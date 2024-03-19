@@ -32,10 +32,10 @@ class ProfileController extends GetxController {
 
       if(res.statusCode == 200){
 
-        var body = jsonDecode(res.body);
-
-        name.value = body["name"];
-        number.value = body["phone"];
+        // var body = jsonDecode(res.body);
+        //
+        // name.value = body["name"];
+        // number.value = body["phone"];
         // number.value = body["phone"];
         // number.value = body["phone"];
 
@@ -45,7 +45,7 @@ class ProfileController extends GetxController {
         print(res.body);
 
         await Duration(milliseconds: 300);
-        await Get.to(ProfilePage());
+        await Get.to(()=> const ProfilePage());
 
       }else{
         print(res.statusCode);

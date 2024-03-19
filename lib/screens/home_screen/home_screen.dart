@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../controllers/profile_controller.dart';
 import '../../global/app_routes.dart';
 import '../../utils/assets_links.dart';
 import '../home_card_pages/feed_page.dart';
@@ -78,6 +79,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final HomeController homeController = Get.put(HomeController());
+  final ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +126,8 @@ class HomePage extends StatelessWidget {
                     Builder(
                       builder: (context) => InkWell(
                         onTap: () {
-                          Scaffold.of(context).openDrawer();
+
+                          controller.profileData();
                         },
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 5),

@@ -24,7 +24,7 @@ class FeedPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppTheme.primary,
         appBar: AppBar(
-          
+
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Colors.redAccent,
             statusBarIconBrightness: Brightness.dark,

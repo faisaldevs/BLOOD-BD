@@ -21,11 +21,11 @@ class _CustomBirthdateState extends State<CustomBirthdate> {
       DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime(1950),
-          lastDate: DateTime.now());
+          firstDate: DateTime.now(),
+          lastDate: DateTime(2025));
 
       setState(() {
-        widget.controller.text = DateFormat.yMMMd().format(pickedDate!);
+        widget.controller.text = DateFormat("y-M-d").format(pickedDate!);
       });
     }
 

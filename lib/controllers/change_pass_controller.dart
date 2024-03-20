@@ -9,25 +9,35 @@ class ChangePassController extends GetxController {
   TextEditingController currentPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmNewPassword = TextEditingController();
-  String token = GetStorage().read("token");
+  String token = GetStorage().read("token") ?? "";
 
   passChange() async {
-    String appUrl = "https://starsoftjpn.xyz/api/auth/change-password";
-    var response = await http.post(
-      Uri.parse(appUrl),
-      headers: {
-        "Accept" : "application/json",
-        "Authorization" : token,
-      },
-      body: {
-        "currentPassword" : currentPassword.text,
-        "newPassword" : newPassword.text,
-        "confirmNewPassword" : confirmNewPassword.text,
+    print(currentPassword.text);
+    print(newPassword.text);
+    print(confirmNewPassword.text);
+    print("pressed");
+   try{
+     String appUrl = "https://starsoftjpn.xyz/api/auth/change-password";
+     var response = await http.post(
+         Uri.parse(appUrl),
+         headers: {
+           "Accept" : "application/json",
+           "Authorization" : token,
+         },
+         body: {
+           "currentPassword" : "123456",
+           "newPassword" : "admin123",
+           "confirmNewPassword" : "admin123",
 
-      }
-    );
-    print(response.statusCode.toString());
-    print(response.body);
+         }
+     );
+
+     print(response.statusCode.toString());
+     print(response.body);
+   }catch(e){
+     print(e);
+   }
+
 
     // if(response.statusCode == 200){
     //   print(object)

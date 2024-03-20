@@ -46,7 +46,7 @@ class EditProfile extends StatelessWidget {
         height: Get.height,
         margin: const EdgeInsets.only(left: 16, right: 16),
         child: Form(
-          key: controller.formKey,
+          // key: controller.formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,

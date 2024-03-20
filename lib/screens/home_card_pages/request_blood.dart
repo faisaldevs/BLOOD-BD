@@ -95,7 +95,8 @@ class _RequestBloodState extends State<RequestBlood> {
                           dropDownList: DataList.bloodAmount,
                           label: 'Amount',
                           onChanged: (value) {
-                            controller.bloodAmount = value.toString();
+                            // controller.bloodAmount = value.toString();
+                          controller.bloodAmount = value;
                           },
                         )),
                   ],

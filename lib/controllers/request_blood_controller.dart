@@ -4,18 +4,17 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class RequestBloodController extends GetxController {
-
-  var token = GetStorage().read("token");
+  var token = GetStorage().read("token") ?? "";
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController patientNameController = TextEditingController();
-  late final String bloodType;
-  late final String bloodAmount;
-  late final String healthIssue;
-  late final String division;
-  late final String district;
-  late final String union;
-  late final String upazila;
+  var bloodType;
+  var bloodAmount;
+  var healthIssue;
+  var division;
+  var district;
+  var union;
+  var upazila;
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -26,34 +25,39 @@ class RequestBloodController extends GetxController {
   onSaveRqBlood() async {
     print(token);
     // if (formKey.currentState!.validate()) {
-    print("validate");
-    String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
-    var res = await http.post(
-      Uri.parse(apiUrl),
-      headers: {
-        "Accept" : "application/json",
-        "Authorization" : token,
-      },
-      body: {
-        "patients_name" : patientNameController.text,
-        "blood_group" : bloodType,
-        "amount_bag" : bloodAmount.toString(),
-        "date" : "2024-01-06",
-        "time" : "16:14:00",
-        "health_issue" : "healthIssue",
-        "division" : "division",
-        "district" : "district",
-        "upazila" : "upazila",
-        "union" : "union",
-        "address" : addressController.text,
-        "contact_person_name" : contactParsonNameController.text,
-        "contact_person_phone" : numberController.text,
-        "note" : "Note",
-      },
-    );
+   try{
+     print("validate");
+     String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
+     var res = await http.post(
+       Uri.parse(apiUrl),
+       headers: {
+         "Accept": "application/json",
+         "Authorization": token,
+       },
+       body: {
+         "patients_name": patientNameController.text,
+         "blood_group": bloodType,
+         "amount_bag": bloodAmount.toString(),
+         // "date": dateController.text,
+         "date": "2024-01-06",
+         "time": "16:14:00",
+         "health_issue": healthIssue,
+         "division": "division",
+         "district": "district",
+         "upazila": "upazila",
+         "union": "union",
+         "address": addressController.text,
+         "contact_person_name": contactParsonNameController.text,
+         "contact_person_phone": numberController.text,
+         "note": "Note",
+       },
+     );
 
-    print(res.statusCode);
-    print(res.body);
+     print(res.statusCode);
+     print(res.body);
+   }catch(e){
+     print(e);
+   }
     // }
   }
 }

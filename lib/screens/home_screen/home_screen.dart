@@ -4,6 +4,7 @@ import 'package:blood_bd/screens/home_screen/widgets/banner_widget.dart';
 import 'package:blood_bd/screens/home_screen/widgets/find_button.dart';
 import 'package:blood_bd/screens/home_screen/widgets/icon_banner.dart';
 import 'package:blood_bd/screens/home_screen/widgets/textfield_widget.dart';
+import 'package:blood_bd/screens/profile/profile_page.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
@@ -128,6 +129,7 @@ class HomePage extends StatelessWidget {
                         onTap: () {
 
                           controller.profileData();
+                          // Get.to(ProfilePage());
                         },
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 5),

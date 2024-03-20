@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
-import '../../../controllers/feed_controller.dart';
+import '../../../controllers/blood_request_controller.dart';
 import '../../../controllers/request_blood_controller.dart';
 
 class DonorRequestFeed extends StatefulWidget {

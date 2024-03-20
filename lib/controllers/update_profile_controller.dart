@@ -35,8 +35,8 @@ class UpdateProfileController extends GetxController {
          "Authorization" : token,
        },
        body: {
-         "name" : "nameController.text",
-         "phone" : "01966666666",
+         "name" : "Faisal Ahamed",
+         "phone" : "01903440069",
          "email" : "faisal.ah123@gmail.com",
        },
      );

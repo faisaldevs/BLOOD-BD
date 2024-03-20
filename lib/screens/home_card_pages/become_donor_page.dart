@@ -247,7 +247,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                   child: CustomButton(
                       onPressed: () {
                         sdController.searchDonor();
-                        Get.toNamed(home);
+                        // Get.toNamed(home);
                       },
                       child: const Text(
                         "Submit",

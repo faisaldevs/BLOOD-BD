@@ -2,7 +2,7 @@ import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../controllers/search_donor_controller.dart';
+import '../../controllers/become_donor_controller.dart';
 import '../../data_list/data_list.dart';
 import '../../global/app_routes.dart';
 import '../../utils/app_colors.dart';
@@ -11,15 +11,15 @@ import '../global_widget/custom_button.dart';
 import '../global_widget/custom_dropdown.dart';
 import '../global_widget/custom_timePicker.dart';
 
-class SearchDonor extends StatefulWidget {
-  const SearchDonor({super.key});
+class BecomeDonor extends StatefulWidget {
+  const BecomeDonor({super.key});
 
   @override
-  State<SearchDonor> createState() => _SearchDonorState();
+  State<BecomeDonor> createState() => _BecomeDonorState();
 }
 
-class _SearchDonorState extends State<SearchDonor> {
-  SearchDonorController sdController = Get.put(SearchDonorController());
+class _BecomeDonorState extends State<BecomeDonor> {
+  BecomeDonorController sdController = Get.put(BecomeDonorController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _SearchDonorState extends State<SearchDonor> {
       body: Container(
         margin: const EdgeInsets.all(16),
         child: Form(
-          key: sdController.formKey,
+          // key: sdController.formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,

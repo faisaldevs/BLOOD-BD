@@ -3,7 +3,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 //
-// import '../../../controllers/search_donor_controller.dart';
+// import '../../../controllers/become_donor_controller.dart';
 // import 'card.dart';
 //
 // class CardSections extends StatelessWidget {

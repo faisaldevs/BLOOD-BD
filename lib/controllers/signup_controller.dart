@@ -75,6 +75,7 @@ class SignupController extends GetxController {
         print(response.statusCode);
 
         if (response.statusCode == 200) {
+
           // var data = jsonDecode(response.body.toString());
           // var id = data["user"]["id"];
           // var name = data["user"]["name"].toString();

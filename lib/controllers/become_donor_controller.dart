@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../global/app_routes.dart';
+
 class BecomeDonorController extends GetxController {
    // GetStorage sdStorage = GetStorage();
   // GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -67,6 +69,11 @@ class BecomeDonorController extends GetxController {
           },
         );
 
+        if(res.statusCode == 201){
+          Get.snackbar("Received", "Donor Data Received");
+          Get.toNamed(home);
+        }
+
         print(res.statusCode);
         print(res.body);
 
@@ -75,8 +82,8 @@ class BecomeDonorController extends GetxController {
       }
 
 
-      Get.snackbar("Received", "Donor Data Received");
-      print("object");
+      // Get.snackbar("Received", "Donor Data Received");
+      // print("object");
     }
   }
 // }

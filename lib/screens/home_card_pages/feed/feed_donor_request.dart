@@ -16,8 +16,8 @@ class DonorRequestFeed extends StatefulWidget {
 
 class _DonorRequestFeedState extends State<DonorRequestFeed> {
 
-  FeedMyRequestController myFeedController =
-  Get.put(FeedMyRequestController());
+  BloodRequestController myFeedController =
+  Get.put(BloodRequestController());
 
 
   RequestBloodController requestBloodController =

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:blood_bd/data_list/data_list.dart';
 import 'package:blood_bd/screens/home_card_pages/feed/feed_dropdown.dart';
 import 'package:blood_bd/utils/app_colors.dart';
@@ -99,12 +101,9 @@ class FeedPage extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
-              return Container(
-                // height: 70,
-                width: Get.width,
-                color: Colors.red,
-                margin: EdgeInsets.all(8),
-                child: Text(snapshot.data!.first.patientsName.toString()),
+                RequestBloodModel e = snapshot.data![index];
+              return ListTile(
+                title: Text(e.patientsName.toString()),
               );
             },);
           } else {

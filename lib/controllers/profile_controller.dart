@@ -31,6 +31,7 @@ class ProfileController extends GetxController {
       );
 
       if(res.statusCode == 200){
+        Get.to(const ProfilePage());
         var body = jsonDecode(res.body);
 
         name.value = body["name"];

@@ -4,7 +4,6 @@ import 'package:blood_bd/screens/home_screen/widgets/banner_widget.dart';
 import 'package:blood_bd/screens/home_screen/widgets/find_button.dart';
 import 'package:blood_bd/screens/home_screen/widgets/icon_banner.dart';
 import 'package:blood_bd/screens/home_screen/widgets/textfield_widget.dart';
-import 'package:blood_bd/screens/profile/profile_page.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
@@ -15,7 +14,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../controllers/profile_controller.dart';
 import '../../global/app_routes.dart';
 import '../../utils/assets_links.dart';
-import '../home_card_pages/feed_page.dart';
+import '../home_card_pages/blood_request_pagee.dart';
 import '../nav_pages/health.dart';
 
 class HomeScreen extends StatelessWidget {

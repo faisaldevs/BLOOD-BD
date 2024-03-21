@@ -104,6 +104,7 @@ class FeedPage extends StatelessWidget {
                 RequestBloodModel e = snapshot.data![index];
               return ListTile(
                 title: Text(e.patientsName.toString()),
+                subtitle: Text(snapshot.data!.length.toString()),
               );
             },);
           } else {

@@ -10,8 +10,9 @@ import '../screens/drawer_profile/drawer_pages/blood_history.dart';
 import '../screens/drawer_profile/drawer_pages/medical_history.dart';
 import '../screens/drawer_profile/drawer_pages/mySearch_history.dart';
 import '../screens/drawer_profile/drawer_pages/notification_page.dart';
+import '../screens/history/user_history.dart';
 import '../screens/home_card_pages/blood_heroes_page.dart';
-import '../screens/home_card_pages/feed_page.dart';
+import '../screens/home_card_pages/blood_request_pagee.dart';
 import '../screens/home_card_pages/request_blood.dart';
 import '../screens/home_card_pages/become_donor_page.dart';
 import '../screens/home_screen/home_screen.dart';
@@ -54,7 +55,7 @@ final pages = [
   customPage(name: newReport, page: NewReport()),
   customPage(name: donationAccepted, page: const DonationAccepted()),
   customPage(name: donationBlocked, page: const DonationBlocked()),
-  customPage(name: history, page: const BloodHistory()),
+  customPage(name: history, page: BloodHistory()),
   customPage(name: mySearchHistory, page: const MySearchHistory()),
 ];
 

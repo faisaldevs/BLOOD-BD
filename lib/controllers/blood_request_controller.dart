@@ -55,6 +55,7 @@ class BloodRequestController extends GetxController{
             contactPersonName: map["contact_person_name"],
             contactPersonPhone: map["contact_person_phone"],
             note: map["note"],
+            // user: map["user"],
           );
         }).toList();
 

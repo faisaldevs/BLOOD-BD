@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/app_colors.dart';
+import 'blood_donate_history.dart';
 import 'blood_request_history.dart';
 
 class BloodHistory extends StatelessWidget {
@@ -87,21 +88,22 @@ class BloodHistory extends StatelessWidget {
             //     ),
             //   ],
             // ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.search,
-                  size: 80,
-                  color: Colors.black26,
-                ),
-                Text(
-                  "No Notification Found!",
-                  style: TextStyle(fontSize: 18, color: Colors.black26),
-                ),
-              ],
-            ),
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     Icon(
+            //       Icons.search,
+            //       size: 80,
+            //       color: Colors.black26,
+            //     ),
+            //     Text(
+            //       "No Notification Found!",
+            //       style: TextStyle(fontSize: 18, color: Colors.black26),
+            //     ),
+            //   ],
+            // ),
+            HistoryDonate(),
           ],
         ),
       ),

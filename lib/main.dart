@@ -30,6 +30,7 @@ void main() async {
   await GetStorage.init();
   runApp(const MyApp());
   DependencyInjection.init();
+
 }
 
 class MyApp extends StatelessWidget {

@@ -10,6 +10,7 @@ import '../../../controllers/login_controller.dart';
 import '../../global_widget/custom_button.dart';
 import '../../global_widget/custom_textFormField.dart';
 import 'forget_password/forgetButton.dart';
+import 'forget_password/forget_password_number.dart';
 import 'forget_password/forget_password_page.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -64,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 40),
                   const Text(
-                    "Welcome Back",
+                    "Forget Password",
                     style: TextStyle(color: Colors.redAccent, fontSize: 24),
                   ),
                   const SizedBox(height: 20),
@@ -119,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ForgetPasswordWidget(
                     onPressed: () {
                       _loginController.forgetButton;
-                      Get.to(ForgetPasswordPage());
+                      Get.to(ForgetPassNumber());
                     },
                   ),
                   const SizedBox(

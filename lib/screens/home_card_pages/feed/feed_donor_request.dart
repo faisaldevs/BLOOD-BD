@@ -7,43 +7,22 @@ import 'package:intl/intl.dart';
 import '../../../controllers/blood_request_controller.dart';
 import '../../../controllers/request_blood_controller.dart';
 
-class DonorRequestFeed extends StatefulWidget {
-  const DonorRequestFeed({super.key});
-
-  @override
-  State<DonorRequestFeed> createState() => _DonorRequestFeedState();
-}
-
-class _DonorRequestFeedState extends State<DonorRequestFeed> {
+class DonorRequestFeed extends StatelessWidget {
+   DonorRequestFeed({super.key});
 
   BloodRequestController myFeedController =
   Get.put(BloodRequestController());
-
 
   RequestBloodController requestBloodController =
       Get.put(RequestBloodController());
 
   // final List<Map<String, dynamic>> dataList =
-  //     GetStorage().read<List<Map<String, dynamic>>>('dataList') ?? [];
-
   List<Map<String, dynamic>> userList =
       (GetStorage().read('dataList') as List<dynamic>?)
               ?.cast<Map<String, dynamic>>() ??
           [];
 
   // var name = requestBloodController.patientNameController.text;
-
-  // sdStorageClear() {
-  //   // var patientName = sdStorage.remove("patientName");
-  //   // var bloodType = sdStorage.remove("bloodType");
-  //   // var bloodAmount = sdStorage.remove("bloodAmount");
-  //   // var healthIssue = sdStorage.remove("healthIssue");
-  //   // var date = sdStorage.remove("date");
-  //   // var time = sdStorage.remove("time");
-  //   // var contactParsonPhone = sdStorage.remove("contactParsonPhone");
-  //   // var contactParsonName = sdStorage.remove("contactParsonName");
-  // }
-
   @override
   Widget build(BuildContext context) {
     print("userList" + userList.toString());
@@ -308,7 +287,6 @@ class _DonorRequestFeedState extends State<DonorRequestFeed> {
     );
   }
 }
-
 
 // userList.toString() == []
 //             ? const Column(

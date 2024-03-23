@@ -8,6 +8,15 @@ import 'package:http/http.dart' as http;
 
 class HistoryController extends GetxController {
 
+  RxBool isVisible = false.obs;
+
+  visibility(){
+    isVisible.value = !isVisible.value;
+  }
+
+
+
+
   var token = GetStorage().read("token");
 
   Future<List<BloodRequestHistoryModel>> getHistoryRequest() async {

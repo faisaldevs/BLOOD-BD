@@ -1,14 +1,13 @@
-import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
-import 'package:blood_bd/screens/user_auth/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../controllers/forget_password_controller.dart';
 import '../../../global_widget/custom_button.dart';
+import '../../../global_widget/custom_textFormField.dart';
+import '../../OTP_verification/forget_pass_otp_verification.dart';
 
-class ForgetPasswordPage extends StatelessWidget {
-  ForgetPasswordPage({super.key});
+class ForgetPassNumber extends StatelessWidget {
+  ForgetPassNumber({super.key});
 
   final ForgetPassController passController = Get.put(ForgetPassController());
 
@@ -21,7 +20,7 @@ class ForgetPasswordPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
-            key: passController.formKey,
+            // key: passController.formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -38,7 +37,7 @@ class ForgetPasswordPage extends StatelessWidget {
                   height: height * 0.04,
                 ),
                 Text(
-                  'New Password',
+                  'Enter Phone Number',
                   style: GoogleFonts.urbanist(
                     fontWeight: FontWeight.w700,
                     color: Colors.black,
@@ -49,7 +48,7 @@ class ForgetPasswordPage extends StatelessWidget {
                   height: height * 0.04,
                 ),
 
-                const Text("Enter new Password"),
+                const Text("Enter a Registered Phone Number"),
                 SizedBox(
                   height: height * 0.02,
                 ),
@@ -57,26 +56,17 @@ class ForgetPasswordPage extends StatelessWidget {
                 /// Password Field
 
                 CustomTextFormField(
-                    controller: passController.newPassword,
-                    hintText: "New Password",
-                    textInputType: TextInputType.text,
-                    validate: (value) {
-                      return null;
-                    }, labelText: 'New Password', ),
+                  controller: passController.newPassword,
+                  hintText: "New Password",
+                  textInputType: TextInputType.text,
+                  validate: (value) {
+                    return null;
+                  },
+                  labelText: 'Enter Number',
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                CustomTextFormField(
-                    controller: passController.confirmPassword,
-                    labelText: "Confirm Password",
-                    textInputType: TextInputType.text,
-                    validate: (value) {
-                      if(value!.isEmpty){
-                        return "";
-                      }
-                      return null;
-                    },
-                    hintText: "Confirm Password"),
 
                 /// Continue Button
                 const Expanded(child: SizedBox()),
@@ -85,11 +75,14 @@ class ForgetPasswordPage extends StatelessWidget {
                     width: width,
                     child: CustomButton(
                         onPressed: () {
-                          passController.forgetValidation();
+                          // passController.forgetValidation();
                           // print("object");
-                          Get.to(const LoginScreen());
+                          Get.to(ForgetPassOtpVerification());
                         },
-                        child: const Text("Continue",style: TextStyle(color: Colors.white),))),
+                        child: const Text(
+                          "Continue",
+                          style: TextStyle(color: Colors.white),
+                        ))),
                 const SizedBox(
                   height: 16.0,
                 ),

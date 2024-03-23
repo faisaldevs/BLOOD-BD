@@ -64,7 +64,6 @@ class HomeScreen extends StatelessWidget {
         index: homeController.selectedItem.value,
         onTap: (index) {
           homeController.navbarFunction(index);
-
         },
         // letIndexChange: (index) => true,
       ),
@@ -96,8 +95,6 @@ class HomePage extends StatelessWidget {
                 AppBar(
                   systemOverlayStyle: const SystemUiOverlayStyle(
                     statusBarColor: Colors.redAccent,
-                    statusBarIconBrightness: Brightness.dark,
-                    statusBarBrightness: Brightness.light,
                   ),
                   surfaceTintColor: Colors.transparent,
                   elevation: 0,
@@ -126,7 +123,6 @@ class HomePage extends StatelessWidget {
                     Builder(
                       builder: (context) => InkWell(
                         onTap: () {
-
                           controller.profileData();
                           // Get.to(ProfilePage());
                         },
@@ -135,8 +131,7 @@ class HomePage extends StatelessWidget {
                           width: 30,
                           height: 30,
                           child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage(ImageLink.profile),
+                            backgroundImage: AssetImage(ImageLink.profile),
                           ),
                         ),
                       ),
@@ -145,6 +140,12 @@ class HomePage extends StatelessWidget {
                       width: 10,
                     ),
                   ],
+                  leading: GestureDetector(
+                    child: const Icon(Icons.menu),
+                    onTap: () {
+                      controller.profileData();
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: Get.height * .4,
@@ -189,8 +190,7 @@ class HomePage extends StatelessWidget {
                                 blurRadius: 7,
                               ),
                             ],
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Form(
                             key: homeController.formKey,
@@ -215,7 +215,8 @@ class HomePage extends StatelessWidget {
                                 FindDonorBtn(
                                   onPressed: () {
                                     homeController.findDonor();
-                                  }, child: "Find Donor",
+                                  },
+                                  child: "Find Donor",
                                 ),
                               ],
                             ),
@@ -228,7 +229,7 @@ class HomePage extends StatelessWidget {
 
                 SizedBox(height: Get.height * .05),
                 // CardSections(),
-                 const HomeScreenIcons(),
+                const HomeScreenIcons(),
                 SizedBox(height: Get.height * .06),
                 Container(
                   // padding: EdgeInsets.all(5),
@@ -354,7 +355,10 @@ class HomePage extends StatelessWidget {
                                     // child: ElevatedButton(
                                     //     onPressed: () {},
                                     //     child: const Text("Urgent")),
-                                    child: FindDonorBtn(onPressed: () {  }, child: 'Urgent',),
+                                    child: FindDonorBtn(
+                                      onPressed: () {},
+                                      child: 'Urgent',
+                                    ),
                                   ),
                                 ],
                               )

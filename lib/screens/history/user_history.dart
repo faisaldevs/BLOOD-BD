@@ -7,7 +7,7 @@ import 'blood_donate_history.dart';
 import 'blood_request_history.dart';
 
 class BloodHistory extends StatelessWidget {
-   BloodHistory({super.key});
+   const BloodHistory({super.key});
 
 
   @override
@@ -34,7 +34,7 @@ class BloodHistory extends StatelessWidget {
             onTap: () => Get.back(),
             child: const Icon(
               Icons.arrow_back_ios,
-              color: Colors.black,
+              // color: Colors.=,
             ),
           ),
           bottom: const TabBar(

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,9 +9,13 @@ class ForgetPassController extends GetxController {
 
   forgetValidation() {
     if(formKey.currentState!.validate()){
-      print("succeed");
+      if (kDebugMode) {
+        print("succeed");
+      }
     }else{
-      print("failed");
+      if (kDebugMode) {
+        print("failed");
+      }
     }
   }
 }

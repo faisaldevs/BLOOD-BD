@@ -1,4 +1,5 @@
 import 'package:blood_bd/controllers/forgetPass_otp_controller.dart';
+import 'package:blood_bd/screens/user_auth/login_screen/forget_password/forget_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -134,8 +135,9 @@ class ForgetPassOtpVerification extends StatelessWidget {
                       onPressed: () {
                         // otpValidation();
                         // Get.toNamed(home);
+                        Get.to(ForgetPasswordPage());
                       },
-                      child: const Text("Continue"))),
+                      child: const Text("Continue",style: TextStyle(color: Colors.white),))),
               const SizedBox(
                 height: 16.0,
               ),

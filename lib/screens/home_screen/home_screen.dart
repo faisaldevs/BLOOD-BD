@@ -1,14 +1,17 @@
 import 'package:blood_bd/controllers/home_controller.dart';
 import 'package:blood_bd/data_list/data_list.dart';
 import 'package:blood_bd/screens/home_screen/widgets/banner_widget.dart';
+import 'package:blood_bd/screens/home_screen/widgets/card.dart';
 import 'package:blood_bd/screens/home_screen/widgets/find_button.dart';
 import 'package:blood_bd/screens/home_screen/widgets/icon_banner.dart';
 import 'package:blood_bd/screens/home_screen/widgets/textfield_widget.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../controllers/profile_controller.dart';
@@ -23,6 +26,7 @@ class HomeScreen extends StatelessWidget {
 
   final getStorage = GetStorage();
   final HomeController homeController = Get.put(HomeController());
+
   // final HomeController homeController = Get.put(HomeController());
   final ProfileController controller = Get.put(ProfileController());
 
@@ -142,7 +146,8 @@ class HomeScreen extends StatelessWidget {
                                 blurRadius: 7,
                               ),
                             ],
-                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Form(
                             key: homeController.formKey,
@@ -184,140 +189,45 @@ class HomeScreen extends StatelessWidget {
                 const HomeScreenIcons(),
                 SizedBox(height: Get.height * .06),
                 Container(
-                  // padding: EdgeInsets.all(5),
-                  height: Get.height * .2,
-                  width: Get.width * .85,
+                  height: Get.height * .26,
+                  width: Get.width * .9,
+                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10,),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
                       ),
                     ],
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
-                  child: Row(
+                  child:  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: Get.width * .25,
-                        height: Get.height,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20)),
-                          color: Colors.white60,
-                        ),
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Image.asset(
-                                "assets/images/blood_drop.png",
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                            const Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "A+",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 34,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
                       Expanded(
+                        flex: 1,
                         child: Container(
-                          // width: Get.width * .3,
-                          padding: const EdgeInsets.only(
-                              left: 10, top: 10, right: 10),
-                          height: Get.height,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                            color: Colors.greenAccent,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                "Name",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24),
-                              ),
-                              const Row(
-                                children: [
-                                  Icon(Icons.add_box_sharp),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      "Name",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Row(
-                                children: [
-                                  Icon(Icons.location_on),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      "Name",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Row(
-                                children: [
-                                  Icon(Icons.calendar_month_sharp),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      "Name",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 4),
-                                    // child: ElevatedButton(
-                                    //     onPressed: () {},
-                                    //     child: const Text("Urgent")),
-                                    child: FindDonorBtn(
-                                      onPressed: () {},
-                                      child: 'Urgent',
-                                    ),
-                                  ),
-                                ],
-                              )
+                              Text("Urgent Blood Request"),
+                              Text("View All"),
                             ],
                           ),
                         ),
                       ),
+                      Expanded(
+                        flex: 6,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          // padding: EdgeInsets.symmetric(horizontal: 10),
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                          return const UrgentRequest();
+                        },),
+                      )
                     ],
                   ),
                 ),
@@ -330,7 +240,6 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: const DrawerProfile(),
     );
-
 
     // return Scaffold(
     //   backgroundColor: Colors.white,

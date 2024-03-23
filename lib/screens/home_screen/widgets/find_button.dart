@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FindDonorBtn extends StatelessWidget {
   const FindDonorBtn({super.key, required this.onPressed, required this.child});
@@ -19,7 +20,7 @@ class FindDonorBtn extends StatelessWidget {
           )),
       child: Text(
         child,
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white,fontSize: 16.sp),
       ),
     );
   }

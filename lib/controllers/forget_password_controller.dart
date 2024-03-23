@@ -16,7 +16,6 @@ class ForgetPassController extends GetxController {
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
 
-
   numberValidate() async {
     print("object");
     String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-by-phone";
@@ -69,8 +68,6 @@ class ForgetPassController extends GetxController {
 
       print(res.statusCode);
       print(res.body);
-
-
 
       if (res.statusCode == 200) {
         Get.to(const LoginScreen());

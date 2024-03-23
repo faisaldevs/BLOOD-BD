@@ -81,7 +81,8 @@ class SignupScreen extends StatelessWidget {
                         dropDownList: DataList.genderListData,
                         label: 'Gender',
                         onChanged: (value) {
-                          signupController.gender = value.toString();
+                          signupController.gender = value;
+                          print(value);
                         },
                       ),
                     ),
@@ -139,28 +140,41 @@ class SignupScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: FutureBuilder(
-                        future: signupController.getDivision(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ApiDropdown(
-                              dropDownList: snapshot.data!.map((e) {
-                                return DropdownMenuItem(value: e.id,child: Text(e.division.toString(), style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: AppTheme.textColorRed)),);
-                              }).toList(),
-                              label: 'Division',
-                              onChanged: (value) {
-                                // signupController.division = value;
-                                print(value.toString());
-                              },
-                            );
-                          } else {
-                            return const Center(child: CircularProgressIndicator());
-                          }
-                        },
-                      ),
-                    ),
+                        child: CustomDropdown(
+                          dropDownList: DataList.districtListData,
+                          label: 'District',
+                          onChanged: (value) {
+                            signupController.division = value;
+                          },
+                        )),
+                    // Expanded(
+                    //   child: FutureBuilder(
+                    //     future: signupController.getDivision(),
+                    //     builder: (context, snapshot) {
+                    //       if (snapshot.hasData) {
+                    //         return ApiDropdown(
+                    //           dropDownList: snapshot.data!.map((e) {
+                    //             return DropdownMenuItem(
+                    //               value: e.id,
+                    //               child: Text(e.division.toString(),
+                    //                   style: TextStyle(
+                    //                       fontWeight: FontWeight.normal,
+                    //                       color: AppTheme.textColorRed)),
+                    //             );
+                    //           }).toList(),
+                    //           label: 'Division',
+                    //           onChanged: (value) {
+                    //             // signupController.division = value;
+                    //             print(value.toString());
+                    //           },
+                    //         );
+                    //       } else {
+                    //         return const Center(
+                    //             child: CircularProgressIndicator());
+                    //       }
+                    //     },
+                    //   ),
+                    // ),
 
                     //FutureBuilder(
                     //                       future: signupController.getDivision(),

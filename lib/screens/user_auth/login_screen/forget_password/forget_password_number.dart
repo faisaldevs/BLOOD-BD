@@ -58,7 +58,7 @@ class ForgetPassNumber extends StatelessWidget {
                 CustomTextFormField(
                   controller: passController.newPassword,
                   hintText: "New Password",
-                  textInputType: TextInputType.text,
+                  textInputType: TextInputType.number,
                   validate: (value) {
                     return null;
                   },

@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _loginController.numberController,
                     hintText: '',
                     length: 11,
-                    textInputType: TextInputType.text,
+                    textInputType: TextInputType.number,
                     validate: (number) {
                       if (number!.isEmpty) {
                         return "Password required";

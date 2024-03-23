@@ -16,15 +16,14 @@ class SignupController extends GetxController {
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  late final String bloodType;
-  late final String gender;
-  late final String division;
-  late final String district;
-  late final String upazila;
-  late final String union;
+    var bloodType;
+  var gender;
+  var division;
+  var district;
+  var upazila;
+  var union;
   TextEditingController addressController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -46,6 +45,20 @@ class SignupController extends GetxController {
   Future signUpForm() async {
     // isLoading.value = true;
 
+    print(nameController.text);
+    print(numberController.text);
+    print(bloodType);
+    print(dateController.text);
+    print(gender);
+    print(weightController.text);
+    print(division);
+    print(district);
+    print(upazila);
+    print(union);
+    print(addressController.text);
+    print(passwordController.text);
+
+
     if (kDebugMode) {
       print("success");
     }
@@ -57,12 +70,12 @@ class SignupController extends GetxController {
             Uri.parse("https://starsoftjpn.xyz/api/auth/register"),
             body: {
               "name": nameController.text,
-              "username": "numberController.text852",
+              "username": "numberController.256",
               "phone": numberController.text,
               "email": "numberController.text852",
               "blood_group": bloodType,
               "date_of_birth": dateController.text,
-              "gender": genderController.text,
+              "gender": gender,
               "weight": weightController.text,
               "division": division,
               "district": district,
@@ -70,11 +83,14 @@ class SignupController extends GetxController {
               "union": union,
               "address": addressController.text,
               "password": passwordController.text,
+
             });
 
         print(response.statusCode);
+        print(response.body);
 
         if (response.statusCode == 200) {
+          print("hoisa");
 
           // var data = jsonDecode(response.body.toString());
           // var id = data["user"]["id"];
@@ -127,13 +143,13 @@ class SignupController extends GetxController {
         isSignup.value = false;
 
         if (kDebugMode) {
-          print(e.toString());
+          print("----"+e.toString());
         }
       }
 
-      if (kDebugMode) {
-        print("success");
-      }
+      // if (kDebugMode) {
+      //   print("success");
+      // }
     }
   }
 

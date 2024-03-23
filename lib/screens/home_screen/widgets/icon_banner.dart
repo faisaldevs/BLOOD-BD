@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../global/app_routes.dart';
+import '../../home_card_pages/blood_request_pagee.dart';
 
 class HomeScreenIcons extends StatelessWidget {
   const HomeScreenIcons({super.key});
@@ -54,6 +55,45 @@ class HomeScreenIcons extends StatelessWidget {
                       width: 110,
                       child: IconButton(
                         onPressed: () {
+                          Get.toNamed(requestBlood);
+                        },
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.note_add_outlined,
+                              size: 34,
+                              color: AppTheme.textColorRed,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(
+                                "Add Request",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppTheme.textColorRed),
+                              ),
+                            ),
+                          ],
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                          const MaterialStatePropertyAll(Colors.white),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                          padding: const MaterialStatePropertyAll(
+                              EdgeInsets.all(10)),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 110,
+                      child: IconButton(
+                        onPressed: () {
                           Get.toNamed(searchDonor);
                         },
                         icon: Column(
@@ -88,45 +128,7 @@ class HomeScreenIcons extends StatelessWidget {
                             )),
                       ),
                     ),
-                    SizedBox(
-                      width: 110,
-                      child: IconButton(
-                        onPressed: () {
-                          Get.toNamed(requestBlood);
-                        },
-                        icon: Column(
-                          children: [
-                            Icon(
-                              Icons.note_add_outlined,
-                              size: 34,
-                              color: AppTheme.textColorRed,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Text(
-                                "Add Request",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppTheme.textColorRed),
-                              ),
-                            ),
-                          ],
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              const MaterialStatePropertyAll(Colors.white),
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                          ),
-                          padding: const MaterialStatePropertyAll(
-                              EdgeInsets.all(10)),
-                        ),
-                      ),
-                    ),
+
                     SizedBox(
                       width: 110,
                       child: IconButton(
@@ -175,18 +177,20 @@ class HomeScreenIcons extends StatelessWidget {
                     SizedBox(
                       width: 110,
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(FeedPage());
+                        },
                         icon: Column(
                           children: [
                             Icon(
-                              Icons.question_mark,
+                              Icons.bloodtype_outlined,
                               size: 34,
                               color: AppTheme.textColorRed,
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 5),
                               child: Text(
-                                "About Us",
+                                "Blood Request",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

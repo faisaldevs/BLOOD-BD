@@ -14,6 +14,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../controllers/profile_controller.dart';
 import '../../global/app_routes.dart';
 import '../../utils/assets_links.dart';
+import '../drawer_profile/drawer_profile.dart';
 import '../home_card_pages/blood_request_pagee.dart';
 import '../nav_pages/health.dart';
 
@@ -22,66 +23,17 @@ class HomeScreen extends StatelessWidget {
 
   final getStorage = GetStorage();
   final HomeController homeController = Get.put(HomeController());
-
-  @override
-  Widget build(BuildContext context) {
-    var pages = [
-      HomePage(),
-      FeedPage(),
-      const HealthPage(),
-    ];
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: AppTheme.primary,
-        color: AppTheme.primaryRed,
-        animationDuration: const Duration(milliseconds: 300),
-        animationCurve: Curves.fastLinearToSlowEaseIn,
-        items: const [
-          CurvedNavigationBarItem(
-              child: Icon(
-                Icons.home_outlined,
-                color: Colors.white,
-              ),
-              label: 'Home',
-              labelStyle: TextStyle(color: Colors.white)),
-          CurvedNavigationBarItem(
-              child: Icon(
-                Icons.bloodtype_outlined,
-                color: Colors.white,
-              ),
-              label: 'Blood Request',
-              labelStyle: TextStyle(color: Colors.white)),
-          CurvedNavigationBarItem(
-              child: Icon(
-                Icons.health_and_safety,
-                color: Colors.white,
-              ),
-              label: 'Health',
-              labelStyle: TextStyle(color: Colors.white)),
-        ],
-        index: homeController.selectedItem.value,
-        onTap: (index) {
-          homeController.navbarFunction(index);
-        },
-        // letIndexChange: (index) => true,
-      ),
-      body: Obx(
-        () => pages[homeController.selectedItem.value],
-      ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  final HomeController homeController = Get.put(HomeController());
+  // final HomeController homeController = Get.put(HomeController());
   final ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
+    // var pages = [
+    //   HomePage(),
+    //   FeedPage(),
+    //   const HealthPage(),
+    // ];
+
     return Scaffold(
       backgroundColor: AppTheme.primary,
       body: SafeArea(
@@ -140,12 +92,12 @@ class HomePage extends StatelessWidget {
                       width: 10,
                     ),
                   ],
-                  leading: GestureDetector(
-                    child: const Icon(Icons.menu),
-                    onTap: () {
-                      controller.profileData();
-                    },
-                  ),
+                  // leading: GestureDetector(
+                  //   child: const Icon(Icons.menu),
+                  //   onTap: () {
+                  //     controller.profileData();
+                  //   },
+                  // ),
                 ),
                 SizedBox(
                   height: Get.height * .4,
@@ -376,7 +328,60 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      // drawer: const DrawerProfile(),
+      drawer: const DrawerProfile(),
     );
+
+
+    // return Scaffold(
+    //   backgroundColor: Colors.white,
+    //   bottomNavigationBar: CurvedNavigationBar(
+    //     backgroundColor: AppTheme.primary,
+    //     color: AppTheme.primaryRed,
+    //     animationDuration: const Duration(milliseconds: 300),
+    //     animationCurve: Curves.fastLinearToSlowEaseIn,
+    //     items: const [
+    //       CurvedNavigationBarItem(
+    //           child: Icon(
+    //             Icons.home_outlined,
+    //             color: Colors.white,
+    //           ),
+    //           label: 'Home',
+    //           labelStyle: TextStyle(color: Colors.white)),
+    //       CurvedNavigationBarItem(
+    //           child: Icon(
+    //             Icons.bloodtype_outlined,
+    //             color: Colors.white,
+    //           ),
+    //           label: 'Blood Request',
+    //           labelStyle: TextStyle(color: Colors.white)),
+    //       CurvedNavigationBarItem(
+    //           child: Icon(
+    //             Icons.health_and_safety,
+    //             color: Colors.white,
+    //           ),
+    //           label: 'Health',
+    //           labelStyle: TextStyle(color: Colors.white)),
+    //     ],
+    //     index: homeController.selectedItem.value,
+    //     onTap: (index) {
+    //       homeController.navbarFunction(index);
+    //     },
+    //     // letIndexChange: (index) => true,
+    //   ),
+    //   body: Obx(
+    //     () => pages[homeController.selectedItem.value],
+    //   ),
+    // );
   }
 }
+
+// class HomePage extends StatelessWidget {
+//   HomePage({super.key});
+//
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//
+//   }
+// }

@@ -20,8 +20,8 @@ class _CustomBirthdateState extends State<CustomBirthdate> {
     void showBirthDate() async {
       DateTime? pickedDate = await showDatePicker(
           context: context,
+          firstDate: DateTime(1800),
           initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
           lastDate: DateTime(2025));
 
       setState(() {

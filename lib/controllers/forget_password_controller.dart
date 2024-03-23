@@ -1,6 +1,5 @@
 import 'package:blood_bd/screens/user_auth/login_screen/forget_password/forget_password_page.dart';
 import 'package:blood_bd/screens/user_auth/login_screen/login_screen.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -70,6 +69,8 @@ class ForgetPassController extends GetxController {
 
       print(res.statusCode);
       print(res.body);
+
+
 
       if (res.statusCode == 200) {
         Get.to(const LoginScreen());

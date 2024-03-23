@@ -21,7 +21,7 @@ class ForgetPasswordPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
-            key: passController.formKey,
+            key: passController.passKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,

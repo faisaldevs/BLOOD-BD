@@ -9,7 +9,7 @@ import '../../OTP_verification/forget_pass_otp_verification.dart';
 class ForgetPassNumber extends StatelessWidget {
   ForgetPassNumber({super.key});
 
-  final ForgetPassController passController = Get.put(ForgetPassController());
+  final ForgetPassController controller = Get.put(ForgetPassController());
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ForgetPassNumber extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
-            // key: passController.formKey,
+            key: controller.key,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -56,10 +56,16 @@ class ForgetPassNumber extends StatelessWidget {
                 /// Password Field
 
                 CustomTextFormField(
-                  controller: passController.newPassword,
+                  length: 11,
+                  controller: controller.numberController,
                   hintText: "New Password",
                   textInputType: TextInputType.number,
                   validate: (value) {
+                    // if(value == 11.toString() && value != null){
+                    //   return null;
+                    // }else{
+                    //   return "Enter a valid Number";
+                    // }
                     return null;
                   },
                   labelText: 'Enter Number',
@@ -77,7 +83,8 @@ class ForgetPassNumber extends StatelessWidget {
                         onPressed: () {
                           // passController.forgetValidation();
                           // print("object");
-                          Get.to(ForgetPassOtpVerification());
+                          // Get.to(ForgetPassOtpVerification());
+                          controller.numberValidate();
                         },
                         child: const Text(
                           "Continue",

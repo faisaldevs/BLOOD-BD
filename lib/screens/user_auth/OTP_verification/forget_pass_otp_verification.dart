@@ -5,13 +5,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../controllers/forget_password_controller.dart';
 import '../../global_widget/custom_button.dart';
 
 class ForgetPassOtpVerification extends StatelessWidget {
   ForgetPassOtpVerification({super.key});
 
-  final ForgetPassOTPController forgetPassOTPController =
-      Get.put(ForgetPassOTPController());
+  final ForgetPassController controller =
+      Get.put(ForgetPassController());
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +80,9 @@ class ForgetPassOtpVerification extends StatelessWidget {
                 child: SizedBox(
                   width: width,
                   child: Pinput(
-                    key: forgetPassOTPController.formKey,
+                    key: controller.otpKey,
                     // senderPhoneNumber: "01903440069",
-                    controller: forgetPassOTPController.forgetPassOtpController,
+                    controller: controller.otpController,
                     validator: (otp) {
                       if (otp!.isEmpty) {
                         // print(otp);

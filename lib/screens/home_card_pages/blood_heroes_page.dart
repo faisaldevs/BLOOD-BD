@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/blood_bank_controller.dart';
 import 'blood_heros/blood_hero.dart';
 
 class BloodHeroes extends StatelessWidget {
-  const BloodHeroes({super.key});
+   BloodHeroes({super.key});
+  BloodBankController controller = Get.put(BloodBankController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,20 @@ class BloodHeroes extends StatelessWidget {
           ),
         ),
       ),
-      body: const BloodHeroList(),
+      // body: FutureBuilder(future: controller.getBloodBankData(), builder: (context, snapshot) {
+      //
+      //   if(snapshot.hasData){
+      //     // List data = snapshot.data
+      //     return ListView.builder(
+      //       itemCount: snapshot.data?.length,
+      //       itemBuilder: (context, index) {
+      //         return Expanded(child: BloodHeroList());
+      //       },);
+      //   }else{
+      //     return Center(child: CircularProgressIndicator());
+      //   }
+      //
+      // },),
       // ListView.builder(
       //   itemCount: 5,
       //   itemBuilder: (context, index) => Container(
@@ -128,3 +143,5 @@ class BloodHeroes extends StatelessWidget {
     );
   }
 }
+
+//const BloodHeroList()

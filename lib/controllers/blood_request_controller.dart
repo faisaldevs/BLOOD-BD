@@ -30,9 +30,6 @@ class BloodRequestController extends GetxController{
       // print("------------"+dataList.toString());
 
       List data = dataList['data'] as List;
-
-
-
       if (res.statusCode == 200) {
         print("-----data-------"+data.toString());
         print(res.statusCode);

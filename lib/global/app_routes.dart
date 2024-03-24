@@ -43,7 +43,7 @@ final pages = [
 
   customPage(name: home, page: HomeScreen()),
   customPage(name: searchDonor, page: const BecomeDonor()),
-  customPage(name: bloodHeroes, page: const BloodHeroes()),
+  customPage(name: bloodHeroes, page:  BloodHeroes()),
   customPage(name: requestBlood, page: const RequestBlood()),
   customPage(name: feedPage, page: FeedPage()),
 

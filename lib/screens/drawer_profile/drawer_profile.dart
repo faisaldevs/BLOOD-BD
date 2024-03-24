@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../controllers/profile_controller.dart';
+import 'components/drawer_header.dart';
 import 'drawer_pages/change_password.dart';
 
 class DrawerProfile extends StatelessWidget {
-  const DrawerProfile({super.key});
+   DrawerProfile({super.key});
+
+  final ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +23,17 @@ class DrawerProfile extends StatelessWidget {
       child: ListView(
         children: [
           // -------Drawer Header------------
-          // const DrawerHeaderPage(),
+          const DrawerHeaderPage(),
 
           // -------Drawer Body------------
           // ActiveDonor(value: ,),
+          CustomDrawerLinks(
+            title: 'Profile',
+            icon: Icons.person,
+            onTap: () {
+              controller.profileData();
+            },
+          ),
 
           CustomDrawerLinks(
             title: 'Medical History',
@@ -67,6 +78,13 @@ class DrawerProfile extends StatelessWidget {
           //   },
           // ),
           CustomDrawerLinks(
+            title: 'Change Password',
+            icon: Icons.password,
+            onTap: () {
+              Get.to(ChangePassword());
+            },
+          ),
+          CustomDrawerLinks(
             title: 'Customer Support',
             icon: Icons.privacy_tip_outlined,
             onTap: () {},
@@ -80,7 +98,7 @@ class DrawerProfile extends StatelessWidget {
             title: 'FAQ',
             icon: Icons.support_agent_outlined,
             onTap: () {
-              Get.to(ChangePassword());
+
             },
           ),
           CustomDrawerLinks(

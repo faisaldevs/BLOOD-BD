@@ -1,33 +1,67 @@
-// import 'package:blood_bd/global/app_routes.dart';
-// import 'package:blood_bd/utils/app_colors.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:get/get.dart';
-// import 'package:get_storage/get_storage.dart';
-// import '../../../controllers/drawer_profile_controller.dart';
-// class DrawerHeaderPage extends StatefulWidget {
-//   const DrawerHeaderPage({super.key});
-//
-//   @override
-//   State<DrawerHeaderPage> createState() => _DrawerHeaderPageState();
-// }
-//
-// class _DrawerHeaderPageState extends State<DrawerHeaderPage> {
-//   final getStorage = GetStorage();
-//
-//   DrawerProfileController drawerProfileController =
-//       Get.put(DrawerProfileController());
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     var name = getStorage.read("name") ?? "Faisal Ahamed";
-//     var number = getStorage.read("phone") ?? "01*********";
-//     var blood = getStorage.read("blood") ?? "A+";
-//     var gender = getStorage.read("gender") ?? "Male";
-//     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
-//     var width = Get.width;
-//     return ;
-//   }
-// }
+import 'package:blood_bd/global/app_routes.dart';
+import 'package:blood_bd/utils/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class DrawerHeaderPage extends StatefulWidget {
+  const DrawerHeaderPage({super.key});
+
+  @override
+  State<DrawerHeaderPage> createState() => _DrawerHeaderPageState();
+}
+
+class _DrawerHeaderPageState extends State<DrawerHeaderPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppTheme.primaryRed,
+      ),
+      width: double.infinity,
+      height: 150,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Profile",
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
+                InkWell(
+                  child: const Icon(
+                    Icons.notifications_active_outlined,
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    Get.toNamed(notificationPage);
+                  },
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: 10,
+              ),
+              child: Text(
+                "BLOOD BD",
+                style: GoogleFonts.roboto(
+                    color: Colors.white,
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

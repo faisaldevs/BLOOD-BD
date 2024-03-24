@@ -238,7 +238,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      drawer: const DrawerProfile(),
+      drawer: DrawerProfile(),
     );
 
     // return Scaffold(

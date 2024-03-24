@@ -1,15 +1,48 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 
 class DrawerProfileController extends GetxController {
+  var token = GetStorage().read("token");
+
   RxBool switchValue = true.obs;
 
-  activeStc() {
-    switchValue.value = !switchValue.value;
-  }
 
-  activeStatus(bool value) {
+
+  // activeStc() {
+  //   switchValue.value = !switchValue.value;
+  // }
+
+  activeStatus(bool value) async {
     switchValue.value = value;
+    String appUrl = "https://starsoftjpn.xyz/api/auth/update-donor-status";
+
+    if (value == true) {
+      print("object");
+
+      try {
+        var res = await http.post(
+          Uri.parse(appUrl),
+          headers: {"Authorization": token},
+          body: {"donor_status": 1.toString()},
+        );
+        print(res.statusCode);
+        print(res.body);
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      print("null");
+      var res1 = await http.post(
+        Uri.parse(appUrl),
+        headers: {"Authorization": token},
+        body: {"donor_status": 0.toString()},
+      );
+      print(res1.statusCode);
+      print(res1.body);
+    }
 
     Get.snackbar(
       "Active status ",

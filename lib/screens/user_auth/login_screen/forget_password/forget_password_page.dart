@@ -1,5 +1,4 @@
 import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
-import 'package:blood_bd/screens/user_auth/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -87,7 +86,7 @@ class ForgetPasswordPage extends StatelessWidget {
                         onPressed: () {
                           passController.forgetValidation();
                           // print("object");
-                          Get.to(const LoginScreen());
+                          // Get.to(const LoginScreen());
                         },
                         child: const Text("Continue",style: TextStyle(color: Colors.white),))),
                 const SizedBox(

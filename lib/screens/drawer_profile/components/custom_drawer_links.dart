@@ -50,7 +50,9 @@ class CustomDrawerLinks extends StatelessWidget {
 //-------------------  Active Donor ----------------------
 
 class ActiveDonor extends StatelessWidget {
-  ActiveDonor({super.key});
+  ActiveDonor({super.key, required this.value});
+
+  final bool value;
 
   final DrawerProfileController drawerProfileController =
       Get.put(DrawerProfileController());
@@ -59,7 +61,7 @@ class ActiveDonor extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        drawerProfileController.activeStc();
+        // drawerProfileController.activeStc();
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -72,7 +74,7 @@ class ActiveDonor extends StatelessWidget {
         )),
         margin: const EdgeInsets.only(left: 10, top: 5),
         padding: const EdgeInsets.only(top: 8, bottom: 8, left: 5),
-        child: Obx(() => Row(
+        child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Row(
@@ -91,7 +93,7 @@ class ActiveDonor extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: drawerProfileController.switchValue.value
+                  child: value
                       ? const Icon(
                           Icons.check_circle,
                           color: Colors.green,
@@ -101,7 +103,7 @@ class ActiveDonor extends StatelessWidget {
                         ),
                 )
               ],
-            )),
+            ),
       ),
     );
   }

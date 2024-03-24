@@ -80,6 +80,7 @@ class HistoryController extends GetxController {
 
   Future<List<BloodDonateHistory>> getHistoryDonate() async {
     print("pressed.............1");
+    print(token);
     try {
       String appUrl = "https://starsoftjpn.xyz/api/auth/blood-donor";
       // var res = await http.get(

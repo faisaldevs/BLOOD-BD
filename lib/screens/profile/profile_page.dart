@@ -22,20 +22,23 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   final getStorage = GetStorage();
 
-  DrawerProfileController drawerProfileController = Get.put(DrawerProfileController());
+  DrawerProfileController drawerProfileController =
+      Get.put(DrawerProfileController());
   ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
     var name = controller.name.value;
     var number = controller.number.value;
+    var status = controller.status.value;
     var blood = getStorage.read("blood") ?? "A+";
     var gender = getStorage.read("gender") ?? "Male";
     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
     var width = Get.width;
+
+    print(status);
     return Scaffold(
       backgroundColor: AppTheme.primary,
       body: Padding(
@@ -62,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       elevation: 0,
                       title: const Row(
                         children: [
-                           Text(
+                          Text(
                             "Profile",
                             // style: TextStyle(fontSize: 21.sp , color: AppTheme.textColorRed ),
                           ),
@@ -78,8 +81,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       // ),
                       actions: [
                         Obx(
-                              () => CupertinoSwitch(
-                            value: drawerProfileController.switchValue.value,
+                          () => CupertinoSwitch(
+                            value: status == 0.toString()
+                                ? !drawerProfileController.switchValue.value
+                                : drawerProfileController.switchValue.value,
                             onChanged: (value) {
                               drawerProfileController.activeStatus(value);
                             },
@@ -91,7 +96,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const CircleAvatar(
-                          backgroundImage: AssetImage("assets/images/profile.png"),
+                          backgroundImage:
+                              AssetImage("assets/images/profile.png"),
                         ),
                         SizedBox(
                           width: 8.w,
@@ -106,7 +112,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Text(
                                     name,
-                                    style: TextStyle(fontSize: 24.sp, color: AppTheme.textColorRed ),
+                                    style: TextStyle(
+                                        fontSize: 24.sp,
+                                        color: AppTheme.textColorRed),
                                   ),
                                 ],
                               ),
@@ -118,7 +126,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   softWrap: true,
-                                  style: TextStyle(fontSize: 16.sp, color: AppTheme.textColorRed ),
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      color: AppTheme.textColorRed),
                                 )),
                           ],
                         ),
@@ -131,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         GestureDetector(
                           onTap: () {},
-                          child:  Row(children: [
+                          child: Row(children: [
                             const Icon(
                               Icons.star,
                               size: 11,
@@ -139,8 +149,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Text(
                               "Basic "
-                                  "Donor",
-                              style: TextStyle(fontSize: 11.sp, color: AppTheme.textColorRed ),
+                              "Donor",
+                              style: TextStyle(
+                                  fontSize: 11.sp,
+                                  color: AppTheme.textColorRed),
                             ),
                           ]),
                         ),
@@ -148,35 +160,60 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: 8,
                         ),
                         Container(
-                            decoration:  BoxDecoration(
-                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: Colors.black.withOpacity(.3),
                             ),
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-                            child: Text(gender,style: TextStyle(fontSize: 16.sp, color: AppTheme.textColorRed ),)),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 3, horizontal: 6),
+                            child: Text(
+                              gender,
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: AppTheme.textColorRed),
+                            )),
                         SizedBox(
                           width: width * .02,
                         ),
                         Container(
-                            decoration:  BoxDecoration(
-                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: Colors.black.withOpacity(.3),
                             ),
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
-                            child: blood == "null" ? Text("A+",style: TextStyle(fontSize: 16.sp, color: AppTheme.textColorRed ),) : Text(blood,style: TextStyle(fontSize: 16.sp, color: AppTheme.textColorRed ),)),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 3, horizontal: 8),
+                            child: blood == "null"
+                                ? Text(
+                                    "A+",
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppTheme.textColorRed),
+                                  )
+                                : Text(
+                                    blood,
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppTheme.textColorRed),
+                                  )),
                         SizedBox(
                           width: width * .02,
                         ),
                         Container(
-                            decoration:  BoxDecoration(
-                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: Colors.black.withOpacity(.3),
                             ),
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-                            child: Text(number,style: TextStyle(fontSize: 16.sp, color: AppTheme.textColorRed ),)),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 3, horizontal: 6),
+                            child: Text(
+                              number,
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: AppTheme.textColorRed),
+                            )),
                       ],
                     ),
                     GestureDetector(
@@ -186,13 +223,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           Get.toNamed(editProfile);
                         }
                       },
-                      child:  Padding(
+                      child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Icon(Icons.edit_note, color: AppTheme.textColorRed ),
-                            Text("Edit Profile",style: TextStyle(fontSize: 16.sp, color: AppTheme.textColorRed ),),
+                            Icon(Icons.edit_note, color: AppTheme.textColorRed),
+                            Text(
+                              "Edit Profile",
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: AppTheme.textColorRed),
+                            ),
                           ],
                         ),
                       ),
@@ -203,13 +245,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
 
             // -------Drawer Body------------
-            ActiveDonor(),
+            // ActiveDonor(),
 
             CustomDrawerLinks(
               title: 'Medical History',
               icon: Icons.medical_information_outlined,
               onTap: () {
-                Get.to( MedicalHistory());
+                Get.to(MedicalHistory());
               },
             ),
             CustomDrawerLinks(
@@ -278,17 +320,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 //Scaffold(
 //       backgroundColor: AppTheme.primary,

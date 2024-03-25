@@ -58,29 +58,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import 'find_button.dart';
 
 class UrgentRequest extends StatelessWidget {
-  const UrgentRequest({super.key});
+  const UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType});
+  final String patientsName;
+  final String hospitalName;
+  final String address;
+  final String date;
+  final String bloodType;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // padding: EdgeInsets.all(5),
-      height: Get.height * .2.h,
-      width: Get.width * .75.w,
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      height: Get.height * .1.h,
+      width: Get.width * .9.w,
+      margin: const EdgeInsets.only(right: 15),
 
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.15),
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.black.withOpacity(0.2),
-        //     spreadRadius: 3,
-        //     blurRadius: 4,
-        //   ),
-        // ],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.01),
+            offset: const Offset(0.0, 1.0),
+            blurRadius: 1.0,
+          ),
+        ],
         borderRadius: BorderRadius.all(Radius.circular(25.r)),
       ),
       child: Row(
@@ -103,10 +107,10 @@ class UrgentRequest extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
-                 Align(
+                Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "A+",
+                    bloodType,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 34.sp,
@@ -118,9 +122,7 @@ class UrgentRequest extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              // width: Get.width * .3,
-              padding: const EdgeInsets.only(
-                  left: 10, top: 10, right: 10),
+              padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
               height: Get.height,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -132,20 +134,23 @@ class UrgentRequest extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Name",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.sp),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 29),
+                    child: Text(
+                      patientsName,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.sp),
+                    ),
                   ),
-                   Row(
+                  Row(
                     children: [
-                      const Icon(Icons.add_box_sharp),
+                      const Icon(Icons.add_box_sharp,size: 24,),
                       Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Text(
-                          "Name",
+                          hospitalName,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
@@ -154,13 +159,13 @@ class UrgentRequest extends StatelessWidget {
                       ),
                     ],
                   ),
-                   Row(
+                  Row(
                     children: [
                       const Icon(Icons.location_on),
                       Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Text(
-                          "Name",
+                          address,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
@@ -169,13 +174,13 @@ class UrgentRequest extends StatelessWidget {
                       ),
                     ],
                   ),
-                   Row(
+                  Row(
                     children: [
-                      Icon(Icons.calendar_month_sharp),
+                      const Icon(Icons.calendar_month_sharp),
                       Padding(
-                        padding: EdgeInsets.only(left: 5),
+                        padding: const EdgeInsets.only(left: 5),
                         child: Text(
-                          "Name",
+                          date,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,

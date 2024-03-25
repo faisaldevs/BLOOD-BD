@@ -7,18 +7,19 @@ class CustomDropdown extends StatelessWidget {
     super.key,
     required this.dropDownList,
     required this.label,
-    required this.onChanged,
+    required this.onChanged, this.validation,
     // required this.hint,
   });
 
   final String label;
-
+  final Function()? validation;
   final List dropDownList;
   var onChanged;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      // validator: validation,
       icon: Icon(
         Icons.arrow_drop_down,
         color: AppTheme.textColorRed,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,8 +7,6 @@ class DrawerProfileController extends GetxController {
   var token = GetStorage().read("token");
 
   RxBool switchValue = true.obs;
-
-
 
   // activeStc() {
   //   switchValue.value = !switchValue.value;
@@ -80,23 +77,26 @@ class DrawerProfileController extends GetxController {
               )
             ]))
           : RichText(
-              text: const TextSpan(children: [
-              TextSpan(
-                text: "Active status  ",
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Colors.black),
+              text: const TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Active status  ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Colors.black),
+                  ),
+                  TextSpan(
+                    text: "off",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  )
+                ],
               ),
-              TextSpan(
-                text: "off",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
-              )
-            ])),
+            ),
     );
   }
 }

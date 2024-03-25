@@ -11,7 +11,7 @@ import 'components/drawer_header.dart';
 import 'drawer_pages/change_password.dart';
 
 class DrawerProfile extends StatelessWidget {
-   DrawerProfile({super.key});
+  DrawerProfile({super.key});
 
   final ProfileController controller = Get.put(ProfileController());
 
@@ -27,19 +27,19 @@ class DrawerProfile extends StatelessWidget {
 
           // -------Drawer Body------------
           // ActiveDonor(value: ,),
-          CustomDrawerLinks(
-            title: 'Profile',
-            icon: Icons.person,
-            onTap: () {
-              controller.profileData();
-            },
-          ),
+       CustomDrawerLinks(
+          title: 'Profile',
+          icon: Icons.person,
+          onTap: () {
+            controller.profileData();
+          },
+        ),
 
           CustomDrawerLinks(
             title: 'Medical History',
             icon: Icons.medical_information_outlined,
             onTap: () {
-              Get.to( MedicalHistory());
+              Get.to(MedicalHistory());
             },
           ),
           CustomDrawerLinks(
@@ -97,9 +97,7 @@ class DrawerProfile extends StatelessWidget {
           CustomDrawerLinks(
             title: 'FAQ',
             icon: Icons.support_agent_outlined,
-            onTap: () {
-
-            },
+            onTap: () {},
           ),
           CustomDrawerLinks(
             title: 'Logout',

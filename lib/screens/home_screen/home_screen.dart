@@ -6,29 +6,28 @@ import 'package:blood_bd/screens/home_screen/widgets/find_button.dart';
 import 'package:blood_bd/screens/home_screen/widgets/icon_banner.dart';
 import 'package:blood_bd/screens/home_screen/widgets/textfield_widget.dart';
 import 'package:blood_bd/utils/app_colors.dart';
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
+import '../../controllers/blood_request_controller.dart';
 import '../../controllers/profile_controller.dart';
 import '../../global/app_routes.dart';
+import '../../models/blood_request_model.dart';
 import '../../utils/assets_links.dart';
 import '../drawer_profile/drawer_profile.dart';
 import '../home_card_pages/blood_request_pagee.dart';
-import '../nav_pages/health.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final getStorage = GetStorage();
+  //
+  // final getStorage = GetStorage();
   final HomeController homeController = Get.put(HomeController());
 
-  // final HomeController homeController = Get.put(HomeController());
   final ProfileController controller = Get.put(ProfileController());
+  final BloodRequestController bloodController =
+      Get.put(BloodRequestController());
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +95,6 @@ class HomeScreen extends StatelessWidget {
                       width: 10,
                     ),
                   ],
-                  // leading: GestureDetector(
-                  //   child: const Icon(Icons.menu),
-                  //   onTap: () {
-                  //     controller.profileData();
-                  //   },
-                  // ),
                 ),
                 SizedBox(
                   height: Get.height * .4,
@@ -189,9 +182,9 @@ class HomeScreen extends StatelessWidget {
                 const HomeScreenIcons(),
                 SizedBox(height: Get.height * .06),
                 Container(
-                  height: Get.height * .26,
+                  height: Get.height * .24,
                   width: Get.width * .9,
-                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10,),
+                  // padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10,),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
@@ -203,30 +196,111 @@ class HomeScreen extends StatelessWidget {
                     ],
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
-                  child:  Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         flex: 1,
                         child: Container(
-                          child: const Row(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Urgent Blood Request"),
-                              Text("View All"),
+                              const Text(
+                                "Urgent Blood Request",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.to(FeedPage());
+                                },
+                                child: const Text(
+                                  "View All",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red),
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 4,
+                      ),
                       Expanded(
                         flex: 6,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          // padding: EdgeInsets.symmetric(horizontal: 10),
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                          return const UrgentRequest();
-                        },),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 10),
+                          child: FutureBuilder<List<RequestBloodModel>>(
+                            future: bloodController.getRequestData(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return const Center(
+                                    child: Text('Something went wrong'));
+                              }
+
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+
+                              if (snapshot.hasData) {
+                                // List dataList = snapshot.data as List;
+                                return ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 5,
+                                  itemBuilder: (context, index) {
+                                    RequestBloodModel e = snapshot.data![index];
+                                    String contactPersonName =
+                                        e.contactPersonName ?? "name";
+                                    String number =
+                                        e.contactPersonPhone ?? "01*********";
+                                    String patientsName =
+                                        e.patientsName ?? "Patient Name";
+                                    String healthIssue =
+                                        e.healthIssue ?? "Health Issue";
+                                    String hospitalName =
+                                        e.hospitalName ?? "Hospital Name";
+                                    String bloodAmount =
+                                        e.amountBag ?? "Blood Amount";
+                                    String bloodType = e.bloodGroup ?? "Type";
+                                    String date = e.date ?? "date";
+                                    String time = e.time ?? "time";
+                                    String address = e.address ?? "address";
+                                    String note = e.note ?? "note";
+
+                                    return UrgentRequest(
+                                      patientsName: patientsName,
+                                      hospitalName: hospitalName,
+                                      address: address,
+                                      date: date,
+                                      bloodType: bloodType,
+                                    );
+                                  },
+                                );
+                              }
+                              // else {
+                              //   return const Center(child: CircularProgressIndicator());
+                              // }
+                              return Text("data");
+                            },
+                          ),
+
+                          //ListView.builder(
+                          //                             scrollDirection: Axis.horizontal,
+                          //                             // padding: EdgeInsets.symmetric(horizontal: 10),
+                          //                             itemCount: 10,
+                          //                             itemBuilder: (context, index) {
+                          //                               return const UrgentRequest();
+                          //                             },
+                          //                           ),
+                        ),
                       )
                     ],
                   ),

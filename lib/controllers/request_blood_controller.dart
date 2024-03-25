@@ -8,6 +8,7 @@ class RequestBloodController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController patientNameController = TextEditingController();
+  TextEditingController hospitalController = TextEditingController();
   var bloodType;
   var bloodAmount;
   var healthIssue;
@@ -20,11 +21,12 @@ class RequestBloodController extends GetxController {
   TextEditingController addressController = TextEditingController();
   TextEditingController contactParsonNameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
+  TextEditingController noteController = TextEditingController();
   List<Map<String, dynamic>> dataList = [];
 
   onSaveRqBlood() async {
     print(token);
-    // if (formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) {
    try{
      print("validate");
      String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
@@ -49,7 +51,7 @@ class RequestBloodController extends GetxController {
          "address": addressController.text,
          "contact_person_name": contactParsonNameController.text,
          "contact_person_phone": numberController.text,
-         "note": "Note",
+         "note": noteController.text,
        },
      );
 
@@ -58,7 +60,7 @@ class RequestBloodController extends GetxController {
    }catch(e){
      print(e);
    }
-    // }
+    }
   }
 }
 

@@ -30,9 +30,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    var name = controller.name.value;
-    var number = controller.number.value;
-    var status = controller.status.value;
+    var name = controller.name;
+    var number = controller.number;
+    var status = controller.status;
     var blood = getStorage.read("blood") ?? "A+";
     var gender = getStorage.read("gender") ?? "Male";
     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
@@ -67,24 +67,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             "Profile",
-                            // style: TextStyle(fontSize: 21.sp , color: AppTheme.textColorRed ),
                           ),
                         ],
                       ),
                       foregroundColor: AppTheme.textColorRed,
                       titleSpacing: 0,
-                      // leading: InkWell(
-                      //   onTap: () => Get.back(),
-                      //   child: const Icon(
-                      //     Icons.arrow_back_ios,
-                      //   ),
-                      // ),
                       actions: [
                         Obx(
                           () => CupertinoSwitch(
                             value: status == 0.toString()
-                                ? !drawerProfileController.switchValue.value
-                                : drawerProfileController.switchValue.value,
+                                ? drawerProfileController.switchValue.value
+                                : !drawerProfileController.switchValue.value,
                             onChanged: (value) {
                               drawerProfileController.activeStatus(value);
                             },

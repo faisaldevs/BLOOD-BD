@@ -19,12 +19,13 @@ class CustomTextFormField extends StatelessWidget {
     required this.validate,
     required this.labelText,
     this.suffixFunction,
-    this.onTap, this.length,
+    this.onTap, this.length, this.maxLine,
   });
 
   final TextEditingController? controller;
   final EdgeInsets? padding;
   final String? hintText;
+  final int? maxLine;
   final String labelText;
   final String? helperText;
   final bool obscure;
@@ -44,6 +45,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       maxLength: length,
       onTap: onTap,
+      maxLines: maxLine,
       validator: validate,
       onChanged: onChanged,
       controller: controller,

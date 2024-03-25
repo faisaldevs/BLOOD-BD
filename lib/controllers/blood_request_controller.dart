@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,18 +23,12 @@ class BloodRequestController extends GetxController{
       String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
       var res = await http.get(Uri.parse(appUrl));
 
-      print(res.statusCode);
-      // print(res.body);
-
       var jsonDataDecoded = json.decode(res.body);
-      var dataList = jsonDataDecoded['data'];
-      // print("------------"+dataList.toString());
-
-      List data = dataList['data'] as List;
+      List data = jsonDataDecoded['data'] as List;
       if (res.statusCode == 200) {
-        print("-----data-------"+data.toString());
-        print(res.statusCode);
-        // print("pressed.............");
+        if (kDebugMode) {
+          print("200-status : ${res.body}");
+        }
         return data.map((e) {
           final map = e as Map<String, dynamic>;
           return RequestBloodModel(
@@ -52,16 +47,22 @@ class BloodRequestController extends GetxController{
             contactPersonName: map["contact_person_name"],
             contactPersonPhone: map["contact_person_phone"],
             note: map["note"],
-            // user: map["user"],
           );
         }).toList();
 
-      } else {
-        print("failed code${res.statusCode}");
-        print("failed body${res.body}");
+      }
+      else {
+        if (kDebugMode) {
+          print("failed code${res.statusCode}");
+        }
+        if (kDebugMode) {
+          print("failed body${res.body}");
+        }
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print("Error : $e");
+      }
     }
     throw Exception("Loading failed !!!");
   }

@@ -1,4 +1,3 @@
-
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ import '../../models/blood_request_model.dart';
 class FeedPage extends StatelessWidget {
   FeedPage({super.key});
 
-  BloodRequestController controller = Get.put(BloodRequestController());
+ final BloodRequestController controller = Get.put(BloodRequestController());
 
   // final getStorage = GetStorage();
 
@@ -138,7 +137,6 @@ class FeedPage extends StatelessWidget {
           } else {
             return const Center(child: CircularProgressIndicator());
           }
-          return Text("data");
         },
       ),
     );

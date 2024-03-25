@@ -2,8 +2,6 @@ import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../../controllers/request_blood_controller.dart';
 import '../../data_list/data_list.dart';
 import '../global_widget/custom_birthDate.dart';
@@ -96,7 +94,7 @@ class _RequestBloodState extends State<RequestBlood> {
                           label: 'Amount',
                           onChanged: (value) {
                             // controller.bloodAmount = value.toString();
-                          controller.bloodAmount = value;
+                            controller.bloodAmount = value;
                           },
                         )),
                   ],
@@ -130,6 +128,20 @@ class _RequestBloodState extends State<RequestBlood> {
                     controller.healthIssue = value.toString();
                   },
                 ),
+                const SizedBox(height: 10),
+                //----------Hospital Name-----------------------
+
+                CustomTextFormField(
+                    controller: controller.hospitalController,
+                    textInputType: TextInputType.text,
+                    validate: (value) {
+                      if(value!.isEmpty){
+                        return "Hospital Name Required";
+                      }else{
+                        return null;
+                      }
+                    },
+                    labelText: "Hospital Name"),
 
                 const SizedBox(height: 10),
 
@@ -219,6 +231,7 @@ class _RequestBloodState extends State<RequestBlood> {
                 ),
 
                 //  ------- Mobile Field --------------
+
                 CustomTextFormField(
                   controller: controller.numberController,
                   hintText: "",
@@ -234,32 +247,48 @@ class _RequestBloodState extends State<RequestBlood> {
                   },
                   labelText: "Number",
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomTextFormField(
+                  controller: controller.noteController,
+                  hintText: "",
+                  textInputType: TextInputType.text,
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      return "Address required";
+                    }
+                    return null;
+                  },
+                  labelText: "Note",
+                ),
 
                 //  ------- Signup Button --------------
 
                 const SizedBox(
-                  height: 40,
-                ),
-
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: CustomButton(
-                      onPressed: () {
-                        controller.onSaveRqBlood();
-                        // if(controller.requestBloodKey.currentState!.validate()){
-                        //   print("validate??");
-                        // }
-                      },
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.white),
-                      )),
+                  height: 80,
                 ),
               ],
             ),
           ),
         ),
       ),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        width: MediaQuery.of(context).size.width * .9,
+        child: CustomButton(
+            onPressed: () {
+              controller.onSaveRqBlood();
+              // if(controller.requestBloodKey.currentState!.validate()){
+              //   print("validate??");
+              // }
+            },
+            child: const Text(
+              "Sign Up",
+              style: TextStyle(color: Colors.white),
+            )),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

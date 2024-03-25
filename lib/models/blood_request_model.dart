@@ -7,7 +7,7 @@ class RequestBloodModel {
   String? date;
   String? time;
   String? healthIssue;
-  Null? hospitalName;
+  String? hospitalName;
   String? division;
   String? district;
   String? upazila;

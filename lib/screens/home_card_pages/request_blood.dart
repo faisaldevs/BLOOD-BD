@@ -135,9 +135,9 @@ class _RequestBloodState extends State<RequestBlood> {
                     controller: controller.hospitalController,
                     textInputType: TextInputType.text,
                     validate: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Hospital Name Required";
-                      }else{
+                      } else {
                         return null;
                       }
                     },

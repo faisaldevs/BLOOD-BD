@@ -21,8 +21,6 @@ class SignupScreen extends StatelessWidget {
 
   final SignupController signupController = Get.put(SignupController());
 
-  final WelcomeController welcomeController = Get.put(WelcomeController());
-
   @override
   Widget build(BuildContext context) {
     print("test");

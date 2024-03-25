@@ -11,7 +11,6 @@ import '../../global_widget/custom_button.dart';
 import '../../global_widget/custom_textFormField.dart';
 import 'forget_password/forgetButton.dart';
 import 'forget_password/forget_password_number.dart';
-import 'forget_password/forget_password_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

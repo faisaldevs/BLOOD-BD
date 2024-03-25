@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:blood_bd/api/api_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class SignupController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-    var bloodType;
+  var bloodType;
   var gender;
   var division;
   var district;
@@ -28,9 +27,7 @@ class SignupController extends GetxController {
   TextEditingController numberController = TextEditingController();
   TextEditingController weightController = TextEditingController();
 
-
-  getBack(){
-
+  getBack() {
     @override
     void dispose() {
       // TODO: implement dispose
@@ -38,11 +35,9 @@ class SignupController extends GetxController {
       signupFormKey;
       nameController.clear();
     }
+
     Get.toNamed(welcomePage);
   }
-
-
-
 
   RxBool isVisible = true.obs;
 
@@ -74,7 +69,6 @@ class SignupController extends GetxController {
     print(addressController.text);
     print(passwordController.text);
 
-
     if (kDebugMode) {
       print("success");
     }
@@ -99,7 +93,6 @@ class SignupController extends GetxController {
               "union": union,
               "address": addressController.text,
               "password": passwordController.text,
-
             });
 
         print(response.statusCode);
@@ -159,7 +152,7 @@ class SignupController extends GetxController {
         isSignup.value = false;
 
         if (kDebugMode) {
-          print("----"+e.toString());
+          print("----" + e.toString());
         }
       }
 
@@ -227,31 +220,3 @@ class SignupController extends GetxController {
     throw Exception("Loading failed !!!");
   }
 }
-
-
- // Future<List<DivisionModel>> getDivision() async {
- //    print("pressed.............");
- //    try {
- //      var res = await http.get(Uri.parse(ApiUrls.division));
- //
- //      print(res.statusCode);
- //      // print(res.body);
- //
- //      var data = jsonDecode(res.body);
- //
- //       List dataList = data["data"] as List;
- //
- //      if (res.statusCode == 200) {
- //        return dataList.map((e) {
- //          final map = e as Map<String, dynamic>;
- //          return DivisionModel(
- //            id: map["id"].toString(),
- //            division: map["division"],
- //          );
- //        }).toList();
- //      }
- //    } catch (e) {
- //      print("Error : $e");
- //    }
- //    throw "";
- //  }

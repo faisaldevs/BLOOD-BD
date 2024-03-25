@@ -28,6 +28,22 @@ class SignupController extends GetxController {
   TextEditingController numberController = TextEditingController();
   TextEditingController weightController = TextEditingController();
 
+
+  getBack(){
+
+    @override
+    void dispose() {
+      // TODO: implement dispose
+      super.dispose();
+      signupFormKey;
+      nameController.clear();
+    }
+    Get.toNamed(welcomePage);
+  }
+
+
+
+
   RxBool isVisible = true.obs;
 
   RxBool isSignup = false.obs;
@@ -198,7 +214,7 @@ class SignupController extends GetxController {
         return divisionList.map((e) {
           final map = e as Map<String, dynamic>;
           return DivisionModel(
-            id: map["id"],
+            id: map["id"].toString(),
             division: map["division"],
           );
         }).toList();
@@ -206,8 +222,36 @@ class SignupController extends GetxController {
         print("failed code${response.statusCode}");
       }
     } catch (e) {
-      print("field.....");
+      print(e);
     }
     throw Exception("Loading failed !!!");
   }
 }
+
+
+ // Future<List<DivisionModel>> getDivision() async {
+ //    print("pressed.............");
+ //    try {
+ //      var res = await http.get(Uri.parse(ApiUrls.division));
+ //
+ //      print(res.statusCode);
+ //      // print(res.body);
+ //
+ //      var data = jsonDecode(res.body);
+ //
+ //       List dataList = data["data"] as List;
+ //
+ //      if (res.statusCode == 200) {
+ //        return dataList.map((e) {
+ //          final map = e as Map<String, dynamic>;
+ //          return DivisionModel(
+ //            id: map["id"].toString(),
+ //            division: map["division"],
+ //          );
+ //        }).toList();
+ //      }
+ //    } catch (e) {
+ //      print("Error : $e");
+ //    }
+ //    throw "";
+ //  }

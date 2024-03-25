@@ -69,6 +69,7 @@ class ApiDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('d list: $dropDownList');
     return DropdownButtonFormField(
       icon: Icon(
         Icons.arrow_drop_down,

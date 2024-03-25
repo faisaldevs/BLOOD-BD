@@ -1,5 +1,5 @@
 class DivisionModel {
-  int? id;
+  String? id;
   String? countryId;
   String? division;
   String? bndivision;

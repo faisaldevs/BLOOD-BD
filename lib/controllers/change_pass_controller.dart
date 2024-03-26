@@ -1,3 +1,4 @@
+import 'package:blood_bd/api/api_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -19,7 +20,7 @@ class ChangePassController extends GetxController {
    try{
      String appUrl = "https://starsoftjpn.xyz/api/auth/change-password";
      var response = await http.post(
-         Uri.parse(appUrl),
+         Uri.parse(ApiUrls.changePasswordPost),
          headers: {
            "Accept" : "application/json",
            "Authorization" : token,

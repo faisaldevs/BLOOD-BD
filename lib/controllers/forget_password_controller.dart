@@ -1,3 +1,4 @@
+import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/screens/user_auth/login_screen/forget_password/forget_password_page.dart';
 import 'package:blood_bd/screens/user_auth/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class ForgetPassController extends GetxController {
     if (key.currentState!.validate()) {
       print("object");
       var res = await http
-          .post(Uri.parse(appUrl), body: {"phone": numberController.text});
+          .post(Uri.parse(ApiUrls.forgotPasswordPhonePost), body: {"phone": numberController.text});
       print("object");
 
       print(res.statusCode);
@@ -39,7 +40,7 @@ class ForgetPassController extends GetxController {
     String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-otp-check";
     if (key.currentState!.validate()) {
       print("object");
-      var res = await http.post(Uri.parse(appUrl), body: {
+      var res = await http.post(Uri.parse(ApiUrls.forgotPasswordOtpPost), body: {
         "phone": numberController.text,
         "otp": otpController.text,
       });
@@ -59,7 +60,7 @@ class ForgetPassController extends GetxController {
     String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-update";
     if (key.currentState!.validate()) {
       print("object");
-      var res = await http.post(Uri.parse(appUrl), body: {
+      var res = await http.post(Uri.parse(ApiUrls.forgotPasswordPost), body: {
         "phone": numberController.text,
         "password": newPassword.text,
         "confirm_password": confirmPassword.text,

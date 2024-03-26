@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blood_bd/api/api_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +40,7 @@ class LoginController extends GetxController {
 
       try {
         var response = await post(
-            Uri.parse("https://starsoftjpn.xyz/api/auth/login"),
+            Uri.parse(ApiUrls.loginPost),
             body: {
               "phone": numberController.text,
               "password": passwordController.text,

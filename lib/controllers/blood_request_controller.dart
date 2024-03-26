@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blood_bd/api/api_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -20,8 +21,8 @@ class BloodRequestController extends GetxController{
   Future<List<RequestBloodModel>> getRequestData() async {
     print("pressed.............1");
     try {
-      String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
-      var res = await http.get(Uri.parse(appUrl));
+      // String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
+      var res = await http.get(Uri.parse(ApiUrls.bloodRequestGetApi));
 
       var jsonDataDecoded = json.decode(res.body);
       List data = jsonDataDecoded['data'] as List;

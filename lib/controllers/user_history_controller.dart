@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/models/blood_donate_history_model.dart';
 import 'package:blood_bd/models/blood_request_history_model.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,7 @@ class HistoryController extends GetxController {
       //
       //   },
       // );
-      var res = await http.get(Uri.parse(appUrl),headers: {
+      var res = await http.get(Uri.parse(ApiUrls.bloodRequestGet),headers: {
         "Accept" : "application/json",
         "Authorization" : token,
       },);
@@ -89,7 +90,7 @@ class HistoryController extends GetxController {
       //
       //   },
       // );
-      var res = await http.get(Uri.parse(appUrl),headers: {
+      var res = await http.get(Uri.parse(ApiUrls.bloodDonorGet),headers: {
         "Accept" : "application/json",
         "Authorization" : token,
       },);

@@ -1,3 +1,4 @@
+import 'package:blood_bd/api/api_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,7 +15,8 @@ class DrawerProfileController extends GetxController {
 
   activeStatus(bool value) async {
     switchValue.value = value;
-    String appUrl = "https://starsoftjpn.xyz/api/auth/update-donor-status";
+    // String appUrl = "https://starsoftjpn.xyz/api/auth/update-donor-status";
+    String appUrl = ApiUrls.donorStatusUpdatePost;
 
     if (value == true) {
       print("object");

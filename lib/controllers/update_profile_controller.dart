@@ -1,3 +1,4 @@
+import 'package:blood_bd/api/api_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -28,7 +29,7 @@ class UpdateProfileController extends GetxController {
    try{
      String appUri = "https://starsoftjpn.xyz/api/auth/update-profile";
      var response = await http.post(
-       Uri.parse(appUri),
+       Uri.parse(ApiUrls.profileUpdatePost),
        headers: {
          "Accept" : "application/json",
          "Authorization" : token,

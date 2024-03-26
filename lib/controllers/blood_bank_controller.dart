@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/models/blood_bank_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ class BloodBankController extends GetxController {
   Future<List> getBloodBankData() async {
     try {
       var res = await http.get(
-        Uri.parse("https://starsoftjpn.xyz/api/v1/club"),
+        Uri.parse(ApiUrls.bloodBankGet),
       );
       var jsonDataDecoded = json.decode(res.body);
 

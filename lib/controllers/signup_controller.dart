@@ -197,7 +197,7 @@ class SignupController extends GetxController {
   Future<List<DivisionModel>> getDivision() async {
     print("pressed.............");
     try {
-      final response = await http.get(Uri.parse(ApiUrls.division));
+      final response = await http.get(Uri.parse(ApiUrls.divisionGet));
 
       var jsonDataDecoded = json.decode(response.body);
       var divisionList = jsonDataDecoded['data'] as List;

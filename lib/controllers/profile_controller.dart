@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/screens/profile/profile_page.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
@@ -25,7 +26,7 @@ class ProfileController extends GetxController {
       String appUrl = "https://starsoftjpn.xyz/api/auth/profile";
 
       var res = await http.get(
-        Uri.parse(appUrl),
+        Uri.parse(ApiUrls.profileGet),
         headers: {
           "Accept" : "application/json",
           "Authorization" : token,

@@ -1,3 +1,4 @@
+import 'package:blood_bd/api/api_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -29,9 +30,9 @@ class RequestBloodController extends GetxController {
     if (formKey.currentState!.validate()) {
    try{
      print("validate");
-     String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
+     // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
      var res = await http.post(
-       Uri.parse(apiUrl),
+       Uri.parse(ApiUrls.bloodRequestPost),
        headers: {
          "Accept": "application/json",
          "Authorization": token,

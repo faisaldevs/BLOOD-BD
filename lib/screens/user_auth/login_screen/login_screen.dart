@@ -1,4 +1,4 @@
-import 'package:blood_bd/global/app_routes.dart';
+import 'package:blood_bd/utils/app_routes.dart';
 import 'package:blood_bd/screens/user_auth/signup_screen/signup_screens.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';

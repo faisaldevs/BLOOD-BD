@@ -1,5 +1,5 @@
 import 'package:blood_bd/controllers/welcome_controller.dart';
-import 'package:blood_bd/global/app_routes.dart';
+import 'package:blood_bd/utils/app_routes.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../screens/user_auth/OTP_verification/forget_pass_otp_verification.dart';
+import '../screens/user_auth/login_screen/forget_password/forget_otp_verification_page.dart';
 
 class ForgetPassController extends GetxController {
   GlobalKey<FormState> key = GlobalKey<FormState>();

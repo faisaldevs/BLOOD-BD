@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/blood_request_controller.dart';
-import '../../global/app_routes.dart';
+import '../../utils/app_routes.dart';
 import '../../models/blood_request_model.dart';
 import '../../utils/assets_links.dart';
 

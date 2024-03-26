@@ -9,7 +9,7 @@ import 'package:get_storage/get_storage.dart';
 
 import '../../controllers/drawer_profile_controller.dart';
 import '../../controllers/profile_controller.dart';
-import '../../global/app_routes.dart';
+import '../../utils/app_routes.dart';
 import '../drawer_profile/components/custom_drawer_links.dart';
 import '../drawer_profile/drawer_pages/change_password.dart';
 import '../drawer_profile/drawer_pages/medical_history.dart';

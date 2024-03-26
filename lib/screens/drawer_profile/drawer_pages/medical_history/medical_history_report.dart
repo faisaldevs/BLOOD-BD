@@ -1,5 +1,5 @@
 import 'package:blood_bd/data_list/data_list.dart';
-import 'package:blood_bd/global/app_routes.dart';
+import 'package:blood_bd/utils/app_routes.dart';
 import 'package:blood_bd/screens/global_widget/custom_birthDate.dart';
 import 'package:blood_bd/screens/global_widget/custom_button.dart';
 import 'package:blood_bd/screens/global_widget/custom_dropdown.dart';

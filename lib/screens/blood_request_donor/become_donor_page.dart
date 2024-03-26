@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../controllers/become_donor_controller.dart';
 import '../../data_list/data_list.dart';
-import '../../global/app_routes.dart';
+import '../../utils/app_routes.dart';
 import '../../utils/app_colors.dart';
 import '../global_widget/custom_birthDate.dart';
 import '../global_widget/custom_button.dart';

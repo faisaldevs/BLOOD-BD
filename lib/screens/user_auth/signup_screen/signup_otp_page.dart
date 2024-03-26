@@ -1,17 +1,21 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-import '../../../../controllers/forget_password_controller.dart';
-import '../../../global_widget/custom_button.dart';
+import '../../../controllers/signup_otp_controller.dart';
+import '../../global_widget/custom_button.dart';
 
-class ForgetPassOtpVerification extends StatelessWidget {
-  ForgetPassOtpVerification({super.key});
+class SignupOTPVerification extends StatefulWidget {
+  const SignupOTPVerification({super.key});
 
-  final ForgetPassController controller =
-  Get.put(ForgetPassController());
+  @override
+  State<SignupOTPVerification> createState() => _SignupOTPVerificationState();
+}
+
+class _SignupOTPVerificationState extends State<SignupOTPVerification> {
+
+  SignupOTPController signupOTPController = Get.put(SignupOTPController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +52,8 @@ class ForgetPassOtpVerification extends StatelessWidget {
               SizedBox(
                 height: height * 0.14,
               ),
-              const Icon(
-                Icons.check_circle,
-                size: 90,
-                color: Colors.red,
-              ),
-              SizedBox(
-                height: height * 0.04,
-              ),
+              const Icon(Icons.check_circle,size: 90,color: Colors.red,),
+              SizedBox(height: height*0.04,),
               Text(
                 'OTP VERIFICATION',
                 style: GoogleFonts.urbanist(
@@ -64,9 +62,7 @@ class ForgetPassOtpVerification extends StatelessWidget {
                   fontSize: 24.0,
                 ),
               ),
-              SizedBox(
-                height: height * 0.04,
-              ),
+              SizedBox(height: height*0.04,),
 
               const Text("Enter the OTP Send To :+88"),
               SizedBox(
@@ -79,31 +75,31 @@ class ForgetPassOtpVerification extends StatelessWidget {
                 child: SizedBox(
                   width: width,
                   child: Pinput(
-                    key: controller.otpKey,
-                    // senderPhoneNumber: "01903440069",
-                    controller: controller.otpController,
-                    validator: (otp) {
-                      if (otp!.isEmpty) {
-                        // print(otp);
-                        return "Enter OTP pin";
-                      }
-                      return null;
-                    },
-                    length: 4,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    defaultPinTheme: defaultPinTheme,
-                    focusedPinTheme: defaultPinTheme.copyWith(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 1.0,
+                      key: signupOTPController.formKey,
+                      // senderPhoneNumber: "01903440069",
+                      controller: signupOTPController.signupOtpController,
+                      validator: (otp) {
+                        if (otp!.isEmpty) {
+                          // print(otp);
+                          return "Enter OTP pin";
+
+                        }
+                        return null;
+                      },
+                      length: 4,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      defaultPinTheme: defaultPinTheme,
+                      focusedPinTheme: defaultPinTheme.copyWith(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 1.0,
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
+                      )),
                 ),
               ),
 
@@ -129,16 +125,10 @@ class ForgetPassOtpVerification extends StatelessWidget {
 
               /// Continue Button
               const Expanded(child: SizedBox()),
-              SizedBox(
-                  width: width,
-                  child: CustomButton(
-                      onPressed: () {
-                        // otpValidation();
-                        // Get.toNamed(home);
-                        // Get.to(ForgetPasswordPage());
-                        controller.otpValidate();
-                      },
-                      child: const Text("Continue",style: TextStyle(color: Colors.white),))),
+              SizedBox(width: width,child: CustomButton(onPressed: (){
+                // otpValidation();
+                // Get.toNamed(home);
+              },child : const Text("Continue"))),
               const SizedBox(
                 height: 16.0,
               ),

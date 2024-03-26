@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import '../global/app_routes.dart';
+import '../utils/app_routes.dart';
 import '../models/division_model.dart';
 
 class SignupController extends GetxController {

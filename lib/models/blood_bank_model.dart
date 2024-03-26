@@ -13,7 +13,7 @@ class BloodBankModel {
   String? status;
   String? createdByUserId;
   String? updatedByUserId;
-  Null? deletedAt;
+  Null deletedAt;
   String? createdAt;
   String? updatedAt;
   String? userId;

@@ -38,7 +38,9 @@ class _ProfilePageState extends State<ProfilePage> {
     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
     var width = Get.width;
 
-    print(status);
+    if (kDebugMode) {
+      print(status);
+    }
     return Scaffold(
       backgroundColor: AppTheme.primary,
       body: Padding(

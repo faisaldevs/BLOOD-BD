@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +34,7 @@ class HistoryDonate extends StatelessWidget {
                 // String time = e.time ?? "time";
                 String address = e.address ?? "address";
                 // String note = e.note ?? "note";
-                return HistoryTile(
+                return historyTile(
                     contactPersonName,
                     number,
                     // patientsName,
@@ -55,7 +56,7 @@ class HistoryDonate extends StatelessWidget {
     );
   }
 
-  Widget HistoryTile(String contactPersonName,
+  Widget historyTile(String contactPersonName,
       String number,
       // String patientsName,
       String healthIssue,
@@ -84,7 +85,9 @@ class HistoryDonate extends StatelessWidget {
     // }
     var value = controller.isVisible.value;
 
-    print(value);
+    if (kDebugMode) {
+      print(value);
+    }
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -213,7 +216,7 @@ class HistoryDonate extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Divider(),
+                    const Divider(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -222,7 +225,7 @@ class HistoryDonate extends StatelessWidget {
                         // Text("Date & Time : $date$time"),
                       ],
                     ),
-                    Divider(),
+                    const Divider(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -231,8 +234,8 @@ class HistoryDonate extends StatelessWidget {
                         Text("Contact Person's Number : $number"),
                       ],
                     ),
-                    Divider(),
-                    Column(
+                    const Divider(),
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../controllers/login_controller.dart';
 import '../../global_widget/custom_button.dart';
 import '../../global_widget/custom_textFormField.dart';

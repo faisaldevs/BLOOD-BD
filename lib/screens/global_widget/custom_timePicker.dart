@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../utils/app_colors.dart';
 
@@ -28,7 +29,9 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
     );
 
     if (selectedTime != null) {
-      print('Selected time: ${selectedTime.format(context)}');
+      if (kDebugMode) {
+        print('Selected time: ${selectedTime.format(context)}');
+      }
       // You can do something with the selected time here
       setState(() {
         widget.controller.text = selectedTime.format(context).toString();

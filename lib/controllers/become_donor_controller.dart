@@ -22,12 +22,12 @@ class BecomeDonorController extends GetxController {
   searchDonor() async{
     print("pressend");
     // if (formKey.currentState!.validate()) {
-      var patientName = patientNameController.text;
-      var date = dateController.text;
-      var time = timeController.text;
-      var contactParsonPhone = numberController.text;
-      var patientAddress = addressController.text;
-      var contactParsonName = contactParsonNameController.text;
+    //   var patientName = patientNameController.text;
+    //   var date = dateController.text;
+    //   var time = timeController.text;
+    //   var contactParsonPhone = numberController.text;
+    //   var patientAddress = addressController.text;
+    //   var contactParsonName = contactParsonNameController.text;
       var token = GetStorage().read("token");
 
       // sdStorage.write("patientName", patientName);

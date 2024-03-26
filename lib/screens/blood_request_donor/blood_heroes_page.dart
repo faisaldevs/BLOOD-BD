@@ -50,15 +50,15 @@ class BloodHeroes extends StatelessWidget {
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
                 BloodBankModel e = snapshot.data![index];
-                String id = e.id.toString() ?? "id";
+                // String id = e.id.toString() ?? "id";
                 String number = e.phones ?? "01*********";
-                // String number2 = e.phones?[1] ?? "01*********";
-                String clubName = e.clubName ?? "Club Name";
+                // // String number2 = e.phones?[1] ?? "01*********";
+                // String clubName = e.clubName ?? "Club Name";
                 String name = e.contactPerson ?? "Contact Person";
-                String division = e.division ?? "Division";
-                String district = e.district ?? "District";
-                String upazilla = e.upazila ?? "Upazilla";
-                String union = e.union ?? "Union";
+                // String division = e.division ?? "Division";
+                // String district = e.district ?? "District";
+                // String upazilla = e.upazila ?? "Upazilla";
+                // String union = e.union ?? "Union";
                 String address = e.address ?? "address";
 
                 return Container(

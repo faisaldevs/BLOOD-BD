@@ -1,5 +1,6 @@
 import 'package:blood_bd/controllers/welcome_controller.dart';
 import 'package:blood_bd/global/app_routes.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -168,10 +169,12 @@ class SignupScreen extends StatelessWidget {
                                   );
                                 }).toList(),
                                 onChanged: (value) {
-                                  print(value.toString());
+                                  if (kDebugMode) {
+                                    print(value.toString());
+                                  }
                                 }, label: 'Division',);
                           } else {
-                            return Text("no data found");
+                            return const Text("no data found");
                           }
 
 

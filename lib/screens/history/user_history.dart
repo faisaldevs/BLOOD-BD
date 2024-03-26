@@ -53,7 +53,7 @@ class BloodHistory extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            HistoryRequest(),
+            const HistoryRequest(),
             // FutureBuilder<List<BloodRequestHistoryModel>>(
             //   future: controller.getHistoryRequest(),
             //   builder: (context, snapshot) {

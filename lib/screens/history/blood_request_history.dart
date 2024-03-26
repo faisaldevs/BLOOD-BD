@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -6,7 +7,7 @@ import '../../controllers/user_history_controller.dart';
 import '../../models/blood_request_history_model.dart';
 
 class HistoryRequest extends StatefulWidget {
-  HistoryRequest({super.key});
+  const HistoryRequest({super.key});
 
   @override
   State<HistoryRequest> createState() => _HistoryRequestState();
@@ -38,7 +39,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
                 String address = e.address ?? "address";
                 String note = e.note ?? "note";
 
-                return HistoryTile(contactPersonName, number, patientsName,
+                return historyTile(contactPersonName, number, patientsName,
                     healthIssue, bloodAmount, bloodType,date,time,address,note);
               },
             );
@@ -50,7 +51,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
     );
   }
 
-  Widget HistoryTile(
+  Widget historyTile(
       String contactPersonName,
       String number,
       String patientsName,
@@ -80,7 +81,9 @@ class _HistoryRequestState extends State<HistoryRequest> {
     // }
     var value = controller.isVisible.value;
 
-    print(value);
+    if (kDebugMode) {
+      print(value);
+    }
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -208,7 +211,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
             child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Divider(),
+                const Divider(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -217,7 +220,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
                     Text("Date & Time : $date$time"),
                   ],
                 ),
-                Divider(),
+                const Divider(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -226,7 +229,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
                     Text("Contact Person's Number : $number"),
                   ],
                 ),
-                Divider(),
+                const Divider(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,

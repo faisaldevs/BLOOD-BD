@@ -122,7 +122,7 @@ class _RequestBloodState extends State<RequestBlood> {
                 //-------  Health issue --------------
 
                 CustomDropdown(
-                  dropDownList: DataList.bloodAmount,
+                  dropDownList: DataList.healthIssue,
                   label: "Health Issue",
                   onChanged: (value) {
                     controller.healthIssue = value.toString();

@@ -125,7 +125,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 //-------  Health issue --------------
 
                 CustomDropdown(
-                  dropDownList: DataList.bloodAmount,
+                  dropDownList: DataList.healthIssue,
                   label: "Health Issue",
                   onChanged: (value) {
                     sdController.healthIssue = value.toString();

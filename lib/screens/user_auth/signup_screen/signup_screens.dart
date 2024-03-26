@@ -126,7 +126,7 @@ class SignupScreen extends StatelessWidget {
                         textInputType: TextInputType.number,
                         validate: (weight) {
                           if (weight!.isEmpty) {
-                            return "Full name required";
+                            return "Weight required";
                           }
                           return null;
                         },

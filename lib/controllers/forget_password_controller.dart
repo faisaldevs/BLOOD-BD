@@ -71,7 +71,7 @@ class ForgetPassController extends GetxController {
       print(res.body);
 
       if (res.statusCode == 200) {
-        Get.to(const LoginScreen());
+        Get.to( LoginScreen());
       }
     }
   }

@@ -11,7 +11,7 @@ class WelcomeController extends GetxController {
   }
 
   loginBtn() async {
-    Get.to(const LoginScreen());
+    Get.to( LoginScreen());
   }
 
   List<String> imageUrls = [

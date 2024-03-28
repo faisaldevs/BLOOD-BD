@@ -333,7 +333,7 @@ class SignupScreen extends StatelessWidget {
                 const SizedBox(height: 60),
 
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: double.infinity,
                   child: Obx(
                     () => CustomButton(
                       onPressed: () {

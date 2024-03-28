@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("object");
     return Scaffold(
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   //------- CONTINUE BUTTON ------
 
                   SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: double.infinity,
                       child: Obx(
                         () => CustomButton(
                           onPressed: () {

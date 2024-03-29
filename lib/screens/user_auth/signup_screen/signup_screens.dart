@@ -42,7 +42,7 @@ class SignupScreen extends StatelessWidget {
         elevation: 0,
         leading: InkWell(
           onTap: () {
-            signupController.getBack();
+            Get.offAllNamed(welcomePage);
           } ,
           child: const Icon(
             Icons.arrow_back_ios,

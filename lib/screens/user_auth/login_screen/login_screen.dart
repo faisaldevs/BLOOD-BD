@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: InkWell(
-          onTap: () => Get.toNamed(welcomePage),
+          onTap: () =>  Get.offAllNamed(welcomePage),
           child: const Icon(
             Icons.arrow_back_ios,
           ),

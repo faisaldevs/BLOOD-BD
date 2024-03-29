@@ -27,17 +27,6 @@ class SignupController extends GetxController {
   TextEditingController numberController = TextEditingController();
   TextEditingController weightController = TextEditingController();
 
-  getBack() {
-    @override
-    void dispose() {
-      // TODO: implement dispose
-      super.dispose();
-      signupFormKey;
-      nameController.clear();
-    }
-
-    Get.toNamed(welcomePage);
-  }
 
   RxBool isVisible = true.obs;
 

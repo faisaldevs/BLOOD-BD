@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
+import 'package:blood_bd/screens/user_auth/signup_screen/signup_otp_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -118,15 +119,15 @@ class SignupController extends GetxController {
           getStorage.write("address", address);
 
           // isLoginIng.value = false;
-          Get.snackbar(
-            "Login Successes",
-            "message",
-          );
+          // Get.snackbar(
+          //   "Login Successes",
+          //   "message",
+          // );
 
-          await Future.delayed(const Duration(seconds: 2));
+          // await Future.delayed(const Duration(seconds: 2));
 
           isSignup.value = false;
-          await Get.offAllNamed(home);
+          await Get.to(SignupOTPVerification(number: numberController,));
           // numberController.clear();
           // passwordController.clear();
         } else {

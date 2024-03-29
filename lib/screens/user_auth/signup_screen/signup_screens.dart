@@ -172,6 +172,8 @@ class SignupScreen extends StatelessWidget {
                                   if (kDebugMode) {
                                     print(value.toString());
                                   }
+                                  signupController.division = value;
+
                                 }, label: 'Division',);
                           } else {
                             return const Text("no data found");

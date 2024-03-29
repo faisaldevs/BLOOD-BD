@@ -6,14 +6,9 @@ import 'package:pinput/pinput.dart';
 import '../../../controllers/signup_otp_controller.dart';
 import '../../global_widget/custom_button.dart';
 
-class SignupOTPVerification extends StatefulWidget {
-  const SignupOTPVerification({super.key});
-
-  @override
-  State<SignupOTPVerification> createState() => _SignupOTPVerificationState();
-}
-
-class _SignupOTPVerificationState extends State<SignupOTPVerification> {
+class SignupOTPVerification extends StatelessWidget {
+   SignupOTPVerification({super.key, required this.number});
+   final TextEditingController number;
 
   SignupOTPController signupOTPController = Get.put(SignupOTPController());
 
@@ -111,6 +106,7 @@ class _SignupOTPVerificationState extends State<SignupOTPVerification> {
                   onPressed: () {
                     // print("object");
                     // Get.toNamed(home);
+
                   },
                   child: Text(
                     'Resend Button',
@@ -128,6 +124,7 @@ class _SignupOTPVerificationState extends State<SignupOTPVerification> {
               SizedBox(width: width,child: CustomButton(onPressed: (){
                 // otpValidation();
                 // Get.toNamed(home);
+                signupOTPController.otpValidate(number);
               },child : const Text("Continue"))),
               const SizedBox(
                 height: 16.0,

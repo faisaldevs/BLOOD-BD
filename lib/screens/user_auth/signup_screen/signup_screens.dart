@@ -36,6 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String? selectedThana; // New variable for selected thana
 
   Future<void> fetchDivisions() async {
+    signupController.fetching.value = true;
     try {
       final response =
           await http.get(Uri.parse("https://starsoftjpn.xyz/api/v1/division"));
@@ -46,12 +47,16 @@ class _SignupScreenState extends State<SignupScreen> {
               .map<String>((division) => division['division'].toString())
               .toList();
         });
+        signupController.fetching.value = false;
       } else {
+        signupController.fetching.value = false;
         throw Exception('Failed to load divisions: ${response.statusCode}');
       }
     } catch (e) {
+      signupController.fetching.value = false;
       throw Exception('Failed to load divisions: $e');
     }
+
   }
 
   Future<void> fetchDistricts(int divisionId) async {
@@ -313,7 +318,13 @@ class _SignupScreenState extends State<SignupScreen> {
                     //   // ),
                     // ),
                     Expanded(
-                      child: DropdownButtonFormField(
+                      child: signupController.fetching.value ?DropdownButtonFormField(
+
+                        decoration: inputDecoration("Select Division"),
+                        onChanged: (newValue) {
+                        },
+                        items: null,
+                      ) : DropdownButtonFormField(
                         value: selectedDivision,
                         decoration: inputDecoration("Select Division"),
                         onChanged: (newValue) {

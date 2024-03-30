@@ -4,6 +4,7 @@ import 'package:blood_bd/screens/user_auth/signup_screen/signup_otp_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -11,6 +12,9 @@ import '../utils/app_routes.dart';
 import '../models/division_model.dart';
 
 class SignupController extends GetxController {
+
+  RxBool fetching = false.obs;
+
   GetStorage getStorage = GetStorage();
 
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();

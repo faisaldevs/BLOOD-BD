@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/blood_request_controller.dart';
+import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
 import '../../models/blood_request_model.dart';
 import '../../utils/assets_links.dart';
@@ -21,7 +22,6 @@ import '../drawer_profile/drawer_profile.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  //
   // final getStorage = GetStorage();
   final HomeController homeController = Get.put(HomeController());
 
@@ -31,6 +31,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     // var pages = [
     //   HomePage(),
     //   FeedPage(),

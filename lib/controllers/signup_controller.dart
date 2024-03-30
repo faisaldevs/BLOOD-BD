@@ -22,7 +22,7 @@ class SignupController extends GetxController {
   var gender;
   var division;
   var district;
-  var upazila;
+  var thana;
   var union;
   TextEditingController addressController = TextEditingController();
   TextEditingController numberController = TextEditingController();
@@ -54,7 +54,7 @@ class SignupController extends GetxController {
     print(weightController.text);
     print(division);
     print(district);
-    print(upazila);
+    print(thana);
     print(union);
     print(addressController.text);
     print(passwordController.text);
@@ -79,7 +79,7 @@ class SignupController extends GetxController {
               "weight": weightController.text,
               "division": division,
               "district": district,
-              "upazila": upazila,
+              "upazila": thana,
               "union": union,
               "address": addressController.text,
               "password": passwordController.text,
@@ -209,4 +209,9 @@ class SignupController extends GetxController {
     }
     throw Exception("Loading failed !!!");
   }
+
+
+
+
+
 }

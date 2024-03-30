@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
   // final getStorage = GetStorage();
   final HomeController homeController = Get.put(HomeController());
 
-  // final ProfileController controller = Get.put(ProfileController());
+  final ProfileController controller = Get.put(ProfileController());
   final BloodRequestController bloodController =
       Get.put(BloodRequestController());
 
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                     Builder(
                       builder: (context) => InkWell(
                         onTap: () {
-                          // controller.profileData();
+                          controller.profileData();
                           // Get.to(ProfilePage());
                         },
                         child: Container(

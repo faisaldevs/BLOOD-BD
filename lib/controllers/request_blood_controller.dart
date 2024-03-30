@@ -1,11 +1,14 @@
 import 'dart:convert';
 
 import 'package:blood_bd/api/api_links.dart';
-import 'package:blood_bd/screens/blood_request_donor/request_blood/request_blood_filter_page.dart';
+import 'package:blood_bd/models/search_requested_donor.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+
+import '../screens/blood_request_donor/request_blood/request_blood_filter_page.dart';
 
 class RequestBloodController extends GetxController {
   var token = GetStorage().read("token") ?? "";
@@ -28,9 +31,10 @@ class RequestBloodController extends GetxController {
   TextEditingController noteController = TextEditingController();
   List<Map<String, dynamic>> dataList = [];
 
-  onSaveRqBlood() async {
+ onSaveRqBlood() async {
     print(token);
     // if (formKey.currentState!.validate()) {
+
    try{
      print("validate");
      // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
@@ -81,23 +85,40 @@ class RequestBloodController extends GetxController {
      print(res.body);
 
      if(res.statusCode == 201){
-
-
        var data = jsonDecode(res.body);
 
-      var success = data["success"];
-      var message = data["message"];
-      var bloodRequestId = data["blood_request_id"].toString() ?? "bloodRequestId";
-      var dataList = data["bloodRDonors"] as List;
-      print(success);
-      print(dataList);
+       var success = data["success"];
+       // var message = data["message"];
+       var bloodRequestId = data["blood_request_id"].toString() ?? "bloodRequestId";
+       Get.to(FilterPage(bloodRequestId: bloodRequestId, bloodType: "O+", division: "Dhaka", district: "Dhaka",));
 
-      if(success == true){
+      // var dataList = data["bloodRDonors"] as List;
+      // print(success);
+      // print(dataList);
+      //
+      // if(success == true){
+      //
+      //   Get.to(FilterPage(bloodRequestId: bloodRequestId, bloodType: "A+", division: "Dhaka", district: "Dhaka",));
+      // }
 
-        Get.to(FilterPage(bloodRequestId: bloodRequestId,));
-      }
-
-
+       // print( "res.statusCode");
+       // var res1 = await http.post(Uri.parse("https://starsoftjpn.xyz/api/auth/blood-donor-with-search"),
+       //     headers: {
+       //       "Accept": "application/json",
+       //       "Authorization": token,
+       //     },
+       //     body: {
+       //       "blood_group" : "O+",
+       //       "division" : "Dhaka",
+       //       "district" : "Dhaka",
+       //     }
+       // );
+       //
+       // print( res1.statusCode);
+       // print( res1.body);
+       //
+       // var donor = jsonDecode(res1.body);
+       // var donorList = donor["data"] as List;
 
 
 
@@ -105,34 +126,65 @@ class RequestBloodController extends GetxController {
 
 
    }catch(e){
-     print(e);
+     print("Error : $e");
    }
     }
+
+  Future<List<DonorSearch>> donorSearch() async{
+    try {
+      // String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
+      var res = await http.post(Uri.parse("https://starsoftjpn.xyz/api/auth/blood-donor-with-search"),
+          headers: {
+            "Accept": "application/json",
+            "Authorization": token,
+          },
+          body: {
+            "blood_group" : "O+",
+            "division" : "Dhaka",
+            "district" : "Dhaka",
+          }
+      );
+
+      var jsonDataDecoded = json.decode(res.body);
+      List data = jsonDataDecoded['data'] as List;
+      if (res.statusCode == 200) {
+        if (kDebugMode) {
+          print("200-status : ${res.body}");
+        }
+        return data.map((e) {
+          final map = e as Map<String, dynamic>;
+          return DonorSearch(
+            id: map["id"].toString(),
+            bloodGroup: map["blood_group"],
+            amountBag : map["amount_bag"],
+            healthIssue: map["health_issue"],
+            district: map["district"],
+            division: map["division"],
+            union: map["upazila"],
+            upazila: map["union"],
+            address: map["address"],
+            contactPersonName: map["contact_person_name"],
+            contactPersonPhone: map["contact_person_phone"],
+            // user: map["user"]
+          );
+        }).toList();
+
+      }
+      else {
+        if (kDebugMode) {
+          print("failed code${res.statusCode}");
+        }
+        if (kDebugMode) {
+          print("failed body${res.body}");
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error : $e");
+      }
+    }
+    throw Exception("Loading failed !!!");
+    }
+
+
   }
-// }
-
-//      final data = {
-//         "patient_name": patientNameController.text,
-//         "blood_type": bloodType,
-//         "blood_amount": bloodAmount,
-//         "health_issue": healthIssue,
-//         "date": dateController.text,
-//         "time": timeController.text,
-//         "address": addressController.text,
-//         "contact_person": contactParsonNameController.text,
-//         "contact_person_number": numberController.text
-//       };
-//
-//       saveData(data);
-//
-//       Get.offAllNamed(home);
-
-//   void saveData(Map<String, dynamic> data) {
-//     final box = GetStorage();
-//     dataList.add(data);
-//     box.write('dataList', dataList);
-//
-//     print("Data List :$dataList");
-//     print("Data List : Done!!");
-//   }
-// }

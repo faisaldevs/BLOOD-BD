@@ -10,7 +10,7 @@ class SignupOTPVerification extends StatelessWidget {
    SignupOTPVerification({super.key, required this.number});
    final TextEditingController number;
 
-  SignupOTPController signupOTPController = Get.put(SignupOTPController());
+ final SignupOTPController signupOTPController = Get.put(SignupOTPController());
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,7 @@ class SignupOTPVerification extends StatelessWidget {
                 // otpValidation();
                 // Get.toNamed(home);
                 signupOTPController.otpValidate(number);
-              },child : const Text("Continue"))),
+              },child : const Text("Continue",style: TextStyle(color: Colors.white),))),
               const SizedBox(
                 height: 16.0,
               ),

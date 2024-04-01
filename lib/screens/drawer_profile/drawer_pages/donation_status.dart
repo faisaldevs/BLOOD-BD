@@ -1,5 +1,5 @@
 import 'package:blood_bd/models/donation_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,11 +48,12 @@ class DonationStatus extends StatelessWidget {
               itemCount: dataList.data?.length,
               itemBuilder: (context, index) {
                 final donationList = dataList.data?[index];
-                return ListTile(
-                  title: Text('Request ID: ${donationList?.user?.name}'),
-                  subtitle: Text('Created By: ${donationList?.createdBy}'),
-                  // You can display other properties here
-                );
+                return donationTile();
+                //   ListTile(
+                //   title: Text('Request ID: ${donationList?.user?.name}'),
+                //   subtitle: Text('Created By: ${donationList?.createdBy}'),
+                //   // You can display other properties here
+                // );
               },
             );
           } else {
@@ -152,8 +153,8 @@ class DonationStatus extends StatelessWidget {
                          )
                        ],
                      ),
-                     Text("Number : ",
-                         style: const TextStyle(
+                     const Text("Number : ",
+                         style: TextStyle(
                              fontSize: 13, fontWeight: FontWeight.bold)),
                    ],
                  ),
@@ -167,19 +168,19 @@ class DonationStatus extends StatelessWidget {
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-                 Column(
+                 const Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
                      Text("Patient's Name : ",
-                         style: const TextStyle(
+                         style: TextStyle(
                            fontSize: 16,
                          )),
                      Text("Health Issue : ",
-                         style: const TextStyle(
+                         style: TextStyle(
                            fontSize: 16,
                          )),
                      Text("Blood Required : ",
-                         style: const TextStyle(
+                         style: TextStyle(
                            fontSize: 16,
                          )),
                    ],
@@ -193,31 +194,24 @@ class DonationStatus extends StatelessWidget {
                        decoration: const BoxDecoration(
                            color: Colors.red,
                            borderRadius: BorderRadius.all(Radius.circular(50))),
-                       child: Text(
-                         "bloodType",
+                       child: const Text(
+                         "A+",
                          // dataList[index]["patient_name"],
-                         style: const TextStyle(color: Colors.white),
+                         style: TextStyle(color: Colors.white),
                        ),
                      ),
                      InkWell(
                        borderRadius: BorderRadius.circular(10),
                        onTap: () {
                          // controller.visibility();
+                         Get.to(const DescriptionUi());
                        },
                        child: Container(
-                         padding: const EdgeInsets.all(4),
+                         padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 6),
                          decoration: const BoxDecoration(
                            borderRadius: BorderRadius.all(Radius.circular(10)),
                          ),
-                         child: const Row(
-                           children: [
-                             Icon(
-                               CupertinoIcons.chevron_up,
-                               size: 16,
-                             ),
-                             Text("Show less")
-                           ],
-                         )
+                         child: const Text("See More",style: TextStyle(color: Colors.red,fontWeight: FontWeight.w600,))
                          //     : const Row(
                          //   children: [
                          //     Icon(

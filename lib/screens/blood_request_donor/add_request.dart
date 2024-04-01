@@ -22,7 +22,6 @@ class _RequestBloodState extends State<RequestBlood> {
 
   @override
   Widget build(BuildContext context) {
-    print("Test122");
     return Scaffold(
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
@@ -45,6 +44,7 @@ class _RequestBloodState extends State<RequestBlood> {
         ),
       ),
       body: Container(
+
         margin: const EdgeInsets.all(16),
         child: Form(
           key: controller.formKey,
@@ -284,7 +284,7 @@ class _RequestBloodState extends State<RequestBlood> {
       ),
       floatingActionButton: Container(
         margin: const EdgeInsets.only(bottom: 10),
-        width: MediaQuery.of(context).size.width * .9,
+        width: double.infinity * .9,
         child: CustomButton(
             onPressed: () {
               controller.onSaveRqBlood();

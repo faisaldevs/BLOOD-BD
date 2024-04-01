@@ -23,6 +23,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
 
   @override
   Widget build(BuildContext context) {
+    print("Test122");
     return Scaffold(
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
@@ -243,7 +244,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 ),
 
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: double.infinity,
                   child: CustomButton(
                       onPressed: () {
                         sdController.searchDonor();

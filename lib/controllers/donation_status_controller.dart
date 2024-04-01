@@ -5,12 +5,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class DonationStatusController extends GetxController{
-  var token = GetStorage().read("token") ?? "Token Expired ";
+  var token  = GetStorage().read("token");
 
   Future<DonationModel> getDonationList()async{
     print("pressed.............1");
     try{
-
+      print(token);
       final response = await http.get(Uri.parse("https://starsoftjpn.xyz/api/auth/blood-request-notification"),
         headers: {
         "Accept" : "application/json",

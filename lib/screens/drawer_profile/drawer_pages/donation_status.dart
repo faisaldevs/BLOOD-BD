@@ -9,317 +9,297 @@ import '../../../controllers/donation_status_controller.dart';
 import '../../../utils/app_colors.dart';
 
 class DonationStatus extends StatelessWidget {
-   DonationStatus({super.key});
+  DonationStatus({super.key});
 
-  final DonationStatusController controller = Get.put(DonationStatusController());
+  final DonationStatusController controller =
+      Get.put(DonationStatusController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.primary,
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.redAccent,
-          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-          statusBarBrightness: Brightness.light, // For iOS (dark icons)
-        ),
-        title: const Text("Donation Request"),
-        titleSpacing: 0,
         backgroundColor: AppTheme.primary,
-        surfaceTintColor: Colors.transparent,
-        foregroundColor: AppTheme.textColorRed,
-        elevation: 0,
-        leading: InkWell(
-          onTap: () => Get.back(),
-          child: const Icon(
-            Icons.arrow_back_ios,
+        appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.redAccent,
+            statusBarIconBrightness: Brightness.dark,
+            // For Android (dark icons)
+            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+          ),
+          title: const Text("Donation Request"),
+          titleSpacing: 0,
+          backgroundColor: AppTheme.primary,
+          surfaceTintColor: Colors.transparent,
+          foregroundColor: AppTheme.textColorRed,
+          elevation: 0,
+          leading: InkWell(
+            onTap: () => Get.back(),
+            child: const Icon(
+              Icons.arrow_back_ios,
+            ),
           ),
         ),
-      ),
-      body:FutureBuilder<DonationModel>(
-        future: controller.getDonationList(),
-        builder: (context, snapshot) {
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasData) {
-            final dataList = snapshot.data!;
-            return ListView.builder(
-              itemCount: dataList.data?.length,
-              itemBuilder: (context, index) {
-                final donationList = dataList.data?[index];
-                return donationTile();
-                //   ListTile(
-                //   title: Text('Request ID: ${donationList?.user?.name}'),
-                //   subtitle: Text('Created By: ${donationList?.createdBy}'),
-                //   // You can display other properties here
-                // );
-              },
-            );
-          } else {
-            return SizedBox(
-              height: Get.height,
-              width: Get.width,
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.search,
-                    size: 80,
-                    color: Colors.black26,
-                  ),
-                  Text(
-                    "No Donation Request Found!",
-                    style: TextStyle(fontSize: 19, color: Colors.black26),
-                  ),
-                ],
-              ),
-            );
-          }
-        },
-      )
-    );
+        body: FutureBuilder<DonationModel>(
+          future: controller.getDonationList(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasData) {
+              final dataList = snapshot.data!;
+              return ListView.builder(
+                itemCount: dataList.data?.length,
+                itemBuilder: (context, index) {
+                  final e = dataList.data?[index];
+
+                  String contactPersonName =
+                      e?.bloodRequest?.contactPersonName ?? "";
+                  String contractPersonNumber =
+                      e?.bloodRequest?.contactPersonPhone ?? "";
+                  String patientsName = e?.bloodRequest?.patientsName ?? "";
+                  String healthIssue = e?.bloodRequest?.healthIssue ?? "";
+                  String bloodAmount = e?.bloodRequest?.amountBag ?? "";
+                  String bloodType = e?.bloodRequest?.bloodGroup ?? "";
+                  String address = e?.bloodRequest?.address ?? "";
+                  String time = e?.bloodRequest?.time ?? "";
+                  String date = e?.bloodRequest?.date ?? "";
+                  String note = e?.bloodRequest?.note ?? "";
+
+                  return donationTile(
+                      contactPersonName,
+                      contractPersonNumber,
+                      patientsName,
+                      healthIssue,
+                      bloodAmount,
+                      bloodType,
+                      address,
+                      time,
+                      date,
+                      note);
+                },
+              );
+            } else {
+              return SizedBox(
+                height: Get.height,
+                width: Get.width,
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.search,
+                      size: 80,
+                      color: Colors.black26,
+                    ),
+                    Text(
+                      "No Donation Request Found!",
+                      style: TextStyle(fontSize: 19, color: Colors.black26),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        ));
   }
 
-   Widget donationTile(
-       // String contactPersonName,
-       // String number,
-       // String patientsName,
-       // String healthIssue,
-       // String bloodAmount,
-       // String bloodType,
-       // String address,
-       // String time,
-       // String date,
-       // String note,
-       ) {
-     String showTime() {
-       DateTime now;
+  Widget donationTile(
+    String contactPersonName,
+    String contractPersonNumber,
+    String patientsName,
+    String healthIssue,
+    String bloodAmount,
+    String bloodType,
+    String address,
+    String time,
+    String date,
+    String note,
+  ) {
+    String showTime() {
+      DateTime now;
 
-       now = DateTime.now();
+      now = DateTime.now();
 
-       String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
+      String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
 
-       return formattedDate;
-     }
+      return formattedDate;
+    }
 
-     // bool isVisible = false;
-     //
-     // visibility(){
-     //   isVisible = !isVisible;
-     //   print(isVisible);
-     // }
-     // var value = controller.isVisible.value;
-
-     // print(value);
-
-     return Container(
-       padding: const EdgeInsets.all(8),
-       width: Get.width,
-       child: Column(
-         children: [
-           Row(
-             children: [
-               SizedBox(
-                 width: Get.width * .1,
-                 child: const CircleAvatar(
-                   backgroundImage: AssetImage("assets/images/profile.png"),
-                 ),
-               ),
-               // SizedBox(width: 10,),
-               Container(
-                 width: Get.width * 1.w,
-                 padding: const EdgeInsets.only(
-                   left: 5,
-                 ),
-                 child: Column(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         Text(
-                           "contactPersonName",
-                           style: TextStyle(
-                               fontSize: 18.sp, fontWeight: FontWeight.bold),
-                         ),
-                         Text(
-                           showTime(),
-                           style: const TextStyle(
-                             color: Colors.green,
-                           ),
-                         )
-                       ],
-                     ),
-                     const Text("Number : ",
-                         style: TextStyle(
-                             fontSize: 13, fontWeight: FontWeight.bold)),
-                   ],
-                 ),
-               )
-             ],
-           ),
-           const SizedBox(height: 10),
-           Container(
-             padding: const EdgeInsets.only(left: 5, right: 5),
-             child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 const Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     Text("Patient's Name : ",
-                         style: TextStyle(
-                           fontSize: 16,
-                         )),
-                     Text("Health Issue : ",
-                         style: TextStyle(
-                           fontSize: 16,
-                         )),
-                     Text("Blood Required : ",
-                         style: TextStyle(
-                           fontSize: 16,
-                         )),
-                   ],
-                 ),
-                 Column(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   crossAxisAlignment: CrossAxisAlignment.end,
-                   children: [
-                     Container(
-                       padding: const EdgeInsets.all(8),
-                       decoration: const BoxDecoration(
-                           color: Colors.red,
-                           borderRadius: BorderRadius.all(Radius.circular(50))),
-                       child: const Text(
-                         "A+",
-                         // dataList[index]["patient_name"],
-                         style: TextStyle(color: Colors.white),
-                       ),
-                     ),
-                     InkWell(
-                       borderRadius: BorderRadius.circular(10),
-                       onTap: () {
-                         // controller.visibility();
-                         Get.to(const DescriptionUi());
-                       },
-                       child: Container(
-                         padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 6),
-                         decoration: const BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                         ),
-                         child: const Text("See More",style: TextStyle(color: Colors.red,fontWeight: FontWeight.w600,))
-                         //     : const Row(
-                         //   children: [
-                         //     Icon(
-                         //       CupertinoIcons.chevron_down,
-                         //       size: 16,
-                         //     ),
-                         //     Text("Show more")
-                         //   ],
-                         // ),
-                       ),
-                     )
-                   ],
-                 ),
-               ],
-             ),
-           ),
-           // Obx(() => Visibility(
-           //   visible: controller.isVisible.value,
-           //   child: Column(
-           //     crossAxisAlignment: CrossAxisAlignment.start,
-           //     children: [
-           //       Divider(),
-           //       Column(
-           //         crossAxisAlignment: CrossAxisAlignment.start,
-           //         mainAxisAlignment: MainAxisAlignment.start,
-           //         children: [
-           //           Text("Address : $address"),
-           //           Text("Date & Time : $date$time"),
-           //         ],
-           //       ),
-           //       Divider(),
-           //       Column(
-           //         crossAxisAlignment: CrossAxisAlignment.start,
-           //         mainAxisAlignment: MainAxisAlignment.start,
-           //         children: [
-           //           Text("Contact Person's Name : $contactPersonName"),
-           //           Text("Contact Person's Number : $number"),
-           //         ],
-           //       ),
-           //       Divider(),
-           //       Column(
-           //         crossAxisAlignment: CrossAxisAlignment.start,
-           //         mainAxisAlignment: MainAxisAlignment.start,
-           //         children: [
-           //           Text("Massage : $note"),
-           //           // Text(
-           //           //     "dew   wwe 0eew dogie  eu ihhjfiew site heo h wo "),
-           //         ],
-           //       ),
-           //     ],
-           //   ),
-           // )),
-           const SizedBox(height: 10),
-           Row(
-             mainAxisAlignment: MainAxisAlignment.end,
-             children: [
-               ElevatedButton(
-                 onPressed: () {
-                   //
-                   // final Uri url = Uri(
-                   //   scheme: "tel",
-                   //   path: "01903440069",
-                   // );
-                   // if (await canLaunchUrl(url)) {
-                   // await launchUrl(url);
-                   // } else {
-                   // print("Can't Launch Url");
-                   // }
-                 },
-                 style: ButtonStyle(
-                   backgroundColor:
-                   const MaterialStatePropertyAll<Color>(Colors.red),
-                   padding: const MaterialStatePropertyAll(
-                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-                   shape: MaterialStatePropertyAll(
-                     RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(5.0),
-                     ),
-                   ),
-                 ),
-                 child: const Text(
-                   "Call",
-                   style: TextStyle(color: Colors.white),
-                 ),
-               ),
-               const SizedBox(width: 20),
-               ElevatedButton(
-                 onPressed: () {},
-                 style: ButtonStyle(
-                   backgroundColor:
-                   const MaterialStatePropertyAll<Color>(Color(0xff026b49)),
-                   padding: const MaterialStatePropertyAll(
-                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-                   shape: MaterialStatePropertyAll(
-                     RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(5.0),
-                     ),
-                   ),
-                 ),
-                 child: const Text(
-                   "Message",
-                   style: TextStyle(color: Colors.white),
-                 ),
-               ),
-             ],
-           ),
-         ],
-       ),
-     );
-   }
+    return Container(
+      padding: const EdgeInsets.all(8),
+      width: Get.width,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: Get.width * .1,
+                child: const CircleAvatar(
+                  backgroundImage: AssetImage("assets/images/profile.png"),
+                ),
+              ),
+              // SizedBox(width: 10,),
+              Container(
+                width: Get.width * 1.w,
+                padding: const EdgeInsets.only(
+                  left: 5,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Name : $contactPersonName",
+                          style: TextStyle(
+                              fontSize: 18.sp, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          showTime(),
+                          style: const TextStyle(
+                            color: Colors.green,
+                          ),
+                        )
+                      ],
+                    ),
+                    Text("Number : $contractPersonNumber",
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Patient's Name : $patientsName",
+                        style: TextStyle(
+                          fontSize: 16,
+                        )),
+                    Text("Health Issue : $healthIssue",
+                        style: TextStyle(
+                          fontSize: 16,
+                        )),
+                    Text("Blood Required : $bloodAmount",
+                        style: TextStyle(
+                          fontSize: 16,
+                        )),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                      child: Text(
+                        "$bloodType",
+                        // dataList[index]["patient_name"],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () {
+                        // controller.visibility();
+                        Get.to(DescriptionUi(
+                          contractPersonName: contactPersonName,
+                          contractPersonNumber: contractPersonNumber,
+                          patientName: patientsName,
+                          healthIssue: healthIssue,
+                          bloodAmount: bloodAmount,
+                          bloodType: bloodType,
+                          address: address,
+                          date: date,
+                          time: time,
+                          note: note,
+                        ));
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 4, vertical: 6),
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          child: const Text("See More",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w600,
+                              ))),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  //
+                  // final Uri url = Uri(
+                  //   scheme: "tel",
+                  //   path: "01903440069",
+                  // );
+                  // if (await canLaunchUrl(url)) {
+                  // await launchUrl(url);
+                  // } else {
+                  // print("Can't Launch Url");
+                  // }
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      const MaterialStatePropertyAll<Color>(Colors.red),
+                  padding: const MaterialStatePropertyAll(
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
+                  shape: MaterialStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                ),
+                child: const Text(
+                  "Call",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              const SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                  backgroundColor:
+                      const MaterialStatePropertyAll<Color>(Color(0xff026b49)),
+                  padding: const MaterialStatePropertyAll(
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
+                  shape: MaterialStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                ),
+                child: const Text(
+                  "Message",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }

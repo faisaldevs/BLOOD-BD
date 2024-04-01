@@ -1,7 +1,10 @@
 import 'package:blood_bd/models/donation_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../controllers/donation_status_controller.dart';
 import '../../../utils/app_colors.dart';
 
@@ -106,9 +109,9 @@ class DonationStatus extends StatelessWidget {
      //   isVisible = !isVisible;
      //   print(isVisible);
      // }
-     var value = controller.isVisible.value;
+     // var value = controller.isVisible.value;
 
-     print(value);
+     // print(value);
 
      return Container(
        padding: const EdgeInsets.all(8),
@@ -137,7 +140,7 @@ class DonationStatus extends StatelessWidget {
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                        children: [
                          Text(
-                           contactPersonName,
+                           "contactPersonName",
                            style: TextStyle(
                                fontSize: 18.sp, fontWeight: FontWeight.bold),
                          ),
@@ -149,7 +152,7 @@ class DonationStatus extends StatelessWidget {
                          )
                        ],
                      ),
-                     Text("Number : $number",
+                     Text("Number : ",
                          style: const TextStyle(
                              fontSize: 13, fontWeight: FontWeight.bold)),
                    ],
@@ -167,15 +170,15 @@ class DonationStatus extends StatelessWidget {
                  Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
-                     Text("Patient's Name : $patientsName",
+                     Text("Patient's Name : ",
                          style: const TextStyle(
                            fontSize: 16,
                          )),
-                     Text("Health Issue : $healthIssue",
+                     Text("Health Issue : ",
                          style: const TextStyle(
                            fontSize: 16,
                          )),
-                     Text("Blood Required : $bloodAmount",
+                     Text("Blood Required : ",
                          style: const TextStyle(
                            fontSize: 16,
                          )),
@@ -191,7 +194,7 @@ class DonationStatus extends StatelessWidget {
                            color: Colors.red,
                            borderRadius: BorderRadius.all(Radius.circular(50))),
                        child: Text(
-                         bloodType,
+                         "bloodType",
                          // dataList[index]["patient_name"],
                          style: const TextStyle(color: Colors.white),
                        ),
@@ -199,15 +202,14 @@ class DonationStatus extends StatelessWidget {
                      InkWell(
                        borderRadius: BorderRadius.circular(10),
                        onTap: () {
-                         controller.visibility();
+                         // controller.visibility();
                        },
                        child: Container(
                          padding: const EdgeInsets.all(4),
                          decoration: const BoxDecoration(
                            borderRadius: BorderRadius.all(Radius.circular(10)),
                          ),
-                         child: controller.isVisible.value
-                             ? const Row(
+                         child: const Row(
                            children: [
                              Icon(
                                CupertinoIcons.chevron_up,
@@ -216,15 +218,15 @@ class DonationStatus extends StatelessWidget {
                              Text("Show less")
                            ],
                          )
-                             : const Row(
-                           children: [
-                             Icon(
-                               CupertinoIcons.chevron_down,
-                               size: 16,
-                             ),
-                             Text("Show more")
-                           ],
-                         ),
+                         //     : const Row(
+                         //   children: [
+                         //     Icon(
+                         //       CupertinoIcons.chevron_down,
+                         //       size: 16,
+                         //     ),
+                         //     Text("Show more")
+                         //   ],
+                         // ),
                        ),
                      )
                    ],
@@ -232,42 +234,42 @@ class DonationStatus extends StatelessWidget {
                ],
              ),
            ),
-           Obx(() => Visibility(
-             visible: controller.isVisible.value,
-             child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Divider(),
-                 Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-                     Text("Address : $address"),
-                     Text("Date & Time : $date$time"),
-                   ],
-                 ),
-                 Divider(),
-                 Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-                     Text("Contact Person's Name : $contactPersonName"),
-                     Text("Contact Person's Number : $number"),
-                   ],
-                 ),
-                 Divider(),
-                 Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-                     Text("Massage : $note"),
-                     // Text(
-                     //     "dew   wwe 0eew dogie  eu ihhjfiew site heo h wo "),
-                   ],
-                 ),
-               ],
-             ),
-           )),
+           // Obx(() => Visibility(
+           //   visible: controller.isVisible.value,
+           //   child: Column(
+           //     crossAxisAlignment: CrossAxisAlignment.start,
+           //     children: [
+           //       Divider(),
+           //       Column(
+           //         crossAxisAlignment: CrossAxisAlignment.start,
+           //         mainAxisAlignment: MainAxisAlignment.start,
+           //         children: [
+           //           Text("Address : $address"),
+           //           Text("Date & Time : $date$time"),
+           //         ],
+           //       ),
+           //       Divider(),
+           //       Column(
+           //         crossAxisAlignment: CrossAxisAlignment.start,
+           //         mainAxisAlignment: MainAxisAlignment.start,
+           //         children: [
+           //           Text("Contact Person's Name : $contactPersonName"),
+           //           Text("Contact Person's Number : $number"),
+           //         ],
+           //       ),
+           //       Divider(),
+           //       Column(
+           //         crossAxisAlignment: CrossAxisAlignment.start,
+           //         mainAxisAlignment: MainAxisAlignment.start,
+           //         children: [
+           //           Text("Massage : $note"),
+           //           // Text(
+           //           //     "dew   wwe 0eew dogie  eu ihhjfiew site heo h wo "),
+           //         ],
+           //       ),
+           //     ],
+           //   ),
+           // )),
            const SizedBox(height: 10),
            Row(
              mainAxisAlignment: MainAxisAlignment.end,

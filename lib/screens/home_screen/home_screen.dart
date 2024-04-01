@@ -25,13 +25,12 @@ class HomeScreen extends StatelessWidget {
   // final getStorage = GetStorage();
   final HomeController homeController = Get.put(HomeController());
 
-  final ProfileController controller = Get.put(ProfileController());
+  // final ProfileController controller = Get.put(ProfileController());
   final BloodRequestController bloodController =
       Get.put(BloodRequestController());
 
   @override
   Widget build(BuildContext context) {
-
     // var pages = [
     //   HomePage(),
     //   FeedPage(),
@@ -79,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                     Builder(
                       builder: (context) => InkWell(
                         onTap: () {
-                          controller.profileData();
+                          // controller.profileData();
                           // Get.to(ProfilePage());
                         },
                         child: Container(
@@ -129,6 +128,7 @@ class HomeScreen extends StatelessWidget {
                         child: Container(
                           height: Get.height * .3,
                           width: Get.width * .7,
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             // ------------find donor card color--------------
                             color: Colors.white,
@@ -149,19 +149,45 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                TextFieldWidget(
-                                  label: 'Select District',
-                                  dropDownList: DataList.districtListData,
-                                  onChanged: (value) {
-                                    homeController.district = value.toString();
-                                  },
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: TextFieldWidget(
+                                        label: 'Select District',
+                                        dropDownList: DataList.districtListData,
+                                        onChanged: (value) {
+                                          homeController.district =
+                                              value.toString();
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: TextFieldWidget(
+                                        label: 'Select District',
+                                        dropDownList: DataList.districtListData,
+                                        onChanged: (value) {
+                                          homeController.district =
+                                              value.toString();
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                TextFieldWidget(
-                                  label: 'Select Blood Group',
-                                  dropDownList: DataList.bloodListData,
-                                  onChanged: (value) {
-                                    homeController.bloodType = value.toString();
-                                  },
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: TextFieldWidget(
+                                    label: 'Select Blood Group',
+                                    dropDownList: DataList.bloodListData,
+                                    onChanged: (value) {
+                                      homeController.bloodType =
+                                          value.toString();
+                                    },
+                                  ),
                                 ),
                                 FindDonorBtn(
                                   onPressed: () {

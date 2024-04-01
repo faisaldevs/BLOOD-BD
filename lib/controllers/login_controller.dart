@@ -60,6 +60,7 @@ class LoginController extends GetxController {
           String message = data["message"].toString();
 
           getStorage.write("token", token);
+          print(token);
           getStorage.write("id", id);
           getStorage.write("name", name);
           getStorage.write("phone", phone);

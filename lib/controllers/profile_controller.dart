@@ -14,7 +14,7 @@ class ProfileController extends GetxController {
   RxString address = "".obs;
   // RxBool loading = false.obs;
 
-  String token = GetStorage().read("token") ?? "Token Expired";
+  String token = GetStorage().read("token");
 
   profileData() async {
     print("object");

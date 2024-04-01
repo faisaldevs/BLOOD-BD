@@ -52,7 +52,7 @@ final pages = [
   customPage(name: notificationPage, page: const NotificationPage()),
   customPage(name: medicalHistory, page:  MedicalHistory()),
   customPage(name: newReport, page: NewReport()),
-  customPage(name: donationAccepted, page: const DonationAccepted()),
+  customPage(name: donationAccepted, page: DonationAccepted()),
   customPage(name: donationBlocked, page: const DonationBlocked()),
   customPage(name: history, page: const BloodHistory()),
   customPage(name: mySearchHistory, page: const MySearchHistory()),

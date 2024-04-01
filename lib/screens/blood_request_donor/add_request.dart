@@ -156,7 +156,9 @@ class _RequestBloodState extends State<RequestBlood> {
                         child: CustomDropdown(
                           dropDownList: DataList.divisionListData,
                           label: 'Division',
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            controller.division = value;
+                          },
                         )),
                     const SizedBox(
                       width: 10,
@@ -166,7 +168,9 @@ class _RequestBloodState extends State<RequestBlood> {
                         child: CustomDropdown(
                           dropDownList: DataList.districtListData,
                           label: 'District',
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            controller.district = value;
+                          },
                         )),
                   ],
                 ),
@@ -179,7 +183,9 @@ class _RequestBloodState extends State<RequestBlood> {
                         child: CustomDropdown(
                           dropDownList: DataList.divisionListData,
                           label: 'Division',
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            controller.upazila = value;
+                          },
                         )),
                     const SizedBox(
                       width: 10,
@@ -189,7 +195,9 @@ class _RequestBloodState extends State<RequestBlood> {
                         child: CustomDropdown(
                           dropDownList: DataList.districtListData,
                           label: 'District',
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            controller.union = value;
+                          },
                         )),
                   ],
                 ),

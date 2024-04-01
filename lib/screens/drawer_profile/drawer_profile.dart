@@ -1,3 +1,4 @@
+import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
 import 'package:blood_bd/utils/app_routes.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/medical_history.dart';
 import 'package:blood_bd/screens/drawer_profile/components/custom_drawer_links.dart';
@@ -50,19 +51,19 @@ class DrawerProfile extends StatelessWidget {
             },
           ),
           CustomDrawerLinks(
-            title: 'Donation Accepted',
+            title: 'Donation Status',
             icon: Icons.bloodtype_outlined,
             onTap: () {
-              Get.toNamed(donationAccepted);
+              Get.to(DonationStatus());
             },
           ),
-          CustomDrawerLinks(
-            title: 'Donation Blocked',
-            icon: Icons.bloodtype_outlined,
-            onTap: () {
-              Get.toNamed(donationBlocked);
-            },
-          ),
+          // CustomDrawerLinks(
+          //   title: 'Donation Blocked',
+          //   icon: Icons.bloodtype_outlined,
+          //   onTap: () {
+          //     Get.toNamed(donationBlocked);
+          //   },
+          // ),
           CustomDrawerLinks(
             title: 'History',
             icon: Icons.history_edu_outlined,

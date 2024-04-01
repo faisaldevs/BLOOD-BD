@@ -1,3 +1,4 @@
+import 'package:blood_bd/controllers/donation_status_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,9 @@ import 'package:get/get.dart';
 import '../../../utils/app_colors.dart';
 
 class DonationAccepted extends StatelessWidget {
-  const DonationAccepted({super.key});
+   DonationAccepted({super.key});
+
+final DonationStatusController controller = Get.put(DonationStatusController());
 
   @override
   Widget build(BuildContext context) {

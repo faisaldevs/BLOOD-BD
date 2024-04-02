@@ -1,24 +1,66 @@
+import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-
+import '../screens/blood_request_donor/become_donor_page.dart';
+import '../screens/blood_request_donor/update_donor.dart';
 import '../utils/app_routes.dart';
 
 class BecomeDonorController extends GetxController {
    // GetStorage sdStorage = GetStorage();
   // GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  var token = GetStorage().read("token");
   TextEditingController patientNameController = TextEditingController();
   var bloodType;
   var bloodAmount;
   var healthIssue;
+  var division;
+  var district;
+  var union;
+  var thana;
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
-
   TextEditingController addressController = TextEditingController();
   TextEditingController contactParsonNameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
+
+
+  donorValidate()async{
+    try{
+      var res = await http.get(
+          Uri.parse(ApiUrls.profileGet),
+          headers: {
+            "Accept" : "application/json",
+            "Authorization" : token,
+          }
+      );
+
+      if(res.statusCode == 200){
+        var data  = jsonDecode(res.body);
+
+        String status = data["donor_profile_status"];
+        if (kDebugMode) {
+          print("Profile Donor: $status");
+        }
+
+        if(status == 0.toString()){
+          Get.to(const BecomeDonor());
+        }else{
+          // Get.to(const UpdateDonor());
+          Get.to(const BecomeDonor());
+
+        }
+
+
+      }
+
+    }catch(e){
+      print("Error : e");
+    }
+  }
 
   searchDonor() async{
     print("pressend");
@@ -29,7 +71,7 @@ class BecomeDonorController extends GetxController {
     //   var contactParsonPhone = numberController.text;
     //   var patientAddress = addressController.text;
     //   var contactParsonName = contactParsonNameController.text;
-      var token = GetStorage().read("token");
+
 
       // sdStorage.write("patientName", patientName);
       // sdStorage.write("bloodType", bloodType);

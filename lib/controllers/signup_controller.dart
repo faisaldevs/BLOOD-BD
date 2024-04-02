@@ -71,7 +71,7 @@ class SignupController extends GetxController {
 
       try {
         var response = await post(
-            Uri.parse("https://starsoftjpn.xyz/api/auth/register"),
+            Uri.parse(ApiUrls.signUpPost),
             body: {
               "name": nameController.text,
               "username": "numberController.256",

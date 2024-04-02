@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../../controllers/donation_status_controller.dart';
 import '../../../utils/app_colors.dart';
 
@@ -164,7 +165,7 @@ class DonationStatus extends StatelessWidget {
                       ],
                     ),
                     Text("Number : $contractPersonNumber",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -250,6 +251,7 @@ class DonationStatus extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
+                  launchUrlString("tel:$contractPersonNumber");
                   //
                   // final Uri url = Uri(
                   //   scheme: "tel",

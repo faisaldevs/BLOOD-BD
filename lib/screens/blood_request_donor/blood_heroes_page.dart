@@ -1,5 +1,6 @@
 import 'package:blood_bd/models/blood_bank_model.dart';
 import 'package:blood_bd/utils/app_colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,10 +16,6 @@ class BloodHeroes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // String? name = "Faisal";
-    // String? address = "Kazipara, Mirpur, Dhaka";
-    // String? number1 = "01903440069";
-    // String? number2 = "0122355";
 
     return Scaffold(
       backgroundColor: AppTheme.primary,
@@ -44,15 +41,28 @@ class BloodHeroes extends StatelessWidget {
       body: FutureBuilder(
         future: controller.getBloodBankData(),
         builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator());
+          }
           if (snapshot.hasData) {
-            print("success");
+            if (kDebugMode) {
+              print("success");
+            }
             return ListView.builder(
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
                 BloodBankModel e = snapshot.data![index];
                 // String id = e.id.toString() ?? "id";
                 String number = e.phones ?? "01*********";
-                // // String number2 = e.phones?[1] ?? "01*********";
+                number = number
+                    .replaceAll('[', '')
+                    .replaceAll(']', '')
+                    .replaceAll('\\', '')
+                    .replaceAll('"', '');
+                List<String> dataList = number.split(', ');
+                String phone1 = dataList[0];
+                String phone2 = dataList[1];
+                String phone3 = dataList[2];
                 // String clubName = e.clubName ?? "Club Name";
                 String name = e.contactPerson ?? "Contact Person";
                 // String division = e.division ?? "Division";
@@ -95,7 +105,7 @@ class BloodHeroes extends StatelessWidget {
                               children: [
                                 IconButton(
                                   onPressed: () async {
-                                    launchUrlString("tel:$number");
+                                    launchUrlString("tel:$phone1");
                                   },
                                   icon: Row(
                                     children: [
@@ -107,7 +117,7 @@ class BloodHeroes extends StatelessWidget {
                                         width: 4,
                                       ),
                                       Text(
-                                        number,
+                                        phone1,
                                         style: TextStyle(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w400),
@@ -115,9 +125,10 @@ class BloodHeroes extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                                const SizedBox(width: 15,),
                                 IconButton(
                                   onPressed: () {
-                                    launchUrlString("tel:$number");
+                                    launchUrlString("tel:$phone2");
                                   },
                                   style: const ButtonStyle(
                                       padding: MaterialStatePropertyAll(
@@ -132,7 +143,33 @@ class BloodHeroes extends StatelessWidget {
                                         width: 4,
                                       ),
                                       Text(
-                                        number,
+                                        phone2,
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 15,),
+                                IconButton(
+                                  onPressed: () {
+                                    launchUrlString("tel:$phone3");
+                                  },
+                                  style: const ButtonStyle(
+                                      padding: MaterialStatePropertyAll(
+                                          EdgeInsets.all(0))),
+                                  icon: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.call,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        phone3,
                                         style: TextStyle(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w400),
@@ -151,116 +188,28 @@ class BloodHeroes extends StatelessWidget {
               },
             );
           } else {
-            return CircularProgressIndicator();
+            return SizedBox(
+              height: Get.height,
+              width: Get.width,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.search,
+                    size: 80,
+                    color: Colors.black26,
+                  ),
+                  Text(
+                    "No Data Found!",
+                    style: TextStyle(fontSize: 19, color: Colors.black26),
+                  ),
+                ],
+              ),
+            );
           }
         },
       ),
     );
   }
 }
-
-//const BloodHeroList()
-
-// body: FutureBuilder(future: controller.getBloodBankData(), builder: (context, snapshot) {
-//
-//   if(snapshot.hasData){
-//     // List data = snapshot.data
-//     return ListView.builder(
-//       itemCount: snapshot.data?.length,
-//       itemBuilder: (context, index) {
-//         return Expanded(child: BloodHeroList());
-//       },);
-//   }else{
-//     return Center(child: CircularProgressIndicator());
-//   }
-//
-// },),
-// ListView.builder(
-//   itemCount: 5,
-//   itemBuilder: (context, index) =>
-// Container(
-//     color: Colors.white,
-//     margin: const EdgeInsets.only(bottom: 4, top: 8),
-//     padding: const EdgeInsets.only(left: 16, top: 10),
-//     child: Column(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text(
-//           name,
-//           style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-//         ),
-//         Text(
-//           address,
-//           style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
-//         ),
-//         Padding(
-//           padding: const EdgeInsets.only(top: 4, bottom: 0),
-//           child: Text(
-//             "contract :",
-//             style:
-//                 TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
-//           ),
-//         ),
-//         Row(
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.only(right: 8),
-//               child: Row(
-//                 children: [
-//                   IconButton(
-//                     onPressed: () async {
-//                       launchUrlString("tel:$number1");
-//                     },
-//                     icon: Row(
-//                       children: [
-//                         const Icon(
-//                           Icons.call,
-//                           size: 20,
-//                         ),
-//                         const SizedBox(
-//                           width: 4,
-//                         ),
-//                         Text(
-//                           number1,
-//                           style: TextStyle(
-//                               fontSize: 14.sp,
-//                               fontWeight: FontWeight.w400),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                   IconButton(
-//                     onPressed: () {
-//                       launchUrlString("tel:$number2");
-//                     },
-//                     style: const ButtonStyle(
-//                         padding:
-//                             MaterialStatePropertyAll(EdgeInsets.all(0))),
-//                     icon: Row(
-//                       children: [
-//                         const Icon(
-//                           Icons.call,
-//                           size: 20,
-//                         ),
-//                         const SizedBox(
-//                           width: 4,
-//                         ),
-//                         Text(
-//                           number2,
-//                           style: TextStyle(
-//                               fontSize: 14.sp,
-//                               fontWeight: FontWeight.w400),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ],
-// //         )
-// //       ],
-// //     ),
-// //   ),
-// // ),

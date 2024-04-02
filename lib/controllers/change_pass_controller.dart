@@ -26,9 +26,9 @@ class ChangePassController extends GetxController {
            "Authorization" : token,
          },
          body: {
-           "currentPassword" : "123456",
-           "newPassword" : "admin123",
-           "confirmNewPassword" : "admin123",
+           "currentPassword" : currentPassword.text,
+           "newPassword" : newPassword.text,
+           "confirmNewPassword" : confirmNewPassword.text,
 
          }
      );

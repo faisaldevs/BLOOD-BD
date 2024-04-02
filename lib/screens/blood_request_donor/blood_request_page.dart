@@ -1,10 +1,11 @@
+import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:blood_bd/utils/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../controllers/blood_request_controller.dart';
 import '../../models/blood_request_model.dart';
@@ -12,9 +13,7 @@ import '../../models/blood_request_model.dart';
 class FeedPage extends StatelessWidget {
   FeedPage({super.key});
 
- final BloodRequestController controller = Get.put(BloodRequestController());
-
-  // final getStorage = GetStorage();
+  final BloodRequestController controller = Get.put(BloodRequestController());
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +120,7 @@ class FeedPage extends StatelessWidget {
                 String address = e.address ?? "address";
                 String note = e.note ?? "note";
 
-                return HistoryTile(
+                return historyTile(
                     contactPersonName,
                     number,
                     patientsName,
@@ -142,7 +141,7 @@ class FeedPage extends StatelessWidget {
     );
   }
 
-  Widget HistoryTile(
+  Widget historyTile(
     String contactPersonName,
     String number,
     String patientsName,
@@ -163,16 +162,6 @@ class FeedPage extends StatelessWidget {
 
       return formattedDate;
     }
-
-    // bool isVisible = false;
-    //
-    // visibility(){
-    //   isVisible = !isVisible;
-    //   print(isVisible);
-    // }
-    var value = controller.isVisible.value;
-
-    print(value);
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -263,32 +252,24 @@ class FeedPage extends StatelessWidget {
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        controller.visibility();
+                        Get.to(DescriptionUi(
+                            contractPersonName: contactPersonName,
+                            contractPersonNumber: number,
+                            patientName: patientsName,
+                            healthIssue: healthIssue,
+                            bloodAmount: bloodAmount,
+                            bloodType: bloodType,
+                            address: address,
+                            date: date,
+                            time: time,
+                            note: note));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child: controller.isVisible.value
-                            ? const Row(
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.chevron_up,
-                                    size: 16,
-                                  ),
-                                  Text("Show less")
-                                ],
-                              )
-                            : const Row(
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.chevron_down,
-                                    size: 16,
-                                  ),
-                                  Text("Show more")
-                                ],
-                              ),
+                        child: const Text("Show more"),
                       ),
                     )
                   ],
@@ -296,58 +277,13 @@ class FeedPage extends StatelessWidget {
               ],
             ),
           ),
-          Obx(() => Visibility(
-                visible: controller.isVisible.value,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Divider(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Address : $address"),
-                        Text("Date & Time : $date$time"),
-                      ],
-                    ),
-                    Divider(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Contact Person's Name : $contactPersonName"),
-                        Text("Contact Person's Number : $number"),
-                      ],
-                    ),
-                    Divider(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Massage : $note"),
-                        // Text(
-                        //     "dew   wwe 0eew dogie  eu ihhjfiew site heo h wo "),
-                      ],
-                    ),
-                  ],
-                ),
-              )),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
                 onPressed: () {
-                  //
-                  // final Uri url = Uri(
-                  //   scheme: "tel",
-                  //   path: "01903440069",
-                  // );
-                  // if (await canLaunchUrl(url)) {
-                  // await launchUrl(url);
-                  // } else {
-                  // print("Can't Launch Url");
-                  // }
+                  launchUrlString("tel:$number");
                 },
                 style: ButtonStyle(
                   backgroundColor:

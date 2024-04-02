@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
 
    GlobalKey<FormState> formKey = GlobalKey<FormState>();
+   late final String division;
    late final String district;
+   late final String thana;
    late final String bloodType;
 
   // final TextEditingController nameController = TextEditingController();
@@ -19,6 +21,10 @@ class HomeController extends GetxController {
 
     if(formKey.currentState!.validate()){
 
+      print(division);
+      print(district);
+      print(thana);
+      print(bloodType);
     }
 
   }

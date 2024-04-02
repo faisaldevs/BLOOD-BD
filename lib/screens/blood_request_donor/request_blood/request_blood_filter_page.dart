@@ -1,4 +1,5 @@
 import 'package:blood_bd/models/search_requested_donor.dart';
+import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -202,34 +203,22 @@ class FilterPage extends StatelessWidget {
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        // controller.visibility();
+                        Get.to(DescriptionUi(
+                          contractPersonName: contactPersonName,
+                          contractPersonNumber: contactPersonNumber,
+                          patientName: contactPersonName,
+                          healthIssue: healthIssue,
+                          bloodAmount: bloodAmount,
+                          bloodType: bloodType,
+                          address: address,
+                        ));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child:
-                            // controller.isVisible.value
-                            //     ? const Row(
-                            //   children: [
-                            //     Icon(
-                            //       CupertinoIcons.chevron_up,
-                            //       size: 16,
-                            //     ),
-                            //     Text("Show less")
-                            //   ],
-                            // )
-                            //     :
-                            const Row(
-                          children: [
-                            Icon(
-                              CupertinoIcons.chevron_down,
-                              size: 16,
-                            ),
-                            Text("Show more")
-                          ],
-                        ),
+                        child: Text("Show more"),
                       ),
                     )
                   ],
@@ -237,60 +226,12 @@ class FilterPage extends StatelessWidget {
               ],
             ),
           ),
-          // Visibility(
-          //   visible: true,
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       const Divider(),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         children: [
-          //           Text("Address : $address"),
-          //           // Text("Date & Time : $date$time"),
-          //         ],
-          //       ),
-          //       const Divider(),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         children: [
-          //           Text("Contact Person's Name : $contactPersonName"),
-          //           Text("Contact Person's Number : $contactPersonNumber"),
-          //         ],
-          //       ),
-          //       const Divider(),
-          //       const Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         children: [
-          //           // Text("Massage : $note"),
-          //           // Text(
-          //           //     "dew   wwe 0eew dogie  eu ihhjfiew site heo h wo "),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
-                onPressed: () async {
-
-                  // sdStorageClear();
-                  // final Uri url = Uri(
-                  //   scheme: "tel",
-                  //   path: "01903440069",
-                  // );
-                  // if (await canLaunchUrl(url)) {
-                  //   await launchUrl(url);
-                  // } else {
-                  //   print("Can't Launch Url");
-                  // }
-                },
+                onPressed: () async {},
                 style: ButtonStyle(
                   backgroundColor:
                       const MaterialStatePropertyAll<Color>(Colors.red),
@@ -310,7 +251,8 @@ class FilterPage extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  controller.confirmBlood(bloodRequestId, bloodDonorId,bloodAmount);
+                  controller.confirmBlood(
+                      bloodRequestId, bloodDonorId, bloodAmount);
                 },
                 style: ButtonStyle(
                   backgroundColor:

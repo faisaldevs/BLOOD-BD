@@ -2,13 +2,14 @@ import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/become_donor_controller.dart';
 import '../../../utils/app_routes.dart';
 import '../../blood_request_donor/blood_request_page.dart';
 
 
 class HomeScreenIcons extends StatelessWidget {
-  const HomeScreenIcons({super.key});
-
+   HomeScreenIcons({super.key});
+  BecomeDonorController controller = Get.put(BecomeDonorController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -95,7 +96,8 @@ class HomeScreenIcons extends StatelessWidget {
                       width: 110,
                       child: IconButton(
                         onPressed: () {
-                          Get.toNamed(searchDonor);
+
+                          controller.donorValidate();
                         },
                         icon: Column(
                           children: [

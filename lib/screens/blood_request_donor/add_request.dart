@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +11,7 @@ import '../global_widget/custom_button.dart';
 import '../global_widget/custom_dropdown.dart';
 import '../global_widget/custom_textFormField.dart';
 import '../global_widget/custom_timePicker.dart';
+import 'package:http/http.dart' as http;
 
 class RequestBlood extends StatefulWidget {
   const RequestBlood({super.key});
@@ -19,6 +22,106 @@ class RequestBlood extends StatefulWidget {
 
 class _RequestBloodState extends State<RequestBlood> {
   RequestBloodController controller = Get.put(RequestBloodController());
+  List<String> divisions = [];
+  List<String> districts = [];
+  List<String> thanas = []; // New list for thanas
+  String? selectedDivision;
+  String? selectedDistrict;
+  String? selectedThana; // New variable for selected thana
+
+  Future<void> fetchDivisions() async {
+    // signupController.fetching.value = true;
+    try {
+      final response =
+          await http.get(Uri.parse("https://starsoftjpn.xyz/api/v1/division"));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        setState(() {
+          divisions = jsonData['data']
+              .map<String>((division) => division['division'].toString())
+              .toList();
+        });
+        // signupController.fetching.value = false;
+      } else {
+        // signupController.fetching.value = false;
+        throw Exception('Failed to load divisions: ${response.statusCode}');
+      }
+    } catch (e) {
+      // signupController.fetching.value = false;
+      throw Exception('Failed to load divisions: $e');
+    }
+  }
+
+  Future<void> fetchDistricts(int divisionId) async {
+    try {
+      final response = await http.get(
+          Uri.parse("https://starsoftjpn.xyz/api/v1/district/$divisionId"));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        setState(() {
+          final uniqueDistricts = jsonData['data']
+              .map<String>((district) => district['district'].toString())
+              .toSet()
+              .toList();
+          districts = uniqueDistricts;
+        });
+      } else {
+        throw Exception('Failed to load districts: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load districts: $e');
+    }
+  }
+
+  Future<void> fetchThanas(int districtId) async {
+    try {
+      final response = await http
+          .get(Uri.parse("https://starsoftjpn.xyz/api/v1/thana/$districtId"));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        setState(() {
+          final uniqueThanas = jsonData['data']
+              .map<String>((thana) => thana['thana'].toString())
+              .toSet()
+              .toList();
+          thanas = uniqueThanas;
+        });
+      } else {
+        throw Exception('Failed to load thanas: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load thanas: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDivisions();
+  }
+
+  inputDecoration(String label) {
+    return InputDecoration(
+      hintText: label,
+      fillColor: AppTheme.textFieldColor,
+      filled: true,
+      contentPadding: const EdgeInsets.only(left: 12),
+      counterStyle: const TextStyle(fontWeight: FontWeight.bold),
+      focusedBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderSide: BorderSide.none,
+      ),
+      border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderSide: BorderSide.none),
+      labelStyle: TextStyle(
+        color: AppTheme.textColorRed,
+      ),
+      hintStyle: TextStyle(
+        color: AppTheme.textColorRed,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +147,6 @@ class _RequestBloodState extends State<RequestBlood> {
         ),
       ),
       body: Container(
-
         margin: const EdgeInsets.all(16),
         child: Form(
           key: controller.formKey,
@@ -152,26 +254,58 @@ class _RequestBloodState extends State<RequestBlood> {
                 Row(
                   children: [
                     Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.divisionListData,
-                          label: 'Division',
-                          onChanged: (value) {
-                            controller.division = value;
-                          },
-                        )),
+                      child: DropdownButtonFormField(
+                        value: selectedDivision,
+                        decoration: inputDecoration("Select Division"),
+                        onChanged: (newValue) {
+                          controller.division = newValue;
+                          // signupController.division = newValue;
+                          setState(() {
+                            selectedDivision = newValue;
+                            selectedDistrict = null;
+                            selectedThana = null; // Reset selected thana
+                            fetchDistricts(
+                                divisions.indexOf(selectedDivision!) + 1);
+                          });
+                        },
+                        items: divisions
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                     const SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.districtListData,
-                          label: 'District',
-                          onChanged: (value) {
-                            controller.district = value;
-                          },
-                        )),
+                        child: DropdownButtonFormField(
+                      decoration: inputDecoration("Select District"),
+                      value: selectedDistrict,
+                      onChanged: (newValue) {
+                        controller.district = newValue;
+                        setState(() {
+                          selectedDistrict = newValue;
+                          selectedThana = null; // Reset selected thana
+                          fetchThanas(districts.indexOf(selectedDistrict!) + 1);
+                        });
+                      },
+                      items: districts
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        );
+                      }).toList(),
+                    )),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -179,13 +313,25 @@ class _RequestBloodState extends State<RequestBlood> {
                 Row(
                   children: [
                     Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.divisionListData,
-                          label: 'Division',
-                          onChanged: (value) {
-                            controller.upazila = value;
+                        child: DropdownButtonFormField(
+                          decoration: inputDecoration("Select Thana"),
+                          value: selectedThana,
+                          onChanged: (newValue) {
+                            controller.thana = newValue;
+                            setState(() {
+                              selectedThana = newValue;
+                            });
                           },
+                          items:
+                          thanas.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            );
+                          }).toList(),
                         )),
                     const SizedBox(
                       width: 10,

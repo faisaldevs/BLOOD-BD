@@ -5,31 +5,32 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class DescriptionUi extends StatelessWidget {
   const DescriptionUi(
       {super.key,
-      required this.contractPersonName,
-      required this.contractPersonNumber,
-      required this.patientName,
-      required this.healthIssue,
-      required this.bloodAmount,
-      required this.bloodType,
-      required this.address,
-      required this.date,
-      required this.time,
-      required this.note});
+       this.contractPersonName,
+       this.contractPersonNumber,
+       this.patientName,
+       this.healthIssue,
+       this.bloodAmount,
+       this.bloodType,
+       this.address,
+       this.date,
+       this.time,
+       this.note});
 
-  final String contractPersonName;
-  final String contractPersonNumber;
-  final String patientName;
-  final String healthIssue;
-  final String bloodAmount;
-  final String bloodType;
-  final String address;
-  final String date;
-  final String time;
-  final String note;
+  final String? contractPersonName;
+  final String? contractPersonNumber;
+  final String? patientName;
+  final String? healthIssue;
+  final String? bloodAmount;
+  final String? bloodType;
+  final String? address;
+  final String? date;
+  final String? time;
+  final String? note;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,7 @@ class DescriptionUi extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Name : ",
+                              "Name : $contractPersonName",
                               style: TextStyle(
                                   fontSize: 18.sp, fontWeight: FontWeight.bold),
                             ),
@@ -97,7 +98,7 @@ class DescriptionUi extends StatelessWidget {
                             )
                           ],
                         ),
-                        const Text("Number : ",
+                         Text("Number : $contractPersonNumber",
                             style: TextStyle(
                                 fontSize: 13, fontWeight: FontWeight.bold)),
                       ],
@@ -112,18 +113,18 @@ class DescriptionUi extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Column(
+                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Patient's Name : ",
+                        Text("Patient's Name : $patientName",
                             style: TextStyle(
                               fontSize: 16,
                             )),
-                        Text("Health Issue : ",
+                        Text("Health Issue : $healthIssue",
                             style: TextStyle(
                               fontSize: 16,
                             )),
-                        Text("Blood Required : ",
+                        Text("Blood Required : $bloodAmount",
                             style: TextStyle(
                               fontSize: 16,
                             )),
@@ -139,41 +140,12 @@ class DescriptionUi extends StatelessWidget {
                               color: Colors.red,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(50))),
-                          child: const Text(
-                            "A+",
+                          child: Text(
+                            "$bloodType",
                             // dataList[index]["patient_name"],
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        InkWell(
-                          borderRadius: BorderRadius.circular(10),
-                          onTap: () {
-                            // controller.visibility();
-                            // Get.to(const DescriptionUi());
-                          },
-                          child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 4, vertical: 6),
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: const Text("See More",
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w600,
-                                  ))
-                              //     : const Row(
-                              //   children: [
-                              //     Icon(
-                              //       CupertinoIcons.chevron_down,
-                              //       size: 16,
-                              //     ),
-                              //     Text("Show more")
-                              //   ],
-                              // ),
-                              ),
-                        )
                       ],
                     ),
                   ],
@@ -187,8 +159,8 @@ class DescriptionUi extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Address : "),
-                      Text("Date & Time : "),
+                      Text("Address : $address"),
+                      Text("Date & Time : $date$time"),
                     ],
                   ),
                   Divider(),
@@ -196,8 +168,8 @@ class DescriptionUi extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Contact Person's Name : "),
-                      Text("Contact Person's Number : "),
+                      Text("Contact Person's Name : $contractPersonName"),
+                      Text("Contact Person's Number : $contractPersonNumber"),
                     ],
                   ),
                   Divider(),
@@ -205,9 +177,7 @@ class DescriptionUi extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Massage : "),
-                      // Text(
-                      //     "dew   wwe 0eew dogie  eu ihhjfiew site heo h wo "),
+                      Text("Massage : $note"),
                     ],
                   ),
                 ],
@@ -218,16 +188,7 @@ class DescriptionUi extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      //
-                      // final Uri url = Uri(
-                      //   scheme: "tel",
-                      //   path: "01903440069",
-                      // );
-                      // if (await canLaunchUrl(url)) {
-                      // await launchUrl(url);
-                      // } else {
-                      // print("Can't Launch Url");
-                      // }
+                      launchUrlString("tel:$contractPersonNumber");
                     },
                     style: ButtonStyle(
                       backgroundColor:

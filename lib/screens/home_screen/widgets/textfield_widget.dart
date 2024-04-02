@@ -21,6 +21,7 @@ class TextFieldWidget extends StatelessWidget {
     return Container(
       // margin: const EdgeInsets.all(),
       child: DropdownButtonFormField(
+
         // dropdownColor:  Colors.black.withOpacity(.2),
         icon: Icon(
           icon,
@@ -51,7 +52,7 @@ class TextFieldWidget extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.normal, color: AppTheme.textColorRed,fontSize: 14),
               ));
         }).toList(),
-        onChanged: onChanged,
+        onChanged: null,
       ),
     );
   }

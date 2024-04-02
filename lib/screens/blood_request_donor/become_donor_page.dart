@@ -1,15 +1,15 @@
+import 'dart:convert';
+
 import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import '../../controllers/become_donor_controller.dart';
 import '../../data_list/data_list.dart';
-import '../../utils/app_routes.dart';
 import '../../utils/app_colors.dart';
-import '../global_widget/custom_birthDate.dart';
 import '../global_widget/custom_button.dart';
 import '../global_widget/custom_dropdown.dart';
-import '../global_widget/custom_timePicker.dart';
 
 class BecomeDonor extends StatefulWidget {
   const BecomeDonor({super.key});
@@ -20,6 +20,107 @@ class BecomeDonor extends StatefulWidget {
 
 class _BecomeDonorState extends State<BecomeDonor> {
   BecomeDonorController sdController = Get.put(BecomeDonorController());
+
+  List<String> divisions = [];
+  List<String> districts = [];
+  List<String> thanas = []; // New list for thanas
+  String? selectedDivision;
+  String? selectedDistrict;
+  String? selectedThana; // New variable for selected thana
+
+  Future<void> fetchDivisions() async {
+    // signupController.fetching.value = true;
+    try {
+      final response =
+      await http.get(Uri.parse("https://starsoftjpn.xyz/api/v1/division"));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        setState(() {
+          divisions = jsonData['data']
+              .map<String>((division) => division['division'].toString())
+              .toList();
+        });
+        // signupController.fetching.value = false;
+      } else {
+        // signupController.fetching.value = false;
+        throw Exception('Failed to load divisions: ${response.statusCode}');
+      }
+    } catch (e) {
+      // signupController.fetching.value = false;
+      throw Exception('Failed to load divisions: $e');
+    }
+  }
+
+  Future<void> fetchDistricts(int divisionId) async {
+    try {
+      final response = await http.get(
+          Uri.parse("https://starsoftjpn.xyz/api/v1/district/$divisionId"));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        setState(() {
+          final uniqueDistricts = jsonData['data']
+              .map<String>((district) => district['district'].toString())
+              .toSet()
+              .toList();
+          districts = uniqueDistricts;
+        });
+      } else {
+        throw Exception('Failed to load districts: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load districts: $e');
+    }
+  }
+
+  Future<void> fetchThanas(int districtId) async {
+    try {
+      final response = await http
+          .get(Uri.parse("https://starsoftjpn.xyz/api/v1/thana/$districtId"));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        setState(() {
+          final uniqueThanas = jsonData['data']
+              .map<String>((thana) => thana['thana'].toString())
+              .toSet()
+              .toList();
+          thanas = uniqueThanas;
+        });
+      } else {
+        throw Exception('Failed to load thanas: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load thanas: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDivisions();
+  }
+
+  inputDecoration(String label) {
+    return InputDecoration(
+      hintText: label,
+      fillColor: AppTheme.textFieldColor,
+      filled: true,
+      contentPadding: const EdgeInsets.only(left: 12),
+      counterStyle: const TextStyle(fontWeight: FontWeight.bold),
+      focusedBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderSide: BorderSide.none,
+      ),
+      border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderSide: BorderSide.none),
+      labelStyle: TextStyle(
+        color: AppTheme.textColorRed,
+      ),
+      hintStyle: TextStyle(
+        color: AppTheme.textColorRed,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,18 +160,18 @@ class _BecomeDonorState extends State<BecomeDonor> {
 
                 //-------Name Field --------------
 
-                CustomTextFormField(
-                  controller: sdController.patientNameController,
-                  hintText: "",
-                  textInputType: TextInputType.text,
-                  validate: (name) {
-                    if (name.toString().isEmpty) {
-                      return "Patient's name required";
-                    }
-                    return null;
-                  },
-                  labelText: "Patient's Name",
-                ),
+                // CustomTextFormField(
+                //   controller: sdController.patientNameController,
+                //   hintText: "",
+                //   textInputType: TextInputType.text,
+                //   validate: (name) {
+                //     if (name.toString().isEmpty) {
+                //       return "Patient's name required";
+                //     }
+                //     return null;
+                //   },
+                //   labelText: "Patient's Name",
+                // ),
 
                 const SizedBox(height: 30),
 
@@ -105,22 +206,22 @@ class _BecomeDonorState extends State<BecomeDonor> {
 
                 //-------Date  and  Time --------------
 
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    CustomBirthdate(
-                      controller: sdController.dateController,
-                      label: 'Date',
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    CustomTimePicker(
-                      controller: sdController.timeController,
-                      label: 'time',
-                    ),
-                  ],
-                ),
+                // const SizedBox(height: 10),
+                // Row(
+                //   children: [
+                //     CustomBirthdate(
+                //       controller: sdController.dateController,
+                //       label: 'Date',
+                //     ),
+                //     const SizedBox(
+                //       width: 10,
+                //     ),
+                //     CustomTimePicker(
+                //       controller: sdController.timeController,
+                //       label: 'time',
+                //     ),
+                //   ],
+                // ),
 
                 const SizedBox(height: 10),
                 //-------  Health issue --------------
@@ -141,21 +242,57 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 Row(
                   children: [
                     Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.divisionListData,
-                          label: 'Division',
-                          onChanged: (value) {},
-                        )),
+                      child: DropdownButtonFormField(
+                        value: selectedDivision,
+                        decoration: inputDecoration("Select Division"),
+                        onChanged: (newValue) {
+                          sdController.division = newValue;
+                          // signupController.division = newValue;
+                          setState(() {
+                            selectedDivision = newValue;
+                            selectedDistrict = null;
+                            selectedThana = null; // Reset selected thana
+                            fetchDistricts(
+                                divisions.indexOf(selectedDivision!) + 1);
+                          });
+                        },
+                        items: divisions
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                     const SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.districtListData,
-                          label: 'District',
-                          onChanged: (value) {},
+                        child: DropdownButtonFormField(
+                          decoration: inputDecoration("Select District"),
+                          value: selectedDistrict,
+                          onChanged: (newValue) {
+                            sdController.district = newValue;
+                            setState(() {
+                              selectedDistrict = newValue;
+                              selectedThana = null; // Reset selected thana
+                              fetchThanas(districts.indexOf(selectedDistrict!) + 1);
+                            });
+                          },
+                          items: districts
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            );
+                          }).toList(),
                         )),
                   ],
                 ),
@@ -164,11 +301,25 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 Row(
                   children: [
                     Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.divisionListData,
-                          label: 'Division',
-                          onChanged: (value) {},
+                        child: DropdownButtonFormField(
+                          decoration: inputDecoration("Select Thana"),
+                          value: selectedThana,
+                          onChanged: (newValue) {
+                            sdController.thana = newValue;
+                            setState(() {
+                              selectedThana = newValue;
+                            });
+                          },
+                          items:
+                          thanas.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            );
+                          }).toList(),
                         )),
                     const SizedBox(
                       width: 10,
@@ -178,7 +329,9 @@ class _BecomeDonorState extends State<BecomeDonor> {
                         child: CustomDropdown(
                           dropDownList: DataList.districtListData,
                           label: 'District',
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            sdController.union = value;
+                          },
                         )),
                   ],
                 ),

@@ -79,19 +79,19 @@ class ChangePassword extends StatelessWidget {
               
                   CustomTextFormField(
                     controller: controller.currentPassword,
-                    hintText: "New Password",
+                    hintText: "Old Password",
                     textInputType: TextInputType.text,
                     validate: (value) {
                       return null;
                     },
-                    labelText: 'New Password',
+                    labelText: 'Old Password',
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   CustomTextFormField(
                       controller: controller.newPassword,
-                      labelText: "Confirm Password",
+                      labelText: "New Password",
                       textInputType: TextInputType.text,
                       validate: (value) {
                         if (value!.isEmpty) {
@@ -99,7 +99,7 @@ class ChangePassword extends StatelessWidget {
                         }
                         return null;
                       },
-                      hintText: "Confirm Password",
+                      hintText: "New Password",
                   ),
               
                   const SizedBox(

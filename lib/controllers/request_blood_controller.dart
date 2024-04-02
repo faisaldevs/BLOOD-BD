@@ -22,7 +22,7 @@ class RequestBloodController extends GetxController {
   var division;
   var district;
   var union;
-  var upazila;
+  var thana;
 
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
@@ -40,7 +40,7 @@ class RequestBloodController extends GetxController {
     print(dateController.text);
     print(division.toString());
     print(district.toString());
-    print(upazila.toString());
+    print(thana.toString());
     print(union.toString());
 
     try {
@@ -63,7 +63,7 @@ class RequestBloodController extends GetxController {
           "health_issue": healthIssue,
           "division": division,
           "district": district,
-          "upazila": upazila,
+          "upazila": thana,
           "union": union,
           "address": addressController.text,
           "contact_person_name": contactParsonNameController.text,

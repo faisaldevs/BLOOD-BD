@@ -1,5 +1,4 @@
 import 'package:blood_bd/controllers/home_controller.dart';
-import 'package:blood_bd/controllers/location_controller.dart';
 import 'package:blood_bd/data_list/data_list.dart';
 import 'package:blood_bd/screens/home_screen/widgets/banner_widget.dart';
 import 'package:blood_bd/screens/home_screen/widgets/card.dart';
@@ -11,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../controllers/blood_request_controller.dart';
-import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
 import '../../models/blood_request_model.dart';
 import '../../utils/assets_links.dart';

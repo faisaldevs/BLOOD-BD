@@ -100,7 +100,7 @@ class RequestBloodController extends GetxController {
         print(success);
         // var message = data["message"];
         var bloodRequestId =
-            data["blood_request_id"].toString() ?? "bloodRequestId";
+            data["blood_request_id"].toString();
 
         print("bloodRequestId : $bloodRequestId");
         print("bloodType : $bloodType");

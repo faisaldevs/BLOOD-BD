@@ -1,13 +1,10 @@
 import 'package:blood_bd/models/search_requested_donor.dart';
 import 'package:blood_bd/screens/global_widget/description_ui.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher_android/url_launcher_android.dart';
 
 import '../../../controllers/request_blood_controller.dart';
 import '../../../utils/app_colors.dart';

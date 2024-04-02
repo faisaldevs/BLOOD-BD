@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../controllers/edit_profile_controller.dart';
 
 import '../global_widget/custom_button.dart';
 

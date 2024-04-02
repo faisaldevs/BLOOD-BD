@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../controllers/forget_password_controller.dart';
 import '../../../global_widget/custom_button.dart';
 import '../../../global_widget/custom_textFormField.dart';
-import '../../OTP_verification/forget_pass_otp_verification.dart';
 
 class ForgetPassNumber extends StatelessWidget {
   ForgetPassNumber({super.key});

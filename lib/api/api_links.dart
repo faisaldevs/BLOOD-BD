@@ -8,6 +8,7 @@ static const String live = "https://starsoftjpn.xyz/api";
 
   static const String loginPost = "$auth/login";
   static const String signUpPost = "$auth/register";
+  static const String signUpOtpPost = "$auth/register-otp-check";
   static const String profileGet = "$auth/profile";
   static const String profileUpdatePost = "$auth/profile-update";
   static const String donorStatusUpdatePost = "$auth/update-donor-status";
@@ -27,7 +28,7 @@ static const String live = "https://starsoftjpn.xyz/api";
 
   static const api = "$live/v1";
 
-  static const String signUpOtpPost = "$api/register-otp-check";
+
   static const String forgotPasswordPhonePost = "$api/forgot-password-by-phone";
   static const String forgotPasswordOtpPost = "$api/forgot-password-otp-check";
   static const String forgotPasswordPost = "$api/forgot-password-update";

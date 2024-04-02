@@ -12,7 +12,6 @@ import '../utils/app_routes.dart';
 import '../models/division_model.dart';
 
 class SignupController extends GetxController {
-
   RxBool fetching = false.obs;
 
   GetStorage getStorage = GetStorage();
@@ -31,7 +30,6 @@ class SignupController extends GetxController {
   TextEditingController addressController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   TextEditingController weightController = TextEditingController();
-
 
   RxBool isVisible = true.obs;
 
@@ -70,24 +68,22 @@ class SignupController extends GetxController {
       isSignup.value = true;
 
       try {
-        var response = await post(
-            Uri.parse(ApiUrls.signUpPost),
-            body: {
-              "name": nameController.text,
-              "username": "numberController.256",
-              "phone": numberController.text,
-              "email": "numberController.text852",
-              "blood_group": bloodType,
-              "date_of_birth": dateController.text,
-              "gender": gender,
-              "weight": weightController.text,
-              "division": division,
-              "district": district,
-              "upazila": thana,
-              "union": union,
-              "address": addressController.text,
-              "password": passwordController.text,
-            });
+        var response = await post(Uri.parse(ApiUrls.signUpPost), body: {
+          "name": nameController.text,
+          "username": "numberController.256",
+          "phone": numberController.text,
+          "email": "numberController.text852",
+          "blood_group": bloodType,
+          "date_of_birth": dateController.text,
+          "gender": gender,
+          "weight": weightController.text,
+          "division": division,
+          "district": district,
+          "upazila": thana,
+          "union": union,
+          "address": addressController.text,
+          "password": passwordController.text,
+        });
 
         print(response.statusCode);
         print(response.body);
@@ -131,7 +127,9 @@ class SignupController extends GetxController {
           // await Future.delayed(const Duration(seconds: 2));
 
           isSignup.value = false;
-          await Get.to(SignupOTPVerification(number: numberController,));
+          await Get.to(SignupOTPVerification(
+            number: numberController,
+          ));
           // numberController.clear();
           // passwordController.clear();
         } else {
@@ -213,9 +211,4 @@ class SignupController extends GetxController {
     }
     throw Exception("Loading failed !!!");
   }
-
-
-
-
-
 }

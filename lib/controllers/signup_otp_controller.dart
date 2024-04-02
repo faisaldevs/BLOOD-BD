@@ -16,22 +16,29 @@ class SignupOTPController extends GetxController {
       String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-otp-check";
       // if (formKey.currentState!.validate()) {
          print("object");
-         var res = await http.post(Uri.parse(ApiUrls.signUpOtpPost), body: {
-            "phone": numberController.text,
-            "otp": signupOtpController.text,
-         });
+         print("Number :"+numberController.text);
+         print("OTP :"+signupOtpController.text);
          print("object");
+        try{
+           var res = await http.post(Uri.parse("https://starsoftjpn.xyz/api/auth/register-otp-check"), body: {
+              "phone": numberController.text,
+              "otp": signupOtpController.text,
+           });
+           print("object");
 
-         print(res.statusCode);
-         print(res.body);
+           print(res.statusCode);
+           print(res.body);
 
-         if (res.statusCode == 200) {
-            Get.snackbar(
-               "Sign Up Successful",
-               "message",
-            );
-            Get.offAll(const LoginScreen());
-         }
+           if (res.statusCode == 200) {
+              Get.snackbar(
+                 "Sign Up Successful",
+                 "message",
+              );
+              Get.offAll(const LoginScreen());
+           }
+        }catch(e){
+           print("Error : $e");
+        }
       }
    }
 

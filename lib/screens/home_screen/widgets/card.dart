@@ -141,7 +141,7 @@ class UrgentRequest extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 24.sp),
+                          fontSize: 18.sp),
                     ),
                   ),
                   Row(
@@ -154,7 +154,7 @@ class UrgentRequest extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
-                              fontSize: 18.sp),
+                              fontSize: 16.sp),
                         ),
                       ),
                     ],
@@ -169,7 +169,7 @@ class UrgentRequest extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
-                              fontSize: 18.sp),
+                              fontSize: 16.sp),
                         ),
                       ),
                     ],
@@ -184,7 +184,7 @@ class UrgentRequest extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
-                              fontSize: 18.sp),
+                              fontSize: 16.sp),
                         ),
                       ),
                     ],

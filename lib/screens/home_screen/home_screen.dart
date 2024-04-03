@@ -1,15 +1,14 @@
 import 'package:blood_bd/controllers/home_controller.dart';
-import 'package:blood_bd/data_list/data_list.dart';
 import 'package:blood_bd/screens/home_screen/widgets/banner_widget.dart';
 import 'package:blood_bd/screens/home_screen/widgets/card.dart';
-import 'package:blood_bd/screens/home_screen/widgets/find_button.dart';
+import 'package:blood_bd/screens/home_screen/widgets/find_donor_ui.dart';
 import 'package:blood_bd/screens/home_screen/widgets/icon_banner.dart';
-import 'package:blood_bd/screens/home_screen/widgets/textfield_widget.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../controllers/blood_request_controller.dart';
+import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
 import '../../models/blood_request_model.dart';
 import '../../utils/assets_links.dart';
@@ -17,7 +16,7 @@ import '../blood_request_donor/blood_request_page.dart';
 import '../drawer_profile/drawer_profile.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // final LocationController locationController = Get.put(LocationController());
 
-  // final ProfileController controller = Get.put(ProfileController());
+  final ProfileController controller = Get.put(ProfileController());
 
   final BloodRequestController bloodController =
   Get.put(BloodRequestController());
@@ -87,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) =>
                           InkWell(
                             onTap: () {
-                              // controller.profileData();
+                              controller.profileData();
                             },
                             child: Container(
                               margin: const EdgeInsets.only(bottom: 5),
@@ -153,184 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Form(
                             key: homeController.formKey,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: TextFieldWidget(
-                                      label: 'Select District',
-                                      dropDownList: DataList.districtListData,
-                                      onChanged: (value) {
-                                        homeController.district =
-                                            value.toString();
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: TextFieldWidget(
-                                      label: 'Select District',
-                                      dropDownList: DataList.districtListData,
-                                      onChanged: (value) {
-                                        homeController.district =
-                                            value.toString();
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: TextFieldWidget(
-                                    label: 'Select Blood Group',
-                                    dropDownList: DataList.bloodListData,
-                                    onChanged: (value) {
-                                      homeController.bloodType =
-                                          value.toString();
-                                    },
-                                  ),
-                                ),
-                                FindDonorBtn(
-                                  onPressed: () {
-                                    homeController.findDonor();
-                                  },
-                                  child: "Find Donor",
-                                ),],
-
-                              // children: [
-                              //   Row(
-                              //     children: [
-                              //       Expanded(
-                              //         flex: 1,
-                              //         child: Obx(() =>
-                              //             TextFieldWidget(
-                              //               value: locationController.divisions
-                              //                   .isNotEmpty ? locationController
-                              //                   .divisions[0] : null,
-                              //               label: 'Select Division',
-                              //               dropDownList: locationController
-                              //                   .divisions.map<
-                              //                   DropdownMenuItem<String>>((
-                              //                   String value) {
-                              //                 return DropdownMenuItem<String>(
-                              //                   value: value,
-                              //                   child: Text(value),
-                              //                 );
-                              //               }).toList(),
-                              //               onChanged: (newValue) {
-                              //                 locationController.districts
-                              //                     .clear(); // Clear districts when division changes
-                              //                 locationController.thanas
-                              //                     .clear(); // Clear thanas when division changes
-                              //                 final divisionIndex = locationController
-                              //                     .divisions.indexOf(newValue);
-                              //                 if (divisionIndex != -1) {
-                              //                   locationController.fetchDistricts(
-                              //                       divisionIndex + 1);
-                              //                 }
-                              //               },
-                              //             )),
-                              //       ),
-                              //       const SizedBox(
-                              //         width: 10,
-                              //       ),
-                              //       Expanded(
-                              //         flex: 1,
-                              //         child: Obx(() =>
-                              //             TextFieldWidget(
-                              //               value: locationController.districts
-                              //                   .isNotEmpty ? locationController
-                              //                   .districts[0] : null,
-                              //               label: 'Select Division',
-                              //               dropDownList: locationController
-                              //                   .districts.map<
-                              //                   DropdownMenuItem<String>>((
-                              //                   String value) {
-                              //                 return DropdownMenuItem<String>(
-                              //                   value: value,
-                              //                   child: Text(value),
-                              //                 );
-                              //               }).toList(),
-                              //               onChanged: (newValue) {
-                              //                 // locationController.districts
-                              //                 //     .clear(); // Clear districts when division changes
-                              //                 locationController.thanas
-                              //                     .clear(); // Clear thanas when division changes
-                              //                 final divisionIndex = locationController
-                              //                     .districts.indexOf(newValue);
-                              //                 if (divisionIndex != -1) {
-                              //                   locationController.fetchDistricts(
-                              //                       divisionIndex + 1);
-                              //                 }
-                              //               },
-                              //             )),
-                              //       ),
-                              //     ],
-                              //   ),
-                              //   Row(
-                              //     children: [
-                              //       Expanded(
-                              //         flex: 1,
-                              //         child: Obx(() =>
-                              //             TextFieldWidget(
-                              //               value: locationController.thanas
-                              //                   .isNotEmpty ? locationController
-                              //                   .thanas[0] : null,
-                              //               label: 'Select Thana',
-                              //               dropDownList: locationController
-                              //                   .thanas.map<
-                              //                   DropdownMenuItem<String>>((
-                              //                   String value) {
-                              //                 return DropdownMenuItem<String>(
-                              //                   value: value,
-                              //                   child: Text(value),
-                              //                 );
-                              //               }).toList(),
-                              //               onChanged: (newValue) {
-                              //                 // locationController.districts
-                              //                 //     .clear(); // Clear districts when division changes
-                              //                 // locationController.thanas
-                              //                 //     .clear(); // Clear thanas when division changes
-                              //                 // final divisionIndex = locationController
-                              //                 //     .thanas.indexOf(newValue);
-                              //                 // if (divisionIndex != -1) {
-                              //                 //   locationController.fetchDistricts(
-                              //                 //       divisionIndex + 1);
-                              //                 // }
-                              //               },
-                              //             )),
-                              //       ),
-                              //       const SizedBox(
-                              //         width: 10,
-                              //       ),
-                              //       // Expanded(
-                              //       //   flex: 1,
-                              //       //   // child: TextFieldWidget(
-                              //       //   //   label: 'Select Blood Group',
-                              //       //   //   // dropDownList: DataList.bloodListData,
-                              //       //   //   onChanged: (value) {
-                              //       //   //     homeController.bloodType =
-                              //       //   //         value.toString();
-                              //       //   //   },
-                              //       //   // ),
-                              //       // ),
-                              //     ],
-                              //   ),
-                              //
-                              //   FindDonorBtn(
-                              //     onPressed: () {
-                              //       homeController.findDonor();
-                              //     },
-                              //     child: "Find Donor",
-                              //   ),
-                              // ],
-                            ),
+                            child: FindDonorUi(),
                           ),
                         ),
                       ),
@@ -446,23 +268,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                 );
                               }
-                              // else {
-                              //   return const Center(child: CircularProgressIndicator());
-                              // }
-                              return const Text("data");
+                              else {
+                                return const Text("Something Went Wrong..");
+                              }
                             },
                           ),
-
-                          //ListView.builder(
-                          //                             scrollDirection: Axis.horizontal,
-                          //                             // padding: EdgeInsets.symmetric(horizontal: 10),
-                          //                             itemCount: 10,
-                          //                             itemBuilder: (context, index) {
-                          //                               return const UrgentRequest();
-                          //                             },
-                          //                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -475,57 +287,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: DrawerProfile(),
     );
-
-    // return Scaffold(
-    //   backgroundColor: Colors.white,
-    //   bottomNavigationBar: CurvedNavigationBar(
-    //     backgroundColor: AppTheme.primary,
-    //     color: AppTheme.primaryRed,
-    //     animationDuration: const Duration(milliseconds: 300),
-    //     animationCurve: Curves.fastLinearToSlowEaseIn,
-    //     items: const [
-    //       CurvedNavigationBarItem(
-    //           child: Icon(
-    //             Icons.home_outlined,
-    //             color: Colors.white,
-    //           ),
-    //           label: 'Home',
-    //           labelStyle: TextStyle(color: Colors.white)),
-    //       CurvedNavigationBarItem(
-    //           child: Icon(
-    //             Icons.bloodtype_outlined,
-    //             color: Colors.white,
-    //           ),
-    //           label: 'Blood Request',
-    //           labelStyle: TextStyle(color: Colors.white)),
-    //       CurvedNavigationBarItem(
-    //           child: Icon(
-    //             Icons.health_and_safety,
-    //             color: Colors.white,
-    //           ),
-    //           label: 'Health',
-    //           labelStyle: TextStyle(color: Colors.white)),
-    //     ],
-    //     index: homeController.selectedItem.value,
-    //     onTap: (index) {
-    //       homeController.navbarFunction(index);
-    //     },
-    //     // letIndexChange: (index) => true,
-    //   ),
-    //   body: Obx(
-    //     () => pages[homeController.selectedItem.value],
-    //   ),
-    // );
   }
 }
 
-// class HomePage extends StatelessWidget {
-//   HomePage({super.key});
-//
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//
-//   }
-// }

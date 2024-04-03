@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -19,28 +18,37 @@ class _HistoryRequestState extends State<HistoryRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<BloodRequestHistoryModel>>(
+      body: FutureBuilder<BloodRequestHistoryModel>(
         future: controller.getHistoryRequest(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            // List dataList = snapshot.data as List;
+            final dataList = snapshot.data!;
             return ListView.builder(
-              itemCount: snapshot.data?.length,
+              itemCount: dataList.data?.length,
               itemBuilder: (context, index) {
-                BloodRequestHistoryModel e = snapshot.data![index];
-                String contactPersonName = e.contactPersonName ?? "name";
-                String number = e.contactPersonPhone ?? "01*********";
-                String patientsName = e.patientsName ?? "Patient Name";
-                String healthIssue = e.healthIssue ?? "Health Issue";
-                String bloodAmount = e.amountBag ?? "Blood Amount";
-                String bloodType = e.bloodGroup ?? "Type";
-                String date = e.date ?? "date";
-                String time = e.time ?? "time";
-                String address = e.address ?? "address";
-                String note = e.note ?? "note";
+                final e = dataList.data?[index];
+                String contactPersonName = e?.contactPersonName ?? "name";
+                String number = e?.contactPersonPhone ?? "01*********";
+                String patientsName = e?.patientsName ?? "Patient Name";
+                String healthIssue = e?.healthIssue ?? "Health Issue";
+                String bloodAmount = e?.amountBag ?? "Blood Amount";
+                String bloodType = e?.bloodGroup ?? "Type";
+                String date = e?.date ?? "date";
+                String time = e?.time ?? "time";
+                String address = e?.address ?? "address";
+                String note = e?.note ?? "note";
 
-                return historyTile(contactPersonName, number, patientsName,
-                    healthIssue, bloodAmount, bloodType,date,time,address,note);
+                return historyTile(
+                    contactPersonName,
+                    number,
+                    patientsName,
+                    healthIssue,
+                    bloodAmount,
+                    bloodType,
+                    date,
+                    time,
+                    address,
+                    note);
               },
             );
           } else {
@@ -52,17 +60,17 @@ class _HistoryRequestState extends State<HistoryRequest> {
   }
 
   Widget historyTile(
-      String contactPersonName,
-      String number,
-      String patientsName,
-      String healthIssue,
-      String bloodAmount,
-      String bloodType,
-      String address,
-      String time,
-      String date,
-      String note,
-      ) {
+    String contactPersonName,
+    String number,
+    String patientsName,
+    String healthIssue,
+    String bloodAmount,
+    String bloodType,
+    String address,
+    String time,
+    String date,
+    String note,
+  ) {
     String showTime() {
       DateTime now;
 
@@ -73,20 +81,10 @@ class _HistoryRequestState extends State<HistoryRequest> {
       return formattedDate;
     }
 
-    // bool isVisible = false;
-    //
-    // visibility(){
-    //   isVisible = !isVisible;
-    //   print(isVisible);
-    // }
-    var value = controller.isVisible.value;
-
-    if (kDebugMode) {
-      print(value);
-    }
-
     return Container(
+      color: AppTheme.primary,
       padding: const EdgeInsets.all(8),
+      margin: EdgeInsets.all(8),
       width: Get.width,
       child: Column(
         children: [
@@ -180,25 +178,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child: controller.isVisible.value
-                            ? const Row(
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.chevron_up,
-                                    size: 16,
-                                  ),
-                                  Text("Show less")
-                                ],
-                              )
-                            : const Row(
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.chevron_down,
-                                    size: 16,
-                                  ),
-                                  Text("Show more")
-                                ],
-                              ),
+                        child: const Text("Show more"),
                       ),
                     )
                   ],
@@ -206,94 +186,10 @@ class _HistoryRequestState extends State<HistoryRequest> {
               ],
             ),
           ),
-          Obx(() => Visibility(
-            visible: controller.isVisible.value,
-            child:  Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Divider(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Address : $address"),
-                    Text("Date & Time : $date$time"),
-                  ],
-                ),
-                const Divider(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Contact Person's Name : $contactPersonName" ),
-                    Text("Contact Person's Number : $number"),
-                  ],
-                ),
-                const Divider(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Massage : $note"),
-                    // Text(
-                    //     "dew   wwe 0eew dogie  eu ihhjfiew site heo h wo "),
-                  ],
-                ),
-              ],
-            ),
-          )),
           const SizedBox(height: 10),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.end,
-          //   children: [
-          //     ElevatedButton(
-          //       onPressed: () {
-          //         // sdStorageClear();
-          //       },
-          //       style: ButtonStyle(
-          //         backgroundColor:
-          //             const MaterialStatePropertyAll<Color>(Colors.red),
-          //         padding: const MaterialStatePropertyAll(
-          //             EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-          //         shape: MaterialStatePropertyAll(
-          //           RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(5.0),
-          //           ),
-          //         ),
-          //       ),
-          //       child: const Text(
-          //         "Call",
-          //         style: TextStyle(color: Colors.white),
-          //       ),
-          //     ),
-          //     const SizedBox(width: 20),
-          //     ElevatedButton(
-          //       onPressed: () {},
-          //       style: ButtonStyle(
-          //         backgroundColor:
-          //             const MaterialStatePropertyAll<Color>(Color(0xff026b49)),
-          //         padding: const MaterialStatePropertyAll(
-          //             EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-          //         shape: MaterialStatePropertyAll(
-          //           RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(5.0),
-          //           ),
-          //         ),
-          //       ),
-          //       child: const Text(
-          //         "I'm Interested",
-          //         style: TextStyle(color: Colors.white),
-          //       ),
-          //     ),
-          //   ],
-          // ),
+
         ],
       ),
     );
   }
 }
-
-//ListTile(
-//                   title: Text(e.patientsName.toString()),
-//                   subtitle: Text(snapshot.data!.length.toString()),
-//                 )

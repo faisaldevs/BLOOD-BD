@@ -37,9 +37,20 @@ class _ProfilePageState extends State<ProfilePage> {
     var gender = getStorage.read("gender") ?? "Male";
     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
     var width = Get.width;
-
+    print("Status : $status");
+    bool switchValue = true;
+    if (status == 1.toString()) {
+      setState(() {
+        switchValue = true;
+      });
+    } else {
+      setState(() {
+        switchValue = false;
+      });
+    }
+    var status12 = GetStorage().read("statusValue");
     if (kDebugMode) {
-      print(status);
+      print(controller.switchValue.value);
     }
     return Scaffold(
       backgroundColor: AppTheme.primary,
@@ -75,16 +86,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       foregroundColor: AppTheme.textColorRed,
                       titleSpacing: 0,
                       actions: [
-                        Obx(
-                          () => CupertinoSwitch(
-                            value: status == 0.toString()
-                                ? drawerProfileController.switchValue.value
-                                : !drawerProfileController.switchValue.value,
+                    CupertinoSwitch(
+                            value: 1.toString() == status? true : false,
                             onChanged: (value) {
-                              drawerProfileController.activeStatus(value);
+                              setState(() {
+
+                              });
+                              print(value);
+                              controller.activeStatus(value);
                             },
                           ),
-                        ),
+
                       ],
                     ),
                     Row(

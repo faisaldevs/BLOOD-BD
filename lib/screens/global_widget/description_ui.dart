@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,16 +9,18 @@ import 'package:url_launcher/url_launcher_string.dart';
 class DescriptionUi extends StatelessWidget {
   const DescriptionUi(
       {super.key,
-       this.contractPersonName,
-       this.contractPersonNumber,
-       this.patientName,
-       this.healthIssue,
-       this.bloodAmount,
-       this.bloodType,
-       this.address,
-       this.date,
-       this.time,
-       this.note});
+      this.contractPersonName,
+      this.contractPersonNumber,
+      this.patientName,
+      this.healthIssue,
+      this.bloodAmount,
+      this.bloodType,
+      this.address,
+      this.date,
+      this.time,
+      this.note,
+      this.buttonText,
+      this.buttonFunction});
 
   final String? contractPersonName;
   final String? contractPersonNumber;
@@ -31,6 +32,8 @@ class DescriptionUi extends StatelessWidget {
   final String? date;
   final String? time;
   final String? note;
+  final String? buttonText;
+  final Function()? buttonFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -98,8 +101,8 @@ class DescriptionUi extends StatelessWidget {
                             )
                           ],
                         ),
-                         Text("Number : $contractPersonNumber",
-                            style: TextStyle(
+                        Text("Number : $contractPersonNumber",
+                            style: const TextStyle(
                                 fontSize: 13, fontWeight: FontWeight.bold)),
                       ],
                     ),
@@ -113,19 +116,19 @@ class DescriptionUi extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Patient's Name : $patientName",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             )),
                         Text("Health Issue : $healthIssue",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             )),
                         Text("Blood Required : $bloodAmount",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             )),
                       ],
@@ -143,7 +146,7 @@ class DescriptionUi extends StatelessWidget {
                           child: Text(
                             "$bloodType",
                             // dataList[index]["patient_name"],
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ],
@@ -154,7 +157,7 @@ class DescriptionUi extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Divider(),
+                  const Divider(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -163,7 +166,7 @@ class DescriptionUi extends StatelessWidget {
                       Text("Date & Time : $date$time"),
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -172,7 +175,7 @@ class DescriptionUi extends StatelessWidget {
                       Text("Contact Person's Number : $contractPersonNumber"),
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -208,7 +211,7 @@ class DescriptionUi extends StatelessWidget {
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: buttonFunction,
                     style: ButtonStyle(
                       backgroundColor: const MaterialStatePropertyAll<Color>(
                           Color(0xff026b49)),
@@ -220,9 +223,9 @@ class DescriptionUi extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const Text(
-                      "Message",
-                      style: TextStyle(color: Colors.white),
+                    child: Text(
+                      buttonText ?? "Massage",
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ],

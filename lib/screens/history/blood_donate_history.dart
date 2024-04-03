@@ -1,3 +1,4 @@
+import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,11 @@ class HistoryDonate extends StatelessWidget {
       body: FutureBuilder<List<BloodDonateHistory>>(
         future: controller.getHistoryDonate(),
         builder: (context, snapshot) {
+
+          if(snapshot.connectionState == ConnectionState.waiting) {
+           return const Center(child: CircularProgressIndicator(),);
+          }
+
           if (snapshot.hasData) {
             // List dataList = snapshot.data as List;
             return ListView.builder(
@@ -49,7 +55,7 @@ class HistoryDonate extends StatelessWidget {
                 // );
               },);
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: Text("Something went wrong",));
           }
         },
       ),

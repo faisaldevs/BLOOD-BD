@@ -8,11 +8,12 @@ class LocationController extends GetxController{
   RxList<String> divisions = <String>[].obs;
   RxList<String> districts = <String>[].obs;
   RxList<String> thanas = <String>[].obs; // New list for thanas
-  String? selectedDivision;
-  String? selectedDistrict;
-  String? selectedThana; // New variable for selected thana
+  RxString? selectedDivision = "".obs;
+  RxString? selectedDistrict = "".obs;
+  RxString? selectedThana = "".obs; // New variable for selected thana
 
   Future<void> fetchDivisions() async {
+    print("object");
     fetching.value = true;
     try {
       final response =

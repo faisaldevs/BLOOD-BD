@@ -20,7 +20,7 @@ class HistoryController extends GetxController {
 
   var token = GetStorage().read("token");
 
-  Future<List<BloodRequestHistoryModel>> getHistoryRequest() async {
+  Future<BloodRequestHistoryModel> getHistoryRequest() async {
     print("pressed.............1");
     try {
       String appUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
@@ -36,43 +36,53 @@ class HistoryController extends GetxController {
       },);
       print("pressed.............2");
       print(res.statusCode);
-
       print(res.body);
 
-      var jsonDataDecoded = json.decode(res.body);
-      var dataList = jsonDataDecoded['data'];
-      // print("------------"+dataList.toString());
-
-      List data = dataList['data'] as List;
 
       if (res.statusCode == 200) {
-        // print("-----data-------" + data.toString());
-        print(res.statusCode);
-        // print("pressed.............");
-        return data.map((e) {
-          final map = e as Map<String, dynamic>;
-          return BloodRequestHistoryModel(
-            patientsName: map["patients_name"],
-            bloodGroup: map["blood_group"],
-            amountBag: map["amount_bag"],
-            date: map["date"],
-            time: map["time"],
-            healthIssue: map["health_issue"],
-            hospitalName: map["hospital_name"],
-            district: map["district"],
-            division: map["division"],
-            union: map["upazila"],
-            upazila: map["union"],
-            address: map["address"],
-            contactPersonName: map["contact_person_name"],
-            contactPersonPhone: map["contact_person_phone"],
-            note: map["note"],
-          );
-        }).toList();
+        final Map<String, dynamic> responseData = jsonDecode(res.body);
+        print(responseData);
+        return BloodRequestHistoryModel.fromJson(responseData);
       } else {
-        print("failed code${res.statusCode}");
-        print("failed body${res.body}");
+        print(res.statusCode);
+        print(res.body);
+        throw Exception('Failed to load blood request notification');
       }
+
+      // var jsonDataDecoded = json.decode(res.body);
+      // var dataList = jsonDataDecoded['data'];
+      // // print("------------"+dataList.toString());
+      //
+      // List data = dataList['data'] as List;
+
+      // if (res.statusCode == 200) {
+      //   // print("-----data-------" + data.toString());
+      //   print(res.statusCode);
+      //   // print("pressed.............");
+      //   return data.map((e) {
+      //     final map = e as Map<String, dynamic>;
+      //     return BloodRequestHistoryModel(
+      //       patientsName: map["patients_name"],
+      //       bloodGroup: map["blood_group"],
+      //       amountBag: map["amount_bag"],
+      //       date: map["date"],
+      //       time: map["time"],
+      //       healthIssue: map["health_issue"],
+      //       hospitalName: map["hospital_name"],
+      //       district: map["district"],
+      //       division: map["division"],
+      //       union: map["upazila"],
+      //       upazila: map["union"],
+      //       address: map["address"],
+      //       contactPersonName: map["contact_person_name"],
+      //       contactPersonPhone: map["contact_person_phone"],
+      //       note: map["note"],
+      //     );
+      //   }).toList();
+      // } else {
+      //   print("failed code${res.statusCode}");
+      //   print("failed body${res.body}");
+      // }
     } catch (e) {
       print("---"+e.toString());
     }
@@ -80,7 +90,7 @@ class HistoryController extends GetxController {
   }
 
   Future<List<BloodDonateHistory>> getHistoryDonate() async {
-    print("pressed.............1");
+    print("pressed.......1");
     print(token);
     try {
       String appUrl = "https://starsoftjpn.xyz/api/auth/blood-donor";

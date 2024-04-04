@@ -27,7 +27,7 @@ class UpdateProfileController extends GetxController {
   updateProfile() async {
     print("object");
    try{
-     String appUri = "https://starsoftjpn.xyz/api/auth/update-profile";
+     // String appUri = "https://starsoftjpn.xyz/api/auth/update-profile";
      var response = await http.post(
        Uri.parse(ApiUrls.profileUpdatePost),
        headers: {

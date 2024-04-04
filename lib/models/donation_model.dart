@@ -7,13 +7,13 @@ class DonationModel {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -79,34 +79,34 @@ class Data {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     bloodRequest = json['blood_request'] != null
-        ? new BloodRequest.fromJson(json['blood_request'])
+        ? BloodRequest.fromJson(json['blood_request'])
         : null;
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['created_by'] = this.createdBy;
-    data['user_id'] = this.userId;
-    data['blood_request_id'] = this.bloodRequestId;
-    data['blood_donor_id'] = this.bloodDonorId;
-    data['request_amount_bag'] = this.requestAmountBag;
-    data['approved_amount_bag'] = this.approvedAmountBag;
-    data['date'] = this.date;
-    data['sender_status'] = this.senderStatus;
-    data['receiver_status'] = this.receiverStatus;
-    data['sender_view_status'] = this.senderViewStatus;
-    data['receiver_view_status'] = this.receiverViewStatus;
-    data['created_by_user_id'] = this.createdByUserId;
-    data['updated_by_user_id'] = this.updatedByUserId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.bloodRequest != null) {
-      data['blood_request'] = this.bloodRequest!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['created_by'] = createdBy;
+    data['user_id'] = userId;
+    data['blood_request_id'] = bloodRequestId;
+    data['blood_donor_id'] = bloodDonorId;
+    data['request_amount_bag'] = requestAmountBag;
+    data['approved_amount_bag'] = approvedAmountBag;
+    data['date'] = date;
+    data['sender_status'] = senderStatus;
+    data['receiver_status'] = receiverStatus;
+    data['sender_view_status'] = senderViewStatus;
+    data['receiver_view_status'] = receiverViewStatus;
+    data['created_by_user_id'] = createdByUserId;
+    data['updated_by_user_id'] = updatedByUserId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (bloodRequest != null) {
+      data['blood_request'] = bloodRequest!.toJson();
     }
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
@@ -220,7 +220,7 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null? emailVerifiedAt;
+  Null emailVerifiedAt;
   String? image;
   String? profileVisibility;
   String? otp;
@@ -230,7 +230,7 @@ class User {
   String? donorProfileStatus;
   String? createdByUserId;
   String? updatedByUserId;
-  Null? deletedAt;
+  Null deletedAt;
   String? createdAt;
   String? updatedAt;
 

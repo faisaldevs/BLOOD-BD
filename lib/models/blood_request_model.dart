@@ -1,4 +1,29 @@
 class RequestBloodModel {
+  List<Data>? data;
+
+  RequestBloodModel({this.data});
+
+  RequestBloodModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+  }
+
+  get length => null;
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data {
   int? id;
   String? userId;
   String? patientsName;
@@ -23,7 +48,7 @@ class RequestBloodModel {
   String? updatedAt;
   User? user;
 
-  RequestBloodModel(
+  Data(
       {this.id,
         this.userId,
         this.patientsName,
@@ -48,7 +73,7 @@ class RequestBloodModel {
         this.updatedAt,
         this.user});
 
-  RequestBloodModel.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     patientsName = json['patients_name'];
@@ -112,15 +137,17 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null? emailVerifiedAt;
+  Null emailVerifiedAt;
   String? image;
   String? profileVisibility;
   String? otp;
   String? ipAddress;
   String? status;
+  String? donorStatus;
+  String? donorProfileStatus;
   String? createdByUserId;
   String? updatedByUserId;
-  Null? deletedAt;
+  Null deletedAt;
   String? createdAt;
   String? updatedAt;
 
@@ -137,6 +164,8 @@ class User {
         this.otp,
         this.ipAddress,
         this.status,
+        this.donorStatus,
+        this.donorProfileStatus,
         this.createdByUserId,
         this.updatedByUserId,
         this.deletedAt,
@@ -156,6 +185,8 @@ class User {
     otp = json['otp'];
     ipAddress = json['ip_address'];
     status = json['status'];
+    donorStatus = json['donor_status'];
+    donorProfileStatus = json['donor_profile_status'];
     createdByUserId = json['created_by_user_id'];
     updatedByUserId = json['updated_by_user_id'];
     deletedAt = json['deleted_at'];
@@ -177,6 +208,8 @@ class User {
     data['otp'] = this.otp;
     data['ip_address'] = this.ipAddress;
     data['status'] = this.status;
+    data['donor_status'] = this.donorStatus;
+    data['donor_profile_status'] = this.donorProfileStatus;
     data['created_by_user_id'] = this.createdByUserId;
     data['updated_by_user_id'] = this.updatedByUserId;
     data['deleted_at'] = this.deletedAt;

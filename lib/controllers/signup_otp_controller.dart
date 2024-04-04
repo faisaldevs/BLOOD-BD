@@ -12,11 +12,11 @@ class SignupOTPController extends GetxController {
 
    Future<void> otpValidate(TextEditingController numberController) async {
       print("object");
-      String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-otp-check";
+      // String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-otp-check";
       // if (formKey.currentState!.validate()) {
          print("object");
-         print("Number :"+numberController.text);
-         print("OTP :"+signupOtpController.text);
+         print("Number :${numberController.text}");
+         print("OTP :${signupOtpController.text}");
          print("object");
         try{
            var res = await http.post(Uri.parse("https://starsoftjpn.xyz/api/auth/register-otp-check"), body: {

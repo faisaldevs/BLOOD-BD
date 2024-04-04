@@ -18,7 +18,7 @@ class ChangePassController extends GetxController {
     print(confirmNewPassword.text);
     print("pressed");
    try{
-     String appUrl = "https://starsoftjpn.xyz/api/auth/change-password";
+     // String appUrl = "https://starsoftjpn.xyz/api/auth/change-password";
      var response = await http.post(
          Uri.parse(ApiUrls.changePasswordPost),
          headers: {

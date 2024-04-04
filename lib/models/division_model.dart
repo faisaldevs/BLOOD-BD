@@ -4,9 +4,9 @@ class DivisionModel {
   String? division;
   String? bndivision;
   String? slug;
-  Null? screma;
-  Null? metadescription;
-  Null? photo;
+  Null screma;
+  Null metadescription;
+  Null photo;
   String? status;
   String? view;
   String? createdAt;

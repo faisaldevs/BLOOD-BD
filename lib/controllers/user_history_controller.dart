@@ -23,7 +23,7 @@ class HistoryController extends GetxController {
   Future<BloodRequestHistoryModel> getHistoryRequest() async {
     print("pressed.............1");
     try {
-      String appUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
+      // String appUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
       // var res = await http.get(
       //   Uri.parse(appUrl),
       //   headers: {
@@ -93,7 +93,7 @@ class HistoryController extends GetxController {
     print("pressed.......1");
     print(token);
     try {
-      String appUrl = "https://starsoftjpn.xyz/api/auth/blood-donor";
+      // String appUrl = "https://starsoftjpn.xyz/api/auth/blood-donor";
       // var res = await http.get(
       //   Uri.parse(appUrl),
       //   headers: {

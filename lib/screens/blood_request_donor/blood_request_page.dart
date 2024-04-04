@@ -100,44 +100,68 @@ class FeedPage extends StatelessWidget {
         foregroundColor: Colors.white,
         title: const Text("Blood Request"),
       ),
-      body: FutureBuilder<List<RequestBloodModel>>(
-        future: controller.getRequestData(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            // List dataList = snapshot.data as List;
-            return ListView.builder(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, index) {
-                RequestBloodModel e = snapshot.data![index];
-                String contactPersonName = e.contactPersonName ?? "name";
-                String number = e.contactPersonPhone ?? "01*********";
-                String patientsName = e.patientsName ?? "Patient Name";
-                String healthIssue = e.healthIssue ?? "Health Issue";
-                String bloodAmount = e.amountBag ?? "Blood Amount";
-                String bloodType = e.bloodGroup ?? "Type";
-                String date = e.date ?? "date";
-                String time = e.time ?? "time";
-                String address = e.address ?? "address";
-                String note = e.note ?? "note";
+      body: FutureBuilder<RequestBloodModel>(
+          future: controller.getRequestData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return const Center(child: Text("Something went wrong..!!"));
+            }
 
-                return historyTile(
-                    contactPersonName,
-                    number,
-                    patientsName,
-                    healthIssue,
-                    bloodAmount,
-                    bloodType,
-                    date,
-                    time,
-                    address,
-                    note);
-              },
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
+            if (snapshot.hasData) {
+              final dataList = snapshot.data!;
+              return ListView.builder(
+                itemCount: dataList.length,
+                itemBuilder: (context, index) {
+                  final e = dataList.data?[index];
+                  String contactPersonName = e?.contactPersonName ?? "name";
+                  String number = e?.contactPersonPhone ?? "01*********";
+                  String patientsName = e?.patientsName ?? "Patient Name";
+                  String healthIssue = e?.healthIssue ?? "Health Issue";
+                  String bloodAmount = e?.amountBag ?? "Blood Amount";
+                  String bloodType = e?.bloodGroup ?? "Type";
+                  String date = e?.date ?? "date";
+                  String time = e?.time ?? "time";
+                  String address = e?.address ?? "address";
+                  String note = e?.note ?? "note";
+
+                  return historyTile(
+                      contactPersonName,
+                      number,
+                      patientsName,
+                      healthIssue,
+                      bloodAmount,
+                      bloodType,
+                      date,
+                      time,
+                      address,
+                      note);
+                },
+              );
+            } else {
+              return SizedBox(
+                height: Get.height,
+                width: Get.width,
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.search,
+                      size: 80,
+                      color: Colors.black26,
+                    ),
+                    Text(
+                      "No Data Found!",
+                      style: TextStyle(fontSize: 19, color: Colors.black26),
+                    ),
+                  ],
+                ),
+              );
+            }
+          }),
     );
   }
 
@@ -202,9 +226,13 @@ class FeedPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    Text("Number : $number",
-                        style: const TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold)),
+                    Text(
+                      "Number : $number",
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -253,16 +281,17 @@ class FeedPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
                         Get.to(DescriptionUi(
-                            contractPersonName: contactPersonName,
-                            contractPersonNumber: number,
-                            patientName: patientsName,
-                            healthIssue: healthIssue,
-                            bloodAmount: bloodAmount,
-                            bloodType: bloodType,
-                            address: address,
-                            date: date,
-                            time: time,
-                            note: note));
+                          contractPersonName: contactPersonName,
+                          contractPersonNumber: number,
+                          patientName: patientsName,
+                          healthIssue: healthIssue,
+                          bloodAmount: bloodAmount,
+                          bloodType: bloodType,
+                          address: address,
+                          date: date,
+                          time: time,
+                          note: note,
+                        ));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),

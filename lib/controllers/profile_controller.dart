@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/screens/profile/profile_page.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -25,7 +24,7 @@ class ProfileController extends GetxController {
     
     try {
       // loading.value = true;
-      String appUrl = "https://starsoftjpn.xyz/api/auth/profile";
+      // String appUrl = "https://starsoftjpn.xyz/api/auth/profile";
 
       var res = await http.get(
         Uri.parse(ApiUrls.profileGet),

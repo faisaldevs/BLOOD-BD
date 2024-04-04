@@ -1,10 +1,8 @@
-import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../controllers/user_history_controller.dart';
 import '../../models/blood_donate_history_model.dart';
 

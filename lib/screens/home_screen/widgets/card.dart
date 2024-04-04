@@ -63,7 +63,7 @@ import 'package:get/get.dart';
 import 'find_button.dart';
 
 class UrgentRequest extends StatelessWidget {
-  const UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType, required this.contractPersonName, required this.contractPersonNumber, required this.healthIssue, required this.bloodAmount, required this.time, required this.note, required this.requestId,});
+  const UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType, required this.contractPersonName, required this.contractPersonNumber, required this.healthIssue, required this.bloodAmount, required this.time, required this.note,  this.requestId,});
   final String patientsName;
   final String hospitalName;
   final String address;
@@ -75,7 +75,7 @@ class UrgentRequest extends StatelessWidget {
   final String bloodAmount;
   final String time;
   final String note;
-  final String requestId;
+  final String? requestId;
 
   @override
   Widget build(BuildContext context) {

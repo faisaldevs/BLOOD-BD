@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 10, right: 10, bottom: 10),
-                          child: FutureBuilder<List<RequestBloodModel>>(
+                          child: FutureBuilder<RequestBloodModel>(
                             future: bloodController.getRequestData(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
@@ -234,30 +234,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               }
 
                               if (snapshot.hasData) {
-                                // List dataList = snapshot.data as List;
+                                final dataList = snapshot.data!;
                                 return ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: 5,
                                   itemBuilder: (context, index) {
-                                    RequestBloodModel e = snapshot.data![index];
-                                    String requestId = e.id.toString();
+                                    final e = dataList.data?[index];
+                                    String? requestId = e?.id.toString();
                                     String contactPersonName =
-                                        e.contactPersonName ?? "name";
+                                        e?.contactPersonName ?? "name";
                                     String contactPersonNumber =
-                                        e.contactPersonPhone ?? "01*********";
+                                        e?.contactPersonPhone ?? "01*********";
                                     String patientsName =
-                                        e.patientsName ?? "Patient Name";
+                                        e?.patientsName ?? "Patient Name";
                                     String healthIssue =
-                                        e.healthIssue ?? "Health Issue";
+                                        e?.healthIssue ?? "Health Issue";
                                     String hospitalName =
-                                        e.hospitalName ?? "Hospital Name";
+                                        e?.hospitalName ?? "Hospital Name";
                                     String bloodAmount =
-                                        e.amountBag ?? "Blood Amount";
-                                    String bloodType = e.bloodGroup ?? "Type";
-                                    String date = e.date ?? "date";
-                                    String time = e.time ?? "time";
-                                    String address = e.address ?? "address";
-                                    String note = e.note ?? "note";
+                                        e?.amountBag ?? "Blood Amount";
+                                    String bloodType = e?.bloodGroup ?? "Type";
+                                    String date = e?.date ?? "date";
+                                    String time = e?.time ?? "time";
+                                    String address = e?.address ?? "address";
+                                    String note = e?.note ?? "note";
 
                                     return UrgentRequest(
                                       patientsName: patientsName,

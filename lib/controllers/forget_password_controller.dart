@@ -19,7 +19,7 @@ class ForgetPassController extends GetxController {
 
   numberValidate() async {
     print("object");
-    String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-by-phone";
+    // String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-by-phone";
     if (key.currentState!.validate()) {
       print("object");
       var res = await http
@@ -37,7 +37,7 @@ class ForgetPassController extends GetxController {
 
   otpValidate() async {
     print("object");
-    String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-otp-check";
+    // String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-otp-check";
     if (key.currentState!.validate()) {
       print("object");
       var res = await http.post(Uri.parse(ApiUrls.forgotPasswordOtpPost), body: {
@@ -57,7 +57,7 @@ class ForgetPassController extends GetxController {
 
   forgetValidation() async {
     print("object");
-    String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-update";
+    // String appUrl = "https://starsoftjpn.xyz/api/v1/forgot-password-update";
     if (key.currentState!.validate()) {
       print("object");
       var res = await http.post(Uri.parse(ApiUrls.forgotPasswordPost), body: {

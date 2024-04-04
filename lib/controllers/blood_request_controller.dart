@@ -18,38 +18,18 @@ class BloodRequestController extends GetxController{
   }
 
 
-  Future<List<RequestBloodModel>> getRequestData() async {
+  Future<RequestBloodModel> getRequestData() async {
     print("pressed.............1");
     try {
       // String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
       var res = await http.get(Uri.parse(ApiUrls.bloodRequestGetApi));
 
-      var jsonDataDecoded = json.decode(res.body);
-      List data = jsonDataDecoded['data'] as List;
       if (res.statusCode == 200) {
         if (kDebugMode) {
           print("200-status : ${res.body}");
         }
-        return data.map((e) {
-          final map = e as Map<String, dynamic>;
-          return RequestBloodModel(
-            patientsName: map["patients_name"],
-            bloodGroup: map["blood_group"],
-            amountBag : map["amount_bag"],
-            date: map["date"],
-            time: map["time"],
-            healthIssue: map["health_issue"],
-            hospitalName: map["hospital_name"],
-            district: map["district"],
-            division: map["division"],
-            union: map["upazila"],
-            upazila: map["union"],
-            address: map["address"],
-            contactPersonName: map["contact_person_name"],
-            contactPersonPhone: map["contact_person_phone"],
-            note: map["note"],
-          );
-        }).toList();
+        final Map<String, dynamic> responseData = jsonDecode(res.body);
+        return RequestBloodModel.fromJson(responseData);
 
       }
       else {

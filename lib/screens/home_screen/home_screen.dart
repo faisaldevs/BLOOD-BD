@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final ProfileController controller = Get.put(ProfileController());
 
   final BloodRequestController bloodController =
-  Get.put(BloodRequestController());
+      Get.put(BloodRequestController());
 
   @override
   void initState() {
@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // locationController.fetchDivisions();
     super.initState();
   }
+
   String? selectedDivision;
   String? selectedDistrict;
   String? selectedThana;
@@ -83,20 +84,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 10,
                     ),
                     Builder(
-                      builder: (context) =>
-                          InkWell(
-                            onTap: () {
-                              controller.profileData();
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 5),
-                              width: 30,
-                              height: 30,
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage(ImageLink.profile),
-                              ),
-                            ),
+                      builder: (context) => InkWell(
+                        onTap: () {
+                          controller.profileData();
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 5),
+                          width: 30,
+                          height: 30,
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(ImageLink.profile),
                           ),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                             borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
+                                const BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Form(
                             key: homeController.formKey,
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 SizedBox(height: Get.height * .05),
                 // CardSections(),
-                 HomeScreenIcons(),
+                HomeScreenIcons(),
                 SizedBox(height: Get.height * .06),
                 Container(
                   height: Get.height * .24,
@@ -240,9 +240,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemCount: 5,
                                   itemBuilder: (context, index) {
                                     RequestBloodModel e = snapshot.data![index];
+                                    String requestId = e.id.toString();
                                     String contactPersonName =
                                         e.contactPersonName ?? "name";
-                                    String number =
+                                    String contactPersonNumber =
                                         e.contactPersonPhone ?? "01*********";
                                     String patientsName =
                                         e.patientsName ?? "Patient Name";
@@ -264,11 +265,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       address: address,
                                       date: date,
                                       bloodType: bloodType,
+                                      contractPersonName: contactPersonName,
+                                      contractPersonNumber: contactPersonNumber,
+                                      healthIssue: healthIssue,
+                                      bloodAmount: bloodAmount,
+                                      time: time,
+                                      note: note, requestId: requestId,
                                     );
                                   },
                                 );
-                              }
-                              else {
+                              } else {
                                 return const Text("Something Went Wrong..");
                               }
                             },
@@ -289,4 +295,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

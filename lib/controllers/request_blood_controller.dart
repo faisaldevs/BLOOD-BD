@@ -202,8 +202,7 @@ class RequestBloodController extends GetxController {
     throw Exception("Loading failed !!!");
   }
 
-  confirmBlood(
-      String bloodRequestId, String bloodDonorId, String bloodAmount) async {
+  confirmBlood(String bloodRequestId, String bloodDonorId, String bloodAmount) async {
     print("validate");
     print(bloodRequestId);
     print(bloodDonorId);
@@ -226,5 +225,10 @@ class RequestBloodController extends GetxController {
     print(res.body);
 
     if (res.statusCode == 200) {}
+  }
+
+  urgentRequest(){
+
+
   }
 }

@@ -55,18 +55,27 @@
 //   }
 // }
 
+import 'package:blood_bd/screens/blood_request_donor/add_request.dart';
+import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'find_button.dart';
 
 class UrgentRequest extends StatelessWidget {
-  const UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType});
+  const UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType, required this.contractPersonName, required this.contractPersonNumber, required this.healthIssue, required this.bloodAmount, required this.time, required this.note, required this.requestId,});
   final String patientsName;
   final String hospitalName;
   final String address;
   final String date;
   final String bloodType;
+  final String contractPersonName;
+  final String contractPersonNumber;
+  final String healthIssue;
+  final String bloodAmount;
+  final String time;
+  final String note;
+  final String requestId;
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +207,25 @@ class UrgentRequest extends StatelessWidget {
                         //     onPressed: () {},
                         //     child: const Text("Urgent")),
                         child: FindDonorBtn(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to( DescriptionUi(
+                              patientName: patientsName,
+                             healthIssue : healthIssue,
+                             address : address,
+                             date : date,
+                             time : time,
+                             bloodType : bloodType,
+                             bloodAmount : bloodAmount,
+                             buttonText : "confirm",
+                              buttonFunction: (){
+                                Get.to(RequestBlood(requestId: requestId,));
+                              },
+                              contractPersonName : contractPersonName,
+                              contractPersonNumber : contractPersonNumber,
+                              note: note,
+
+                            ));
+                          },
                           child: 'Urgent',
                         ),
                       ),

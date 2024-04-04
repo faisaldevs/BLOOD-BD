@@ -1,5 +1,4 @@
 import 'package:blood_bd/utils/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +27,8 @@ class _ProfilePageState extends State<ProfilePage> {
       Get.put(DrawerProfileController());
   ProfileController controller = Get.put(ProfileController());
 
+  bool switchValue = true;
+
   @override
   Widget build(BuildContext context) {
     var name = controller.name;
@@ -37,21 +38,6 @@ class _ProfilePageState extends State<ProfilePage> {
     var gender = getStorage.read("gender") ?? "Male";
     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
     var width = Get.width;
-    print("Status : $status");
-    bool switchValue = true;
-    if (status == 1.toString()) {
-      setState(() {
-        switchValue = true;
-      });
-    } else {
-      setState(() {
-        switchValue = false;
-      });
-    }
-    var status12 = GetStorage().read("statusValue");
-    if (kDebugMode) {
-      print(controller.switchValue.value);
-    }
     return Scaffold(
       backgroundColor: AppTheme.primary,
       body: Padding(
@@ -86,17 +72,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       foregroundColor: AppTheme.textColorRed,
                       titleSpacing: 0,
                       actions: [
-                    CupertinoSwitch(
-                            value: 1.toString() == status? true : false,
-                            onChanged: (value) {
-                              setState(() {
-
-                              });
+                        Switch.adaptive(
+                          value: status == 1.toString()
+                              ? switchValue
+                              : !switchValue,
+                          onChanged: (value) {
+                            controller.activeStatus(value);
+                            setState(() {
+                              switchValue = value;
+                            });
+                            if (kDebugMode) {
                               print(value);
-                              controller.activeStatus(value);
-                            },
-                          ),
-
+                            }
+                          },
+                        ),
                       ],
                     ),
                     Row(

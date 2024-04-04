@@ -14,13 +14,14 @@ import '../global_widget/custom_timePicker.dart';
 import 'package:http/http.dart' as http;
 
 class RequestBlood extends StatefulWidget {
-  const RequestBlood({super.key});
-
+  const RequestBlood({super.key, this.requestId});
+  final String? requestId;
   @override
   State<RequestBlood> createState() => _RequestBloodState();
 }
 
 class _RequestBloodState extends State<RequestBlood> {
+
   RequestBloodController controller = Get.put(RequestBloodController());
   List<String> divisions = [];
   List<String> districts = [];
@@ -433,10 +434,14 @@ class _RequestBloodState extends State<RequestBlood> {
         width: double.infinity * .9,
         child: CustomButton(
             onPressed: () {
-              controller.onSaveRqBlood();
-              // if(controller.requestBloodKey.currentState!.validate()){
-              //   print("validate??");
-              // }
+
+              if(widget.requestId == null){
+                controller.onSaveRqBlood();
+              }
+             else{
+               print("object");
+             }
+
             },
             child: const Text(
               "Sign Up",

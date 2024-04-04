@@ -21,6 +21,14 @@ class _HistoryRequestState extends State<HistoryRequest> {
       body: FutureBuilder<BloodRequestHistoryModel>(
         future: controller.getHistoryRequest(),
         builder: (context, snapshot) {
+
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          if(snapshot.hasError){
+            return const Center(child: Text("Something went wrong"),);
+          }
+
           if (snapshot.hasData) {
             final dataList = snapshot.data!;
             return ListView.builder(
@@ -52,7 +60,25 @@ class _HistoryRequestState extends State<HistoryRequest> {
               },
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return SizedBox(
+              height: Get.height,
+              width: Get.width,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.search,
+                    size: 80,
+                    color: Colors.black26,
+                  ),
+                  Text(
+                    "No Data Found!",
+                    style: TextStyle(fontSize: 19, color: Colors.black26),
+                  ),
+                ],
+              ),
+            );
           }
         },
       ),

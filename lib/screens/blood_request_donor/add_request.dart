@@ -264,7 +264,9 @@ class _RequestBloodState extends State<RequestBlood> {
                           setState(() {
                             selectedDivision = newValue;
                             selectedDistrict = null;
-                            selectedThana = null; // Reset selected thana
+                            selectedThana = null;
+                            districts.clear();
+                            thanas.clear();
                             fetchDistricts(
                                 divisions.indexOf(selectedDivision!) + 1);
                           });
@@ -292,7 +294,8 @@ class _RequestBloodState extends State<RequestBlood> {
                         controller.district = newValue;
                         setState(() {
                           selectedDistrict = newValue;
-                          selectedThana = null; // Reset selected thana
+                          selectedThana = null;
+                          thanas.clear();
                           fetchThanas(districts.indexOf(selectedDistrict!) + 1);
                         });
                       },

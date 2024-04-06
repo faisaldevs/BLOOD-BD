@@ -58,9 +58,9 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: AppTheme.textFieldColor,
         filled: true,
-        suffixIcon: GestureDetector(
-            onTap: suffixFunction,
-            child: Icon(
+        suffixIcon: IconButton(
+            onPressed : suffixFunction,
+            icon: Icon(
               suffixIcon,
               size: 28,
             )),

@@ -27,7 +27,7 @@ class LoginController extends GetxController {
   RxBool show = false.obs;
 
   showFunction() {
-    show.value = !show.value;
+    // show.value = !show.value;
   }
 
   Future<Text> loginForm() async {

@@ -29,6 +29,7 @@ class BecomeDonorController extends GetxController {
 
 
   donorValidate()async{
+    print("object");
     try{
       var res = await http.get(
           Uri.parse(ApiUrls.profileGet),
@@ -37,9 +38,14 @@ class BecomeDonorController extends GetxController {
             "Authorization" : token,
           }
       );
+      print("object");
+      print(res.statusCode);
+      print(res.body);
+
 
       if(res.statusCode == 200){
-        var data  = jsonDecode(res.body);
+        var body  = jsonDecode(res.body);
+        var data = body["data"];
 
         String status = data["donor_profile_status"];
         if (kDebugMode) {
@@ -49,11 +55,10 @@ class BecomeDonorController extends GetxController {
         if(status == 0.toString()){
           Get.to(const BecomeDonor());
         }else{
-          Get.to(const DonorProfile());
+          Get.to( DonorProfile());
           // Get.to(const BecomeDonor());
 
         }
-
 
       }
 
@@ -128,5 +133,68 @@ class BecomeDonorController extends GetxController {
       // Get.snackbar("Received", "Donor Data Received");
       // print("object");
     }
+
+
+
+
+  String? id;
+  String? userId;
+  String? nameDonor;
+  String? bloodGroupDonor;
+  String? amountBagDonor;
+  String? healthIssueDonor;
+  String? divisionDonor;
+  String? districtDonor;
+  String? upazilaDonor ;
+  String? unionDonor ;
+  String? addressDonor;
+  String? contact_person_nameDonor ;
+  String? contact_person_phoneDonor ;
+  String? last_donate_date;
+
+  donorProfile()async{
+    print("object");
+    try{
+      var res = await http.get(
+          Uri.parse(ApiUrls.profileGet),
+          headers: {
+            "Accept" : "application/json",
+            "Authorization" : token,
+          }
+      );
+      print("object");
+      print(res.statusCode);
+      print(res.body);
+
+
+      if(res.statusCode == 200){
+        var body  = jsonDecode(res.body);
+
+        // return ProfileModel.fromJson(body);
+        var data = body["blood_donor"];
+
+        id = data["id"];
+        userId = data["user_id"];
+        bloodGroupDonor = data["blood_group"];
+        amountBagDonor = data["amount_bag"];
+        healthIssueDonor = data["health_issue"];
+        divisionDonor = data["division"];
+        districtDonor = data["district"];
+        upazilaDonor  = data["upazila"];
+        unionDonor  = data["union"];
+        addressDonor = data["address"];
+        contact_person_nameDonor  = data["contact_person_name"];
+        contact_person_phoneDonor  = data["contact_person_phone"];
+        last_donate_date = data["last_donate_date"];
+
+        var user = body["data"];
+
+        nameDonor = user["name"];
+      }
+
+    }catch(e){
+      print("Error : $e");
+    }
+  }
   }
 // }

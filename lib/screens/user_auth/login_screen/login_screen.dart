@@ -23,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("object");
     return Scaffold(
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
@@ -77,7 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     textInputType: TextInputType.number,
                     validate: (number) {
                       if (number!.isEmpty) {
-                        return "Password required";
+                        return "Number required";
+                      }else if (number.length != 11) {
+                        return "Number must be 8 Character";
                       }
                       return null;
                     },
@@ -108,11 +109,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       suffixFunction: () {
                         _loginController.visibility();
                       },
-                      suffixIcon: _loginController.show.value
-                          ? _loginController.isVisible.value
-                              ? Icons.visibility_off
-                              : Icons.visibility
-                          : null,
+                      suffixIcon: _loginController.isVisible.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                     ),
                   ),
 
@@ -169,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   TextButton(
                       onPressed: () {
-                        Get.to(SignupScreen());
+                        Get.to(const SignupScreen());
                       },
                       style: ButtonStyle(
                         backgroundColor:

@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../screens/blood_request_donor/request_blood/request_blood_filter_page.dart';
+import '../utils/app_routes.dart';
 
 class RequestBloodController extends GetxController {
   var token = GetStorage().read("token") ?? "";
@@ -38,6 +39,7 @@ class RequestBloodController extends GetxController {
 
     print(bloodType);
     print(dateController.text);
+    print(timeController.text);
     print(division.toString());
     print(district.toString());
     print(thana.toString());
@@ -56,9 +58,9 @@ class RequestBloodController extends GetxController {
           "patients_name": patientNameController.text,
           "blood_group": bloodType,
           "amount_bag": bloodAmount.toString(),
-          // "date": dateController.text,
+          "date": dateController.text,
           "hospital_name": hospitalController.text,
-          "date": "2024-01-06",
+          // "date": "2024-01-06",
           "time": "16:14:00",
           "health_issue": healthIssue,
           "division": division,
@@ -224,7 +226,9 @@ class RequestBloodController extends GetxController {
     print(res.statusCode);
     print(res.body);
 
-    if (res.statusCode == 200) {}
+    if (res.statusCode == 200) {
+
+    }
   }
 
   urgentRequest(){

@@ -40,7 +40,7 @@ class SignupController extends GetxController {
   RxBool show = false.obs;
 
   showFunction() {
-    show.value = !show.value;
+    // show.value = !show.value;
   }
 
   Future signUpForm() async {
@@ -68,9 +68,9 @@ class SignupController extends GetxController {
       try {
         var response = await post(Uri.parse(ApiUrls.signUpPost), body: {
           "name": nameController.text,
-          "username": "numberController.256",
+          // "username": "numberController.256",
           "phone": numberController.text,
-          "email": "numberController.text852",
+          // "email": "numberController.text852",
           "blood_group": bloodType,
           "date_of_birth": dateController.text,
           "gender": gender,

@@ -1,16 +1,13 @@
 import 'dart:convert';
-
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:blood_bd/utils/app_routes.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../controllers/signup_controller.dart';
 import '../../../data_list/data_list.dart';
-
 import '../../../utils/app_colors.dart';
 import '../../global_widget/custom_birthDate.dart';
 import '../../global_widget/custom_button.dart';
@@ -30,10 +27,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
   List<String> divisions = [];
   List<String> districts = [];
-  List<String> thanas = []; // New list for thanas
+  List<String> thanas = [];
   String? selectedDivision;
   String? selectedDistrict;
-  String? selectedThana; // New variable for selected thana
+  String? selectedThana;
 
   Future<void> fetchDivisions() async {
     signupController.fetching.value = true;
@@ -56,7 +53,6 @@ class _SignupScreenState extends State<SignupScreen> {
       signupController.fetching.value = false;
       throw Exception('Failed to load divisions: $e');
     }
-
   }
 
   Future<void> fetchDistricts(int divisionId) async {
@@ -132,7 +128,9 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("test");
+    if (kDebugMode) {
+      print("test");
+    }
     return Scaffold(
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
@@ -193,17 +191,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         label: 'Gender',
                         onChanged: (value) {
                           signupController.gender = value;
-                          print(value);
                         },
                       ),
                     ),
-
-                    //CustomDropdown(
-                    //                       // controller: signupController.genderController,
-                    //                       dropDownList: DataList.genderListData,
-                    //                       label: 'Gender', onChanged: () {},
-                    //                     )
-
                     const SizedBox(
                       width: 10,
                     ),
@@ -251,36 +241,38 @@ class _SignupScreenState extends State<SignupScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: signupController.fetching.value ?DropdownButtonFormField(
-
-                        decoration: inputDecoration("Select Division"),
-                        onChanged: (newValue) {
-                        },
-                        items: null,
-                      ) : DropdownButtonFormField(
-                        value: selectedDivision,
-                        decoration: inputDecoration("Select Division"),
-                        onChanged: (newValue) {
-                          signupController.division = newValue;
-                          setState(() {
-                            selectedDivision = newValue;
-                            selectedDistrict = null;
-                            selectedThana = null; // Reset selected thana
-                            fetchDistricts(
-                                divisions.indexOf(selectedDivision!) + 1);
-                          });
-                        },
-                        items: divisions
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: TextStyle(color: Colors.red),
+                      child: signupController.fetching.value
+                          ? DropdownButtonFormField(
+                              decoration: inputDecoration("Select Division"),
+                              onChanged: (newValue) {},
+                              items: null,
+                            )
+                          : DropdownButtonFormField(
+                              value: selectedDivision,
+                              decoration: inputDecoration("Select Division"),
+                              onChanged: (newValue) {
+                                signupController.division = newValue;
+                                setState(() {
+                                  selectedDivision = newValue;
+                                  selectedDistrict = null;
+                                  selectedThana = null;
+                                  districts.clear();
+                                  thanas.clear();
+                                  fetchDistricts(
+                                      divisions.indexOf(selectedDivision!) + 1);
+                                });
+                              },
+                              items: divisions.map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: const TextStyle(color: Colors.red),
+                                  ),
+                                );
+                              }).toList(),
                             ),
-                          );
-                        }).toList(),
-                      ),
                     ),
                     const SizedBox(
                       width: 10,
@@ -293,7 +285,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         signupController.district = newValue;
                         setState(() {
                           selectedDistrict = newValue;
-                          selectedThana = null; // Reset selected thana
+                          selectedThana = null;
+                          thanas.clear();
                           fetchThanas(districts.indexOf(selectedDistrict!) + 1);
                         });
                       },
@@ -303,7 +296,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.red),
+                            style: const TextStyle(color: Colors.red),
                           ),
                         );
                       }).toList(),
@@ -330,7 +323,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.red),
+                            style: const TextStyle(color: Colors.red),
                           ),
                         );
                       }).toList(),
@@ -353,7 +346,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
                 CustomTextFormField(
                   controller: signupController.addressController,
-                  hintText: "",
                   textInputType: TextInputType.text,
                   validate: (address) {
                     if (address!.isEmpty) {
@@ -370,14 +362,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 //  ------- Mobile Field --------------
                 CustomTextFormField(
                   controller: signupController.numberController,
-                  hintText: "",
                   length: 11,
                   textInputType: TextInputType.number,
                   validate: (number) {
                     if (number!.isEmpty) {
                       return "Mobile number is required";
                     } else if (number.length != 11) {
-                      return "Incorrect mobile number!!";
+                      return "Number must be 8 Character";
                     }
                     return null;
                   },
@@ -399,6 +390,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     validate: (pass) {
                       if (pass!.isEmpty) {
                         return "Password required";
+                      } else if (pass.length < 7) {
+                        return "Password must be 8 Character";
                       }
                       return null;
                     },
@@ -409,24 +402,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     suffixFunction: () {
                       signupController.visibility();
                     },
-                    suffixIcon:
-                        signupController.show.value ? Icons.visibility : null,
+                    suffixIcon: signupController.isVisible.value
+                        ? Icons.visibility
+                        : Icons.visibility_off,
                   ),
                 ),
-                // CustomTextFormField(
-                //   controller: signupController.passwordController,
-                //   hintText: "",
-                //   textInputType: TextInputType.text,
-                //   validate: (pass) {
-                //     if (pass!.isEmpty) {
-                //       return "Mobile number is required";
-                //     } else if (pass.length < 7) {
-                //       return "Password must be 8 Character";
-                //     }
-                //     return null;
-                //   },
-                //   labelText: "Password",
-                // ),
 
                 //  ------- Signup Button --------------
 

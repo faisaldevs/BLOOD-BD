@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../../../controllers/request_blood_controller.dart';
 import '../../../utils/app_colors.dart';
+import '../../../utils/app_routes.dart';
 
 class FilterPage extends StatelessWidget {
   FilterPage(
@@ -41,6 +42,12 @@ class FilterPage extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
         title: const Text("Blood Request"),
+        leading: InkWell(
+          onTap: () =>  Get.offAllNamed(home),
+          child: const Icon(
+            Icons.arrow_back_ios,
+          ),
+        ),
       ),
       body: FutureBuilder<List<DonorSearch>>(
         future: controller.donorSearch(),

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
 
-   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
    late final String division;
    late final String district;
    late final String thana;
@@ -17,17 +17,17 @@ class HomeController extends GetxController {
   }
 
 
-  findDonor(){
-
-    if(formKey.currentState!.validate()){
-
-      print(division);
-      print(district);
-      print(thana);
-      print(bloodType);
-    }
-
-  }
+  // findDonor(){
+  //
+  //   if(formKey.currentState!.validate()){
+  //
+  //     print(division);
+  //     print(district);
+  //     print(thana);
+  //     print(bloodType);
+  //   }
+  //
+  // }
 
 
   //------------------Nav bar----------------

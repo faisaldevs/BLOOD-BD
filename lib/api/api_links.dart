@@ -21,6 +21,7 @@ static const String live = "https://starsoftjpn.xyz/api";
   static const String bloodRequestNotificationReceiverStatusPost = "$auth/update-blood-request-receiver-status";
   static const String bloodDonorGet = "$auth/blood-donor";
   static const String bloodDonorPost = "$auth/blood-donor";
+  static const String bloodDonorWithSearchPost = "$auth/blood-donor-with-search";
   static const String bloodDonorUpdatePost = "$auth/blood-donor-update";
 
 

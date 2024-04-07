@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:blood_bd/controllers/find_donor_controller.dart';
 import 'package:blood_bd/controllers/location_controller.dart';
 import 'package:blood_bd/data_list/data_list.dart';
+import 'package:blood_bd/screens/home_screen/widgets/find_donor_list.dart';
 import 'package:blood_bd/screens/home_screen/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +12,7 @@ import '../../../utils/app_colors.dart';
 import 'find_button.dart';
 
 class FindDonorUi extends StatefulWidget {
-  FindDonorUi({super.key});
+  const FindDonorUi({super.key});
 
   @override
   State<FindDonorUi> createState() => _FindDonorUiState();
@@ -18,6 +20,11 @@ class FindDonorUi extends StatefulWidget {
 
 class _FindDonorUiState extends State<FindDonorUi> {
   final LocationController controller = Get.put(LocationController());
+final cnt = Get.put(FindDonorController());
+
+String bloodType = "";
+String division = "";
+String district = "";
 
   bool loading = false;
 
@@ -125,85 +132,116 @@ class _FindDonorUiState extends State<FindDonorUi> {
     );
   }
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: TextFieldWidget(
-                label: 'Blood Group',
-                dropDownList: DataList.bloodListData,
-                onChanged: (value) {},
+    return Form(
+      key: formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: TextFieldWidget(
+                  label: 'Blood Group',
+                  dropDownList: DataList.bloodListData,
+                  onChanged: (value) {
+                    bloodType = value;
+                  },
+                ),
               ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: TextFieldApi(
-                value: selectedDivision,
-                label: "Select Division",
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: TextFieldApi(
+                  value: selectedDivision,
+                  label: "Select Division",
+                  onChanged: (newValue) {
+                    division = newValue;
+                    setState(() {
+                      selectedDivision = newValue;
+                      selectedDistrict = null;
+                      districts.clear();
+                      fetchDistricts(divisions.indexOf(selectedDivision!) + 1);
+                    });
+                  },
+                  items: divisions.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.red, fontSize: 18.sp),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: TextFieldApi(
+                label: "Select District",
+                value: selectedDistrict,
                 onChanged: (newValue) {
+                  district = newValue;
+                  // signupController.district = newValue;
                   setState(() {
-                    selectedDivision = newValue;
-                    selectedDistrict = null;
-                    districts.clear();
-                    fetchDistricts(divisions.indexOf(selectedDivision!) + 1);
+                    selectedDistrict = newValue;
+                    selectedThana = null; // Reset selected thana
+                    fetchThanas(districts.indexOf(selectedDistrict!) + 1);
                   });
                 },
-                items: divisions.map<DropdownMenuItem<String>>((String value) {
+                items: districts.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(
                       value,
-                      style: TextStyle(color: Colors.red, fontSize: 18.sp),
+                      style: const TextStyle(
+                        color: Colors.red,
+                      ),
                     ),
                   );
                 }).toList(),
+              )),
+              const SizedBox(
+                width: 10,
               ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(
-                child: TextFieldApi(
-              label: "Select District",
-              value: selectedDistrict,
-              onChanged: (newValue) {
-                // signupController.district = newValue;
-                setState(() {
-                  selectedDistrict = newValue;
-                  selectedThana = null; // Reset selected thana
-                  fetchThanas(districts.indexOf(selectedDistrict!) + 1);
-                });
-              },
-              items: districts.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: const TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                );
-              }).toList(),
-            )),
-            const SizedBox(
-              width: 10,
-            ),
-          ],
-        ),
-        FindDonorBtn(
-          onPressed: () {},
-          child: "Find Donor",
-        ),
-      ],
+            ],
+          ),
+          FindDonorBtn(
+            onPressed: () {
+             if(bloodType != "" && division != "" && district != "" ){
+               Get.to(FindDonorListPage(bloodType: bloodType, division: division, district: district));
+             }else{
+               return Get.rawSnackbar(
+                   messageText: const Text(
+                       'PLEASE FILL ALL DROPDOWNS',
+                       style: TextStyle(
+                           color: Colors.white,
+                           fontSize: 14
+                       )
+                   ),
+                   isDismissible: false,
+                   duration: const Duration(seconds: 2),
+                   backgroundColor: Colors.red[400]!,
+                   icon : const Icon(Icons.error_outline, color: Colors.white, size: 35,),
+                   margin: EdgeInsets.zero,
+                   snackStyle: SnackStyle.GROUNDED
+               );
+             }
+              // cnt.getFindDonor(bloodType,division,district);
+
+            },
+            child: "Find Donor",
+          ),
+        ],
+      ),
     );
   }
 }

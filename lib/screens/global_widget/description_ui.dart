@@ -20,8 +20,12 @@ class DescriptionUi extends StatelessWidget {
       this.time,
       this.note,
       this.buttonText,
-      this.buttonFunction});
+      this.buttonFunction,
+      this.lastDonateDate,
+      this.division,
+      this.district, this.id});
 
+  final String? id;
   final String? contractPersonName;
   final String? contractPersonNumber;
   final String? patientName;
@@ -30,6 +34,9 @@ class DescriptionUi extends StatelessWidget {
   final String? bloodType;
   final String? address;
   final String? date;
+  final String? lastDonateDate;
+  final String? division;
+  final String? district;
   final String? time;
   final String? note;
   final String? buttonText;
@@ -131,6 +138,10 @@ class DescriptionUi extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 16,
                             )),
+                        Text("Last Donate Date : $lastDonateDate",
+                            style: const TextStyle(
+                              fontSize: 16,
+                            )),
                       ],
                     ),
                     Column(
@@ -162,8 +173,9 @@ class DescriptionUi extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      Text("Division : $division"),
+                      Text("District : $district"),
                       Text("Address : $address"),
-                      Text("Date & Time : $date$time"),
                     ],
                   ),
                   const Divider(),

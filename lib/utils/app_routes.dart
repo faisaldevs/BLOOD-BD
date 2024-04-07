@@ -40,7 +40,7 @@ final pages = [
 
   //-------------App Screens---------------------------
 
-  customPage(name: home, page: HomeScreen()),
+  customPage(name: home, page: const HomeScreen()),
   customPage(name: searchDonor, page: const BecomeDonor()),
   customPage(name: bloodHeroes, page:  BloodHeroes()),
   customPage(name: requestBlood, page: const RequestBlood()),

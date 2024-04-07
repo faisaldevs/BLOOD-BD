@@ -289,7 +289,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(color: Colors.red),
+                                style: const TextStyle(color: Colors.red),
                               ),
                             );
                           }).toList(),
@@ -316,7 +316,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(color: Colors.red),
+                                style: const TextStyle(color: Colors.red),
                               ),
                             );
                           }).toList(),

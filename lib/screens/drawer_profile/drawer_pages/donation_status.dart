@@ -183,15 +183,15 @@ class DonationStatus extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Patient's Name : $patientsName",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                         )),
                     Text("Health Issue : $healthIssue",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                         )),
                     Text("Blood Required : $bloodAmount",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                         )),
                   ],
@@ -206,9 +206,9 @@ class DonationStatus extends StatelessWidget {
                           color: Colors.red,
                           borderRadius: BorderRadius.all(Radius.circular(50))),
                       child: Text(
-                        "$bloodType",
+                        bloodType,
                         // dataList[index]["patient_name"],
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                     InkWell(

@@ -70,7 +70,7 @@ class FilterPage extends StatelessWidget {
                 String address = e.address ?? "address";
                 // String note = e.note ?? "note";
 
-                return HistoryTile(
+                return historyTile(
                   bloodDonorId,
                   contactPersonName,
                   number,
@@ -89,7 +89,7 @@ class FilterPage extends StatelessWidget {
     );
   }
 
-  Widget HistoryTile(
+  Widget historyTile(
     String bloodDonorId,
     String contactPersonName,
     String contactPersonNumber,
@@ -222,7 +222,7 @@ class FilterPage extends StatelessWidget {
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child: Text("Show more"),
+                        child: const Text("Show more"),
                       ),
                     )
                   ],

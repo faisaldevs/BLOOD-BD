@@ -7,11 +7,11 @@ import '../screens/user_auth/signup_screen/signup_screens.dart';
 
 class WelcomeController extends GetxController {
   signupBtn() async {
-    Get.to(SignupScreen());
+    Get.to(const SignupScreen());
   }
 
   loginBtn() async {
-    Get.to( LoginScreen());
+    Get.to( const LoginScreen());
   }
 
   List<String> imageUrls = [

@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(20)),
                           ),
-                          child: FindDonorUi(),
+                          child: const FindDonorUi(),
                         ),
                       ),
                     ],

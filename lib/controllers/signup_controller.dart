@@ -142,7 +142,7 @@ class SignupController extends GetxController {
         isSignup.value = false;
 
         if (kDebugMode) {
-          print("----" + e.toString());
+          print("----$e");
         }
       }
 

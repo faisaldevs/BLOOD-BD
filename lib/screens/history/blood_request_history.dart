@@ -110,7 +110,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
     return Container(
       color: AppTheme.primary,
       padding: const EdgeInsets.all(8),
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       width: Get.width,
       child: Column(
         children: [

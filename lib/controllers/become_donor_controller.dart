@@ -55,7 +55,7 @@ class BecomeDonorController extends GetxController {
         if(status == 0.toString()){
           Get.to(const BecomeDonor());
         }else{
-          Get.to( DonorProfile());
+          Get.to( const DonorProfile());
           // Get.to(const BecomeDonor());
 
         }

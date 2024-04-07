@@ -84,7 +84,7 @@ class HistoryController extends GetxController {
       //   print("failed body${res.body}");
       // }
     } catch (e) {
-      print("---"+e.toString());
+      print("---$e");
     }
     throw Exception("Loading failed !!!");
   }
@@ -144,7 +144,7 @@ class HistoryController extends GetxController {
         print("failed body${res.body}");
       }
     } catch (e) {
-      print("---"+e.toString());
+      print("---$e");
     }
     throw Exception("Loading failed !!!");
   }

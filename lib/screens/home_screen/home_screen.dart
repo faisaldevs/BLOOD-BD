@@ -199,9 +199,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: const Text(
                                   "View All",
                                   style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.red),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                  ),
                                 ),
                               ),
                             ],
@@ -267,12 +268,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       healthIssue: healthIssue,
                                       bloodAmount: bloodAmount,
                                       time: time,
-                                      note: note, requestId: requestId,
+                                      note: note,
+                                      requestId: requestId,
                                     );
                                   },
                                 );
                               } else {
-                                return const Text("Something Went Wrong..");
+                                return const Text("No data found..");
                               }
                             },
                           ),

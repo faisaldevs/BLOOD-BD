@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../../../controllers/find_donor_controller.dart';
 import '../../global_widget/description_ui.dart';
 

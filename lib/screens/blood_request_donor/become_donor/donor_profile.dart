@@ -6,7 +6,7 @@ import '../../../controllers/become_donor_controller.dart';
 import '../../../utils/app_colors.dart';
 
 class DonorProfile extends StatefulWidget {
-   DonorProfile({super.key});
+   const DonorProfile({super.key});
 
   @override
   State<DonorProfile> createState() => _DonorProfileState();
@@ -51,14 +51,14 @@ class _DonorProfileState extends State<DonorProfile> {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                   width: Get.width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.redAccent,
                       borderRadius: BorderRadius.all(Radius.circular(16))),
                   child: Text(
-                    "Name : " + name,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    "Name : $name",
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(
@@ -68,7 +68,7 @@ class _DonorProfileState extends State<DonorProfile> {
                   children: [
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                         width: Get.width,
                         decoration: const BoxDecoration(
@@ -86,7 +86,7 @@ class _DonorProfileState extends State<DonorProfile> {
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(left: 5),
+                        margin: const EdgeInsets.only(left: 5),
                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                         width: Get.width,
                         decoration: const BoxDecoration(
@@ -108,7 +108,7 @@ class _DonorProfileState extends State<DonorProfile> {
                   children: [
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                         width: Get.width,
                         decoration: const BoxDecoration(
@@ -126,7 +126,7 @@ class _DonorProfileState extends State<DonorProfile> {
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(left: 5),
+                        margin: const EdgeInsets.only(left: 5),
                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                         width: Get.width,
                         decoration: const BoxDecoration(
@@ -148,7 +148,7 @@ class _DonorProfileState extends State<DonorProfile> {
                   children: [
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                         width: Get.width,
                         decoration: const BoxDecoration(
@@ -166,7 +166,7 @@ class _DonorProfileState extends State<DonorProfile> {
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(left: 5),
+                        margin: const EdgeInsets.only(left: 5),
                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                         width: Get.width,
                         decoration: const BoxDecoration(

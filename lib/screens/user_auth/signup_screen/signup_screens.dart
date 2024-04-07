@@ -317,8 +317,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           selectedThana = newValue;
                         });
                       },
-                      items:
-                          thanas.map<DropdownMenuItem<String>>((String value) {
+                      items: thanas.map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(
@@ -390,8 +389,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     validate: (pass) {
                       if (pass!.isEmpty) {
                         return "Password required";
-                      } else if (pass.length < 7) {
-                        return "Password must be 8 Character";
+                      } else if (pass.length >= 6) {
+                        return "Password must be 6 Character";
                       }
                       return null;
                     },

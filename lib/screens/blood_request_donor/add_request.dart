@@ -278,7 +278,7 @@ class _RequestBloodState extends State<RequestBlood> {
                             value: value,
                             child: Text(
                               value,
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             ),
                           );
                         }).toList(),
@@ -306,7 +306,7 @@ class _RequestBloodState extends State<RequestBlood> {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.red),
+                            style: const TextStyle(color: Colors.red),
                           ),
                         );
                       }).toList(),
@@ -333,7 +333,7 @@ class _RequestBloodState extends State<RequestBlood> {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(color: Colors.red),
+                                style: const TextStyle(color: Colors.red),
                               ),
                             );
                           }).toList(),

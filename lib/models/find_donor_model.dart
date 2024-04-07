@@ -34,7 +34,7 @@ class Data {
   String? address;
   String? contactPersonName;
   String? contactPersonPhone;
-  Null? lastDonateDate;
+  Null lastDonateDate;
   String? status;
   String? createdByUserId;
   String? updatedByUserId;
@@ -119,7 +119,7 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null? emailVerifiedAt;
+  Null emailVerifiedAt;
   String? image;
   String? profileVisibility;
   String? otp;
@@ -129,7 +129,7 @@ class User {
   String? donorProfileStatus;
   String? createdByUserId;
   String? updatedByUserId;
-  Null? deletedAt;
+  Null deletedAt;
   String? createdAt;
   String? updatedAt;
 

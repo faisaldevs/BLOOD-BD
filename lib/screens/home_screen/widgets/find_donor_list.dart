@@ -28,7 +28,7 @@ class FindDonorListPage extends StatelessWidget {
     print(district);
 
     return Scaffold(
-      appBar:      AppBar(
+      appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.redAccent,
         ),
@@ -38,7 +38,6 @@ class FindDonorListPage extends StatelessWidget {
         foregroundColor: Colors.white,
         title: const Text("Donor List"),
         // leading: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios)),
-
       ),
       body: FutureBuilder(
         future: cnt.getFindDonor(bloodType, division, district),
@@ -68,42 +67,44 @@ class FindDonorListPage extends StatelessWidget {
                 String bloodAmount = e?.amountBag ?? "Blood Amount";
                 String bloodType = e?.bloodGroup ?? "Type";
                 String address = e?.address ?? "address";
-                String lastDonateDate =
-                    e?.lastDonateDate ?? "Not Donated Yet..";
+                String lastDonateDate = e?.lastDonateDate ?? "Not Donated Yet..";
                 String division = e?.division ?? "address";
                 String district = e?.district ?? "address";
                 print(number);
 
-                return donorId == "donorId" ?  SizedBox(
-                  height: Get.height,
-                  width: Get.width,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search,
-                        size: 80,
-                        color: Colors.black26,
-                      ),
-                      Text(
-                        "No Data Found!",
-                        style: TextStyle(fontSize: 19, color: Colors.black26),
-                      ),
-                    ],
-                  ),
-                ):historyTile(
-                    donorId,
-                    name,
-                    contactPersonName,
-                    number,
-                    healthIssue,
-                    bloodAmount,
-                    bloodType,
-                    address,
-                    lastDonateDate,
-                    division,
-                    district);
+                return donorId == "donorId"
+                    ? SizedBox(
+                        height: Get.height,
+                        width: Get.width,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search,
+                              size: 80,
+                              color: Colors.black26,
+                            ),
+                            Text(
+                              "No Data Found!",
+                              style: TextStyle(
+                                  fontSize: 19, color: Colors.black26),
+                            ),
+                          ],
+                        ),
+                      )
+                    : historyTile(
+                        donorId,
+                        name,
+                        contactPersonName,
+                        number,
+                        healthIssue,
+                        bloodAmount,
+                        bloodType,
+                        address,
+                        lastDonateDate,
+                        division,
+                        district);
               },
             );
           } else {

@@ -39,7 +39,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
                 String number = e?.contactPersonPhone ?? "01*********";
                 String patientsName = e?.patientsName ?? "Patient Name";
                 String healthIssue = e?.healthIssue ?? "Health Issue";
-                String bloodAmount = e?.amountBag ?? "Blood Amount";
+                String bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
                 String bloodType = e?.bloodGroup ?? "Type";
                 String date = e?.date ?? "date";
                 String time = e?.time ?? "time";

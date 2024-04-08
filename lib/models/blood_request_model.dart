@@ -12,8 +12,6 @@ class RequestBloodModel {
     }
   }
 
-  get length => null;
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.data != null) {
@@ -25,10 +23,10 @@ class RequestBloodModel {
 
 class Data {
   int? id;
-  String? userId;
+  int? userId;
   String? patientsName;
   String? bloodGroup;
-  String? amountBag;
+  int? amountBag;
   String? date;
   String? time;
   String? healthIssue;
@@ -42,8 +40,8 @@ class Data {
   String? contactPersonName;
   String? note;
   String? status;
-  String? createdByUserId;
-  String? updatedByUserId;
+  int? createdByUserId;
+  int? updatedByUserId;
   String? createdAt;
   String? updatedAt;
   User? user;
@@ -137,17 +135,17 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null emailVerifiedAt;
+  Null? emailVerifiedAt;
   String? image;
-  String? profileVisibility;
-  String? otp;
+  int? profileVisibility;
+  int? otp;
   String? ipAddress;
-  String? status;
-  String? donorStatus;
-  String? donorProfileStatus;
-  String? createdByUserId;
-  String? updatedByUserId;
-  Null deletedAt;
+  int? status;
+  int? donorStatus;
+  int? donorProfileStatus;
+  int? createdByUserId;
+  int? updatedByUserId;
+  Null? deletedAt;
   String? createdAt;
   String? updatedAt;
 

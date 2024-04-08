@@ -113,14 +113,14 @@ class FeedPage extends StatelessWidget {
             if (snapshot.hasData) {
               final dataList = snapshot.data!;
               return ListView.builder(
-                itemCount: dataList.length,
+                itemCount: snapshot.data?.data?.length,
                 itemBuilder: (context, index) {
                   final e = dataList.data?[index];
                   String contactPersonName = e?.contactPersonName ?? "name";
                   String number = e?.contactPersonPhone ?? "01*********";
                   String patientsName = e?.patientsName ?? "Patient Name";
                   String healthIssue = e?.healthIssue ?? "Health Issue";
-                  String bloodAmount = e?.amountBag ?? "Blood Amount";
+                  String bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
                   String bloodType = e?.bloodGroup ?? "Type";
                   String date = e?.date ?? "date";
                   String time = e?.time ?? "time";
@@ -290,7 +290,7 @@ class FeedPage extends StatelessWidget {
                           address: address,
                           date: date,
                           time: time,
-                          note: note,
+                          note: note, title: 'Blood Request',
                         ));
                       },
                       child: Container(

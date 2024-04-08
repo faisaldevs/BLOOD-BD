@@ -37,9 +37,9 @@ class ProfileController extends GetxController {
       if(res.statusCode == 200){
         var jsonBody = jsonDecode(res.body);
         var body = jsonBody["data"];
-        name = body["name"];
-        number = body["phone"];
-        status = body["donor_status"];
+        name = body["name"].toString();
+        number = body["phone"].toString();
+        status = body["donor_status"].toString();
         GetStorage().write("StatusValue", status);
         // number.value = body["phone"];
         // number.value = body["phone"];

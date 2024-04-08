@@ -47,7 +47,7 @@ class BecomeDonorController extends GetxController {
         var body  = jsonDecode(res.body);
         var data = body["data"];
 
-        String status = data["donor_profile_status"];
+        String status = data["donor_profile_status"].toString();
         if (kDebugMode) {
           print("Profile Donor: $status");
         }
@@ -55,8 +55,9 @@ class BecomeDonorController extends GetxController {
         if(status == 0.toString()){
           Get.to(const BecomeDonor());
         }else{
-          Get.to( const DonorProfile());
-          // Get.to(const BecomeDonor());
+          // Get.to( const DonorProfile());
+          Get.to(const BecomeDonor());
+          // donorProfile();
 
         }
 
@@ -173,8 +174,8 @@ class BecomeDonorController extends GetxController {
         // return ProfileModel.fromJson(body);
         var data = body["blood_donor"];
 
-        id = data["id"];
-        userId = data["user_id"];
+        id = data["id"].toString();
+        userId = data["user_id"].toString();
         bloodGroupDonor = data["blood_group"];
         amountBagDonor = data["amount_bag"];
         healthIssueDonor = data["health_issue"];
@@ -190,6 +191,8 @@ class BecomeDonorController extends GetxController {
         var user = body["data"];
 
         nameDonor = user["name"];
+
+        Get.to( const DonorProfile());
       }
 
     }catch(e){

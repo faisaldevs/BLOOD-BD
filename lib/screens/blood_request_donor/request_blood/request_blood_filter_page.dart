@@ -207,15 +207,15 @@ class FilterPage extends StatelessWidget {
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        Get.to(DescriptionUi(
-                          contractPersonName: contactPersonName,
-                          contractPersonNumber: contactPersonNumber,
-                          patientName: contactPersonName,
-                          healthIssue: healthIssue,
-                          bloodAmount: bloodAmount,
-                          bloodType: bloodType,
-                          address: address,
-                        ));
+                        // Get.to(DescriptionUi(
+                        //   contractPersonName: contactPersonName,
+                        //   contractPersonNumber: contactPersonNumber,
+                        //   patientName: contactPersonName,
+                        //   healthIssue: healthIssue,
+                        //   bloodAmount: bloodAmount,
+                        //   bloodType: bloodType,
+                        //   address: address,
+                        // ));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),

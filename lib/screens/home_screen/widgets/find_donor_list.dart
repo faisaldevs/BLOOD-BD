@@ -64,7 +64,7 @@ class FindDonorListPage extends StatelessWidget {
                 String contactPersonName = e?.contactPersonName ?? "name";
                 String number = e?.contactPersonPhone ?? "01*********";
                 String healthIssue = e?.healthIssue ?? "Health Issue";
-                String bloodAmount = e?.amountBag ?? "Blood Amount";
+                String bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
                 String bloodType = e?.bloodGroup ?? "Type";
                 String address = e?.address ?? "address";
                 String lastDonateDate = e?.lastDonateDate ?? "Not Donated Yet..";
@@ -259,7 +259,7 @@ class FindDonorListPage extends StatelessWidget {
                           address: address,
                           division: division,
                           district: district,
-                          id: donorId,
+                          id: donorId, title: 'Donor List',
                           // date: date,
                           // time: time,
                           // note: note,
@@ -305,7 +305,23 @@ class FindDonorListPage extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(RequestBlood(donorId: donorId));
+                  // Get.to(RequestBlood(donorId: donorId));
+
+                    Get.rawSnackbar(
+                        messageText: const Text(
+                            'Currently working on it..!!',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14
+                            )
+                        ),
+                        isDismissible: true,
+                        duration: const Duration(seconds: 3),
+                        backgroundColor: Colors.red[400]!,
+                        icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+                        margin: EdgeInsets.zero,
+                        snackStyle: SnackStyle.GROUNDED
+                    );
                 },
                 style: ButtonStyle(
                   backgroundColor:

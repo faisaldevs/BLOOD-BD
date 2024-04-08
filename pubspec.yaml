@@ -49,6 +49,7 @@ dependencies:
   carousel_slider: ^4.2.1
   badges:
   curved_labeled_navigation_bar: ^2.0.2
+  snackbar: ^1.0.2
 
   #-------Storage ----------
   shared_preferences:
@@ -60,11 +61,21 @@ dependencies:
   url_launcher:
   connectivity_plus:
 
+  #----------Flutter Launcher Icon--------
+#  flutter_launcher_icons: ^0.13.1
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_logo/Blood_BD.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -94,6 +105,7 @@ flutter:
     - assets/images/home_icons/
     #      -----------Home-Icon Image------
     - assets/images/
+#    - assets/app_logo/Blood_BD.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -120,3 +132,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+

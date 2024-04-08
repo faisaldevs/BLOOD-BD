@@ -61,7 +61,22 @@ class NotificationPage extends StatelessWidget {
         ),
         body:  TabBarView(
           children: [
-            BloodRqNotification(),
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.search,
+                  size: 120,
+                  color: Colors.black26,
+                ),
+                Text(
+                  "No Notification Found!",
+                  style: TextStyle(fontSize: 24, color: Colors.black26),
+                ),
+              ],
+            ),
+            // BloodRqNotification(),
             const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

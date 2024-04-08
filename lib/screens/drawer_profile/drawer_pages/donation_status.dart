@@ -55,10 +55,10 @@ class DonationStatus extends StatelessWidget {
                   String contactPersonName =
                       e?.bloodRequest?.contactPersonName ?? "";
                   String contractPersonNumber =
-                      e?.bloodRequest?.contactPersonPhone ?? "";
+                      e?.bloodRequest?.contactPersonPhone.toString() ?? "";
                   String patientsName = e?.bloodRequest?.patientsName ?? "";
                   String healthIssue = e?.bloodRequest?.healthIssue ?? "";
-                  String bloodAmount = e?.bloodRequest?.amountBag ?? "";
+                  String bloodAmount = e?.bloodRequest?.amountBag.toString() ?? "";
                   String bloodType = e?.bloodRequest?.bloodGroup ?? "";
                   String address = e?.bloodRequest?.address ?? "";
                   String time = e?.bloodRequest?.time ?? "";
@@ -225,7 +225,7 @@ class DonationStatus extends StatelessWidget {
                           address: address,
                           date: date,
                           time: time,
-                          note: note,
+                          note: note, title: 'Donation Request List',
                         ));
                       },
                       child: Container(
@@ -281,7 +281,23 @@ class DonationStatus extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: (){
+                  Get.rawSnackbar(
+                      messageText: const Text(
+                          'Currently working on it..!!',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14
+                          )
+                      ),
+                      isDismissible: true,
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Colors.red[400]!,
+                      icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+                      margin: EdgeInsets.zero,
+                      snackStyle: SnackStyle.GROUNDED
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       const MaterialStatePropertyAll<Color>(Color(0xff026b49)),

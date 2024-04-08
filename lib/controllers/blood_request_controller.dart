@@ -42,7 +42,7 @@ class BloodRequestController extends GetxController{
       }
     } catch (e) {
       if (kDebugMode) {
-        print("Error : $e");
+        print("Error 12 : $e");
       }
     }
     throw Exception("Loading failed !!!");

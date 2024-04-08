@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:snackbar/snackbar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class DescriptionUi extends StatelessWidget {
@@ -23,8 +24,9 @@ class DescriptionUi extends StatelessWidget {
       this.buttonFunction,
       this.lastDonateDate,
       this.division,
-      this.district, this.id});
+      this.district, this.id, required this.title});
 
+  final String title;
   final String? id;
   final String? contractPersonName;
   final String? contractPersonNumber;
@@ -65,7 +67,7 @@ class DescriptionUi extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
-        title: const Text("title"),
+        title: Text(title),
       ),
       body: SafeArea(
         child: Container(
@@ -223,7 +225,23 @@ class DescriptionUi extends StatelessWidget {
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
-                    onPressed: buttonFunction,
+                    onPressed: (){
+                      Get.rawSnackbar(
+                          messageText: const Text(
+                              'Currently working on it..!!',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14
+                              )
+                          ),
+                          isDismissible: true,
+                          duration: const Duration(seconds: 3),
+                          backgroundColor: Colors.red[400]!,
+                          icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+                          margin: EdgeInsets.zero,
+                          snackStyle: SnackStyle.GROUNDED
+                      );
+                    },
                     style: ButtonStyle(
                       backgroundColor: const MaterialStatePropertyAll<Color>(
                           Color(0xff026b49)),

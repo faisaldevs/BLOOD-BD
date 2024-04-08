@@ -23,9 +23,9 @@ class FindDonorModel {
 
 class Data {
   int? id;
-  String? userId;
+  int? userId;
   String? bloodGroup;
-  String? amountBag;
+  int? amountBag;
   String? healthIssue;
   String? division;
   String? district;
@@ -34,10 +34,10 @@ class Data {
   String? address;
   String? contactPersonName;
   String? contactPersonPhone;
-  Null lastDonateDate;
-  String? status;
-  String? createdByUserId;
-  String? updatedByUserId;
+  Null? lastDonateDate;
+  int? status;
+  int? createdByUserId;
+  int? updatedByUserId;
   String? createdAt;
   String? updatedAt;
   User? user;
@@ -119,17 +119,17 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null emailVerifiedAt;
+  Null? emailVerifiedAt;
   String? image;
-  String? profileVisibility;
-  String? otp;
+  int? profileVisibility;
+  int? otp;
   String? ipAddress;
-  String? status;
-  String? donorStatus;
-  String? donorProfileStatus;
-  String? createdByUserId;
-  String? updatedByUserId;
-  Null deletedAt;
+  int? status;
+  int? donorStatus;
+  int? donorProfileStatus;
+  int? createdByUserId;
+  int? updatedByUserId;
+  Null? deletedAt;
   String? createdAt;
   String? updatedAt;
 

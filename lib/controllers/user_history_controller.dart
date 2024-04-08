@@ -34,14 +34,12 @@ class HistoryController extends GetxController {
         "Accept" : "application/json",
         "Authorization" : token,
       },);
-      print("pressed.............2");
-      print(res.statusCode);
-      print(res.body);
+      // print(res.statusCode);
+      // print(res.body);
 
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(res.body);
-        print(responseData);
         return BloodRequestHistoryModel.fromJson(responseData);
       } else {
         print(res.statusCode);

@@ -238,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemCount: 5,
                                   itemBuilder: (context, index) {
                                     final e = dataList.data?[index];
-                                    String? requestId = e?.id.toString();
+                                    var requestId = e?.id;
                                     String contactPersonName =
                                         e?.contactPersonName ?? "name";
                                     String contactPersonNumber =
@@ -250,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     String hospitalName =
                                         e?.hospitalName ?? "Hospital Name";
                                     String bloodAmount =
-                                        e?.amountBag ?? "Blood Amount";
+                                        e?.amountBag.toString() ?? "Blood Amount";
                                     String bloodType = e?.bloodGroup ?? "Type";
                                     String date = e?.date ?? "date";
                                     String time = e?.time ?? "time";
@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       bloodAmount: bloodAmount,
                                       time: time,
                                       note: note,
-                                      requestId: requestId,
+                                      requestId: requestId.toString(),
                                     );
                                   },
                                 );

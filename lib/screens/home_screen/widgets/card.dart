@@ -222,7 +222,7 @@ class UrgentRequest extends StatelessWidget {
                               },
                               contractPersonName : contractPersonName,
                               contractPersonNumber : contractPersonNumber,
-                              note: note,
+                              note: note, title: 'Urgent Request',
 
                             ));
                           },

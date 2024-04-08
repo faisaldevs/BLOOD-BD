@@ -22,7 +22,8 @@ class HistoryDonate extends StatelessWidget {
             return const Center(child: CircularProgressIndicator(),);
           }
           if(snapshot.hasError){
-            return const Center(child: Text("Something went wrong"),);
+            // return const Center(child: Text("Something went wrong"),);
+            return const Center(child: Text("Coming Soon..!!"),);
           }
 
           if (snapshot.hasData) {

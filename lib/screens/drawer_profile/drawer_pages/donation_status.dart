@@ -18,89 +18,91 @@ class DonationStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.primary,
+      appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.redAccent,
+          statusBarIconBrightness: Brightness.dark,
+          // For Android (dark icons)
+          statusBarBrightness: Brightness.light, // For iOS (dark icons)
+        ),
+        title: const Text("Donation Request"),
+        titleSpacing: 0,
         backgroundColor: AppTheme.primary,
-        appBar: AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Colors.redAccent,
-            statusBarIconBrightness: Brightness.dark,
-            // For Android (dark icons)
-            statusBarBrightness: Brightness.light, // For iOS (dark icons)
-          ),
-          title: const Text("Donation Request"),
-          titleSpacing: 0,
-          backgroundColor: AppTheme.primary,
-          surfaceTintColor: Colors.transparent,
-          foregroundColor: AppTheme.textColorRed,
-          elevation: 0,
-          leading: InkWell(
-            onTap: () => Get.back(),
-            child: const Icon(
-              Icons.arrow_back_ios,
-            ),
+        surfaceTintColor: Colors.transparent,
+        foregroundColor: AppTheme.textColorRed,
+        elevation: 0,
+        leading: InkWell(
+          onTap: () => Get.back(),
+          child: const Icon(
+            Icons.arrow_back_ios,
           ),
         ),
-        body: FutureBuilder<DonationModel>(
-          future: controller.getDonationList(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasData) {
-              final dataList = snapshot.data!;
-              return ListView.builder(
-                itemCount: dataList.data?.length,
-                itemBuilder: (context, index) {
-                  final e = dataList.data?[index];
+      ),
+      body: FutureBuilder<DonationModel>(
+        future: controller.getDonationList(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasData) {
+            final dataList = snapshot.data!;
+            return ListView.builder(
+              itemCount: dataList.data?.length,
+              itemBuilder: (context, index) {
+                final e = dataList.data?[index];
 
-                  String contactPersonName =
-                      e?.bloodRequest?.contactPersonName ?? "";
-                  String contractPersonNumber =
-                      e?.bloodRequest?.contactPersonPhone.toString() ?? "";
-                  String patientsName = e?.bloodRequest?.patientsName ?? "";
-                  String healthIssue = e?.bloodRequest?.healthIssue ?? "";
-                  String bloodAmount = e?.bloodRequest?.amountBag.toString() ?? "";
-                  String bloodType = e?.bloodRequest?.bloodGroup ?? "";
-                  String address = e?.bloodRequest?.address ?? "";
-                  String time = e?.bloodRequest?.time ?? "";
-                  String date = e?.bloodRequest?.date ?? "";
-                  String note = e?.bloodRequest?.note ?? "";
+                String contactPersonName =
+                    e?.bloodRequest?.contactPersonName ?? "";
+                String contractPersonNumber =
+                    e?.bloodRequest?.contactPersonPhone.toString() ?? "";
+                String patientsName = e?.bloodRequest?.patientsName ?? "";
+                String healthIssue = e?.bloodRequest?.healthIssue ?? "";
+                String bloodAmount =
+                    e?.bloodRequest?.amountBag.toString() ?? "";
+                String bloodType = e?.bloodRequest?.bloodGroup ?? "";
+                String address = e?.bloodRequest?.address ?? "";
+                String time = e?.bloodRequest?.time ?? "";
+                String date = e?.bloodRequest?.date ?? "";
+                String note = e?.bloodRequest?.note ?? "";
 
-                  return donationTile(
-                      contactPersonName,
-                      contractPersonNumber,
-                      patientsName,
-                      healthIssue,
-                      bloodAmount,
-                      bloodType,
-                      address,
-                      time,
-                      date,
-                      note);
-                },
-              );
-            } else {
-              return SizedBox(
-                height: Get.height,
-                width: Get.width,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.search,
-                      size: 80,
-                      color: Colors.black26,
-                    ),
-                    Text(
-                      "No Donation Request Found!",
-                      style: TextStyle(fontSize: 19, color: Colors.black26),
-                    ),
-                  ],
-                ),
-              );
-            }
-          },
-        ));
+                return donationTile(
+                    contactPersonName,
+                    contractPersonNumber,
+                    patientsName,
+                    healthIssue,
+                    bloodAmount,
+                    bloodType,
+                    address,
+                    time,
+                    date,
+                    note);
+              },
+            );
+          } else {
+            return SizedBox(
+              height: Get.height,
+              width: Get.width,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.search,
+                    size: 80,
+                    color: Colors.black26,
+                  ),
+                  Text(
+                    "No Donation Request Found!",
+                    style: TextStyle(fontSize: 19, color: Colors.black26),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 
   Widget donationTile(
@@ -190,10 +192,12 @@ class DonationStatus extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 16,
                         )),
-                    Text("Blood Required : $bloodAmount",
-                        style: const TextStyle(
-                          fontSize: 16,
-                        )),
+                    Text(
+                      "Blood Required : $bloodAmount",
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
                   ],
                 ),
                 Column(
@@ -215,30 +219,36 @@ class DonationStatus extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
                         // controller.visibility();
-                        Get.to(DescriptionUi(
-                          contractPersonName: contactPersonName,
-                          contractPersonNumber: contractPersonNumber,
-                          patientName: patientsName,
-                          healthIssue: healthIssue,
-                          bloodAmount: bloodAmount,
-                          bloodType: bloodType,
-                          address: address,
-                          date: date,
-                          time: time,
-                          note: note, title: 'Donation Request List',
-                        ));
+                        Get.to(
+                          DescriptionUi(
+                            contractPersonName: contactPersonName,
+                            contractPersonNumber: contractPersonNumber,
+                            patientName: patientsName,
+                            healthIssue: healthIssue,
+                            bloodAmount: bloodAmount,
+                            bloodType: bloodType,
+                            address: address,
+                            date: date,
+                            time: time,
+                            note: note,
+                            title: 'Donation Request List',
+                          ),
+                        );
                       },
                       child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 4, vertical: 6),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 6),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: const Text(
+                          "See More",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w600,
                           ),
-                          child: const Text("See More",
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w600,
-                              ))),
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -252,16 +262,6 @@ class DonationStatus extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   launchUrlString("tel:$contractPersonNumber");
-                  //
-                  // final Uri url = Uri(
-                  //   scheme: "tel",
-                  //   path: "01903440069",
-                  // );
-                  // if (await canLaunchUrl(url)) {
-                  // await launchUrl(url);
-                  // } else {
-                  // print("Can't Launch Url");
-                  // }
                 },
                 style: ButtonStyle(
                   backgroundColor:
@@ -281,22 +281,20 @@ class DonationStatus extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               ElevatedButton(
-                onPressed: (){
+                onPressed: () {
                   Get.rawSnackbar(
-                      messageText: const Text(
-                          'Currently working on it..!!',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14
-                          )
-                      ),
+                      messageText: const Text('Currently working on it..!!',
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
                       isDismissible: true,
                       duration: const Duration(seconds: 3),
                       backgroundColor: Colors.red[400]!,
-                      icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+                      icon: const Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 35,
+                      ),
                       margin: EdgeInsets.zero,
-                      snackStyle: SnackStyle.GROUNDED
-                  );
+                      snackStyle: SnackStyle.GROUNDED);
                 },
                 style: ButtonStyle(
                   backgroundColor:

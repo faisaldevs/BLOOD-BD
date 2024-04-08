@@ -57,13 +57,6 @@ class DrawerProfile extends StatelessWidget {
               Get.to(DonationStatus());
             },
           ),
-          // CustomDrawerLinks(
-          //   title: 'Donation Blocked',
-          //   icon: Icons.bloodtype_outlined,
-          //   onTap: () {
-          //     Get.toNamed(donationBlocked);
-          //   },
-          // ),
           CustomDrawerLinks(
             title: 'History',
             icon: Icons.history_edu_outlined,

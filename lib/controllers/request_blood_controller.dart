@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/models/search_requested_donor.dart';
 import 'package:flutter/foundation.dart';
@@ -7,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-
 import '../screens/blood_request_donor/request_blood/request_blood_filter_page.dart';
+
 
 class RequestBloodController extends GetxController {
   var token = GetStorage().read("token") ?? "";
@@ -34,7 +33,6 @@ class RequestBloodController extends GetxController {
 
   onSaveRqBlood() async {
     print(token);
-    // if (formKey.currentState!.validate()) {
 
     print(bloodType);
     print(dateController.text);
@@ -149,7 +147,7 @@ class RequestBloodController extends GetxController {
     }
   }
 
-  Future<List<DonorSearch>> donorSearch() async {
+  Future<DonorSearch> donorSearch() async {
     try {
       // String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
       var res = await http.post(
@@ -165,28 +163,12 @@ class RequestBloodController extends GetxController {
           });
 
       var jsonDataDecoded = json.decode(res.body);
-      List data = jsonDataDecoded['data'] as List;
+      // List data = jsonDataDecoded['data'] as List;
       if (res.statusCode == 200) {
         if (kDebugMode) {
           print("200-status : ${res.body}");
         }
-        return data.map((e) {
-          final map = e as Map<String, dynamic>;
-          return DonorSearch(
-            id: map["id"].toString(),
-            bloodGroup: map["blood_group"],
-            amountBag: map["amount_bag"],
-            healthIssue: map["health_issue"],
-            district: map["district"],
-            division: map["division"],
-            union: map["upazila"],
-            upazila: map["union"],
-            address: map["address"],
-            contactPersonName: map["contact_person_name"],
-            contactPersonPhone: map["contact_person_phone"],
-            // user: map["user"]
-          );
-        }).toList();
+        return DonorSearch.fromJson(jsonDataDecoded);
       } else {
         if (kDebugMode) {
           print("failed code${res.statusCode}");

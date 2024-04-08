@@ -332,7 +332,23 @@ class FeedPage extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: (){
+                  Get.rawSnackbar(
+                      messageText: const Text(
+                          'Currently working on it..!!',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14
+                          )
+                      ),
+                      isDismissible: true,
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Colors.red[400]!,
+                      icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+                      margin: EdgeInsets.zero,
+                      snackStyle: SnackStyle.GROUNDED
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       const MaterialStatePropertyAll<Color>(Color(0xff026b49)),

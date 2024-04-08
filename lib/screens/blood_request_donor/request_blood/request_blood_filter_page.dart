@@ -49,25 +49,25 @@ class FilterPage extends StatelessWidget {
           ),
         ),
       ),
-      body: FutureBuilder<List<DonorSearch>>(
+      body: FutureBuilder<DonorSearch>(
         future: controller.donorSearch(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            // List dataList = snapshot.data as List;
+            final dataList = snapshot.data!;
             return ListView.builder(
-              itemCount: snapshot.data?.length,
+              itemCount: snapshot.data?.data?.length,
               itemBuilder: (context, index) {
-                DonorSearch e = snapshot.data![index];
-                String bloodDonorId = e.id ?? "";
-                String contactPersonName = e.contactPersonName ?? "name";
-                String number = e.contactPersonPhone ?? "01*********";
+                final e = dataList.data?[index];
+                String bloodDonorId = e?.id.toString() ?? "";
+                String contactPersonName = e?.contactPersonName ?? "name";
+                String number = e?.contactPersonPhone.toString() ?? "01*********";
                 // String patientsName = e.patientsName ?? "Patient Name";
-                String healthIssue = e.healthIssue ?? "Health Issue";
-                String bloodAmount = e.amountBag ?? "Blood Amount";
-                String bloodType = e.bloodGroup ?? "Type";
+                String healthIssue = e?.healthIssue ?? "Health Issue";
+                String bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
+                String bloodType = e?.bloodGroup ?? "Type";
                 // String date = e.date ?? "date";
                 // String time = e.time ?? "time";
-                String address = e.address ?? "address";
+                String address = e?.address ?? "address";
                 // String note = e.note ?? "note";
 
                 return historyTile(
@@ -257,6 +257,22 @@ class FilterPage extends StatelessWidget {
                 onPressed: () {
                   controller.confirmBlood(
                       bloodRequestId, bloodDonorId, bloodAmount);
+                  Get.rawSnackbar(
+                      messageText: const Text(
+                          'Request has been sent. Please wait donner response..!! ',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14
+                          )
+                      ),
+                      isDismissible: true,
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Colors.red[400]!,
+                      icon : const Icon(Icons.download_done, color: Colors.white, size: 35,),
+                      margin: EdgeInsets.zero,
+                      snackStyle: SnackStyle.GROUNDED
+                  );
+
                 },
                 style: ButtonStyle(
                   backgroundColor:

@@ -79,6 +79,9 @@ class UrgentRequest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(patientsName);
+    print(hospitalName);
+    print(date);
     return Container(
       // padding: EdgeInsets.all(5),
       height: Get.height * .1.h,
@@ -217,9 +220,7 @@ class UrgentRequest extends StatelessWidget {
                              bloodType : bloodType,
                              bloodAmount : bloodAmount,
                              buttonText : "confirm",
-                              buttonFunction: (){
-                                Get.to(RequestBlood(requestId: requestId,));
-                              },
+                              buttonFunction: () => Get.to(RequestBlood(requestId: requestId,)),
                               contractPersonName : contractPersonName,
                               contractPersonNumber : contractPersonNumber,
                               note: note, title: 'Urgent Request',

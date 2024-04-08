@@ -1,8 +1,31 @@
 class DonorSearch {
-  String? id;
-  String? userId;
+  List<Data>? data;
+
+  DonorSearch({this.data});
+
+  DonorSearch.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data {
+  int? id;
+  int? userId;
   String? bloodGroup;
-  String? amountBag;
+  int? amountBag;
   String? healthIssue;
   String? division;
   String? district;
@@ -11,15 +34,15 @@ class DonorSearch {
   String? address;
   String? contactPersonName;
   String? contactPersonPhone;
-  Null lastDonateDate;
-  String? status;
-  String? createdByUserId;
-  String? updatedByUserId;
+  Null? lastDonateDate;
+  int? status;
+  int? createdByUserId;
+  int? updatedByUserId;
   String? createdAt;
   String? updatedAt;
   User? user;
 
-  DonorSearch(
+  Data(
       {this.id,
         this.userId,
         this.bloodGroup,
@@ -40,7 +63,7 @@ class DonorSearch {
         this.updatedAt,
         this.user});
 
-  DonorSearch.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     bloodGroup = json['blood_group'];
@@ -96,17 +119,17 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null emailVerifiedAt;
+  Null? emailVerifiedAt;
   String? image;
-  String? profileVisibility;
-  String? otp;
+  int? profileVisibility;
+  int? otp;
   String? ipAddress;
-  String? status;
-  String? donorStatus;
-  String? donorProfileStatus;
-  String? createdByUserId;
-  String? updatedByUserId;
-  Null deletedAt;
+  int? status;
+  int? donorStatus;
+  int? donorProfileStatus;
+  int? createdByUserId;
+  int? updatedByUserId;
+  Null? deletedAt;
   String? createdAt;
   String? updatedAt;
 

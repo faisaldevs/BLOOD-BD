@@ -20,7 +20,7 @@ class BloodHeroes extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
-        backgroundColor: AppTheme.primary,
+        backgroundColor: AppTheme.primaryRed,
         surfaceTintColor: Colors.transparent,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.redAccent,
@@ -29,7 +29,7 @@ class BloodHeroes extends StatelessWidget {
         ),
         elevation: 0,
         title: const Text("Blood Bank"),
-        foregroundColor: AppTheme.textColorRed,
+        foregroundColor: AppTheme.primary,
         titleSpacing: 0,
         leading: InkWell(
           onTap: () => Get.back(),

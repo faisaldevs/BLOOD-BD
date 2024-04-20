@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:snackbar/snackbar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class DescriptionUi extends StatelessWidget {

@@ -61,6 +61,8 @@ donateBlood(requestId, bloodAmount)async{
           "Authorization" : token,
         }
     );
+    print(res.statusCode);
+    print("try");
 
     if(res.statusCode == 200){
       var jsonBody = jsonDecode(res.body);

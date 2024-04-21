@@ -258,6 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     String note = e?.note ?? "note";
 
                                     return UrgentRequest(
+
                                       patientsName: patientsName,
                                       hospitalName: hospitalName,
                                       address: address,
@@ -266,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       contractPersonName: contactPersonName,
                                       contractPersonNumber: contactPersonNumber,
                                       healthIssue: healthIssue,
-                                      bloodAmount: bloodAmount,
+                                      bloodAmount: bloodAmount.toString(),
                                       time: time,
                                       note: note,
                                       requestId: requestId.toString(),

@@ -36,13 +36,13 @@ class DrawerProfile extends StatelessWidget {
           },
         ),
 
-          CustomDrawerLinks(
-            title: 'Medical History',
-            icon: Icons.medical_information_outlined,
-            onTap: () {
-              Get.to(MedicalHistory());
-            },
-          ),
+          // CustomDrawerLinks(
+          //   title: 'Medical History',
+          //   icon: Icons.medical_information_outlined,
+          //   onTap: () {
+          //     Get.to(MedicalHistory());
+          //   },
+          // ),
           CustomDrawerLinks(
             title: 'Notifications',
             icon: Icons.notifications_active,
@@ -78,21 +78,21 @@ class DrawerProfile extends StatelessWidget {
               Get.to(ChangePassword());
             },
           ),
-          CustomDrawerLinks(
-            title: 'Customer Support',
-            icon: Icons.privacy_tip_outlined,
-            onTap: () {},
-          ),
-          CustomDrawerLinks(
-            title: 'Privacy Settings',
-            icon: Icons.question_answer_outlined,
-            onTap: () {},
-          ),
-          CustomDrawerLinks(
-            title: 'FAQ',
-            icon: Icons.support_agent_outlined,
-            onTap: () {},
-          ),
+          // CustomDrawerLinks(
+          //   title: 'Customer Support',
+          //   icon: Icons.privacy_tip_outlined,
+          //   onTap: () {},
+          // ),
+          // CustomDrawerLinks(
+          //   title: 'Privacy Settings',
+          //   icon: Icons.question_answer_outlined,
+          //   onTap: () {},
+          // ),
+          // CustomDrawerLinks(
+          //   title: 'FAQ',
+          //   icon: Icons.support_agent_outlined,
+          //   onTap: () {},
+          // ),
           CustomDrawerLinks(
             title: 'Logout',
             icon: Icons.logout_outlined,

@@ -321,18 +321,18 @@ class _BecomeDonorState extends State<BecomeDonor> {
                             );
                           }).toList(),
                         )),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.districtListData,
-                          label: 'District',
-                          onChanged: (value) {
-                            sdController.union = value;
-                          },
-                        )),
+                    // const SizedBox(
+                    //   width: 10,
+                    // ),
+                    // Expanded(
+                    //     flex: 1,
+                    //     child: CustomDropdown(
+                    //       dropDownList: DataList.districtListData,
+                    //       label: 'District',
+                    //       onChanged: (value) {
+                    //         sdController.union = value;
+                    //       },
+                    //     )),
                   ],
                 ),
                 const SizedBox(height: 10),

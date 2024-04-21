@@ -56,8 +56,23 @@ class BecomeDonorController extends GetxController {
           Get.to(const BecomeDonor());
         }else{
           // Get.to( const DonorProfile());
-          Get.to(const BecomeDonor());
+          // Get.to(const BecomeDonor());
           // donorProfile();
+          Get.rawSnackbar(
+              messageText: const Text(
+                  'You are already a Donor..!!',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14
+                  )
+              ),
+              isDismissible: true,
+              duration: const Duration(seconds: 3),
+              backgroundColor: Colors.red[400]!,
+              icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+              margin: EdgeInsets.zero,
+              snackStyle: SnackStyle.GROUNDED
+          );
 
         }
 

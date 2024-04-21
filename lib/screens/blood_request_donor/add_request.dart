@@ -338,18 +338,18 @@ class _RequestBloodState extends State<RequestBlood> {
                             );
                           }).toList(),
                         )),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        flex: 1,
-                        child: CustomDropdown(
-                          dropDownList: DataList.districtListData,
-                          label: 'District',
-                          onChanged: (value) {
-                            controller.union = value;
-                          },
-                        )),
+                    // const SizedBox(
+                    //   width: 10,
+                    // ),
+                    // Expanded(
+                    //     flex: 1,
+                    //     child: CustomDropdown(
+                    //       dropDownList: DataList.districtListData,
+                    //       label: 'District',
+                    //       onChanged: (value) {
+                    //         controller.union = value;
+                    //       },
+                    //     )),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -438,15 +438,15 @@ class _RequestBloodState extends State<RequestBlood> {
         width: double.infinity * .9,
         child: CustomButton(
             onPressed: () {
-                controller.onSaveRqBlood();
+                // controller.onSaveRqBlood();
 
-             //
-             //  if(widget.requestId == null){
-             //    controller.onSaveRqBlood();
-             //  }
-             // else{
-             //   print("object");
-             // }
+
+              if(widget.donorId == null){
+                controller.onSaveRqBlood();
+              }
+             else{
+               controller.donate(widget.donorId);
+             }
 
             },
             child: const Text(

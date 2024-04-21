@@ -23,6 +23,7 @@ class DescriptionUi extends StatelessWidget {
       this.buttonFunction,
       this.lastDonateDate,
       this.division,
+      this.thana,
       this.district, this.id, required this.title});
 
   final String title;
@@ -38,6 +39,7 @@ class DescriptionUi extends StatelessWidget {
   final String? lastDonateDate;
   final String? division;
   final String? district;
+  final String? thana;
   final String? time;
   final String? note;
   final String? buttonText;
@@ -224,23 +226,24 @@ class DescriptionUi extends StatelessWidget {
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
-                    onPressed: (){
-                      Get.rawSnackbar(
-                          messageText: const Text(
-                              'Currently working on it..!!',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14
-                              )
-                          ),
-                          isDismissible: true,
-                          duration: const Duration(seconds: 3),
-                          backgroundColor: Colors.red[400]!,
-                          icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
-                          margin: EdgeInsets.zero,
-                          snackStyle: SnackStyle.GROUNDED
-                      );
-                    },
+                    onPressed: buttonFunction,
+                    //(){
+                    //                       Get.rawSnackbar(
+                    //                           messageText: const Text(
+                    //                               'Currently working on it..!!',
+                    //                               style: TextStyle(
+                    //                                   color: Colors.white,
+                    //                                   fontSize: 14
+                    //                               )
+                    //                           ),
+                    //                           isDismissible: true,
+                    //                           duration: const Duration(seconds: 3),
+                    //                           backgroundColor: Colors.red[400]!,
+                    //                           icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+                    //                           margin: EdgeInsets.zero,
+                    //                           snackStyle: SnackStyle.GROUNDED
+                    //                       );
+                    //                     }
                     style: ButtonStyle(
                       backgroundColor: const MaterialStatePropertyAll<Color>(
                           Color(0xff026b49)),

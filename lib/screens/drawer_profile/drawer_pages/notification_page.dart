@@ -1,10 +1,12 @@
+import 'package:blood_bd/screens/drawer_profile/drawer_pages/notification/notification_donate.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import 'notification/blood_request_notification.dart';
+import 'notification/notification_request.dart';
+
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -61,37 +63,40 @@ class NotificationPage extends StatelessWidget {
         ),
         body:  TabBarView(
           children: [
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.search,
-                  size: 120,
-                  color: Colors.black26,
-                ),
-                Text(
-                  "No Notification Found!",
-                  style: TextStyle(fontSize: 24, color: Colors.black26),
-                ),
-              ],
-            ),
+            NotificationRequest(),
+            // const Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     Icon(
+            //       Icons.search,
+            //       size: 120,
+            //       color: Colors.black26,
+            //     ),
+            //     Text(
+            //       "No Notification Found!",
+            //       style: TextStyle(fontSize: 24, color: Colors.black26),
+            //     ),
+            //   ],
+            // ),
+
+            NotificationDonate(),
             // BloodRqNotification(),
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.search,
-                  size: 120,
-                  color: Colors.black26,
-                ),
-                Text(
-                  "No Notification Found!",
-                  style: TextStyle(fontSize: 24, color: Colors.black26),
-                ),
-              ],
-            ),
+            // const Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     Icon(
+            //       Icons.search,
+            //       size: 120,
+            //       color: Colors.black26,
+            //     ),
+            //     Text(
+            //       "No Notification Found!",
+            //       style: TextStyle(fontSize: 24, color: Colors.black26),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:blood_bd/models/donation_model.dart';
+import 'package:blood_bd/screens/blood_request_donor/become_donor_page.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/foundation.dart';
@@ -9,6 +11,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../controllers/drawer_profile_controller.dart';
 import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
+import '../blood_request_donor/add_request.dart';
 import '../drawer_profile/components/custom_drawer_links.dart';
 import '../drawer_profile/drawer_pages/change_password.dart';
 import '../drawer_profile/drawer_pages/medical_history.dart';
@@ -244,10 +247,17 @@ class _ProfilePageState extends State<ProfilePage> {
             // ActiveDonor(),
 
             CustomDrawerLinks(
-              title: 'Medical History',
-              icon: Icons.medical_information_outlined,
+              title: 'Request For Blood',
+              icon: Icons.note_add_outlined,
               onTap: () {
-                Get.to(MedicalHistory());
+                Get.to(RequestBlood());
+              },
+            ),
+            CustomDrawerLinks(
+              title: 'Become Donor',
+              icon: Icons.person_add_alt_1_rounded,
+              onTap: () {
+                Get.to(BecomeDonor());
               },
             ),
             CustomDrawerLinks(
@@ -264,13 +274,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 Get.to(DonationStatus());
               },
             ),
-            // CustomDrawerLinks(
-            //   title: 'Donation Accepted',
-            //   icon: Icons.bloodtype_outlined,
-            //   onTap: () {
-            //     Get.toNamed(donationAccepted);
-            //   },
-            // ),
             // CustomDrawerLinks(
             //   title: 'Donation Blocked',
             //   icon: Icons.bloodtype_outlined,
@@ -292,23 +295,23 @@ class _ProfilePageState extends State<ProfilePage> {
             //     Get.toNamed(mySearchHistory);
             //   },
             // ),
-            CustomDrawerLinks(
-              title: 'Customer Support',
-              icon: Icons.privacy_tip_outlined,
-              onTap: () {},
-            ),
-            CustomDrawerLinks(
-              title: 'Privacy Settings',
-              icon: Icons.question_answer_outlined,
-              onTap: () {},
-            ),
-            CustomDrawerLinks(
-              title: 'FAQ',
-              icon: Icons.support_agent_outlined,
-              onTap: () {
-                Get.to(ChangePassword());
-              },
-            ),
+            // CustomDrawerLinks(
+            //   title: 'Customer Support',
+            //   icon: Icons.privacy_tip_outlined,
+            //   onTap: () {},
+            // ),
+            // CustomDrawerLinks(
+            //   title: 'Privacy Settings',
+            //   icon: Icons.question_answer_outlined,
+            //   onTap: () {},
+            // ),
+            // CustomDrawerLinks(
+            //   title: 'FAQ',
+            //   icon: Icons.support_agent_outlined,
+            //   onTap: () {
+            //     Get.to(ChangePassword());
+            //   },
+            // ),
             CustomDrawerLinks(
               title: 'Logout',
               icon: Icons.logout_outlined,

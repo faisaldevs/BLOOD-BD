@@ -327,17 +327,17 @@ class _SignupScreenState extends State<SignupScreen> {
                         );
                       }).toList(),
                     )),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        child: CustomDropdown(
-                      dropDownList: DataList.districtListData,
-                      label: 'Union',
-                      onChanged: (value) {
-                        signupController.union = value;
-                      },
-                    )),
+                    // const SizedBox(
+                    //   width: 10,
+                    // ),
+                    // Expanded(
+                    //     child: CustomDropdown(
+                    //   dropDownList: DataList.districtListData,
+                    //   label: 'Union',
+                    //   onChanged: (value) {
+                    //     signupController.union = value;
+                    //   },
+                    // )),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -389,7 +389,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     validate: (pass) {
                       if (pass!.isEmpty) {
                         return "Password required";
-                      } else if (pass.length <= 6) {
+                      } else if (pass.length <= 5) {
                         return "Password must be 6 Character";
                       }
                       return null;

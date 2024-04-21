@@ -60,10 +60,11 @@ import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../controllers/blood_request_controller.dart';
 import 'find_button.dart';
 
 class UrgentRequest extends StatelessWidget {
-  const UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType, required this.contractPersonName, required this.contractPersonNumber, required this.healthIssue, required this.bloodAmount, required this.time, required this.note,  this.requestId,});
+   UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType, required this.contractPersonName, required this.contractPersonNumber, required this.healthIssue, required this.bloodAmount, required this.time, required this.note,  this.requestId,});
   final String patientsName;
   final String hospitalName;
   final String address;
@@ -76,6 +77,8 @@ class UrgentRequest extends StatelessWidget {
   final String time;
   final String note;
   final String? requestId;
+
+  final BloodRequestController controller = Get.put(BloodRequestController());
 
   @override
   Widget build(BuildContext context) {
@@ -219,11 +222,14 @@ class UrgentRequest extends StatelessWidget {
                              time : time,
                              bloodType : bloodType,
                              bloodAmount : bloodAmount,
-                             buttonText : "confirm",
-                              buttonFunction: () => Get.to(RequestBlood(requestId: requestId,)),
+                             buttonText : "Donate",
+                              buttonFunction: (){
+                                controller.donateBlood(requestId,bloodAmount);
+                              },
                               contractPersonName : contractPersonName,
                               contractPersonNumber : contractPersonNumber,
-                              note: note, title: 'Urgent Request',
+                              note: note,
+                              title: 'Urgent Request',
 
                             ));
                           },

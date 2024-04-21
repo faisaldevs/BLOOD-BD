@@ -116,6 +116,7 @@ class FeedPage extends StatelessWidget {
                 itemCount: snapshot.data?.data?.length,
                 itemBuilder: (context, index) {
                   final e = dataList.data?[index];
+                  String requestId = e?.id.toString() ?? "name";
                   String contactPersonName = e?.contactPersonName ?? "name";
                   String number = e?.contactPersonPhone ?? "01*********";
                   String patientsName = e?.patientsName ?? "Patient Name";
@@ -128,6 +129,7 @@ class FeedPage extends StatelessWidget {
                   String note = e?.note ?? "note";
 
                   return historyTile(
+                      requestId,
                       contactPersonName,
                       number,
                       patientsName,
@@ -166,6 +168,7 @@ class FeedPage extends StatelessWidget {
   }
 
   Widget historyTile(
+    String requestId,
     String contactPersonName,
     String number,
     String patientsName,
@@ -333,21 +336,24 @@ class FeedPage extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: (){
-                  Get.rawSnackbar(
-                      messageText: const Text(
-                          'Currently working on it..!!',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14
-                          )
-                      ),
-                      isDismissible: true,
-                      duration: const Duration(seconds: 3),
-                      backgroundColor: Colors.red[400]!,
-                      icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
-                      margin: EdgeInsets.zero,
-                      snackStyle: SnackStyle.GROUNDED
-                  );
+
+                  controller.donateBlood(requestId,bloodAmount);
+
+                  // Get.rawSnackbar(
+                  //     messageText: const Text(
+                  //         'Currently working on it..!!',
+                  //         style: TextStyle(
+                  //             color: Colors.white,
+                  //             fontSize: 14
+                  //         )
+                  //     ),
+                  //     isDismissible: true,
+                  //     duration: const Duration(seconds: 3),
+                  //     backgroundColor: Colors.red[400]!,
+                  //     icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+                  //     margin: EdgeInsets.zero,
+                  //     snackStyle: SnackStyle.GROUNDED
+                  // );
                 },
                 style: ButtonStyle(
                   backgroundColor:
@@ -361,7 +367,7 @@ class FeedPage extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  "Message",
+                  "Donate",
                   style: TextStyle(color: Colors.white),
                 ),
               ),

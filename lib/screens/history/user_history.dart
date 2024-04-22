@@ -7,8 +7,7 @@ import 'blood_donate_history.dart';
 import 'blood_request_history.dart';
 
 class BloodHistory extends StatelessWidget {
-   const BloodHistory({super.key});
-
+  const BloodHistory({super.key});
 
   @override
   Widget build(BuildContext context) {

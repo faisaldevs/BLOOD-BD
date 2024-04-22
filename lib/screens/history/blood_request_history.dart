@@ -21,13 +21,14 @@ class _HistoryRequestState extends State<HistoryRequest> {
       body: FutureBuilder<BloodRequestHistoryModel>(
         future: controller.getHistoryRequest(),
         builder: (context, snapshot) {
-
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return const Center(child: CircularProgressIndicator(),);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
-          if(snapshot.hasError){
-            return const Center(child: Text("Something went wrong"),);
-          }
+          // if(snapshot.hasError){
+          //   return const Center(child: Text("Something went wrong"),);
+          // }
 
           if (snapshot.hasData) {
             final dataList = snapshot.data!;
@@ -213,7 +214,6 @@ class _HistoryRequestState extends State<HistoryRequest> {
             ),
           ),
           const SizedBox(height: 10),
-
         ],
       ),
     );

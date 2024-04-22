@@ -78,7 +78,7 @@ class SignupController extends GetxController {
           "division": division,
           "district": district,
           "upazila": thana,
-          "union": union,
+          "union": "union",
           "address": addressController.text,
           "password": passwordController.text,
         });

@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../controllers/blood_request_controller.dart';
 import '../../models/blood_request_model.dart';
+import 'blood_request_discription.dart';
 
 class FeedPage extends StatelessWidget {
   FeedPage({super.key});
@@ -126,6 +127,10 @@ class FeedPage extends StatelessWidget {
                   String date = e?.date ?? "date";
                   String time = e?.time ?? "time";
                   String address = e?.address ?? "address";
+                  String division = e?.division ?? "address";
+                  String district = e?.district ?? "address";
+                  String thana = e?.upazila ?? "address";
+                  String hospitalName = e?.hospitalName ?? "address";
                   String note = e?.note ?? "note";
 
                   return historyTile(
@@ -139,6 +144,10 @@ class FeedPage extends StatelessWidget {
                       date,
                       time,
                       address,
+                      division,
+                      district,
+                      thana,
+                      hospitalName,
                       note);
                 },
               );
@@ -175,6 +184,10 @@ class FeedPage extends StatelessWidget {
     String healthIssue,
     String bloodAmount,
     String bloodType,
+      String   division,
+      String district,
+      String thana,
+      String hospitalName,
     String address,
     String time,
     String date,
@@ -283,13 +296,17 @@ class FeedPage extends StatelessWidget {
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        Get.to(DescriptionUi(
+                        Get.to(RequestDescriptionUi(
                           contractPersonName: contactPersonName,
                           contractPersonNumber: number,
                           patientName: patientsName,
                           healthIssue: healthIssue,
                           bloodAmount: bloodAmount,
                           bloodType: bloodType,
+                          division: division,
+                          district: district,
+                          thana: thana,
+                          hospitalName: hospitalName,
                           address: address,
                           date: date,
                           time: time,

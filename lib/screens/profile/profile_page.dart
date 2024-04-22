@@ -268,7 +268,7 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             CustomDrawerLinks(
-              title: 'Donation Status',
+              title: 'Donation Requests',
               icon: Icons.bloodtype_outlined,
               onTap: () {
                 Get.to(DonationStatus());

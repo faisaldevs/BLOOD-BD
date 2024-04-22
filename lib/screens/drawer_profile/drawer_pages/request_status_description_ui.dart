@@ -6,25 +6,31 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class DescriptionUi extends StatelessWidget {
-  const DescriptionUi(
+class RequestDescriptionUi extends StatelessWidget {
+  const RequestDescriptionUi(
       {super.key,
-      this.contractPersonName,
-      this.contractPersonNumber,
-      this.patientName,
-      this.healthIssue,
-      this.bloodAmount,
-      this.bloodType,
-      this.address,
-      this.date,
-      this.time,
-      this.note,
-      this.buttonText,
-      this.buttonFunction,
-      this.lastDonateDate,
-      this.division,
-      this.thana,
-      this.district, this.id, required this.title, this.hospitalName});
+        this.contractPersonName,
+        this.contractPersonNumber,
+        this.patientName,
+        this.healthIssue,
+        this.bloodAmount,
+        this.bloodType,
+        this.address,
+        this.date,
+        this.time,
+        this.note,
+        this.buttonText,
+        this.lastDonateDate,
+        this.division,
+        this.thana,
+        this.district,
+        this.id,
+        required this.title,
+        this.hospitalName,
+        this.receiverStatus,
+        this.notificationId,
+        this.buttonFunction1,
+        this.buttonFunction2});
 
   final String title;
   final String? id;
@@ -43,8 +49,11 @@ class DescriptionUi extends StatelessWidget {
   final String? thana;
   final String? time;
   final String? note;
+  final String? receiverStatus;
+  final String? notificationId;
   final String? buttonText;
-  final Function()? buttonFunction;
+  final Function()? buttonFunction1;
+  final Function()? buttonFunction2;
 
   @override
   Widget build(BuildContext context) {
@@ -105,16 +114,44 @@ class DescriptionUi extends StatelessWidget {
                                   fontSize: 18.sp, fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              showTime(),
+                              date!,
                               style: const TextStyle(
                                 color: Colors.green,
                               ),
                             )
                           ],
                         ),
-                        Text("Number : $contractPersonNumber",
-                            style: const TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.bold)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Number : $contractPersonNumber",
+                                style: const TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.bold)),
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: receiverStatus == "Pending"
+                                  ? Text(
+                                "Pending",
+                                style: const TextStyle(
+                                  color: Colors.blueGrey,
+                                ),
+                              )
+                                  : receiverStatus == "Accepted"
+                                  ? Text(
+                                "Accepted",
+                                style: const TextStyle(
+                                  color: Colors.green,
+                                ),
+                              )
+                                  : Text(
+                                "Canceled",
+                                style: const TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   )
@@ -142,10 +179,12 @@ class DescriptionUi extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 16,
                             )),
-                        Text("Last Donate Date : $lastDonateDate",
-                            style: const TextStyle(
-                              fontSize: 16,
-                            )),
+                        Text(
+                          "Last Donate Date : $lastDonateDate",
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -157,7 +196,7 @@ class DescriptionUi extends StatelessWidget {
                           decoration: const BoxDecoration(
                               color: Colors.red,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(50))),
+                              BorderRadius.all(Radius.circular(50))),
                           child: Text(
                             "$bloodType",
                             // dataList[index]["patient_name"],
@@ -179,6 +218,7 @@ class DescriptionUi extends StatelessWidget {
                     children: [
                       Text("Division : $division"),
                       Text("District : $district"),
+                      // Text("Thana : $"),
                       Text("Address : $address"),
                     ],
                   ),
@@ -201,7 +241,75 @@ class DescriptionUi extends StatelessWidget {
                   ),
                 ],
               ),
+              Divider(),
               const SizedBox(height: 10),
+              Text(
+                "Your Status Will Update in Next Refresh ..!!",
+                style: TextStyle(color: Colors.red),
+              ),
+
+              const SizedBox(height: 10),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     ElevatedButton(
+              //       onPressed: () {
+              //         launchUrlString("tel:$contractPersonNumber");
+              //       },
+              //       style: ButtonStyle(
+              //         backgroundColor:
+              //         const MaterialStatePropertyAll<Color>(Colors.red),
+              //         padding: const MaterialStatePropertyAll(
+              //             EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
+              //         shape: MaterialStatePropertyAll(
+              //           RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(5.0),
+              //           ),
+              //         ),
+              //       ),
+              //       child: const Text(
+              //         "Call",
+              //         style: TextStyle(color: Colors.white),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 20),
+              //     ElevatedButton(
+              //       onPressed: buttonFunction,
+              //       //(){
+              //       //                       Get.rawSnackbar(
+              //       //                           messageText: const Text(
+              //       //                               'Currently working on it..!!',
+              //       //                               style: TextStyle(
+              //       //                                   color: Colors.white,
+              //       //                                   fontSize: 14
+              //       //                               )
+              //       //                           ),
+              //       //                           isDismissible: true,
+              //       //                           duration: const Duration(seconds: 3),
+              //       //                           backgroundColor: Colors.red[400]!,
+              //       //                           icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+              //       //                           margin: EdgeInsets.zero,
+              //       //                           snackStyle: SnackStyle.GROUNDED
+              //       //                       );
+              //       //                     }
+              //       style: ButtonStyle(
+              //         backgroundColor: const MaterialStatePropertyAll<Color>(
+              //             Color(0xff026b49)),
+              //         padding: const MaterialStatePropertyAll(
+              //             EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
+              //         shape: MaterialStatePropertyAll(
+              //           RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(5.0),
+              //           ),
+              //         ),
+              //       ),
+              //       child: Text(
+              //         buttonText ?? "Massage",
+              //         style: const TextStyle(color: Colors.white),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -210,8 +318,8 @@ class DescriptionUi extends StatelessWidget {
                       launchUrlString("tel:$contractPersonNumber");
                     },
                     style: ButtonStyle(
-                      backgroundColor:
-                          const MaterialStatePropertyAll<Color>(Colors.red),
+                      backgroundColor: const MaterialStatePropertyAll<Color>(
+                          Colors.blueGrey),
                       padding: const MaterialStatePropertyAll(
                           EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
                       shape: MaterialStatePropertyAll(
@@ -227,24 +335,26 @@ class DescriptionUi extends StatelessWidget {
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
-                    onPressed: buttonFunction,
-                    //(){
-                    //                       Get.rawSnackbar(
-                    //                           messageText: const Text(
-                    //                               'Currently working on it..!!',
-                    //                               style: TextStyle(
-                    //                                   color: Colors.white,
-                    //                                   fontSize: 14
-                    //                               )
-                    //                           ),
-                    //                           isDismissible: true,
-                    //                           duration: const Duration(seconds: 3),
-                    //                           backgroundColor: Colors.red[400]!,
-                    //                           icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
-                    //                           margin: EdgeInsets.zero,
-                    //                           snackStyle: SnackStyle.GROUNDED
-                    //                       );
-                    //                     }
+                    onPressed: buttonFunction2,
+                    style: ButtonStyle(
+                      backgroundColor:
+                      const MaterialStatePropertyAll<Color>(Colors.red),
+                      padding: const MaterialStatePropertyAll(
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
+                      shape: MaterialStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  ElevatedButton(
+                    onPressed: buttonFunction2,
                     style: ButtonStyle(
                       backgroundColor: const MaterialStatePropertyAll<Color>(
                           Color(0xff026b49)),
@@ -256,9 +366,9 @@ class DescriptionUi extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: Text(
-                      buttonText ?? "Massage",
-                      style: const TextStyle(color: Colors.white),
+                    child: const Text(
+                      "Accept",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],

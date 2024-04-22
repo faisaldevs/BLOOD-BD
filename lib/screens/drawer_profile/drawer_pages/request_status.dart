@@ -1,5 +1,3 @@
-import 'package:blood_bd/models/donation_model.dart';
-import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,15 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '../../../controllers/donation_status_controller.dart';
+import '../../../controllers/request_status_controller.dart';
+import '../../../models/request_status_model.dart';
 import '../../../utils/app_colors.dart';
 import 'donation_status_description_ui.dart';
 
-class DonationStatus extends StatelessWidget {
-  DonationStatus({super.key});
+class RequestStatus extends StatelessWidget {
+  RequestStatus({super.key});
 
-  final DonationStatusController controller =
-      Get.put(DonationStatusController());
+  final RequestStatusController controller =
+  Get.put(RequestStatusController());
 
   loadingBar() => Get.rawSnackbar(
       messageText: const Text('Loading..!!',
@@ -63,7 +62,7 @@ class DonationStatus extends StatelessWidget {
           ),
           Divider(),
           Expanded(
-            child: FutureBuilder<DonationModel>(
+            child: FutureBuilder<RequestStatusModel>(
               future: controller.getDonationList(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -80,20 +79,20 @@ class DonationStatus extends StatelessWidget {
                       final e = dataList.data?[index];
                       String notificationId = e?.id.toString() ?? "";
                       String contactPersonName =
-                          e?.bloodRequest?.contactPersonName ?? "";
+                          e?.bloodDonor?.contactPersonName ?? "";
                       String contractPersonNumber =
-                          e?.bloodRequest?.contactPersonPhone.toString() ?? "";
-                      String patientsName = e?.bloodRequest?.patientsName ?? "";
-                      String healthIssue = e?.bloodRequest?.healthIssue ?? "";
+                          e?.bloodDonor?.contactPersonPhone.toString() ?? "";
+                      String? patientsName =  "";
+                      String healthIssue = e?.bloodDonor?.healthIssue ?? "";
                       String bloodAmount =
-                          e?.bloodRequest?.amountBag.toString() ?? "";
-                      String bloodType = e?.bloodRequest?.bloodGroup ?? "";
-                      String address = e?.bloodRequest?.address ?? "";
-                      String division = e?.bloodRequest?.division ?? "";
-                      String district = e?.bloodRequest?.district ?? "";
-                      String time = e?.bloodRequest?.time ?? "";
-                      String date = e?.bloodRequest?.date ?? "";
-                      String note = e?.bloodRequest?.note ?? "";
+                          e?.bloodDonor?.amountBag.toString() ?? "";
+                      String bloodType = e?.bloodDonor?.bloodGroup ?? "";
+                      String address = e?.bloodDonor?.address ?? "";
+                      String division = e?.bloodDonor?.division ?? "";
+                      String district = e?.bloodDonor?.district ?? "";
+                      String time =  "";
+                      String date =  "";
+                      String note =   "";
                       String receiverStatus = e?.receiverStatus ?? "";
 
                       return donationTile(
@@ -143,21 +142,21 @@ class DonationStatus extends StatelessWidget {
   }
 
   Widget donationTile(
-    String notificationId,
-    String contactPersonName,
-    String contractPersonNumber,
-    String patientsName,
-    String healthIssue,
-    String bloodAmount,
-    String bloodType,
-    String address,
-    String division,
-    String district,
-    String time,
-    String date,
-    String note,
-    String receiverStatus,
-  ) {
+      String notificationId,
+      String contactPersonName,
+      String contractPersonNumber,
+      String patientsName,
+      String healthIssue,
+      String bloodAmount,
+      String bloodType,
+      String address,
+      String division,
+      String district,
+      String time,
+      String date,
+      String note,
+      String receiverStatus,
+      ) {
     String showTime() {
       DateTime now;
 
@@ -217,24 +216,24 @@ class DonationStatus extends StatelessWidget {
                           margin: EdgeInsets.only(left: 10),
                           child: receiverStatus == "Pending"
                               ? Text(
-                                  "Pending",
-                                  style: const TextStyle(
-                                    color: Colors.blueGrey,
-                                  ),
-                                )
+                            "Pending",
+                            style: const TextStyle(
+                              color: Colors.blueGrey,
+                            ),
+                          )
                               : receiverStatus == "Accepted"
-                                  ? Text(
-                                      "Accepted",
-                                      style: const TextStyle(
-                                        color: Colors.green,
-                                      ),
-                                    )
-                                  : Text(
-                                      "Canceled",
-                                      style: const TextStyle(
-                                        color: Colors.red,
-                                      ),
-                                    ),
+                              ? Text(
+                            "Accepted",
+                            style: const TextStyle(
+                              color: Colors.green,
+                            ),
+                          )
+                              : Text(
+                            "Canceled",
+                            style: const TextStyle(
+                              color: Colors.red,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -304,16 +303,16 @@ class DonationStatus extends StatelessWidget {
                             note: note,
                             notificationId: notificationId,
                             receiverStatus: receiverStatus,
-                            buttonFunction1: () {
-                              controller.donationStatus(
-                                  notificationId, "Canceled");
-                              loadingBar();
-                            },
-                            buttonFunction2: () {
-                              controller.donationStatus(
-                                  notificationId, "Accepted");
-                              loadingBar();
-                            },
+                            // buttonFunction1: () {
+                            //   controller.donationStatus(
+                            //       notificationId, "Canceled");
+                            //   loadingBar();
+                            // },
+                            // buttonFunction2: () {
+                            //   controller.donationStatus(
+                            //       notificationId, "Accepted");
+                            //   loadingBar();
+                            // },
                             title: 'Donation Request List',
                           ),
                         );
@@ -348,7 +347,7 @@ class DonationStatus extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      const MaterialStatePropertyAll<Color>(Colors.blueGrey),
+                  const MaterialStatePropertyAll<Color>(Colors.blueGrey),
                   padding: const MaterialStatePropertyAll(
                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
                   shape: MaterialStatePropertyAll(
@@ -365,12 +364,12 @@ class DonationStatus extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  controller.donationStatus(notificationId, "Canceled");
+                  // controller.donationStatus(notificationId, "Canceled");
                   loadingBar();
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      const MaterialStatePropertyAll<Color>(Colors.red),
+                  const MaterialStatePropertyAll<Color>(Colors.red),
                   padding: const MaterialStatePropertyAll(
                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
                   shape: MaterialStatePropertyAll(
@@ -387,12 +386,12 @@ class DonationStatus extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  controller.donationStatus(notificationId, "Accepted");
+                  // controller.donationStatus(notificationId, "Accepted");
                   loadingBar();
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      const MaterialStatePropertyAll<Color>(Color(0xff026b49)),
+                  const MaterialStatePropertyAll<Color>(Color(0xff026b49)),
                   padding: const MaterialStatePropertyAll(
                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
                   shape: MaterialStatePropertyAll(

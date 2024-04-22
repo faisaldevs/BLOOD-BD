@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../controllers/profile_controller.dart';
 import 'components/drawer_header.dart';
 import 'drawer_pages/change_password.dart';
+import 'drawer_pages/request_status.dart';
 
 class DrawerProfile extends StatelessWidget {
   DrawerProfile({super.key});
@@ -28,13 +29,13 @@ class DrawerProfile extends StatelessWidget {
 
           // -------Drawer Body------------
           // ActiveDonor(value: ,),
-       CustomDrawerLinks(
-          title: 'Profile',
-          icon: Icons.person,
-          onTap: () {
-            controller.profileData();
-          },
-        ),
+          CustomDrawerLinks(
+            title: 'Profile',
+            icon: Icons.person,
+            onTap: () {
+              controller.profileData();
+            },
+          ),
 
           // CustomDrawerLinks(
           //   title: 'Medical History',
@@ -51,10 +52,17 @@ class DrawerProfile extends StatelessWidget {
             },
           ),
           CustomDrawerLinks(
-            title: 'Donation Status',
+            title: 'Donation Requests',
             icon: Icons.bloodtype_outlined,
             onTap: () {
               Get.to(DonationStatus());
+            },
+          ),
+          CustomDrawerLinks(
+            title: 'Request status',
+            icon: Icons.bloodtype_outlined,
+            onTap: () {
+              Get.to(RequestStatus());
             },
           ),
           CustomDrawerLinks(

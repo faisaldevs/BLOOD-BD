@@ -6,25 +6,25 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class DescriptionUi extends StatelessWidget {
-  const DescriptionUi(
+class RequestDescriptionUi extends StatelessWidget {
+  const RequestDescriptionUi(
       {super.key,
-      this.contractPersonName,
-      this.contractPersonNumber,
-      this.patientName,
-      this.healthIssue,
-      this.bloodAmount,
-      this.bloodType,
-      this.address,
-      this.date,
-      this.time,
-      this.note,
-      this.buttonText,
-      this.buttonFunction,
-      this.lastDonateDate,
-      this.division,
-      this.thana,
-      this.district, this.id, required this.title, this.hospitalName});
+        this.contractPersonName,
+        this.contractPersonNumber,
+        this.patientName,
+        this.healthIssue,
+        this.bloodAmount,
+        this.bloodType,
+        this.address,
+        this.date,
+        this.time,
+        this.note,
+        this.buttonText,
+        this.buttonFunction,
+        this.lastDonateDate,
+        this.division,
+        this.thana,
+        this.district, this.id, required this.title, this.hospitalName});
 
   final String title;
   final String? id;
@@ -105,7 +105,8 @@ class DescriptionUi extends StatelessWidget {
                                   fontSize: 18.sp, fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              showTime(),
+                              // showTime(),
+                              time ?? "$showTime()",
                               style: const TextStyle(
                                 color: Colors.green,
                               ),
@@ -157,7 +158,7 @@ class DescriptionUi extends StatelessWidget {
                           decoration: const BoxDecoration(
                               color: Colors.red,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(50))),
+                              BorderRadius.all(Radius.circular(50))),
                           child: Text(
                             "$bloodType",
                             // dataList[index]["patient_name"],
@@ -211,7 +212,7 @@ class DescriptionUi extends StatelessWidget {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          const MaterialStatePropertyAll<Color>(Colors.red),
+                      const MaterialStatePropertyAll<Color>(Colors.red),
                       padding: const MaterialStatePropertyAll(
                           EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
                       shape: MaterialStatePropertyAll(

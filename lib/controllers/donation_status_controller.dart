@@ -1,22 +1,27 @@
 import 'dart:convert';
+import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/models/donation_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/notification_request_model.dart';
 
-class DonationStatusController extends GetxController{
-  var token  = GetStorage().read("token");
+class DonationStatusController extends GetxController {
+  RxString statusBool = "0".obs;
+  var token = GetStorage().read("token") ?? "null";
 
-  Future<DonationModel> getDonationList()async{
+  Future<DonationModel> getDonationList() async {
     print("pressed.............1");
-    try{
+    try {
       print(token);
-      final response = await http.get(Uri.parse("https://starsoftjpn.xyz/api/auth/blood-request-notification"),
+      final response = await http.get(
+        Uri.parse(
+            "https://starsoftjpn.xyz/api/auth/blood-request-notification"),
         headers: {
-        "Accept" : "application/json",
-        "Authorization" : token,
+          "Accept": "application/json",
+          "Authorization": token,
         },
       );
       if (response.statusCode == 200) {
@@ -28,22 +33,22 @@ class DonationStatusController extends GetxController{
         print(response.body);
         throw Exception('Failed to load blood request notification');
       }
-
-    }catch(e){
-      print(e);
+    } catch (e) {
+      print("Error : $e");
     }
 
     throw Exception("Loading failed !!!");
   }
 
-  Future<NotificationRequestModel> getNotificationRequest()async{
+  Future<NotificationRequestModel> getNotificationRequest() async {
     print("pressed.............1");
-    try{
+    try {
       print(token);
-      final response = await http.get(Uri.parse("https://starsoftjpn.xyz/api/auth/blood-donor-notification"),
+      final response = await http.get(
+        Uri.parse("https://starsoftjpn.xyz/api/auth/blood-donor-notification"),
         headers: {
-          "Accept" : "application/json",
-          "Authorization" : token,
+          "Accept": "application/json",
+          "Authorization": token,
         },
       );
       if (response.statusCode == 200) {
@@ -55,17 +60,55 @@ class DonationStatusController extends GetxController{
         print(response.body);
         throw Exception('Failed to load blood request notification');
       }
-
-    }catch(e){
+    } catch (e) {
       print(e);
     }
 
     throw Exception("Loading failed !!!");
   }
 
+  sentStatus() {}
 
-  sentStatus(){
+  donationStatus(notificationId, status) async {
+    print("Notification Id :$notificationId");
+    print("Status : $status");
 
+    var response = await http.post(
+        Uri.parse(ApiUrls.bloodRequestNotificationReceiverStatusPost),
+        headers: {
+          "Accept": "application/json",
+          "Authorization": token,
+        },
+        body: {
+          "blood_request_notification_id": notificationId.toString(),
+          "receiver_status": status.toString(),
+        });
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      print("done");
+      Get.rawSnackbar(
+          messageText: const Text('Done..!!',
+              style: TextStyle(color: Colors.white, fontSize: 14)),
+          isDismissible: true,
+          duration: const Duration(milliseconds: 800),
+          backgroundColor: Colors.red[400]!,
+          icon: const Icon(
+            Icons.done_all_outlined,
+            color: Colors.white,
+            size: 35,
+          ),
+          margin: EdgeInsets.zero,
+          snackStyle: SnackStyle.GROUNDED);
+    }
   }
 
+// statusUpdate(status){
+//   if(status == "Accepted"){
+//     statusBool.value = "1";
+//   }else if(status == "Canceled"){
+//     statusBool.value = "2";
+//   }
+// }
 }

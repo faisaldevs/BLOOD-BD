@@ -8,15 +8,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class HistoryController extends GetxController {
-
   RxBool isVisible = false.obs;
 
-  visibility(){
+  visibility() {
     isVisible.value = !isVisible.value;
   }
-
-
-
 
   var token = GetStorage().read("token");
 
@@ -30,13 +26,15 @@ class HistoryController extends GetxController {
       //
       //   },
       // );
-      var res = await http.get(Uri.parse(ApiUrls.bloodRequestGet),headers: {
-        "Accept" : "application/json",
-        "Authorization" : token,
-      },);
+      var res = await http.get(
+        Uri.parse(ApiUrls.bloodRequestGet),
+        headers: {
+          "Accept": "application/json",
+          "Authorization": token,
+        },
+      );
       // print(res.statusCode);
       // print(res.body);
-
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(res.body);
@@ -98,10 +96,13 @@ class HistoryController extends GetxController {
       //
       //   },
       // );
-      var res = await http.get(Uri.parse(ApiUrls.bloodDonorGet),headers: {
-        "Accept" : "application/json",
-        "Authorization" : token,
-      },);
+      var res = await http.get(
+        Uri.parse(ApiUrls.bloodDonorGet),
+        headers: {
+          "Accept": "application/json",
+          "Authorization": token,
+        },
+      );
       print("pressed.............2");
       print(res.statusCode);
 
@@ -146,5 +147,4 @@ class HistoryController extends GetxController {
     }
     throw Exception("Loading failed !!!");
   }
-
 }

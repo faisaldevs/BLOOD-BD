@@ -316,7 +316,7 @@ class RequestBloodController extends GetxController {
     throw Exception("Loading failed !!!");
   }
 
-  confirmBlood(String bloodRequestId, String bloodDonorId, String bloodAmount) async {
+  confirmBlood(String bloodRequestId, String bloodDonorId, String bloodAmount, bloodDonorUserId) async {
     print("validate");
     print(bloodRequestId);
     print(bloodDonorId);
@@ -332,6 +332,7 @@ class RequestBloodController extends GetxController {
         "blood_request_id": bloodRequestId,
         "blood_donor_id": bloodDonorId,
         "request_amount_bag": bloodAmount,
+        "blood_donor_user_id": bloodDonorUserId,
       },
     );
 

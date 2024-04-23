@@ -335,7 +335,7 @@ class DonationDescriptionUi extends StatelessWidget {
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
-                    onPressed: buttonFunction2,
+                    onPressed: buttonFunction1,
                     style: ButtonStyle(
                       backgroundColor:
                           const MaterialStatePropertyAll<Color>(Colors.red),

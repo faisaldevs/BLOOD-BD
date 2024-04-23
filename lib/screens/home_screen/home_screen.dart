@@ -239,6 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     final e = dataList.data?[index];
                                     var requestId = e?.id;
+                                    String requestUserId = e?.user?.id.toString() ?? "name";
                                     String contactPersonName =
                                         e?.contactPersonName ?? "name";
                                     String contactPersonNumber =
@@ -270,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       bloodAmount: bloodAmount.toString(),
                                       time: time,
                                       note: note,
-                                      requestId: requestId.toString(),
+                                      requestId: requestId.toString(), requestUserId: requestUserId,
                                     );
                                   },
                                 );

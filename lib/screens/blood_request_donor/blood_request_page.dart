@@ -1,4 +1,3 @@
-import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -118,6 +117,7 @@ class FeedPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final e = dataList.data?[index];
                   String requestId = e?.id.toString() ?? "name";
+                  String requestUserId = e?.user?.id.toString() ?? "name";
                   String contactPersonName = e?.contactPersonName ?? "name";
                   String number = e?.contactPersonPhone ?? "01*********";
                   String patientsName = e?.patientsName ?? "Patient Name";
@@ -135,6 +135,7 @@ class FeedPage extends StatelessWidget {
 
                   return historyTile(
                       requestId,
+                      requestUserId,
                       contactPersonName,
                       number,
                       patientsName,
@@ -178,6 +179,7 @@ class FeedPage extends StatelessWidget {
 
   Widget historyTile(
     String requestId,
+    String requestUserId,
     String contactPersonName,
     String number,
     String patientsName,
@@ -353,8 +355,8 @@ class FeedPage extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: (){
-
-                  controller.donateBlood(requestId,bloodAmount);
+                  print("clicked");
+                  controller.donateBlood(requestId,bloodAmount,requestUserId);
 
                   // Get.rawSnackbar(
                   //     messageText: const Text(

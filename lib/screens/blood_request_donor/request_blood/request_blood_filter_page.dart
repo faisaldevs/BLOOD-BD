@@ -41,7 +41,7 @@ class FilterPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
-        title: const Text("Blood Request"),
+        title: const Text("Donor List"),
         leading: InkWell(
           onTap: () =>  Get.offAllNamed(home),
           child: const Icon(
@@ -59,19 +59,19 @@ class FilterPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final e = dataList.data?[index];
                 String bloodDonorId = e?.id.toString() ?? "";
+                String bloodDonorUserId = e?.user?.id.toString() ?? "";
                 String contactPersonName = e?.contactPersonName ?? "name";
-                String number = e?.contactPersonPhone.toString() ?? "01*********";
-                // String patientsName = e.patientsName ?? "Patient Name";
+                String number =
+                    e?.contactPersonPhone.toString() ?? "01*********";
                 String healthIssue = e?.healthIssue ?? "Health Issue";
                 String bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
                 String bloodType = e?.bloodGroup ?? "Type";
-                // String date = e.date ?? "date";
-                // String time = e.time ?? "time";
+
                 String address = e?.address ?? "address";
-                // String note = e.note ?? "note";
 
                 return historyTile(
                   bloodDonorId,
+                  bloodDonorUserId,
                   contactPersonName,
                   number,
                   healthIssue,
@@ -82,7 +82,25 @@ class FilterPage extends StatelessWidget {
               },
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return SizedBox(
+              height: Get.height,
+              width: Get.width,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.search,
+                    size: 80,
+                    color: Colors.black26,
+                  ),
+                  Text(
+                    "No Donate List Found!",
+                    style: TextStyle(fontSize: 19, color: Colors.black26),
+                  ),
+                ],
+              ),
+            );
           }
         },
       ),
@@ -91,6 +109,7 @@ class FilterPage extends StatelessWidget {
 
   Widget historyTile(
     String bloodDonorId,
+    String bloodDonorUserId,
     String contactPersonName,
     String contactPersonNumber,
     String healthIssue,
@@ -107,6 +126,7 @@ class FilterPage extends StatelessWidget {
 
       return formattedDate;
     }
+
 
     // bool isVisible = false;
     //
@@ -255,24 +275,9 @@ class FilterPage extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
+                  print("1122");
                   controller.confirmBlood(
-                      bloodRequestId, bloodDonorId, bloodAmount);
-                  Get.rawSnackbar(
-                      messageText: const Text(
-                          'Request has been sent. Please wait donner response..!! ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14
-                          )
-                      ),
-                      isDismissible: true,
-                      duration: const Duration(seconds: 3),
-                      backgroundColor: Colors.red[400]!,
-                      icon : const Icon(Icons.download_done, color: Colors.white, size: 35,),
-                      margin: EdgeInsets.zero,
-                      snackStyle: SnackStyle.GROUNDED
-                  );
-
+                      bloodRequestId, bloodDonorId, bloodAmount, bloodDonorUserId);
                 },
                 style: ButtonStyle(
                   backgroundColor:

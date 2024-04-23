@@ -9,18 +9,27 @@ static const String live = "https://starsoftjpn.xyz/api";
   static const String loginPost = "$auth/login";
   static const String signUpPost = "$auth/register";
   static const String signUpOtpPost = "$auth/register-otp-check";
+
   static const String profileGet = "$auth/profile";
   static const String profileUpdatePost = "$auth/update-profile";
   static const String donorStatusUpdatePost = "$auth/update-donor-status";
   static const String changePasswordPost = "$auth/change-password";
+
   static const String bloodRequestGet = "$auth/blood-request";
   static const String bloodRequestPost = "$auth/blood-request";
+
   static const String bloodRequestNotificationGet= "$auth/blood-request-notification";
   static const String bloodDonorNotificationGet= "$auth/blood-donor-notification";
+
   static const String bloodRequestNotificationPost= "$auth/blood-request-notification";
   static const String bloodDonorNotificationPost= "$auth/blood-donor-notification";
+
+  static const String bloodDonorNotificationSenderStatusPost = "$auth/update-blood-donor-sender-status";
+  static const String bloodDonorNotificationReceiverStatusPost = "$auth/update-blood-donor-receiver-status";
+
   static const String bloodRequestNotificationSenderStatusPost = "$auth/update-blood-request-sender-status";
   static const String bloodRequestNotificationReceiverStatusPost = "$auth/update-blood-request-receiver-status";
+
   static const String bloodDonorGet = "$auth/blood-donor";
   static const String bloodDonorPost = "$auth/blood-donor";
   static const String bloodDonorWithSearchPost = "$auth/blood-donor-with-search";

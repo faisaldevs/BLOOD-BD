@@ -55,7 +55,7 @@ class BloodRequestController extends GetxController{
   }
 
 
-donateBlood(requestId, bloodAmount)async{
+donateBlood(requestId, bloodAmount,requestUserId)async{
     print("try");
   try {
     var res = await http.get(
@@ -89,6 +89,7 @@ donateBlood(requestId, bloodAmount)async{
           },
           body: {
             "blood_request_id": requestId.toString(),
+            "blood_request_user_id": requestUserId.toString(),
             "blood_donor_id": donorId.toString(),
             "request_amount_bag": bloodAmount.toString(),
           },
@@ -112,6 +113,9 @@ donateBlood(requestId, bloodAmount)async{
               margin: EdgeInsets.zero,
               snackStyle: SnackStyle.GROUNDED
           );
+        }else{
+          print(response.statusCode);
+          print(response.body);
         }
 
 
@@ -138,6 +142,9 @@ donateBlood(requestId, bloodAmount)async{
     }else if (res.statusCode == 404) {
       GetStorage().erase();
       Get.offAllNamed(welcomePage);
+    }
+    else{
+
     }
   } catch (e) {
     // loading.value = false;

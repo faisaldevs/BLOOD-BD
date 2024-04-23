@@ -95,6 +95,7 @@ class DonationStatus extends StatelessWidget {
                       String date = e?.bloodRequest?.date ?? "";
                       String note = e?.bloodRequest?.note ?? "";
                       String receiverStatus = e?.receiverStatus ?? "";
+                      print(notificationId);
 
                       return donationTile(
                           notificationId,
@@ -167,6 +168,8 @@ class DonationStatus extends StatelessWidget {
 
       return formattedDate;
     }
+
+    print(contactPersonName + "---123456");
 
     return Container(
       padding: const EdgeInsets.all(8),

@@ -18,21 +18,26 @@ class DonationStatusController extends GetxController {
     try {
       print(token);
       final response = await http.get(
-        Uri.parse(
-            "https://starsoftjpn.xyz/api/auth/blood-request-notification"),
+        //"https://starsoftjpn.xyz/api/auth/blood-request-notification"
+        Uri.parse(ApiUrls.bloodRequestNotificationGet),
         headers: {
           "Accept": "application/json",
-          "Authorization": token,
+          "Authorization": "bearer"+GetStorage().read("token"),
         },
       );
+
+      print(response.statusCode);
+      print(response.body);
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
-        print(responseData);
         return DonationModel.fromJson(responseData);
-      }else if (response.statusCode == 404) {
-        GetStorage().erase();
-        Get.offAllNamed(welcomePage);
-      } else {
+      }
+      // else if (response.statusCode == 404) {
+      //   GetStorage().erase();
+      //   Get.offAllNamed(welcomePage);
+      // }
+      else {
         print(response.statusCode);
         print(response.body);
         throw Exception('Failed to load blood request notification');
@@ -49,20 +54,22 @@ class DonationStatusController extends GetxController {
     try {
       print(token);
       final response = await http.get(
-        Uri.parse("https://starsoftjpn.xyz/api/auth/blood-donor-notification"),
+        Uri.parse(ApiUrls.bloodDonorNotificationGet),
         headers: {
           "Accept": "application/json",
-          "Authorization": token,
+          "Authorization": "bearer"+GetStorage().read("token"),
         },
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         print(responseData);
         return NotificationRequestModel.fromJson(responseData);
-      }else if (response.statusCode == 404) {
-        GetStorage().erase();
-        Get.offAllNamed(welcomePage);
-      } else {
+      }
+      // else if (response.statusCode == 404) {
+      //   GetStorage().erase();
+      //   Get.offAllNamed(welcomePage);
+      // }
+      else {
         print(response.statusCode);
         print(response.body);
         throw Exception('Failed to load blood request notification');

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../utils/app_routes.dart';
+
 class ProfileController extends GetxController {
   String name = "";
   String number = "";
@@ -48,6 +50,9 @@ class ProfileController extends GetxController {
         print(number);
         print(status);
         Get.to(const ProfilePage());
+      }else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       }
 
       print(res.statusCode);
@@ -77,6 +82,10 @@ class ProfileController extends GetxController {
           headers: {"Authorization": token},
           body: {"donor_status": 1.toString()},
         );
+     if (res.statusCode == 404) {
+      GetStorage().erase();
+      Get.offAllNamed(welcomePage);
+    }
         print(res.statusCode);
         print(res.body);
       } catch (e) {
@@ -89,6 +98,10 @@ class ProfileController extends GetxController {
         headers: {"Authorization": token},
         body: {"donor_status": 0.toString()},
       );
+     if (res1.statusCode == 404) {
+    GetStorage().erase();
+    Get.offAllNamed(welcomePage);
+    }
       print(res1.statusCode);
       print(res1.body);
     }

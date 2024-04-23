@@ -3,9 +3,11 @@ import 'package:blood_bd/screens/user_auth/login_screen/forget_password/forget_p
 import 'package:blood_bd/screens/user_auth/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../screens/user_auth/login_screen/forget_password/forget_otp_verification_page.dart';
+import '../utils/app_routes.dart';
 
 class ForgetPassController extends GetxController {
   GlobalKey<FormState> key = GlobalKey<FormState>();
@@ -31,6 +33,9 @@ class ForgetPassController extends GetxController {
 
       if (res.statusCode == 200) {
         Get.to(ForgetPassOtpVerification());
+      }else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       }
     }
   }
@@ -51,6 +56,9 @@ class ForgetPassController extends GetxController {
 
       if (res.statusCode == 200) {
         Get.to(ForgetPasswordPage());
+      }else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       }
     }
   }
@@ -72,6 +80,9 @@ class ForgetPassController extends GetxController {
 
       if (res.statusCode == 200) {
         Get.to( const LoginScreen());
+      }else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       }
     }
   }

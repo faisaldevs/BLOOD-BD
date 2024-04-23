@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../utils/app_routes.dart';
+
 class HistoryController extends GetxController {
   RxBool isVisible = false.obs;
 
@@ -39,7 +41,10 @@ class HistoryController extends GetxController {
       if (res.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(res.body);
         return BloodRequestHistoryModel.fromJson(responseData);
-      } else {
+      }else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
+      }  else {
         print(res.statusCode);
         print(res.body);
         throw Exception('Failed to load blood request notification');
@@ -138,7 +143,10 @@ class HistoryController extends GetxController {
             // note: map["note"],
           );
         }).toList();
-      } else {
+      }else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
+      }  else {
         print("failed code${res.statusCode}");
         print("failed body${res.body}");
       }

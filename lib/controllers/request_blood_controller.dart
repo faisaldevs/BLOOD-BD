@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../screens/blood_request_donor/request_blood/request_blood_filter_page.dart';
+import '../utils/app_routes.dart';
 
 
 class RequestBloodController extends GetxController {
@@ -339,6 +340,9 @@ class RequestBloodController extends GetxController {
 
     if (res.statusCode == 200) {
 
+    }else if (res.statusCode == 404) {
+      GetStorage().erase();
+      Get.offAllNamed(welcomePage);
     }
   }
 

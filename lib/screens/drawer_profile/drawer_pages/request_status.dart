@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,38 +77,36 @@ class RequestStatus extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final e = dataList.data?[index];
                       String notificationId = e?.id.toString() ?? "";
+                      String name = e?.user?.name.toString() ?? "";
+                      String bloodType = e?.bloodDonor?.bloodGroup ?? "";
+                      String bloodAmount =
+                          e?.bloodDonor?.amountBag.toString() ?? "";
+                      String healthIssue = e?.bloodDonor?.healthIssue ?? "";
+                      String lastDonateDate = e?.bloodDonor?.lastDonateDate ?? "";
+                      String address = e?.bloodDonor?.address ?? "";
+                      String division = e?.bloodDonor?.division ?? "";
+                      String district = e?.bloodDonor?.district ?? "";
+                      String thana = e?.bloodDonor?.upazila ?? "";
+                      String receiverStatus = e?.receiverStatus ?? "";
                       String contactPersonName =
                           e?.bloodDonor?.contactPersonName ?? "";
                       String contractPersonNumber =
                           e?.bloodDonor?.contactPersonPhone.toString() ?? "";
-                      String? patientsName =  "";
-                      String healthIssue = e?.bloodDonor?.healthIssue ?? "";
-                      String bloodAmount =
-                          e?.bloodDonor?.amountBag.toString() ?? "";
-                      String bloodType = e?.bloodDonor?.bloodGroup ?? "";
-                      String address = e?.bloodDonor?.address ?? "";
-                      String division = e?.bloodDonor?.division ?? "";
-                      String district = e?.bloodDonor?.district ?? "";
-                      String time =  "";
-                      String date =  "";
-                      String note =   "";
-                      String receiverStatus = e?.receiverStatus ?? "";
 
                       return donationTile(
                           notificationId,
-                          contactPersonName,
-                          contractPersonNumber,
-                          patientsName,
+                          name,
                           healthIssue,
                           bloodAmount,
                           bloodType,
                           address,
                           division,
                           district,
-                          time,
-                          date,
-                          note,
-                          receiverStatus);
+                        thana,
+                          receiverStatus,
+                        lastDonateDate,
+                        contactPersonName,
+                        contractPersonNumber,);
                     },
                   );
                 } else {
@@ -141,21 +138,21 @@ class RequestStatus extends StatelessWidget {
     );
   }
 
+
   Widget donationTile(
       String notificationId,
-      String contactPersonName,
-      String contractPersonNumber,
-      String patientsName,
+      String name,
       String healthIssue,
       String bloodAmount,
       String bloodType,
       String address,
       String division,
       String district,
-      String time,
-      String date,
-      String note,
+      String thana,
       String receiverStatus,
+      String lastDonateDate,
+      String contactPersonName,
+      String contractPersonNumber,
       ) {
     String showTime() {
       DateTime now;
@@ -198,12 +195,12 @@ class RequestStatus extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18.sp, fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          date,
-                          style: const TextStyle(
-                            color: Colors.green,
-                          ),
-                        )
+                        // Text(
+                        //   date,
+                        //   style: const TextStyle(
+                        //     color: Colors.green,
+                        //   ),
+                        // )
                       ],
                     ),
                     Row(
@@ -252,7 +249,7 @@ class RequestStatus extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Patient's Name : $patientsName",
+                    Text("Patient's Name : $name",
                         style: const TextStyle(
                           fontSize: 16,
                         )),
@@ -291,16 +288,13 @@ class RequestStatus extends StatelessWidget {
                           DonationDescriptionUi(
                             contractPersonName: contactPersonName,
                             contractPersonNumber: contractPersonNumber,
-                            patientName: patientsName,
+                            patientName: name,
                             healthIssue: healthIssue,
                             bloodAmount: bloodAmount,
                             bloodType: bloodType,
                             address: address,
                             division: division,
                             district: district,
-                            date: date,
-                            time: time,
-                            note: note,
                             notificationId: notificationId,
                             receiverStatus: receiverStatus,
                             // buttonFunction1: () {

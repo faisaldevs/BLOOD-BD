@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/request_status_model.dart';
+import '../utils/app_routes.dart';
 
 
 class RequestStatusController extends GetxController {
@@ -26,6 +27,9 @@ class RequestStatusController extends GetxController {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         print(responseData);
         return RequestStatusModel.fromJson(responseData);
+      }else if (response.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       } else {
         print(response.statusCode);
         print(response.body);

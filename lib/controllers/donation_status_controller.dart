@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/notification_request_model.dart';
+import '../utils/app_routes.dart';
 
 class DonationStatusController extends GetxController {
   RxString statusBool = "0".obs;
@@ -28,6 +29,9 @@ class DonationStatusController extends GetxController {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         print(responseData);
         return DonationModel.fromJson(responseData);
+      }else if (response.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       } else {
         print(response.statusCode);
         print(response.body);
@@ -55,6 +59,9 @@ class DonationStatusController extends GetxController {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         print(responseData);
         return NotificationRequestModel.fromJson(responseData);
+      }else if (response.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       } else {
         print(response.statusCode);
         print(response.body);
@@ -101,6 +108,9 @@ class DonationStatusController extends GetxController {
           ),
           margin: EdgeInsets.zero,
           snackStyle: SnackStyle.GROUNDED);
+    }else if (response.statusCode == 404) {
+      GetStorage().erase();
+      Get.offAllNamed(welcomePage);
     }
   }
 

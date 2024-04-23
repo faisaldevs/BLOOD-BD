@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/blood_request_model.dart';
+import '../utils/app_routes.dart';
 
 
 class BloodRequestController extends GetxController{
@@ -33,6 +34,9 @@ class BloodRequestController extends GetxController{
         final Map<String, dynamic> responseData = jsonDecode(res.body);
         return RequestBloodModel.fromJson(responseData);
 
+      } else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       }
       else {
         if (kDebugMode) {
@@ -131,6 +135,9 @@ donateBlood(requestId, bloodAmount)async{
         );
       }
 
+    }else if (res.statusCode == 404) {
+      GetStorage().erase();
+      Get.offAllNamed(welcomePage);
     }
   } catch (e) {
     // loading.value = false;

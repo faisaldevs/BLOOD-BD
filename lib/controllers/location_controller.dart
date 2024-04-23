@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+
+import '../utils/app_routes.dart';
 class LocationController extends GetxController{
 
 
@@ -23,6 +26,9 @@ class LocationController extends GetxController{
           divisions.value = jsonData['data']
               .map<String>((division) => division['division'].toString())
               .toList();
+      }else if (response.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       } else {
       fetching.value = false;
         throw Exception('Failed to load divisions: ${response.statusCode}');
@@ -45,6 +51,9 @@ class LocationController extends GetxController{
               .toSet()
               .toList();
           districts.value = uniqueDistricts;
+      }else if (response.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       } else {
         throw Exception('Failed to load districts: ${response.statusCode}');
       }
@@ -66,6 +75,9 @@ class LocationController extends GetxController{
               .toList();
           thanas.value = uniqueThanas;
 
+      }else if (response.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       } else {
         throw Exception('Failed to load thanas: ${response.statusCode}');
       }

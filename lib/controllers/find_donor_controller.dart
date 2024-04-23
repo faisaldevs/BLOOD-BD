@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../api/api_links.dart';
+import '../utils/app_routes.dart';
 
 class FindDonorController extends GetxController{
 
@@ -35,6 +36,9 @@ class FindDonorController extends GetxController{
         final Map<String, dynamic> responseData = jsonDecode(res.body);
         print(responseData);
         return FindDonorModel.fromJson(responseData);
+      }else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
       } else {
         print(res.statusCode);
         print(res.body);

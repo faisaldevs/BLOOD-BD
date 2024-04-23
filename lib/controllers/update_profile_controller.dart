@@ -43,6 +43,9 @@ class UpdateProfileController extends GetxController {
 
      if(response.statusCode == 200){
        Get.toNamed(home);
+     }else if (response.statusCode == 404) {
+       GetStorage().erase();
+       Get.offAllNamed(welcomePage);
      }
      print(response.statusCode);
      print(response.body);

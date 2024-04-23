@@ -29,7 +29,6 @@ class BecomeDonorController extends GetxController {
 
 
   donorValidate()async{
-    print("object");
     try{
       var res = await http.get(
           Uri.parse(ApiUrls.profileGet),
@@ -38,9 +37,6 @@ class BecomeDonorController extends GetxController {
             "Authorization" : token,
           }
       );
-      print("object");
-      print(res.statusCode);
-      print(res.body);
 
 
       if(res.statusCode == 200){
@@ -76,6 +72,12 @@ class BecomeDonorController extends GetxController {
 
         }
 
+      } else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
+      } else{
+        print(res.statusCode);
+        print(res.body);
       }
 
     }catch(e){
@@ -208,6 +210,12 @@ class BecomeDonorController extends GetxController {
         nameDonor = user["name"];
 
         Get.to( const DonorProfile());
+      } else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
+      } else{
+        print(res.statusCode);
+        print(res.body);
       }
 
     }catch(e){

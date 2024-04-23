@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../utils/app_routes.dart';
+
 class ChangePassController extends GetxController {
   GlobalKey<FormState> changePassKey = GlobalKey<FormState>();
 
@@ -32,6 +34,10 @@ class ChangePassController extends GetxController {
 
          }
      );
+     if (response.statusCode == 404) {
+    GetStorage().erase();
+    Get.offAllNamed(welcomePage);
+    }
 
      print(response.statusCode.toString());
      print(response.body);

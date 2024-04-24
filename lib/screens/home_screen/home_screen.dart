@@ -1,3 +1,4 @@
+import 'package:blood_bd/app_notifications/local_notification.dart';
 import 'package:blood_bd/controllers/home_controller.dart';
 import 'package:blood_bd/screens/home_screen/widgets/banner_widget.dart';
 import 'package:blood_bd/screens/home_screen/widgets/card.dart';
@@ -87,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) => InkWell(
                         onTap: () {
                           controller.profileData();
+                          // AwesomeNotify().triggerNotification("title", "body");
                         },
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 5),

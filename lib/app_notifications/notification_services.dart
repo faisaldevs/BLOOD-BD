@@ -7,7 +7,7 @@ class NotificationServices {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin();
 
   firebaseInit() {
     FirebaseMessaging.onMessage.listen((message) {
@@ -18,6 +18,7 @@ class NotificationServices {
       // LocalNotification().showNotification(
       //     title: message.notification!.title.toString(),
       //     body: message.notification!.title.toString());
+      AwesomeNotify().triggerNotification( message.notification!.title.toString(), message.notification!.body.toString());
     });
   }
 

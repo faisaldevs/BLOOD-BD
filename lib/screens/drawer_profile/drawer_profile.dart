@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
 import 'package:blood_bd/utils/app_routes.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/medical_history.dart';
@@ -70,6 +71,15 @@ class DrawerProfile extends StatelessWidget {
             icon: Icons.history_edu_outlined,
             onTap: () {
               Get.toNamed(history);
+            },
+          ),
+          CustomDrawerLinks(
+            title: 'History',
+            icon: Icons.history_edu_outlined,
+            onTap: () {
+              // Get.toNamed(history);
+
+              AwesomeNotifications().createNotification(content: NotificationContent(id: 0, channelKey: "channelKey",title: "title",body: "body"));
             },
           ),
           // CustomDrawerLinks(

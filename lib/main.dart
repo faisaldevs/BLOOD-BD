@@ -1,10 +1,13 @@
- import 'dart:io';
+import 'dart:io';
 import 'package:blood_bd/screens/depandency_injection.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'app_notifications/notification_services.dart';
+import 'firebase_options.dart';
 import 'utils/app_routes.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -17,8 +20,23 @@ class PostHttpOverrides extends HttpOverrides {
           (X509Certificate cert, String host, int port) => true;
   }
 }
+// void main() async{
+//   WidgetsFlutterBinding.ensureInitialized();
+//   // NotificationService().initNotification();
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//   runApp(MyApp());
+//
+// }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   HttpOverrides.global = PostHttpOverrides();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -31,8 +49,29 @@ void main() async {
   DependencyInjection.init();
 }
 
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  NotificationServices notificationServices = NotificationServices();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    notificationServices.firebaseInit();
+    notificationServices.isTokenRefresh();
+    notificationServices.requestNotificationPermission();
+    notificationServices.getDeviceToken().then((value) {
+      print("Device Token: $value");
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {

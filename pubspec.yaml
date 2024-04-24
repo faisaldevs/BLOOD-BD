@@ -42,7 +42,7 @@ dependencies:
   # UI Design
   google_fonts:
   flutter_screenutil:
-  fluttertoast:
+#  fluttertoast:
   pinput:
   flutter_spinkit:
   dropdown_textfield: ^1.0.8
@@ -64,6 +64,12 @@ dependencies:
   #----------Flutter Launcher Icon--------
 #  flutter_launcher_icons: ^0.13.1
 
+  #---------- Firebase --------
+  firebase_core:
+  app_settings:
+  firebase_messaging:
+  flutter_local_notifications:
+
 
 
 dev_dependencies:
@@ -74,7 +80,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/app_logo/Blood_BD.png"
+  image_path: "assets/app_logo/blood_bd.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -105,7 +111,7 @@ flutter:
     - assets/images/home_icons/
     #      -----------Home-Icon Image------
     - assets/images/
-#    - assets/app_logo/Blood_BD.png
+#    - assets/app_logo/blood_bd.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

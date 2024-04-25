@@ -1,4 +1,3 @@
-import 'package:blood_bd/models/donation_model.dart';
 import 'package:blood_bd/screens/blood_request_donor/become_donor_page.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
 import 'package:blood_bd/utils/app_colors.dart';
@@ -13,8 +12,6 @@ import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
 import '../blood_request_donor/add_request.dart';
 import '../drawer_profile/components/custom_drawer_links.dart';
-import '../drawer_profile/drawer_pages/change_password.dart';
-import '../drawer_profile/drawer_pages/medical_history.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

@@ -64,28 +64,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message)async{
 }
 
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  NotificationServices notificationServices = NotificationServices();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    notificationServices.firebaseInit();
-    notificationServices.isTokenRefresh();
-    notificationServices.requestNotificationPermission();
-    notificationServices.getDeviceToken().then((value) {
-      print("Device Token: $value");
-    });
-
-  }
 
   @override
   Widget build(BuildContext context) {

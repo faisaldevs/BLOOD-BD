@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../controllers/user_history_controller.dart';
 import '../../models/blood_request_history_model.dart';
+import 'description_ui_history.dart';
 
 class HistoryRequest extends StatefulWidget {
   const HistoryRequest({super.key});
@@ -17,6 +18,34 @@ class _HistoryRequestState extends State<HistoryRequest> {
 
   @override
   Widget build(BuildContext context) {
+    dateConverter(inputDateText) {
+      if (inputDateText.isNotEmpty) {
+        try {
+          DateTime inputDate = DateFormat('yyyy-MM-dd').parse(inputDateText);
+          String outputDateText = DateFormat('MMMM dd').format(inputDate);
+          return outputDateText;
+        } catch (e) {
+          print("Error : $e");
+        }
+      } else {
+        print("date is Empty.");
+      }
+    }
+
+    timeConverter(inputTimeText) {
+      if (inputTimeText.isNotEmpty) {
+        try {
+          DateTime inputTime = DateFormat('HH:mm').parse(inputTimeText);
+          String outputTimeText = DateFormat('hh:mm a').format(inputTime);
+          return outputTimeText;
+        } catch (e) {
+          print("Error : $e");
+        }
+      } else {
+        print("date is Empty.");
+      }
+    }
+
     return Scaffold(
       body: FutureBuilder<BloodRequestHistoryModel>(
         future: controller.getHistoryRequest(),
@@ -42,8 +71,11 @@ class _HistoryRequestState extends State<HistoryRequest> {
                 String healthIssue = e?.healthIssue ?? "Health Issue";
                 String bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
                 String bloodType = e?.bloodGroup ?? "Type";
-                String date = e?.date ?? "date";
-                String time = e?.time ?? "time";
+                String dateText = e?.date ?? "date";
+                String? date = dateConverter(dateText);
+
+                String timeText = e?.time ?? "time";
+                String? time = timeConverter(timeText);
                 String address = e?.address ?? "address";
                 String note = e?.note ?? "note";
 
@@ -54,9 +86,9 @@ class _HistoryRequestState extends State<HistoryRequest> {
                     healthIssue,
                     bloodAmount,
                     bloodType,
-                    date,
-                    time,
                     address,
+                    date!,
+                    time!,
                     note);
               },
             );
@@ -94,8 +126,8 @@ class _HistoryRequestState extends State<HistoryRequest> {
     String bloodAmount,
     String bloodType,
     String address,
-    String time,
     String date,
+    String time,
     String note,
   ) {
     String showTime() {
@@ -141,7 +173,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          showTime(),
+                          "$date $time",
                           style: const TextStyle(
                             color: Colors.green,
                           ),
@@ -195,10 +227,32 @@ class _HistoryRequestState extends State<HistoryRequest> {
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
+                    const SizedBox(height: 5),
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        controller.visibility();
+                        Get.to(HistoryDescription(
+                          title: 'History',
+                          id: '',
+                          hospitalName: '',
+                          contractPersonName: '',
+                          contractPersonNumber: '',
+                          patientName: '',
+                          healthIssue: '',
+                          bloodAmount: '',
+                          bloodType: '',
+                          address: '',
+                          date: '',
+                          lastDonateDate: '',
+                          division: '',
+                          district: '',
+                          note: '',
+                          thana: '',
+                          time: '',
+                          receiverStatus: '',
+                          notificationId: '', buttonText: '',
+                        ));
+                        print("object");
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),
@@ -213,7 +267,7 @@ class _HistoryRequestState extends State<HistoryRequest> {
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          // const SizedBox(height: 10),
         ],
       ),
     );

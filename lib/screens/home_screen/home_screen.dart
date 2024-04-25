@@ -1,4 +1,3 @@
-import 'package:blood_bd/app_notifications/local_notification.dart';
 import 'package:blood_bd/controllers/home_controller.dart';
 import 'package:blood_bd/screens/home_screen/widgets/banner_widget.dart';
 import 'package:blood_bd/screens/home_screen/widgets/card.dart';
@@ -8,6 +7,8 @@ import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import '../../app_notifications/notification_services.dart';
 import '../../controllers/blood_request_controller.dart';
 import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
@@ -15,6 +16,7 @@ import '../../models/blood_request_model.dart';
 import '../../utils/assets_links.dart';
 import '../blood_request_donor/blood_request_page.dart';
 import '../drawer_profile/drawer_profile.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,10 +35,53 @@ class _HomeScreenState extends State<HomeScreen> {
   final BloodRequestController bloodController =
       Get.put(BloodRequestController());
 
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   // locationController.fetchDivisions();
+  //
+  //   super.initState();
+  // }
+
+  final NotificationServices notificationServices = NotificationServices();
   @override
   void initState() {
     // TODO: implement initState
-    // locationController.fetchDivisions();
+
+    homeController.profileData();
+    notificationServices.requestNotificationPermission();
+    notificationServices.firebaseInit();
+    notificationServices.isTokenRefresh();
+    notificationServices.getDeviceToken().then((value) async{
+      print("Device Token: $value");
+
+      var api = "https://starsoftjpn.xyz/api/auth/store-token";
+
+     try{
+       print("object");
+       var res = await http.post(Uri.parse(api),
+           headers: {
+             "Accept" : "application/json",
+             "Authorization" : GetStorage().read("token").toString(),
+           },
+           body: {
+             "token" : value.toString(),
+           }
+       );
+       print(res.statusCode);
+       print(res.body);
+       if(res == 201){
+         print("Device token was sent..!!");
+         print(res.statusCode);
+         print(res.body);
+       }
+     }catch(e){
+       print("Error : $e");
+     }
+
+
+
+    });
     super.initState();
   }
 

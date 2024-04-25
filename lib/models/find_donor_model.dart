@@ -1,9 +1,11 @@
 class FindDonorModel {
+  String? message;
   List<Data>? data;
 
-  FindDonorModel({this.data});
+  FindDonorModel({this.message, this.data});
 
   FindDonorModel.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -14,6 +16,7 @@ class FindDonorModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -115,14 +118,15 @@ class Data {
 class User {
   int? id;
   String? name;
-  String? username;
+  Null? username;
   String? userType;
   String? email;
   String? phone;
   Null? emailVerifiedAt;
+  String? deviceToken;
   String? image;
   int? profileVisibility;
-  int? otp;
+  Null? otp;
   String? ipAddress;
   int? status;
   int? donorStatus;
@@ -141,6 +145,7 @@ class User {
         this.email,
         this.phone,
         this.emailVerifiedAt,
+        this.deviceToken,
         this.image,
         this.profileVisibility,
         this.otp,
@@ -162,6 +167,7 @@ class User {
     email = json['email'];
     phone = json['phone'];
     emailVerifiedAt = json['email_verified_at'];
+    deviceToken = json['device_token'];
     image = json['image'];
     profileVisibility = json['profile_visibility'];
     otp = json['otp'];
@@ -185,6 +191,7 @@ class User {
     data['email'] = this.email;
     data['phone'] = this.phone;
     data['email_verified_at'] = this.emailVerifiedAt;
+    data['device_token'] = this.deviceToken;
     data['image'] = this.image;
     data['profile_visibility'] = this.profileVisibility;
     data['otp'] = this.otp;

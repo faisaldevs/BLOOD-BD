@@ -47,11 +47,11 @@ class FindDonorListPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text("Something went wrong"),
-            );
-          }
+          // if (snapshot.hasError) {
+          //   return const Center(
+          //     child: Text("Something went wrong"),
+          //   );
+          // }
 
           if (snapshot.hasData) {
             final dataList = snapshot.data!;
@@ -70,6 +70,7 @@ class FindDonorListPage extends StatelessWidget {
                 String lastDonateDate = e?.lastDonateDate ?? "Not Donated Yet..";
                 String division = e?.division ?? "address";
                 String district = e?.district ?? "address";
+                String deviceToken = e?.user?.deviceToken ?? "address";
                 print(number);
 
                 return donorId == "donorId"
@@ -104,7 +105,8 @@ class FindDonorListPage extends StatelessWidget {
                         address,
                         lastDonateDate,
                         division,
-                        district);
+                        district,
+                    deviceToken,);
               },
             );
           } else {
@@ -145,6 +147,7 @@ class FindDonorListPage extends StatelessWidget {
     String lastDonateDate,
     String division,
     String district,
+    String deviceToken,
   ) {
     String showTime() {
       DateTime now;
@@ -305,7 +308,7 @@ class FindDonorListPage extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(RequestBlood(donorId: donorId));
+                  Get.to(RequestBlood(donorId: donorId,deviceToken: deviceToken,));
 
                     // Get.rawSnackbar(
                     //     messageText: const Text(

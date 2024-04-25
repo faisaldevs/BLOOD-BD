@@ -147,7 +147,7 @@ class RequestBloodController extends GetxController {
       print("Error : $e");
     }
   }
-  donate(String? donorId) async {
+  donate(String? donorId,String? deviceToken) async {
     print(token);
 
     print(bloodType);
@@ -232,11 +232,48 @@ class RequestBloodController extends GetxController {
             "blood_request_id": bloodRequestId,
             "blood_donor_id": donorId,
             "request_amount_bag": bloodAmount,
+            "blood_donor_user_id" : "69",
           },
         );
 
-        print(response.statusCode);
+        print("---------------"+response.statusCode.toString());
         print(response.body);
+        if(response.statusCode == 201) {
+          print("test_notification");
+
+          var body = {
+            "to": deviceToken,
+            "notification": {
+              "body": "test body",
+              "title": "test title"
+            },
+            "data" : {
+              "routeId": 6
+            }
+          };
+          var serverKey = "key=AAAA7XPIygM:APA91bHjk7K5YCkFfXXkS4X2AFnxR9SQGVJbYxdt8MhnzqsaXyPMyu7Rc-JUSHAksG1xgXfQ-NPP-Zv3HUA9nU_rYXo_Abu-3chPJlnJfIzJZ578TEgll6L8BtJ6vM222RjIdhhkko8S";
+          var api = "https://fcm.googleapis.com/fcm/send";
+
+          try{
+            print("object");
+            var res12 = await http.post(Uri.parse(api),
+              headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : serverKey,
+              },
+              body: jsonEncode(body),
+            );
+            print(res12.statusCode);
+            print(res12.body);
+            // if(res == 201){
+            //   print("Device token was sent..!!");
+            //   print(res.statusCode);
+            //   print(res.body);
+            // }
+          }catch(e){
+            print("Error : $e");
+          }
+        }
         // Get.to(FilterPage(
         //   bloodRequestId: bloodRequestId,
         //   bloodType: bloodType,

@@ -14,9 +14,10 @@ import '../global_widget/custom_timePicker.dart';
 import 'package:http/http.dart' as http;
 
 class RequestBlood extends StatefulWidget {
-  const RequestBlood({super.key, this.requestId, this.donorId});
+  const RequestBlood({super.key, this.requestId, this.donorId, this.deviceToken});
   final String? requestId;
   final String? donorId;
+  final String? deviceToken;
   @override
   State<RequestBlood> createState() => _RequestBloodState();
 }
@@ -445,7 +446,7 @@ class _RequestBloodState extends State<RequestBlood> {
                 controller.onSaveRqBlood();
               }
              else{
-               controller.donate(widget.donorId);
+               controller.donate(widget.donorId,widget.deviceToken);
              }
 
             },

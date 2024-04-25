@@ -73,15 +73,6 @@ class DrawerProfile extends StatelessWidget {
               Get.toNamed(history);
             },
           ),
-          CustomDrawerLinks(
-            title: 'History',
-            icon: Icons.history_edu_outlined,
-            onTap: () {
-              // Get.toNamed(history);
-
-              AwesomeNotifications().createNotification(content: NotificationContent(id: 0, channelKey: "channelKey",title: "title",body: "body"));
-            },
-          ),
           // CustomDrawerLinks(
           //   title: 'My Search History',
           //   icon: Icons.content_paste_search_outlined,

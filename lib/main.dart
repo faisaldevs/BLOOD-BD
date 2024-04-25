@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:blood_bd/screens/depandency_injection.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,10 +48,19 @@ void main() async {
     systemNavigationBarColor: Colors.redAccent,
     statusBarColor: Colors.redAccent,
   ));
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await GetStorage.init();
   runApp(const MyApp());
   DependencyInjection.init();
+}
+
+
+@pragma("vm:entry-point")
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message)async{
+  await Firebase.initializeApp();
+  print(message.notification?.title);
+
 }
 
 

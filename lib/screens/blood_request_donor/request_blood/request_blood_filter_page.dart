@@ -68,6 +68,7 @@ class FilterPage extends StatelessWidget {
                 String bloodType = e?.bloodGroup ?? "Type";
 
                 String address = e?.address ?? "address";
+                String deviceToken = e?.user?.deviceToken ?? "Device token";
 
                 return historyTile(
                   bloodDonorId,
@@ -78,6 +79,7 @@ class FilterPage extends StatelessWidget {
                   bloodAmount,
                   bloodType,
                   address,
+                    deviceToken,
                 );
               },
             );
@@ -116,6 +118,7 @@ class FilterPage extends StatelessWidget {
     String bloodAmount,
     String bloodType,
     String address,
+    String deviceToken,
   ) {
     String showTime() {
       DateTime now;
@@ -277,7 +280,7 @@ class FilterPage extends StatelessWidget {
                 onPressed: () {
                   print("1122");
                   controller.confirmBlood(
-                      bloodRequestId, bloodDonorId, bloodAmount, bloodDonorUserId);
+                      bloodRequestId, bloodDonorId, bloodAmount, bloodDonorUserId,deviceToken);
                 },
                 style: ButtonStyle(
                   backgroundColor:

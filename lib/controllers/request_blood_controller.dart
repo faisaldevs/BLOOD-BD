@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import '../app_notifications/notification_helper.dart';
 import '../screens/blood_request_donor/request_blood/request_blood_filter_page.dart';
 import '../utils/app_routes.dart';
 
@@ -186,22 +187,22 @@ class RequestBloodController extends GetxController {
           "note": noteController.text,
         },
         // body: {
-        //   "patients_name": "Faisal",
-        //   "blood_group": "A+",
-        //   "amount_bag": "1",
-        //   // "date": dateController.text,
-        //   "date": "2024-01-06",
-        //   "time": "16:14:00",
-        //   "health_issue": "healthIssue",
-        //   "division": "dhaka",
-        //   "district": "dhaka",
-        //   "hospital_name": "Dhaka",
-        //   "upazila": "dhaka",
-        //   "union": "dhaka",
-        //   "address": "addressController.text",
-        //   "contact_person_name": "contactParson",
-        //   "contact_person_phone": "01725966666",
-        //   "note" : "noteController.text",
+        //     "patients_name": "Test",
+        //     "blood_group": "O+",
+        //     "amount_bag": "2",
+        //     "date": "2024-01-06",
+        //     "hospital_name": "hospital name",
+        //     // "date": "2024-01-06",
+        //     "time": "16:14:00",
+        //     "health_issue": "healthIssue",
+        //     "division": "division",
+        //     "district": "district",
+        //     "upazila": "thana",
+        //     "union": "union",
+        //     "address": "addressController",
+        //     "contact_person_name": "name",
+        //     "contact_person_phone": "number",
+        //     "note": "note",
         // },
       );
 
@@ -241,38 +242,7 @@ class RequestBloodController extends GetxController {
         if(response.statusCode == 201) {
           print("test_notification");
 
-          var body = {
-            "to": deviceToken,
-            "notification": {
-              "body": "test body",
-              "title": "test title"
-            },
-            "data" : {
-              "routeId": 6
-            }
-          };
-          var serverKey = "key=AAAA7XPIygM:APA91bHjk7K5YCkFfXXkS4X2AFnxR9SQGVJbYxdt8MhnzqsaXyPMyu7Rc-JUSHAksG1xgXfQ-NPP-Zv3HUA9nU_rYXo_Abu-3chPJlnJfIzJZ578TEgll6L8BtJ6vM222RjIdhhkko8S";
-          var api = "https://fcm.googleapis.com/fcm/send";
-
-          try{
-            print("object");
-            var res12 = await http.post(Uri.parse(api),
-              headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : serverKey,
-              },
-              body: jsonEncode(body),
-            );
-            print(res12.statusCode);
-            print(res12.body);
-            // if(res == 201){
-            //   print("Device token was sent..!!");
-            //   print(res.statusCode);
-            //   print(res.body);
-            // }
-          }catch(e){
-            print("Error : $e");
-          }
+          NotificationHelper().sendNotification(deviceToken);
         }
         // Get.to(FilterPage(
         //   bloodRequestId: bloodRequestId,
@@ -353,7 +323,7 @@ class RequestBloodController extends GetxController {
     throw Exception("Loading failed !!!");
   }
 
-  confirmBlood(String bloodRequestId, String bloodDonorId, String bloodAmount, bloodDonorUserId) async {
+  confirmBlood(String bloodRequestId, String bloodDonorId, String bloodAmount, bloodDonorUserId,deviceToken) async {
     print("validate");
     print(bloodRequestId);
     print(bloodDonorId);
@@ -376,7 +346,10 @@ class RequestBloodController extends GetxController {
     print(res.statusCode);
     print(res.body);
 
-    if (res.statusCode == 200) {
+    if (res.statusCode == 201) {
+      print("confirm blood");
+
+      NotificationHelper().sendNotification(deviceToken);
 
     }else if (res.statusCode == 404) {
       GetStorage().erase();

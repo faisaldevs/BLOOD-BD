@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
+import 'package:blood_bd/app_notifications/notification_helper.dart';
 import 'package:blood_bd/models/donation_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -83,7 +84,7 @@ class DonationStatusController extends GetxController {
 
   sentStatus() {}
 
-  donationStatus(notificationId, status) async {
+  donationStatus(notificationId, status,deviceToken) async {
     print("Notification Id :$notificationId");
     print("Status : $status");
 
@@ -102,6 +103,9 @@ class DonationStatusController extends GetxController {
 
     if (response.statusCode == 200) {
       print("done");
+
+      NotificationHelper().sendNotification(deviceToken);
+
       Get.rawSnackbar(
           messageText: const Text('Done..!!',
               style: TextStyle(color: Colors.white, fontSize: 14)),

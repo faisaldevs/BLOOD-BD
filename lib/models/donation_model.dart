@@ -1,9 +1,11 @@
 class DonationModel {
+  String? message;
   List<Data>? data;
 
-  DonationModel({this.data});
+  DonationModel({this.message, this.data});
 
   DonationModel.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -14,6 +16,7 @@ class DonationModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -27,6 +30,7 @@ class Data {
   int? userId;
   int? bloodRequestId;
   int? bloodDonorId;
+  int? bloodDonorUserId;
   int? requestAmountBag;
   int? approvedAmountBag;
   String? date;
@@ -47,6 +51,7 @@ class Data {
         this.userId,
         this.bloodRequestId,
         this.bloodDonorId,
+        this.bloodDonorUserId,
         this.requestAmountBag,
         this.approvedAmountBag,
         this.date,
@@ -67,6 +72,7 @@ class Data {
     userId = json['user_id'];
     bloodRequestId = json['blood_request_id'];
     bloodDonorId = json['blood_donor_id'];
+    bloodDonorUserId = json['blood_donor_user_id'];
     requestAmountBag = json['request_amount_bag'];
     approvedAmountBag = json['approved_amount_bag'];
     date = json['date'];
@@ -91,6 +97,7 @@ class Data {
     data['user_id'] = this.userId;
     data['blood_request_id'] = this.bloodRequestId;
     data['blood_donor_id'] = this.bloodDonorId;
+    data['blood_donor_user_id'] = this.bloodDonorUserId;
     data['request_amount_bag'] = this.requestAmountBag;
     data['approved_amount_bag'] = this.approvedAmountBag;
     data['date'] = this.date;
@@ -216,14 +223,15 @@ class BloodRequest {
 class User {
   int? id;
   String? name;
-  String? username;
+  Null? username;
   String? userType;
   String? email;
   String? phone;
   Null? emailVerifiedAt;
+  String? deviceToken;
   String? image;
   int? profileVisibility;
-  int? otp;
+  Null? otp;
   String? ipAddress;
   int? status;
   int? donorStatus;
@@ -242,6 +250,7 @@ class User {
         this.email,
         this.phone,
         this.emailVerifiedAt,
+        this.deviceToken,
         this.image,
         this.profileVisibility,
         this.otp,
@@ -263,6 +272,7 @@ class User {
     email = json['email'];
     phone = json['phone'];
     emailVerifiedAt = json['email_verified_at'];
+    deviceToken = json['device_token'];
     image = json['image'];
     profileVisibility = json['profile_visibility'];
     otp = json['otp'];
@@ -286,6 +296,7 @@ class User {
     data['email'] = this.email;
     data['phone'] = this.phone;
     data['email_verified_at'] = this.emailVerifiedAt;
+    data['device_token'] = this.deviceToken;
     data['image'] = this.image;
     data['profile_visibility'] = this.profileVisibility;
     data['otp'] = this.otp;

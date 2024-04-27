@@ -12,6 +12,8 @@ import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
 import '../blood_request_donor/add_request.dart';
 import '../drawer_profile/components/custom_drawer_links.dart';
+import '../drawer_profile/drawer_pages/change_password.dart';
+import '../drawer_profile/drawer_pages/request_status.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -271,6 +273,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 Get.to(DonationStatus());
               },
             ),
+            CustomDrawerLinks(
+              title: 'Request status',
+              icon: Icons.bloodtype_outlined,
+              onTap: () {
+                Get.to(RequestStatus());
+              },
+            ),
             // CustomDrawerLinks(
             //   title: 'Donation Blocked',
             //   icon: Icons.bloodtype_outlined,
@@ -283,6 +292,13 @@ class _ProfilePageState extends State<ProfilePage> {
               icon: Icons.history_edu_outlined,
               onTap: () {
                 Get.toNamed(history);
+              },
+            ),
+            CustomDrawerLinks(
+              title: 'Change Password',
+              icon: Icons.password,
+              onTap: () {
+                Get.to(ChangePassword());
               },
             ),
             // CustomDrawerLinks(

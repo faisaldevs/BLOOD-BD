@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:blood_bd/api/api_links.dart';
+import 'package:blood_bd/app_notifications/notification_helper.dart';
+import 'package:blood_bd/app_notifications/notification_services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +27,16 @@ class BloodRequestController extends GetxController{
     print("pressed.............1");
     try {
       // String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
-      var res = await http.get(Uri.parse(ApiUrls.bloodRequestGetApi));
+      var res = await http.get(Uri.parse(ApiUrls.bloodRequestWithoutMeGet),
+          headers: {
+        "Accept" : "application/json",
+        "Authorization" : token,
+      });
+      if (kDebugMode) {
+        print("200-status 1: ${res.statusCode}");
+        print("200-status 2: ${res.body}");
+      }
+
 
       if (res.statusCode == 200) {
         if (kDebugMode) {
@@ -35,8 +46,10 @@ class BloodRequestController extends GetxController{
         return RequestBloodModel.fromJson(responseData);
 
       } else if (res.statusCode == 404) {
-        GetStorage().erase();
-        Get.offAllNamed(welcomePage);
+        // GetStorage().erase();
+        // Get.offAllNamed(welcomePage);
+        print("bloodRequestWithoutMeGet");
+
       }
       else {
         if (kDebugMode) {
@@ -55,8 +68,8 @@ class BloodRequestController extends GetxController{
   }
 
 
-donateBlood(requestId, bloodAmount,requestUserId)async{
-    print("try");
+donateBlood(requestId, bloodAmount,requestUserId,deviceToken)async{
+    print("Donate Blood");
   try {
     var res = await http.get(
         Uri.parse(ApiUrls.profileGet),
@@ -66,22 +79,19 @@ donateBlood(requestId, bloodAmount,requestUserId)async{
         }
     );
     print(res.statusCode);
-    print("try");
-
     if(res.statusCode == 200){
       var jsonBody = jsonDecode(res.body);
       var body = jsonBody["data"];
       var donorStatus = body["donor_profile_status"];
-
-
       print("Status : $donorStatus");
+
       if(donorStatus == 1){
         var donorBody = jsonBody["blood_donor"];
         var donorId =  donorBody["id"];
         print("DonorId : $donorId");
         // String requestId = requestId.toString();
 
-        var response = await http.post(
+        var response1 = await http.post(
           Uri.parse(ApiUrls.bloodDonorNotificationPost),
           headers: {
             "Accept": "application/json",
@@ -94,9 +104,9 @@ donateBlood(requestId, bloodAmount,requestUserId)async{
             "request_amount_bag": bloodAmount.toString(),
           },
         );
-        print(response.statusCode);
-        print(response.body);
-        if(response == 201){
+        // print(response1.statusCode.toString());
+        // print(response1.body);
+        if(response1 == 201){
           print("success");
           Get.rawSnackbar(
               messageText: const Text(
@@ -113,9 +123,13 @@ donateBlood(requestId, bloodAmount,requestUserId)async{
               margin: EdgeInsets.zero,
               snackStyle: SnackStyle.GROUNDED
           );
-        }else{
-          print(response.statusCode);
-          print(response.body);
+
+          NotificationHelper().sendNotification(deviceToken);
+
+        }
+        else{
+          print(response1.statusCode);
+          print(response1.body);
         }
 
 

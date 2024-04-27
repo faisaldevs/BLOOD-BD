@@ -282,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 final dataList = snapshot.data!;
                                 return ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: 5,
+                                  itemCount: snapshot.data!.data!.length < 8 ? snapshot.data?.data?.length : 5,
                                   itemBuilder: (context, index) {
                                     final e = dataList.data?[index];
                                     var requestId = e?.id;
@@ -304,6 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     String time = e?.time ?? "time";
                                     String address = e?.address ?? "address";
                                     String note = e?.note ?? "note";
+                                    String deviceToken = e?.user?.deviceToken ?? "note";
 
                                     return UrgentRequest(
 
@@ -318,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       bloodAmount: bloodAmount.toString(),
                                       time: time,
                                       note: note,
-                                      requestId: requestId.toString(), requestUserId: requestUserId,
+                                      requestId: requestId.toString(), requestUserId: requestUserId,deviceToken: deviceToken,
                                     );
                                   },
                                 );

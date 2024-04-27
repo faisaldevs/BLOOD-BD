@@ -64,7 +64,7 @@ import '../../../controllers/blood_request_controller.dart';
 import 'find_button.dart';
 
 class UrgentRequest extends StatelessWidget {
-   UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType, required this.contractPersonName, required this.contractPersonNumber, required this.healthIssue, required this.bloodAmount, required this.time, required this.note,  required this.requestId, required this.requestUserId,});
+   UrgentRequest({super.key, required this.patientsName, required this.hospitalName, required this.address, required this.date, required this.bloodType, required this.contractPersonName, required this.contractPersonNumber, required this.healthIssue, required this.bloodAmount, required this.time, required this.note,  required this.requestId, required this.requestUserId, required this.deviceToken,});
   final String patientsName;
   final String hospitalName;
   final String address;
@@ -78,6 +78,7 @@ class UrgentRequest extends StatelessWidget {
   final String note;
   final String requestId;
   final String requestUserId;
+  final String deviceToken;
 
   final BloodRequestController controller = Get.put(BloodRequestController());
 
@@ -225,7 +226,7 @@ class UrgentRequest extends StatelessWidget {
                              bloodAmount : bloodAmount,
                              buttonText : "Donate",
                               buttonFunction: (){
-                                controller.donateBlood(requestId,bloodAmount,requestUserId);
+                                controller.donateBlood(requestId,bloodAmount,requestUserId,deviceToken);
                               },
                               contractPersonName : contractPersonName,
                               contractPersonNumber : contractPersonNumber,

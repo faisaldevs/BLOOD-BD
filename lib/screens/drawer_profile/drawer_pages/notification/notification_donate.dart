@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../../../../controllers/donation_status_controller.dart';
 import '../../../../models/donation_model.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../global_widget/description_ui.dart';
+
 
 class NotificationDonate extends StatelessWidget {
    NotificationDonate({super.key});
@@ -129,7 +129,7 @@ class NotificationDonate extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(8),
-      width: Get.width,
+      width: Get.width.w,
       child: Column(
         children: [
           Row(

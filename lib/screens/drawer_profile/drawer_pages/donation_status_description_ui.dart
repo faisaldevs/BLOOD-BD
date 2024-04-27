@@ -30,7 +30,7 @@ class DonationDescriptionUi extends StatelessWidget {
       this.receiverStatus,
       this.notificationId,
       this.buttonFunction1,
-      this.buttonFunction2});
+      this.buttonFunction2, this.deviceToken});
 
   final String title;
   final String? id;
@@ -49,6 +49,7 @@ class DonationDescriptionUi extends StatelessWidget {
   final String? thana;
   final String? time;
   final String? note;
+  final String? deviceToken;
   final String? receiverStatus;
   final String? notificationId;
   final String? buttonText;

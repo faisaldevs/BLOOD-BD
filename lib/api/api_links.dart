@@ -16,6 +16,7 @@ static const String live = "https://starsoftjpn.xyz/api";
   static const String changePasswordPost = "$auth/change-password";
 
   static const String bloodRequestGet = "$auth/blood-request";
+  static const String bloodRequestWithoutMeGet = "$auth/blood-request-without-me";
   static const String bloodRequestPost = "$auth/blood-request";
 
   static const String bloodRequestNotificationGet= "$auth/blood-request-notification";

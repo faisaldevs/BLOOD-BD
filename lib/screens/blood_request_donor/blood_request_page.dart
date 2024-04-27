@@ -132,6 +132,7 @@ class FeedPage extends StatelessWidget {
                   String thana = e?.upazila ?? "address";
                   String hospitalName = e?.hospitalName ?? "address";
                   String note = e?.note ?? "note";
+                  String deviceToken = e?.user?.deviceToken ?? "deviceId";
 
                   return historyTile(
                       requestId,
@@ -149,7 +150,9 @@ class FeedPage extends StatelessWidget {
                       district,
                       thana,
                       hospitalName,
-                      note);
+                      note,
+                      deviceToken
+                  );
                 },
               );
             } else {
@@ -194,6 +197,7 @@ class FeedPage extends StatelessWidget {
     String time,
     String date,
     String note,
+    String deviceToken,
   ) {
     String showTime() {
       DateTime now;
@@ -356,7 +360,7 @@ class FeedPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: (){
                   print("clicked");
-                  controller.donateBlood(requestId,bloodAmount,requestUserId);
+                  controller.donateBlood(requestId,bloodAmount,requestUserId,deviceToken);
 
                   // Get.rawSnackbar(
                   //     messageText: const Text(

@@ -1,9 +1,11 @@
 import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/forget_password_controller.dart';
+import '../../../../utils/app_colors.dart';
 import '../../../global_widget/custom_button.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
@@ -16,6 +18,20 @@ class ForgetPasswordPage extends StatelessWidget {
     double height = Get.height;
     double width = Get.width;
     return Scaffold(
+      appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.redAccent,
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+          statusBarBrightness: Brightness.light, // For iOS (dark icons)
+        ),
+        title: const Text("Forgot Password"),
+        titleSpacing: 0,
+        foregroundColor: AppTheme.primaryRed,
+        // backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),

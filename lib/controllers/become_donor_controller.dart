@@ -4,6 +4,7 @@ import 'package:blood_bd/screens/blood_request_donor/become_donor/donor_profile.
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../screens/blood_request_donor/become_donor_page.dart';
@@ -26,6 +27,7 @@ class BecomeDonorController extends GetxController {
   TextEditingController addressController = TextEditingController();
   TextEditingController contactParsonNameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
+ RxBool isLoading = false.obs;
 
 
   donorValidate()async{
@@ -86,6 +88,7 @@ class BecomeDonorController extends GetxController {
   }
 
   searchDonor() async{
+    isLoading.value = true;
     print("pressend");
     // if (formKey.currentState!.validate()) {
     //   var patientName = patientNameController.text;
@@ -138,12 +141,16 @@ class BecomeDonorController extends GetxController {
         if(res.statusCode == 201){
           Get.snackbar("Received", "Donor Data Received");
           Get.toNamed(home);
+          isLoading.value = false;
+        }else{
+          isLoading.value = false;
         }
 
         print(res.statusCode);
         print(res.body);
 
       }catch(e){
+        isLoading.value = false;
         print(e);
       }
 

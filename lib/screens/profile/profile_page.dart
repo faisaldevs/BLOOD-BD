@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../controllers/become_donor_controller.dart';
 import '../../controllers/drawer_profile_controller.dart';
 import '../../controllers/profile_controller.dart';
 import '../../utils/app_routes.dart';
@@ -24,6 +25,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final getStorage = GetStorage();
+  BecomeDonorController bcController = Get.put(BecomeDonorController());
 
   DrawerProfileController drawerProfileController =
       Get.put(DrawerProfileController());
@@ -47,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: ListView(
           children: [
             // -------Drawer Header------------
-            DrawerHeader(
+            Container(
               margin: EdgeInsets.zero,
               padding: const EdgeInsets.only(
                 left: 10,
@@ -244,6 +246,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // -------Drawer Body------------
             // ActiveDonor(),
+            Divider(height: 2,color: Colors.black,),
 
             CustomDrawerLinks(
               title: 'Request For Blood',
@@ -256,7 +259,8 @@ class _ProfilePageState extends State<ProfilePage> {
               title: 'Become Donor',
               icon: Icons.person_add_alt_1_rounded,
               onTap: () {
-                Get.to(BecomeDonor());
+                // Get.to(BecomeDonor());
+                bcController.donorValidate();
               },
             ),
             CustomDrawerLinks(

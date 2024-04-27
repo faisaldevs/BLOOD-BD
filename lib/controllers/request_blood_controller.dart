@@ -8,7 +8,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../app_notifications/notification_helper.dart';
 import '../screens/blood_request_donor/request_blood/request_blood_filter_page.dart';
+import '../screens/home_screen/home_screen.dart';
 import '../utils/app_routes.dart';
+
 
 
 class RequestBloodController extends GetxController {
@@ -32,8 +34,10 @@ class RequestBloodController extends GetxController {
   TextEditingController numberController = TextEditingController();
   TextEditingController noteController = TextEditingController();
   List<Map<String, dynamic>> dataList = [];
+  RxBool isLoading = false.obs;
 
   onSaveRqBlood() async {
+    isLoading.value = true;
     print(token);
 
     print(bloodType);
@@ -95,6 +99,7 @@ class RequestBloodController extends GetxController {
       print(res.body);
 
       if (res.statusCode == 201) {
+
         var data = jsonDecode(res.body);
 
         var success = data["success"];
@@ -115,6 +120,7 @@ class RequestBloodController extends GetxController {
           district: district,
           bloodAmount: bloodAmount,
         ));
+        isLoading.value = false;
 
         // var dataList = data["bloodRDonors"] as List;
         // print(success);
@@ -143,12 +149,16 @@ class RequestBloodController extends GetxController {
         //
         // var donor = jsonDecode(res1.body);
         // var donorList = donor["data"] as List;
+      }else{
+        isLoading.value = false;
       }
     } catch (e) {
+      isLoading.value = false;
       print("Error : $e");
     }
   }
   donate(String? donorId,String? deviceToken) async {
+    isLoading.value = true;
     print(token);
 
     print(bloodType);
@@ -237,12 +247,20 @@ class RequestBloodController extends GetxController {
           },
         );
 
-        print("---------------"+response.statusCode.toString());
+        print(response.statusCode.toString());
         print(response.body);
         if(response.statusCode == 201) {
           print("test_notification");
 
           NotificationHelper().sendNotification(deviceToken);
+
+          Get.offAll(HomeScreen());
+          isLoading.value = false;
+        }else{
+          isLoading.value = false;
+          print(response.statusCode.toString());
+          print(response.body);
+
         }
         // Get.to(FilterPage(
         //   bloodRequestId: bloodRequestId,
@@ -281,11 +299,13 @@ class RequestBloodController extends GetxController {
         // var donorList = donor["data"] as List;
       }
     } catch (e) {
+      isLoading.value = false;
       print("Error : $e");
     }
   }
 
   Future<DonorSearch> donorSearch() async {
+    isLoading.value = true;
     try {
       // String appUrl = "https://starsoftjpn.xyz/api/v1/blood-request";
       var res = await http.post(
@@ -306,6 +326,8 @@ class RequestBloodController extends GetxController {
         if (kDebugMode) {
           print("200-status : ${res.body}");
         }
+        isLoading.value = false;
+
         return DonorSearch.fromJson(jsonDataDecoded);
       } else {
         if (kDebugMode) {
@@ -314,8 +336,12 @@ class RequestBloodController extends GetxController {
         if (kDebugMode) {
           print("failed body${res.body}");
         }
+        isLoading.value = false;
+
       }
     } catch (e) {
+      isLoading.value = false;
+
       if (kDebugMode) {
         print("Error : $e");
       }
@@ -324,37 +350,48 @@ class RequestBloodController extends GetxController {
   }
 
   confirmBlood(String bloodRequestId, String bloodDonorId, String bloodAmount, bloodDonorUserId,deviceToken) async {
-    print("validate");
-    print(bloodRequestId);
-    print(bloodDonorId);
-    print(bloodAmount);
-    // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
-    var res = await http.post(
-      Uri.parse(ApiUrls.bloodRequestNotificationPost),
-      headers: {
-        "Accept": "application/json",
-        "Authorization": token,
-      },
-      body: {
-        "blood_request_id": bloodRequestId,
-        "blood_donor_id": bloodDonorId,
-        "request_amount_bag": bloodAmount,
-        "blood_donor_user_id": bloodDonorUserId,
-      },
-    );
+    isLoading.value = true;
+   try{ print("validate");
+   print(bloodRequestId);
+   print(bloodDonorId);
+   print(bloodAmount);
+   // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
+   var res = await http.post(
+     Uri.parse(ApiUrls.bloodRequestNotificationPost),
+     headers: {
+       "Accept": "application/json",
+       "Authorization": token,
+     },
+     body: {
+       "blood_request_id": bloodRequestId,
+       "blood_donor_id": bloodDonorId,
+       "request_amount_bag": bloodAmount,
+       "blood_donor_user_id": bloodDonorUserId,
+     },
+   );
 
-    print(res.statusCode);
-    print(res.body);
+   print(res.statusCode);
+   print(res.body);
+   if (res.statusCode == 201) {
+     print("confirm blood");
 
-    if (res.statusCode == 201) {
-      print("confirm blood");
+     NotificationHelper().sendNotification(deviceToken);
+     isLoading.value = false;
 
-      NotificationHelper().sendNotification(deviceToken);
 
-    }else if (res.statusCode == 404) {
-      GetStorage().erase();
-      Get.offAllNamed(welcomePage);
-    }
+   }else if (res.statusCode == 404) {
+     GetStorage().erase();
+     Get.offAllNamed(welcomePage);
+     isLoading.value = false;
+
+   }
+   }catch(e){
+     isLoading.value = false;
+     print("Error : $e");
+
+   }
+
+
   }
 
   urgentRequest(){

@@ -9,7 +9,7 @@ import '../../blood_request_donor/blood_request_page.dart';
 
 class HomeScreenIcons extends StatelessWidget {
    HomeScreenIcons({super.key});
-  BecomeDonorController controller = Get.put(BecomeDonorController());
+ final BecomeDonorController controller = Get.put(BecomeDonorController());
   @override
   Widget build(BuildContext context) {
     return Container(

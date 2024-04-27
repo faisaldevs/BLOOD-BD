@@ -52,6 +52,13 @@ class FilterPage extends StatelessWidget {
       body: FutureBuilder<DonorSearch>(
         future: controller.donorSearch(),
         builder: (context, snapshot) {
+
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           if (snapshot.hasData) {
             final dataList = snapshot.data!;
             return ListView.builder(

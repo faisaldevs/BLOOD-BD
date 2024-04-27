@@ -41,7 +41,7 @@ class WelcomePage extends StatelessWidget {
                         child: Text(
                           'Sign up',
                           style: GoogleFonts.roboto(
-                              color: Colors.white, fontSize: 16),
+                              color: Colors.white, fontSize: 14),
                         ),
                       ),
                     ),
@@ -68,7 +68,7 @@ class WelcomePage extends StatelessWidget {
                           'Login',
                           style: GoogleFonts.roboto(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 14,
                           ),
                         ),
                       ),

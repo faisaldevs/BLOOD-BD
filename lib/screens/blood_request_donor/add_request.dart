@@ -451,7 +451,7 @@ class _RequestBloodState extends State<RequestBlood> {
 
             },
             child: const Text(
-              "Sign Up",
+              "Submit",
               style: TextStyle(color: Colors.white),
             )),
       ),

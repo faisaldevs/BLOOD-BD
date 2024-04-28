@@ -177,7 +177,7 @@ class BecomeDonorController extends GetxController {
   String? contact_person_phoneDonor ;
   String? last_donate_date;
 
-  donorProfile()async{
+  donorProfile()async {
     print("object");
     try{
       var res = await http.get(

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:core';
-import 'package:blood_bd/screens/drawer_profile/drawer_pages/medical_history.dart';
+// import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,7 +10,7 @@ import '../models/MedicalHistoryModel.dart';
 
 class MedicalHistoryController extends GetxController {
    GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+   // String? image;
    TextEditingController hemoglobin = TextEditingController();
    TextEditingController institutionName = TextEditingController();
    TextEditingController dayOfTest = TextEditingController();
@@ -30,6 +30,7 @@ class MedicalHistoryController extends GetxController {
     print(malaria);
     print(institutionName);
     print(token);
+    print("image");
   }
 
   onSaveReport() async{
@@ -51,7 +52,7 @@ class MedicalHistoryController extends GetxController {
           "malaria" : malaria.toString(),
           "institute_name" : institutionName.text,
           "blood_pressure" : bloodPressure.text,
-          // "image" : bloodType,
+          // "image" : "image",
           "test_date" : dayOfTest.text,
           },
         );

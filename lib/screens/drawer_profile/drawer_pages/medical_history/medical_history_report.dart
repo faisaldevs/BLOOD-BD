@@ -1,20 +1,26 @@
+
 import 'package:blood_bd/data_list/data_list.dart';
 import 'package:blood_bd/screens/global_widget/custom_birthDate.dart';
 import 'package:blood_bd/screens/global_widget/custom_button.dart';
 import 'package:blood_bd/screens/global_widget/custom_dropdown.dart';
-import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../controllers/medical_hisory_controller.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../global_widget/custom_file_upload.dart';
 import 'medical_text_field.dart';
 
-class NewReport extends StatelessWidget {
+class NewReport extends StatefulWidget {
   NewReport({super.key});
 
+  @override
+  State<NewReport> createState() => _NewReportState();
+}
+
+class _NewReportState extends State<NewReport> {
   final MedicalHistoryController controller=
       Get.put(MedicalHistoryController());
 
@@ -167,8 +173,15 @@ class NewReport extends StatelessWidget {
                       CustomFileUpload(
                         padding: const EdgeInsets.all(16),
                         border: Border.all(color: Colors.black54, width: 1),
-                        onTap1: () {
+                        onTap1: () async{
+                          final imagePicker = await ImagePicker().pickImage(source: ImageSource.gallery);
 
+
+                            // if (imagePicker != null) {
+                            //  controller.image = imagePicker.path;
+                            // } else {
+                            //   print('No image selected.');
+                            // }
                         },
                         onTap2: () {
 

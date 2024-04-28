@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blood_bd/app_notifications/notification_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -73,7 +74,7 @@ class RequestStatusController extends GetxController {
 
   sentStatus() {}
 
-  donationStatus(notificationId, status) async {
+  donationStatus(notificationId, status,deviceToken) async {
     print("Notification Id :$notificationId");
     print("Status : $status");
 
@@ -107,6 +108,7 @@ class RequestStatusController extends GetxController {
           ),
           margin: EdgeInsets.zero,
           snackStyle: SnackStyle.GROUNDED);
+      NotificationHelper().sendNotification(deviceToken);
     } else if (response.statusCode == 404) {
       GetStorage().erase();
       Get.offAllNamed(welcomePage);

@@ -143,10 +143,10 @@ class RequestDescriptionUi extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 16,
                             )),
-                        Text("Last Donate Date : $lastDonateDate",
-                            style: const TextStyle(
-                              fontSize: 16,
-                            )),
+                        // Text("Last Donate Date : $lastDonateDate",
+                        //     style: const TextStyle(
+                        //       fontSize: 16,
+                        //     )),
                       ],
                     ),
                     Column(

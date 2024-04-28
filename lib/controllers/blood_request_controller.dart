@@ -68,7 +68,7 @@ class BloodRequestController extends GetxController{
   }
 
 
-donateBlood(requestId, bloodAmount,requestUserId,deviceToken)async{
+donateBlood(requestId, bloodAmount, requestUserId, deviceToken)async{
     print("Donate Blood");
   try {
     var res = await http.get(

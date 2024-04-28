@@ -1,24 +1,26 @@
 import 'package:blood_bd/screens/global_widget/custom_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import '../../../controllers/medical_hisory_controller.dart';
 import '../../../utils/app_routes.dart';
 import '../../../utils/app_colors.dart';
 
-class MedicalHistory extends StatelessWidget {
+class MedicalHistory extends StatefulWidget {
   MedicalHistory({super.key});
 
-  final List<Map<String, dynamic>> mhList =
-      (GetStorage().read('mhList') as List<dynamic>?)
-              ?.cast<Map<String, dynamic>>() ??
-          [];
+  @override
+  State<MedicalHistory> createState() => _MedicalHistoryState();
+}
+
+class _MedicalHistoryState extends State<MedicalHistory> {
+  final MedicalHistoryController controller =
+      Get.put(MedicalHistoryController());
 
   @override
   Widget build(BuildContext context) {
-    print(mhList.toString());
-
     String showTime() {
       DateTime now;
 
@@ -29,7 +31,8 @@ class MedicalHistory extends StatelessWidget {
       return formattedDate;
     }
 
-    return Scaffold(backgroundColor: AppTheme.primary,
+    return Scaffold(
+      backgroundColor: AppTheme.primary,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.redAccent,
@@ -40,136 +43,82 @@ class MedicalHistory extends StatelessWidget {
         titleSpacing: 0,
         backgroundColor: AppTheme.primary,
         surfaceTintColor: Colors.transparent,
-        foregroundColor: AppTheme.textColorRed,        elevation: 0,
-        leading: InkWell(
-          onTap: () => Get.back(),
-          child: const Icon(
-            Icons.arrow_back_ios,
-            // color: Colors.black,
-          ),
-        ),
+        foregroundColor: AppTheme.textColorRed,
+        elevation: 0,
+        // leading: InkWell(
+        //   onTap: () => Get.back(),
+        //   child: const Icon(
+        //     Icons.arrow_back_ios,
+        //     // color: Colors.black,
+        //   ),
+        // ),
         actions: [
-          IconButton(onPressed: (){
-            GetStorage().remove("mhList");
-          }, icon: const Icon(Icons.clear)),
+          IconButton(onPressed: () {
+            setState(() {
+
+            });
+          }, icon: const Icon(Icons.refresh)),
         ],
       ),
-      body: ListView.builder(
-        itemCount: mhList.length,
-        itemBuilder: (context, index) {
-          // Map<String, dynamic> medHistory = mhList[index];
-
-          // print("2nd Data :$medicalHistory");
-
-          return Container(
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(16),
+      body: FutureBuilder(
+        future: controller.getMedicalHistory(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          // if(snapshot.hasError){
+          //   return const Center(child: Text("Something went wrong"),);
+          // }
+          if (snapshot.hasData) {
+            final dataList = snapshot.data!;
+            return ListView.builder(
+              itemCount: dataList.data?.length,
+              itemBuilder: (context, index) {
+                final e = dataList.data?[index];
+                String id = e?.id.toString() ?? "";
+                String userId = e?.userId.toString() ?? "";
+                String instituteName = e?.instituteName.toString() ?? "";
+                String dayOfTest = e?.testDate.toString() ?? "";
+                String bloodType = e?.bloodGroup.toString() ?? "";
+                String bloodPressure = e?.bloodPressure.toString() ?? "";
+                String hemoglobin = e?.hemoglobinLevel.toString() ?? "";
+                String hepatitis = e?.hepatitis.toString() ?? "";
+                String malaria = e?.malaria.toString() ?? "";
+                String image = e?.image.toString() ?? "";
+                return medicalHistory(
+                    id,
+                    userId,
+                    instituteName,
+                    dayOfTest,
+                    bloodType,
+                    bloodPressure,
+                    hemoglobin,
+                    hepatitis,
+                    malaria,
+                    image);
+              },
+            );
+          } else {
+            return SizedBox(
+              height: Get.height,
+              width: Get.width,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.search,
+                    size: 80,
+                    color: Colors.black26,
                   ),
-                  padding: const EdgeInsets.all(10),
-                  width: Get.width,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: Get.width * .1,
-                        child: const CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/images/profile.png",
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                              left: 10, top: 5, bottom: 5),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 7),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      "Blood Test",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      showTime(),
-                                      style: const TextStyle(
-                                        color: Colors.green,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 4),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                            mhList[index]["institutionName"]
-                                                .toString(),
-                                            // "Dhaka Medical College",
-                                            style: const TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.bold)),
-                                      ],
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4, vertical: 3),
-                                        decoration: BoxDecoration(
-                                          color: Colors.teal[400],
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(16)),
-                                          border: Border.all(
-                                              width: 1, color: Colors.cyan),
-                                        ),
-                                        child: const Text(
-                                          "Confirmed",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                  Text(
+                    "No Donation Request Found!",
+                    style: TextStyle(fontSize: 19, color: Colors.black26),
                   ),
-                ),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "View Details",
-                      style: TextStyle(
-                          color: Colors.green,
-                          decoration: TextDecoration.underline),
-                    )),
-                const Divider(),
-              ],
-            ),
-          );
+                ],
+              ),
+            );
+          }
         },
       ),
       bottomNavigationBar: Container(
@@ -198,51 +147,152 @@ class MedicalHistory extends StatelessWidget {
           )),
     );
   }
-}
 
-//hemoglobin.toString().isEmpty? SizedBox(
-//         height: Get.height,
-//         width: Get.width,
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.end,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             const Icon(
-//               Icons.search,
-//               size: 80,
-//               color: Colors.black26,
-//             ),
-//             const Text(
-//               "No Notification Found!",
-//               style: TextStyle(fontSize: 19, color: Colors.black26),
-//             ),
-//             SizedBox(
-//               height: Get.height * .32,
-//             ),
-//             // Container(
-//             //     width: Get.width,
-//             //     margin: const EdgeInsets.all(16),
-//             //     child: CustomButton(
-//             //       onPressed: () {
-//             //         Get.toNamed(newReport);
-//             //       },
-//             //       child: const Row(
-//             //         mainAxisAlignment: MainAxisAlignment.center,
-//             //         children: [
-//             //           Icon(
-//             //             Icons.add,
-//             //             color: Colors.white,
-//             //           ),
-//             //           SizedBox(
-//             //             width: 4,
-//             //           ),
-//             //           Text(
-//             //             "Add New Report",
-//             //             style: TextStyle(color: Colors.white, fontSize: 16),
-//             //           ),
-//             //         ],
-//             //       ),
-//             //     )),
-//           ],
-//         ),
-//       ) :
+  Widget medicalHistory(
+    String id,
+    String userId,
+    String instituteName,
+    String dayOfTest,
+    String bloodType,
+    String bloodPressure,
+    String hemoglobin,
+    String hepatitis,
+    String malaria,
+    String image,
+  ) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppTheme.textFieldColor,
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      // height: 400,
+      width: Get.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                "Institute Name : ",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ),
+              Text(
+                instituteName,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Blood Group : ",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                  ),
+                  Text(
+                    bloodType,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ],
+              ),
+              Text(
+                dayOfTest,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: [
+              Text(
+                "Hemoglobin level : ",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ),
+              Text(
+                hemoglobin,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: [
+              Text(
+                "Blood Pressure : ",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ), Text(
+                bloodPressure,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          // Text(
+          //   "malaria : ",
+          //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          // ),
+          // const SizedBox(
+          //   height: 5,
+          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Malaria : ",
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                      ),
+                      Text(
+                        malaria,
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Hepatitis : ",
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                      ),
+                      Text(
+                        " $hepatitis",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // const SizedBox(width: 5,),
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "See Report",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}

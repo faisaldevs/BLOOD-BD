@@ -29,6 +29,7 @@ class Data {
   String? createdBy;
   int? userId;
   int? bloodRequestId;
+  int? bloodRequestUserId;
   int? bloodDonorId;
   int? requestAmountBag;
   Null? approvedAmountBag;
@@ -49,6 +50,7 @@ class Data {
         this.createdBy,
         this.userId,
         this.bloodRequestId,
+        this.bloodRequestUserId,
         this.bloodDonorId,
         this.requestAmountBag,
         this.approvedAmountBag,
@@ -69,6 +71,7 @@ class Data {
     createdBy = json['created_by'];
     userId = json['user_id'];
     bloodRequestId = json['blood_request_id'];
+    bloodRequestUserId = json['blood_request_user_id'];
     bloodDonorId = json['blood_donor_id'];
     requestAmountBag = json['request_amount_bag'];
     approvedAmountBag = json['approved_amount_bag'];
@@ -93,6 +96,7 @@ class Data {
     data['created_by'] = this.createdBy;
     data['user_id'] = this.userId;
     data['blood_request_id'] = this.bloodRequestId;
+    data['blood_request_user_id'] = this.bloodRequestUserId;
     data['blood_donor_id'] = this.bloodDonorId;
     data['request_amount_bag'] = this.requestAmountBag;
     data['approved_amount_bag'] = this.approvedAmountBag;
@@ -203,14 +207,15 @@ class BloodDonor {
 class User {
   int? id;
   String? name;
-  String? username;
+  Null? username;
   String? userType;
   String? email;
   String? phone;
   Null? emailVerifiedAt;
+  String? deviceToken;
   String? image;
   int? profileVisibility;
-  int? otp;
+  Null? otp;
   String? ipAddress;
   int? status;
   int? donorStatus;
@@ -229,6 +234,7 @@ class User {
         this.email,
         this.phone,
         this.emailVerifiedAt,
+        this.deviceToken,
         this.image,
         this.profileVisibility,
         this.otp,
@@ -250,6 +256,7 @@ class User {
     email = json['email'];
     phone = json['phone'];
     emailVerifiedAt = json['email_verified_at'];
+    deviceToken = json['device_token'];
     image = json['image'];
     profileVisibility = json['profile_visibility'];
     otp = json['otp'];
@@ -273,6 +280,7 @@ class User {
     data['email'] = this.email;
     data['phone'] = this.phone;
     data['email_verified_at'] = this.emailVerifiedAt;
+    data['device_token'] = this.deviceToken;
     data['image'] = this.image;
     data['profile_visibility'] = this.profileVisibility;
     data['otp'] = this.otp;

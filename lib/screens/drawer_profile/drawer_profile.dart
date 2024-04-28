@@ -38,13 +38,13 @@ class DrawerProfile extends StatelessWidget {
             },
           ),
 
-          // CustomDrawerLinks(
-          //   title: 'Medical History',
-          //   icon: Icons.medical_information_outlined,
-          //   onTap: () {
-          //     Get.to(MedicalHistory());
-          //   },
-          // ),
+          CustomDrawerLinks(
+            title: 'Medical History',
+            icon: Icons.medical_information_outlined,
+            onTap: () {
+              Get.to(MedicalHistory());
+            },
+          ),
           CustomDrawerLinks(
             title: 'Notifications',
             icon: Icons.notifications_active,

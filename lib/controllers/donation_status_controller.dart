@@ -120,8 +120,10 @@ class DonationStatusController extends GetxController {
           margin: EdgeInsets.zero,
           snackStyle: SnackStyle.GROUNDED);
     }else if (response.statusCode == 404) {
-      GetStorage().erase();
-      Get.offAllNamed(welcomePage);
+      print(response.statusCode);
+      print(response.body);
+      // GetStorage().erase();
+      // Get.offAllNamed(welcomePage);
     }
   }
 

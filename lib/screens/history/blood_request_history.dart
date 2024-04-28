@@ -228,40 +228,40 @@ class _HistoryRequestState extends State<HistoryRequest> {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(10),
-                      onTap: () {
-                        Get.to(HistoryDescription(
-                          title: 'History',
-                          id: '',
-                          hospitalName: '',
-                          contractPersonName: '',
-                          contractPersonNumber: '',
-                          patientName: '',
-                          healthIssue: '',
-                          bloodAmount: '',
-                          bloodType: '',
-                          address: '',
-                          date: '',
-                          lastDonateDate: '',
-                          division: '',
-                          district: '',
-                          note: '',
-                          thana: '',
-                          time: '',
-                          receiverStatus: '',
-                          notificationId: '', buttonText: '',
-                        ));
-                        print("object");
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: const Text("Show more"),
-                      ),
-                    )
+                    // InkWell(
+                    //   borderRadius: BorderRadius.circular(10),
+                    //   onTap: () {
+                    //     Get.to(HistoryDescription(
+                    //       title: 'History',
+                    //       id: '',
+                    //       hospitalName: '',
+                    //       contractPersonName: '',
+                    //       contractPersonNumber: '',
+                    //       patientName: '',
+                    //       healthIssue: '',
+                    //       bloodAmount: '',
+                    //       bloodType: '',
+                    //       address: '',
+                    //       date: '',
+                    //       lastDonateDate: '',
+                    //       division: '',
+                    //       district: '',
+                    //       note: '',
+                    //       thana: '',
+                    //       time: '',
+                    //       receiverStatus: '',
+                    //       notificationId: '', buttonText: '',
+                    //     ));
+                    //     print("object");
+                    //   },
+                    //   child: Container(
+                    //     padding: const EdgeInsets.all(4),
+                    //     decoration: const BoxDecoration(
+                    //       borderRadius: BorderRadius.all(Radius.circular(10)),
+                    //     ),
+                    //     child: const Text("Show more"),
+                    //   ),
+                    // )
                   ],
                 ),
               ],

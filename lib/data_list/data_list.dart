@@ -47,6 +47,7 @@ class DataList {
     "19",
     "20"
   ];
+  static List<String> medicalHistory = ["Positive","Negative", "Not Tested"];
   static List<String> healthIssue = [
     "None",
     "Anemia",
@@ -78,6 +79,8 @@ class DataList {
     "Ulcers",
     "Valve Replacement",
   ];
+
+
 
 // static List<>
 

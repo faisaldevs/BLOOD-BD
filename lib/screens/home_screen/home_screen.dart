@@ -114,17 +114,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () {
                           Get.toNamed(notificationPage);
                         },
-                        icon: const Badge(
-                          backgroundColor: Colors.white10,
-                          label: Text(
-                            "1",
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
-                          child: Icon(
-                            Icons.notifications_active_outlined,
-                            // color: Colors.white,
-                            size: 24,
-                          ),
+                        icon: Icon(
+                          Icons.notifications_active_outlined,
+                          // color: Colors.white,
+                          size: 24,
                         )),
                     const SizedBox(
                       width: 10,

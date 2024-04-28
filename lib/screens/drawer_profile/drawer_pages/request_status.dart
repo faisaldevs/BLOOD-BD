@@ -78,6 +78,7 @@ class RequestStatus extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final e = dataList.data?[index];
                       String notificationId = e?.id.toString() ?? "";
+                      String deviceToken = e?.user?.deviceToken.toString() ?? "";
                       String name = e?.user?.name.toString() ?? "";
                       String bloodType = e?.bloodDonor?.bloodGroup ?? "";
                       String bloodAmount =
@@ -108,7 +109,7 @@ class RequestStatus extends StatelessWidget {
                         receiverStatus,
                         lastDonateDate,
                         contactPersonName,
-                        contractPersonNumber,
+                        contractPersonNumber,deviceToken
                       );
                     },
                   );
@@ -155,6 +156,7 @@ class RequestStatus extends StatelessWidget {
     String lastDonateDate,
     String contactPersonName,
     String contractPersonNumber,
+    String deviceToken,
   ) {
     String showTime() {
       DateTime now;
@@ -327,12 +329,12 @@ class RequestStatus extends StatelessWidget {
                             notificationId: notificationId,
                             buttonFunction1: () {
                               controller.donationStatus(
-                                  notificationId, "Canceled");
+                                  notificationId, "Canceled",deviceToken);
                               loadingBar();
                             },
                             buttonFunction2: () {
                               controller.donationStatus(
-                                  notificationId, "Accepted");
+                                  notificationId, "Accepted",deviceToken);
                               loadingBar();
                             },
                             // title: 'Donation Request List',
@@ -386,7 +388,7 @@ class RequestStatus extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  controller.donationStatus(notificationId, "Canceled");
+                  controller.donationStatus(notificationId, "Canceled",deviceToken);
                   loadingBar();
                 },
                 style: ButtonStyle(
@@ -408,7 +410,7 @@ class RequestStatus extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  controller.donationStatus(notificationId, "Accepted",);
+                  controller.donationStatus(notificationId, "Accepted",deviceToken);
                   loadingBar();
                 },
                 style: ButtonStyle(

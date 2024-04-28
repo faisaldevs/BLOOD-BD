@@ -1,5 +1,4 @@
 import 'package:blood_bd/data_list/data_list.dart';
-import 'package:blood_bd/utils/app_routes.dart';
 import 'package:blood_bd/screens/global_widget/custom_birthDate.dart';
 import 'package:blood_bd/screens/global_widget/custom_button.dart';
 import 'package:blood_bd/screens/global_widget/custom_dropdown.dart';
@@ -11,11 +10,12 @@ import 'package:get/get.dart';
 import '../../../../controllers/medical_hisory_controller.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../global_widget/custom_file_upload.dart';
+import 'medical_text_field.dart';
 
 class NewReport extends StatelessWidget {
   NewReport({super.key});
 
-  final MedicalHistoryController medicalHistoryController =
+  final MedicalHistoryController controller=
       Get.put(MedicalHistoryController());
 
   @override
@@ -49,7 +49,7 @@ class NewReport extends StatelessWidget {
           height: Get.height,
           width: Get.width,
           child: Form(
-            key: medicalHistoryController.formKey,
+            key: controller.formKey,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -62,9 +62,9 @@ class NewReport extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomTextFormField(
-                        controller: medicalHistoryController.hemoglobin,
-                        hintText: "15.5 g/dL",
+                      MedicalTextField(
+                        controller: controller.hemoglobin,
+
                         textInputType: TextInputType.number,
                         validate: (value) {
                           if (value!.isEmpty) {
@@ -72,7 +72,9 @@ class NewReport extends StatelessWidget {
                           }
                           return null;
                         },
+                        hintText: "15.5 g/dL",
                         labelText: "Hemoglobin Level*",
+                        // labelText: "15.5 g/dL",
                       ),
                       const SizedBox(height: 8),
                       Row(
@@ -83,12 +85,12 @@ class NewReport extends StatelessWidget {
                               dropDownList: DataList.bloodListData,
                               label: "Blood Group",
                               onChanged: (value) {
-                                medicalHistoryController.bloodType = value;
+                                controller.bloodType = value;
                               },
                             ),
                           ),
                           const SizedBox(width: 10,),
-                          CustomBirthdate(controller: medicalHistoryController.dayOfTest, label: "Day of Test"),
+                          CustomBirthdate(controller: controller.dayOfTest, label: "Day of Test"),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -107,10 +109,10 @@ class NewReport extends StatelessWidget {
                           Expanded(
                             flex: 1,
                             child: CustomDropdown(
-                              dropDownList: DataList.bloodListData,
+                              dropDownList: DataList.medicalHistory,
                               label: "Hepatitis",
                               onChanged: (value) {
-                                medicalHistoryController.hepatitis = value;
+                                controller.hepatitis = value;
                               },
                             ),
                           ),
@@ -120,46 +122,57 @@ class NewReport extends StatelessWidget {
                           Expanded(
                             flex: 1,
                             child: CustomDropdown(
-                              dropDownList: DataList.bloodListData,
+                              dropDownList: DataList.medicalHistory,
                               label: "Malaria",
                               onChanged: (value) {
-                                medicalHistoryController.malaria = value;
+                                controller.malaria = value;
                               },
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 8),
-                      CustomTextFormField(
-                        controller: medicalHistoryController.bloodPressure,
+                      MedicalTextField(
+                        controller: controller.bloodPressure,
                         hintText: "120/80",
-                        textInputType: TextInputType.number,
+                        labelText:  "Blood pressure*",
+                        textInputType: TextInputType.text,
                         validate: (value) {
                           if (value!.isEmpty) {
                             return "required Hemoglobin Level";
                           }
                           return null;
                         },
-                        labelText: "Blood pressure*",
                       ),
                       const SizedBox(height: 14),
                        Divider(
                         color: AppTheme.textColorRed,
                       ),
                       const SizedBox(height: 8),
-                      CustomDropdown(
-                        dropDownList: DataList.bloodListData,
-                        label: "Institute Name",
-                        onChanged: (value) {
-                          medicalHistoryController.institutionName = value;
+
+                      MedicalTextField(
+                        controller: controller.institutionName,
+                        // hintText: "15.5 g/dL",
+                        textInputType: TextInputType.text,
+                        validate: (value) {
+                          if (value!.isEmpty) {
+                            return "required Hemoglobin Level";
+                          }
+                          return null;
                         },
+                        labelText: "Institute Name*",
                       ),
+
                       const SizedBox(height: 8),
                       CustomFileUpload(
                         padding: const EdgeInsets.all(16),
                         border: Border.all(color: Colors.black54, width: 1),
-                        onTap1: () {},
-                        onTap2: () {},
+                        onTap1: () {
+
+                        },
+                        onTap2: () {
+
+                        },
                       ),
                       const SizedBox(height: 8),
                     ],
@@ -178,8 +191,11 @@ class NewReport extends StatelessWidget {
         width: Get.width,
         child: CustomButton(
           onPressed: () {
-            medicalHistoryController.onSaveReport();
-            Get.toNamed(medicalHistory);
+
+            // controller.test();
+
+            controller.onSaveReport();
+            // Get.toNamed(medicalHistory);
           },
           child: const Text(
             "Save Report",

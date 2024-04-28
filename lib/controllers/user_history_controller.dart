@@ -90,7 +90,7 @@ class HistoryController extends GetxController {
     throw Exception("Loading failed !!!");
   }
 
-  Future<List<BloodDonateHistory>> getHistoryDonate() async {
+  Future<BloodDonateHistoryModel> getHistoryDonate() async {
     print("pressed.......1");
     print(token);
     try {
@@ -102,7 +102,7 @@ class HistoryController extends GetxController {
       //   },
       // );
       var res = await http.get(
-        Uri.parse(ApiUrls.bloodDonorGet),
+        Uri.parse("https://starsoftjpn.xyz/api/auth/accepted-blood-request-notification"),
         headers: {
           "Accept": "application/json",
           "Authorization": token,
@@ -113,36 +113,10 @@ class HistoryController extends GetxController {
 
       print(res.body);
 
-      var jsonDataDecoded = json.decode(res.body);
-      var dataList = jsonDataDecoded['data'];
-      // print("------------"+dataList.toString());
-
-      List data = dataList['data'] as List;
+      var body = json.decode(res.body);
 
       if (res.statusCode == 200) {
-        // print("-----data-------" + data.toString());
-        print(res.statusCode);
-        // print("pressed.............");
-        return data.map((e) {
-          final map = e as Map<String, dynamic>;
-          return BloodDonateHistory(
-            // patientsName: map["patients_name"],
-            bloodGroup: map["blood_group"],
-            amountBag: map["amount_bag"],
-            // date: map["date"],
-            // time: map["time"],
-            healthIssue: map["health_issue"],
-            // hospitalName: map["hospital_name"],
-            district: map["district"],
-            division: map["division"],
-            union: map["upazila"],
-            upazila: map["union"],
-            address: map["address"],
-            contactPersonName: map["contact_person_name"],
-            contactPersonPhone: map["contact_person_phone"],
-            // note: map["note"],
-          );
-        }).toList();
+        return BloodDonateHistoryModel.fromJson(body);
       }else if (res.statusCode == 404) {
         GetStorage().erase();
         Get.offAllNamed(welcomePage);

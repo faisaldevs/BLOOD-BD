@@ -36,6 +36,9 @@ class NotificationServices {
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       print("user permission granted");
+
+
+
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
       print("user provisional permission granted");

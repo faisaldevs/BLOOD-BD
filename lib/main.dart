@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:blood_bd/screens/depandency_injection.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -34,10 +33,10 @@ class PostHttpOverrides extends HttpOverrides {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AwesomeNotifications().initialize(null, [
-    NotificationChannel(channelKey: "channelKey", channelName: "channelName", channelDescription: "channelDescription"),
-
-  ],debug: true,);
+  // AwesomeNotifications().initialize(null, [
+  //   NotificationChannel(channelKey: "channelKey", channelName: "channelName", channelDescription: "channelDescription"),
+  //
+  // ],debug: true,);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

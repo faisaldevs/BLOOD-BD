@@ -94,7 +94,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                     hemoglobin,
                     hepatitis,
                     malaria,
-                    image);
+                    image,);
               },
             );
           } else {

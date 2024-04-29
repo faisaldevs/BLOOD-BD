@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     homeController.profileData();
     notificationServices.requestNotificationPermission();
-    notificationServices.firebaseInit();
+    notificationServices.firebaseInit(context);
     notificationServices.isTokenRefresh();
     notificationServices.getDeviceToken().then((value) async{
       print("Device Token: $value");

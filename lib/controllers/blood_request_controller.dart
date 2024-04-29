@@ -30,7 +30,7 @@ class BloodRequestController extends GetxController{
       var res = await http.get(Uri.parse(ApiUrls.bloodRequestWithoutMeGet),
           headers: {
         "Accept" : "application/json",
-        "Authorization" : token,
+        "Authorization" : GetStorage().read("token").toString(),
       });
       if (kDebugMode) {
         print("200-status 1: ${res.statusCode}");
@@ -75,7 +75,7 @@ donateBlood(requestId, bloodAmount, requestUserId, deviceToken)async{
         Uri.parse(ApiUrls.profileGet),
         headers: {
           "Accept" : "application/json",
-          "Authorization" : token,
+          "Authorization" : GetStorage().read("token").toString(),
         }
     );
     print(res.statusCode);
@@ -95,7 +95,7 @@ donateBlood(requestId, bloodAmount, requestUserId, deviceToken)async{
           Uri.parse(ApiUrls.bloodDonorNotificationPost),
           headers: {
             "Accept": "application/json",
-            "Authorization": token,
+            "Authorization": GetStorage().read("token").toString(),
           },
           body: {
             "blood_request_id": requestId.toString(),

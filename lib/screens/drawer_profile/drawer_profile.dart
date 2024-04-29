@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
 import 'package:blood_bd/utils/app_routes.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/medical_history.dart';

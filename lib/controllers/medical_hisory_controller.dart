@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:core';
-// import 'dart:io';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,7 +10,7 @@ import '../models/MedicalHistoryModel.dart';
 
 class MedicalHistoryController extends GetxController {
    GlobalKey<FormState> formKey = GlobalKey<FormState>();
-   // String? image;
+   File? image;
    TextEditingController hemoglobin = TextEditingController();
    TextEditingController institutionName = TextEditingController();
    TextEditingController dayOfTest = TextEditingController();

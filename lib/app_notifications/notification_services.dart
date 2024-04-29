@@ -33,6 +33,14 @@ class NotificationServices {
       print(message.notification?.body.toString());
       print(message.data.toString());
       print(message.data["type"].toString());
+      print(message.data["healthIssue"].toString());
+      // String healthIssue = ;
+      // String bloodType = message.data["bloodType"];
+      // String bloodAmount = message.data["bloodAmount"];
+      // String date = message.data["date"];
+      // String hospitalName = message.data["hospitalName"];
+      // String number = message.data["phone"];
+      // String name = message.data["name"];
 
 
       initLocalNotification(context, message);
@@ -41,7 +49,18 @@ class NotificationServices {
   }
 
   Future<void>showMessage(RemoteMessage message)async{
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+
+    String? healthIssue = message.data["healthIssue"];
+    String? bloodType = message.data["bloodType"];
+    String? bloodAmount = message.data["bloodAmount"];
+    String? date = message.data["date"];
+    String? hospitalName = message.data["hospitalName"];
+    String? number = message.data["phone"];
+    String? name = message.data["name"];
+
+    print(hospitalName);
+
+    final AndroidNotificationDetails androidPlatformChannelSpecifics =
     AndroidNotificationDetails(
       'your_channel_id',
       'your_channel_name',
@@ -49,23 +68,29 @@ class NotificationServices {
       priority: Priority.high,
       ticker: 'ticker',
       styleInformation: BigTextStyleInformation(
-        '''🩸জরুরী রক্ত প্রয়োজন🩸\b
-        💁 রোগীর সমস্যা: ক্যান্সার\b
-      🔴 রক্তের গ্রুপঃ A+ positive\b
-      💉 রক্তের পরিমাণঃ 1 beg.\b
-      🗓️ তারিখঃ আগামীকাল সকাল\b
-      🏥 রক্তদানের স্থান: মিরপুর ডেলটা হাসপাতাল\b
-      ☎️ যোগাযোগ : 01521-376288 (Radid)''',
+          '''🩸জরুরী রক্ত প্রয়োজন🩸\b
+        💁 রোগীর সমস্যা: $healthIssue\b
+      🔴 রক্তের গ্রুপঃ $bloodType\b
+      💉 রক্তের পরিমাণঃ $bloodAmount  beg.\b
+      🗓️ তারিখঃ $date\b
+      🏥 রক্তদানের স্থান: $hospitalName\b
+      ☎️ যোগাযোগ : $number ($name)''',
       ),
     );
-    const NotificationDetails platformChannelSpecifics =
+    final NotificationDetails platformChannelSpecifics =
     NotificationDetails(android: androidPlatformChannelSpecifics);
 
     await flutterLocalNotificationsPlugin.show(
       0,
       message.notification?.title.toString(),
       // 'You have a new message!',
-      "🩸জরুরী রক্ত প্রয়োজন🩸",
+      '''🩸জরুরী রক্ত প্রয়োজন🩸\b
+        💁 রোগীর সমস্যা: ক্যান্সার\b
+      🔴 রক্তের গ্রুপঃ A+ positive\b
+      💉 রক্তের পরিমাণঃ 1 beg.\b
+      🗓️ তারিখঃ আগামীকাল সকাল\b
+      🏥 রক্তদানের স্থান: মিরপুর ডেলটা হাসপাতাল\b
+      ☎️ যোগাযোগ : 01521-376288 (Radid)''',
       platformChannelSpecifics,
       payload: 'type',
     );

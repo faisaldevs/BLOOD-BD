@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'app_notifications/notification_services.dart';
 import 'firebase_options.dart';
 import 'utils/app_routes.dart';
+
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -21,6 +21,7 @@ class PostHttpOverrides extends HttpOverrides {
           (X509Certificate cert, String host, int port) => true;
   }
 }
+
 // void main() async{
 //   WidgetsFlutterBinding.ensureInitialized();
 //   // NotificationService().initNotification();

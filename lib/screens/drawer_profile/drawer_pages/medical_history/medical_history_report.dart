@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:blood_bd/data_list/data_list.dart';
 import 'package:blood_bd/screens/global_widget/custom_birthDate.dart';
 import 'package:blood_bd/screens/global_widget/custom_button.dart';
@@ -178,7 +180,7 @@ class _NewReportState extends State<NewReport> {
 
 
                             // if (imagePicker != null) {
-                            //  controller.image = imagePicker.path;
+                             controller.image = imagePicker?.path as File?;
                             // } else {
                             //   print('No image selected.');
                             // }

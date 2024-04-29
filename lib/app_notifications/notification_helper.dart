@@ -42,24 +42,30 @@ class NotificationHelper{
   }
 
 
-  customNotification()async{
+  customNotification(deviceToken)async{
+    print("sent notification");
     var body = {
-      "to": "deviceToken",
+      "to": deviceToken,
       "notification": {
         "title": "Blood BD",
-        "body": "🩸জরুরী রক্ত প্রয়োজন🩸",
+        "body": "test body"
+
       },
+
       "data" : {
         "routeId": 6,
-        "health_issue" : "",
-        "blood_group" : "",
-        "Blood_amount" : "",
-        "date" : "",
-        "hospital" : "",
-        "phone" : "",
+        "type": "blood_request",
+        "healthIssue" : "Animilia",
+        "bloodType" : "O+",
+        "bloodAmount" : "2",
+        "date" : "2024-02-18",
+        "hospitalName" : "Dhaka Medical Hospital",
+        "phone" : "01903440069",
+        "name" : "Faisal"
       }
-    };
+    }
 
+    ;
     var serverKey = "key=AAAA7XPIygM:APA91bG7SzjFPfXGJDbC26m_6ZDyf3qxPJX81i6t6CiO5Lgh0RlV6rz80f6wyfagmVr2o1RI2ZFIBQf5SfAZ5wI0ll78MhBD7ijI3yQNW1AHRJWvoLAcz-hmHl4eSbalnDam6MGs0k4q";
     var api = "https://fcm.googleapis.com/fcm/send";
 

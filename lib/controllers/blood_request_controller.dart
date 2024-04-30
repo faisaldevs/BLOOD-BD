@@ -83,11 +83,14 @@ donateBlood(requestId, bloodAmount, requestUserId, deviceToken)async{
       var jsonBody = jsonDecode(res.body);
       var body = jsonBody["data"];
       var donorStatus = body["donor_profile_status"];
+      var donorName = body["name"];
       print("Status : $donorStatus");
 
       if(donorStatus == 1){
         var donorBody = jsonBody["blood_donor"];
         var donorId =  donorBody["id"];
+        var donorBloodGroup =  donorBody["blood_group"];
+        var donorNumber =  donorBody["contact_person_phone"];
         print("DonorId : $donorId");
         // String requestId = requestId.toString();
 
@@ -104,9 +107,13 @@ donateBlood(requestId, bloodAmount, requestUserId, deviceToken)async{
             "request_amount_bag": bloodAmount.toString(),
           },
         );
+        var body = jsonDecode(response1.body);
         // print(response1.statusCode.toString());
         // print(response1.body);
-        if(response1 == 201){
+        var success = body["success"];
+        print("---------"+success.toString());
+        NotificationHelper().customNotificationDonate(deviceToken, "donate", donorBloodGroup, donorNumber, donorName);
+        if(success == "true"){
           print("success");
           Get.rawSnackbar(
               messageText: const Text(
@@ -124,7 +131,7 @@ donateBlood(requestId, bloodAmount, requestUserId, deviceToken)async{
               snackStyle: SnackStyle.GROUNDED
           );
 
-          NotificationHelper().sendNotification(deviceToken);
+          // NotificationHelper().sendNotification(deviceToken);
 
         }
         else{

@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/screens/profile/profile_page.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../screens/blood_request_donor/become_donor_page.dart';
 import '../utils/app_routes.dart';
 
 class ProfileController extends GetxController {
@@ -14,13 +17,14 @@ class ProfileController extends GetxController {
   RxString blood = "".obs;
   RxString gender = "".obs;
   RxString address = "".obs;
-  // RxBool loading = false.obs;
+  RxBool loading = false.obs;
 
 
 
   String token = GetStorage().read("token");
 
   profileData() async {
+    loading.value = true;
     print("object");
     print(token);
     
@@ -49,8 +53,10 @@ class ProfileController extends GetxController {
         print(name);
         print(number);
         print(status);
+        loading.value = false;
         Get.to(const ProfilePage());
       }else if (res.statusCode == 404) {
+        loading.value = false;
         GetStorage().erase();
         Get.offAllNamed(welcomePage);
       }
@@ -58,6 +64,7 @@ class ProfileController extends GetxController {
       print(res.statusCode);
       print(res.body.toString());
     } catch (e) {
+      loading.value = false;
       // loading.value = false;
       print("Error : $e");
     }
@@ -165,6 +172,68 @@ class ProfileController extends GetxController {
     // );
   }
 
+
+  donorValidate()async{
+    loading.value = true;
+    try{
+      var res = await http.get(
+          Uri.parse(ApiUrls.profileGet),
+          headers: {
+            "Accept" : "application/json",
+            "Authorization" : token,
+          }
+      );
+
+
+      if(res.statusCode == 200){
+        var body  = jsonDecode(res.body);
+        var data = body["data"];
+
+        String status = data["donor_profile_status"].toString();
+        if (kDebugMode) {
+          print("Profile Donor: $status");
+        }
+
+        loading.value = false;
+        if(status == 0.toString()){
+          Get.to(const BecomeDonor());
+        }else{
+          // Get.to( const DonorProfile());
+          // Get.to(const BecomeDonor());
+          // donorProfile();
+          Get.rawSnackbar(
+              messageText: const Text(
+                  'You are already a Donor..!!',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14
+                  )
+              ),
+              isDismissible: true,
+              duration: const Duration(seconds: 3),
+              backgroundColor: Colors.red[400]!,
+              icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
+              margin: EdgeInsets.zero,
+              snackStyle: SnackStyle.GROUNDED
+          );
+
+        }
+
+      } else if (res.statusCode == 404) {
+        loading.value = false;
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
+      } else{
+        loading.value = false;
+        print(res.statusCode);
+        print(res.body);
+      }
+
+    }catch(e){
+      loading.value = false;
+      print("Error : $e");
+    }
+  }
 
 
 

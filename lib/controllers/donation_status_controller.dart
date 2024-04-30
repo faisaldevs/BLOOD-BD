@@ -104,7 +104,7 @@ class DonationStatusController extends GetxController {
     if (response.statusCode == 200) {
       print("done");
 
-      NotificationHelper().sendNotification(deviceToken);
+      // NotificationHelper().sendNotification(deviceToken);
 
       Get.rawSnackbar(
           messageText: const Text('Done..!!',

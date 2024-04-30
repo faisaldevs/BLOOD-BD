@@ -30,62 +30,7 @@ class BecomeDonorController extends GetxController {
  RxBool isLoading = false.obs;
 
 
-  donorValidate()async{
-    try{
-      var res = await http.get(
-          Uri.parse(ApiUrls.profileGet),
-          headers: {
-            "Accept" : "application/json",
-            "Authorization" : token,
-          }
-      );
 
-
-      if(res.statusCode == 200){
-        var body  = jsonDecode(res.body);
-        var data = body["data"];
-
-        String status = data["donor_profile_status"].toString();
-        if (kDebugMode) {
-          print("Profile Donor: $status");
-        }
-
-        if(status == 0.toString()){
-          Get.to(const BecomeDonor());
-        }else{
-          // Get.to( const DonorProfile());
-          // Get.to(const BecomeDonor());
-          // donorProfile();
-          Get.rawSnackbar(
-              messageText: const Text(
-                  'You are already a Donor..!!',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14
-                  )
-              ),
-              isDismissible: true,
-              duration: const Duration(seconds: 3),
-              backgroundColor: Colors.red[400]!,
-              icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
-              margin: EdgeInsets.zero,
-              snackStyle: SnackStyle.GROUNDED
-          );
-
-        }
-
-      } else if (res.statusCode == 404) {
-        GetStorage().erase();
-        Get.offAllNamed(welcomePage);
-      } else{
-        print(res.statusCode);
-        print(res.body);
-      }
-
-    }catch(e){
-      print("Error : $e");
-    }
-  }
 
   searchDonor() async{
     isLoading.value = true;

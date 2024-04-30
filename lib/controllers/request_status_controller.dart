@@ -108,7 +108,7 @@ class RequestStatusController extends GetxController {
           ),
           margin: EdgeInsets.zero,
           snackStyle: SnackStyle.GROUNDED);
-      NotificationHelper().sendNotification(deviceToken);
+      // NotificationHelper().sendNotification(deviceToken);
     } else if (response.statusCode == 404) {
       GetStorage().erase();
       Get.offAllNamed(welcomePage);

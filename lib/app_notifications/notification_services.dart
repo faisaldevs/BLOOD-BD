@@ -57,17 +57,25 @@ class NotificationServices {
     String? hospitalName = message.data["hospitalName"];
     String? number = message.data["phone"];
     String? name = message.data["name"];
+    String? type = message.data["type"];
 
     print(hospitalName);
+    print(type);
 
-    final AndroidNotificationDetails androidPlatformChannelSpecifics =
-    AndroidNotificationDetails(
-      'your_channel_id',
-      'your_channel_name',
-      importance: Importance.max,
-      priority: Priority.high,
-      ticker: 'ticker',
-      styleInformation: BigTextStyleInformation(
+    String? donorName = message.data["name"];
+    String? donorBloodType = message.data["bloodType"];
+    String? donorNumber = message.data["phone"];
+
+
+    if(healthIssue != null){
+      final AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
+        'your_channel_id',
+        'your_channel_name',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker',
+        styleInformation: BigTextStyleInformation(
           '''🩸জরুরী রক্ত প্রয়োজন🩸\b
         💁 রোগীর সমস্যা: $healthIssue\b
       🔴 রক্তের গ্রুপঃ $bloodType\b
@@ -75,25 +83,45 @@ class NotificationServices {
       🗓️ তারিখঃ $date\b
       🏥 রক্তদানের স্থান: $hospitalName\b
       ☎️ যোগাযোগ : $number ($name)''',
-      ),
-    );
-    final NotificationDetails platformChannelSpecifics =
-    NotificationDetails(android: androidPlatformChannelSpecifics);
+        ),
+      );
+      final NotificationDetails platformChannelSpecifics =
+      NotificationDetails(android: androidPlatformChannelSpecifics);
 
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      message.notification?.title.toString(),
-      // 'You have a new message!',
-      '''🩸জরুরী রক্ত প্রয়োজন🩸\b
-        💁 রোগীর সমস্যা: ক্যান্সার\b
-      🔴 রক্তের গ্রুপঃ A+ positive\b
-      💉 রক্তের পরিমাণঃ 1 Beg.\b
-      🗓️ তারিখঃ আগামীকাল সকাল\b
-      🏥 রক্তদানের স্থান: মিরপুর ডেলটা হাসপাতাল\b
-      ☎️ যোগাযোগ : 01521-376288 (Radid)''',
-      platformChannelSpecifics,
-      payload: 'type',
-    );
+      await flutterLocalNotificationsPlugin.show(
+        0,
+        message.notification?.title.toString(),
+        '🩸জরুরী রক্ত প্রয়োজন🩸',
+        platformChannelSpecifics,
+        payload: 'type',
+      );
+    }else{
+      final AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
+        'your_channel_id',
+        'your_channel_name',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker',
+        styleInformation: BigTextStyleInformation(
+          '''🩸আমি প্রস্তুত রক্ত দানের জন্য🩸\b
+        🙍‍♂️ দাতা : $donorName\b
+      🔴 রক্তের গ্রুপঃ $donorBloodType\b
+      ☎️ যোগাযোগ : $donorNumber ($donorName)''',
+        ),
+      );
+      final NotificationDetails platformChannelSpecifics =
+      NotificationDetails(android: androidPlatformChannelSpecifics);
+
+      await flutterLocalNotificationsPlugin.show(
+        0,
+        message.notification?.title.toString(),
+        "🩸আমি প্রস্তুত রক্ত দানের জন্য🩸",
+        platformChannelSpecifics,
+        payload: 'type',
+      );
+    }
+
   }
 
 

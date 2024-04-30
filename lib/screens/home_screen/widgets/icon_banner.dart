@@ -1,4 +1,5 @@
 import 'package:blood_bd/app_notifications/local%20notification_pc.dart';
+import 'package:blood_bd/controllers/profile_controller.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ import '../../blood_request_donor/blood_request_page.dart';
 
 class HomeScreenIcons extends StatelessWidget {
    HomeScreenIcons({super.key});
- final BecomeDonorController controller = Get.put(BecomeDonorController());
+ final ProfileController controller = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -97,7 +97,7 @@ class NotificationRequest extends StatelessWidget {
                     color: Colors.black26,
                   ),
                   Text(
-                    "No Donation Request Found!",
+                    "No Notification Found!",
                     style: TextStyle(fontSize: 19, color: Colors.black26),
                   ),
                 ],

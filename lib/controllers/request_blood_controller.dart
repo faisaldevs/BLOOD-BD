@@ -11,8 +11,6 @@ import '../screens/blood_request_donor/request_blood/request_blood_filter_page.d
 import '../screens/home_screen/home_screen.dart';
 import '../utils/app_routes.dart';
 
-
-
 class RequestBloodController extends GetxController {
   var token = GetStorage().read("token") ?? "";
 
@@ -37,129 +35,139 @@ class RequestBloodController extends GetxController {
   RxBool isLoading = false.obs;
 
   onSaveRqBlood() async {
-   if(formKey.currentState!.validate()){
-     isLoading.value = true;
-     print(token);
+    if (formKey.currentState!.validate()) {
+      isLoading.value = true;
+      print(token);
 
-     print(bloodType);
-     print(dateController.text);
-     print(timeController.text);
-     print(division.toString());
-     print(district.toString());
-     print(thana.toString());
-     print(union.toString());
+      print(bloodType);
+      print(dateController.text);
+      print(timeController.text);
+      print(division.toString());
+      print(district.toString());
+      print(thana.toString());
+      print(union.toString());
 
-     try {
-       print("validate");
-       // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
-       var res = await http.post(
-         Uri.parse(ApiUrls.bloodRequestPost),
-         headers: {
-           "Accept": "application/json",
-           "Authorization": token,
-         },
-         body: {
-           "patients_name": patientNameController.text,
-           "blood_group": bloodType,
-           "amount_bag": bloodAmount.toString(),
-           "date": dateController.text,
-           "hospital_name": hospitalController.text,
-           // "date": "2024-01-06",
-           "time": "16:14:00",
-           "health_issue": healthIssue,
-           "division": division,
-           "district": district,
-           "upazila": thana,
-           "union": "union",
-           "address": addressController.text,
-           "contact_person_name": contactParsonNameController.text,
-           "contact_person_phone": numberController.text,
-           "note": noteController.text,
-         },
-         // body: {
-         //   "patients_name": "Faisal",
-         //   "blood_group": "A+",
-         //   "amount_bag": "1",
-         //   // "date": dateController.text,
-         //   "date": "2024-01-06",
-         //   "time": "16:14:00",
-         //   "health_issue": "healthIssue",
-         //   "division": "dhaka",
-         //   "district": "dhaka",
-         //   "hospital_name": "Dhaka",
-         //   "upazila": "dhaka",
-         //   "union": "dhaka",
-         //   "address": "addressController.text",
-         //   "contact_person_name": "contactParson",
-         //   "contact_person_phone": "01725966666",
-         //   "note" : "noteController.text",
-         // },
-       );
+      try {
+        print("validate");
+        // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
+        var res = await http.post(
+          Uri.parse(ApiUrls.bloodRequestPost),
+          headers: {
+            "Accept": "application/json",
+            "Authorization": token,
+          },
+          body: {
+            "patients_name": patientNameController.text,
+            "blood_group": bloodType,
+            "amount_bag": bloodAmount.toString(),
+            "date": dateController.text,
+            "hospital_name": hospitalController.text,
+            // "date": "2024-01-06",
+            "time": "16:14:00",
+            "health_issue": healthIssue,
+            "division": division,
+            "district": district,
+            "upazila": thana,
+            "union": "union",
+            "address": addressController.text,
+            "contact_person_name": contactParsonNameController.text,
+            "contact_person_phone": numberController.text,
+            "note": noteController.text,
+          },
+          // body: {
+          //   "patients_name": "Faisal",
+          //   "blood_group": "A+",
+          //   "amount_bag": "1",
+          //   // "date": dateController.text,
+          //   "date": "2024-01-06",
+          //   "time": "16:14:00",
+          //   "health_issue": "healthIssue",
+          //   "division": "dhaka",
+          //   "district": "dhaka",
+          //   "hospital_name": "Dhaka",
+          //   "upazila": "dhaka",
+          //   "union": "dhaka",
+          //   "address": "addressController.text",
+          //   "contact_person_name": "contactParson",
+          //   "contact_person_phone": "01725966666",
+          //   "note" : "noteController.text",
+          // },
+        );
 
-       print(res.statusCode);
-       print(res.body);
+        print(res.statusCode);
+        print(res.body);
 
-       if (res.statusCode == 201) {
+        if (res.statusCode == 201) {
+          var data = jsonDecode(res.body);
 
-         var data = jsonDecode(res.body);
+          var success = data["success"];
+          print(success);
+          // var message = data["message"];
+          var bloodRequestId = data["blood_request_id"].toString();
 
-         var success = data["success"];
-         print(success);
-         // var message = data["message"];
-         var bloodRequestId =
-         data["blood_request_id"].toString();
+          print("bloodRequestId : $bloodRequestId");
+          print("bloodType : $bloodType");
+          print("bloodAmount : $bloodAmount");
+          print("division : $division");
+          print("district : $district");
 
-         print("bloodRequestId : $bloodRequestId");
-         print("bloodType : $bloodType");
-         print("bloodAmount : $bloodAmount");
-         print("division : $division");
-         print("district : $district");
-         Get.to(FilterPage(
-           bloodRequestId: bloodRequestId,
-           bloodType: bloodType,
-           division: division,
-           district: district,
-           bloodAmount: bloodAmount,
-         ));
-         isLoading.value = false;
+          print("health : $healthIssue");
+          print("name : ${patientNameController.text}");
+          print("date : $data");
+          print("Hospital Name : ${hospitalController.text}");
+          print("phone : ${numberController.text}");
+          Get.to(FilterPage(
+            bloodRequestId: bloodRequestId,
+            bloodType: bloodType,
+            division: division,
+            district: district,
+            bloodAmount: bloodAmount,
+            healthIssue: healthIssue,
+            name: contactParsonNameController.text,
+            date: dateController.text,
+            hospitalName: hospitalController.text,
+            phone: numberController.text,
+          ));
+          isLoading.value = false;
 
-         // var dataList = data["bloodRDonors"] as List;
-         // print(success);
-         // print(dataList);
-         //
-         // if(success == true){
-         //
-         //   Get.to(FilterPage(bloodRequestId: bloodRequestId, bloodType: "A+", division: "Dhaka", district: "Dhaka",));
-         // }
+          // var dataList = data["bloodRDonors"] as List;
+          // print(success);
+          // print(dataList);
+          //
+          // if(success == true){
+          //
+          //   Get.to(FilterPage(bloodRequestId: bloodRequestId, bloodType: "A+", division: "Dhaka", district: "Dhaka",));
+          // }
 
-         // print( "res.statusCode");
-         // var res1 = await http.post(Uri.parse("https://starsoftjpn.xyz/api/auth/blood-donor-with-search"),
-         //     headers: {
-         //       "Accept": "application/json",
-         //       "Authorization": token,
-         //     },
-         //     body: {
-         //       "blood_group" : "O+",
-         //       "division" : "Dhaka",
-         //       "district" : "Dhaka",
-         //     }
-         // );
-         //
-         // print( res1.statusCode);
-         // print( res1.body);
-         //
-         // var donor = jsonDecode(res1.body);
-         // var donorList = donor["data"] as List;
-       }else{
-         isLoading.value = false;
-       }
-     } catch (e) {
-       isLoading.value = false;
-       print("Error : $e");
-     }
-   }
+          // print( "res.statusCode");
+          // var res1 = await http.post(Uri.parse("https://starsoftjpn.xyz/api/auth/blood-donor-with-search"),
+          //     headers: {
+          //       "Accept": "application/json",
+          //       "Authorization": token,
+          //     },
+          //     body: {
+          //       "blood_group" : "O+",
+          //       "division" : "Dhaka",
+          //       "district" : "Dhaka",
+          //     }
+          // );
+          //
+          // print( res1.statusCode);
+          // print( res1.body);
+          //
+          // var donor = jsonDecode(res1.body);
+          // var donorList = donor["data"] as List;
+        } else {
+          isLoading.value = false;
+        }
+      } catch (e) {
+        isLoading.value = false;
+        print("Error : $e");
+      }
+    }
   }
-  donate(String? donorId,String? deviceToken) async {
+
+  donate(String? donorId, String? deviceToken) async {
     isLoading.value = true;
     print(token);
 
@@ -227,8 +235,7 @@ class RequestBloodController extends GetxController {
         var success = data["success"];
         print(success);
         // var message = data["message"];
-        var bloodRequestId =
-        data["blood_request_id"].toString();
+        var bloodRequestId = data["blood_request_id"].toString();
 
         print("bloodRequestId : $bloodRequestId");
         print("bloodType : $bloodType");
@@ -245,24 +252,33 @@ class RequestBloodController extends GetxController {
             "blood_request_id": bloodRequestId,
             "blood_donor_id": donorId,
             "request_amount_bag": bloodAmount,
-            "blood_donor_user_id" : "69",
+            "blood_donor_user_id": "69",
           },
         );
 
         print(response.statusCode.toString());
         print(response.body);
-        if(response.statusCode == 201) {
+        if (response.statusCode == 201) {
           print("test_notification");
 
-          NotificationHelper().sendNotification(deviceToken);
+          // NotificationHelper().sendNotification(deviceToken);
+          NotificationHelper().customNotification(
+              deviceToken,
+              "type",
+              healthIssue,
+              bloodType,
+              bloodAmount,
+              dateController.text,
+              hospitalController.text,
+              numberController.text,
+              contactParsonNameController.text);
 
           Get.offAll(HomeScreen());
           isLoading.value = false;
-        }else{
+        } else {
           isLoading.value = false;
           print(response.statusCode.toString());
           print(response.body);
-
         }
         // Get.to(FilterPage(
         //   bloodRequestId: bloodRequestId,
@@ -339,7 +355,6 @@ class RequestBloodController extends GetxController {
           print("failed body${res.body}");
         }
         isLoading.value = false;
-
       }
     } catch (e) {
       isLoading.value = false;
@@ -351,53 +366,66 @@ class RequestBloodController extends GetxController {
     throw Exception("Loading failed !!!");
   }
 
-  confirmBlood(String bloodRequestId, String bloodDonorId, String bloodAmount, bloodDonorUserId,deviceToken) async {
+  confirmBlood(
+      String bloodRequestId,
+      String bloodDonorId,
+      String bloodAmount,
+      bloodDonorUserId,
+      deviceToken,
+      healthIssue,
+      name,
+      date,
+      hospitalName,
+      phone,
+      bloodType) async {
     isLoading.value = true;
-   try{ print("validate");
-   print(bloodRequestId);
-   print(bloodDonorId);
-   print(bloodAmount);
-   // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
-   var res = await http.post(
-     Uri.parse(ApiUrls.bloodRequestNotificationPost),
-     headers: {
-       "Accept": "application/json",
-       "Authorization": token,
-     },
-     body: {
-       "blood_request_id": bloodRequestId,
-       "blood_donor_id": bloodDonorId,
-       "request_amount_bag": bloodAmount,
-       "blood_donor_user_id": bloodDonorUserId,
-     },
-   );
+    try {
+      print("validate");
+      print(bloodRequestId);
+      print(bloodDonorId);
+      print(bloodAmount);
+      // String apiUrl = "https://starsoftjpn.xyz/api/auth/blood-request";
+      var res = await http.post(
+        Uri.parse(ApiUrls.bloodRequestNotificationPost),
+        headers: {
+          "Accept": "application/json",
+          "Authorization": token,
+        },
+        body: {
+          "blood_request_id": bloodRequestId,
+          "blood_donor_id": bloodDonorId,
+          "request_amount_bag": bloodAmount,
+          "blood_donor_user_id": bloodDonorUserId,
+        },
+      );
 
-   print(res.statusCode);
-   print(res.body);
-   if (res.statusCode == 201) {
-     print("confirm blood");
+      print(res.statusCode);
+      print(res.body);
+      if (res.statusCode == 201) {
+        print("confirm blood");
 
-     NotificationHelper().sendNotification(deviceToken);
-     isLoading.value = false;
-
-
-   }else if (res.statusCode == 404) {
-     GetStorage().erase();
-     Get.offAllNamed(welcomePage);
-     isLoading.value = false;
-
-   }
-   }catch(e){
-     isLoading.value = false;
-     print("Error : $e");
-
-   }
-
-
+        // NotificationHelper().sendNotification(deviceToken);
+        NotificationHelper().customNotification(
+            deviceToken,
+            "type",
+            healthIssue,
+            bloodType,
+            bloodAmount,
+            date,
+            hospitalName,
+            phone,
+            name);
+        isLoading.value = false;
+      } else if (res.statusCode == 404) {
+        GetStorage().erase();
+        Get.offAllNamed(welcomePage);
+        isLoading.value = false;
+      }
+    } catch (e) {
+      isLoading.value = false;
+      print("Error : $e");
+    }
   }
 
-  urgentRequest(){
-
-
-  }
+  urgentRequest() {}
 }

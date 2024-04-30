@@ -37,7 +37,7 @@ class Data {
   String? address;
   String? contactPersonName;
   String? contactPersonPhone;
-  Null? lastDonateDate;
+  String? lastDonateDate;
   int? status;
   int? createdByUserId;
   int? updatedByUserId;

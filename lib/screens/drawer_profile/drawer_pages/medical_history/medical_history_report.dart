@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:blood_bd/data_list/data_list.dart';
@@ -25,6 +24,18 @@ class NewReport extends StatefulWidget {
 class _NewReportState extends State<NewReport> {
   final MedicalHistoryController controller=
       Get.put(MedicalHistoryController());
+  final picker = ImagePicker();
+
+
+  Future<void> getImage(ImageSource source) async {
+    final pickedFile = await picker.pickImage(source: source, imageQuality: 80);
+
+    if (pickedFile != null) {
+      setState(() {
+        controller.imageFile = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -175,21 +186,14 @@ class _NewReportState extends State<NewReport> {
                       CustomFileUpload(
                         padding: const EdgeInsets.all(16),
                         border: Border.all(color: Colors.black54, width: 1),
-                        onTap1: () async{
-                          final imagePicker = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-
-                            // if (imagePicker != null) {
-                             controller.image = imagePicker?.path as File?;
-                            // } else {
-                            //   print('No image selected.');
-                            // }
-                        },
-                        onTap2: () {
-
-                        },
+                        onTap1: () => getImage(ImageSource.gallery),
+                        onTap2: () => getImage(ImageSource.camera),
                       ),
-                      const SizedBox(height: 8),
+                      // const SizedBox(height: 8),
+                      SizedBox(height: 16.0),
+                      controller.imageFile != null
+                          ? Image.file(controller.imageFile!)
+                          : Container(),
                     ],
                   ),
                   // const SizedBox(height: 30),
@@ -209,7 +213,7 @@ class _NewReportState extends State<NewReport> {
 
             // controller.test();
 
-            controller.onSaveReport();
+            controller.sendMultipartRequest();
             // Get.toNamed(medicalHistory);
           },
           child: const Text(

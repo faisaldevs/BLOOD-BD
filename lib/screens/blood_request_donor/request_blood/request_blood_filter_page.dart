@@ -17,13 +17,23 @@ class FilterPage extends StatelessWidget {
       required this.bloodType,
       required this.division,
       required this.district,
-      required this.bloodAmount});
+      required this.bloodAmount,
+       this.healthIssue,
+       this.name,
+       this.date,
+       this.hospitalName,
+       this.phone});
 
   final String bloodRequestId;
   final String bloodType;
   final String bloodAmount;
   final String division;
   final String district;
+  final String? healthIssue;
+  final String? name;
+  final String? date;
+  final String? hospitalName;
+  final String? phone;
 
   final RequestBloodController controller = Get.put(RequestBloodController());
 
@@ -42,18 +52,17 @@ class FilterPage extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
         title: const Text("Donor List"),
-        leading: InkWell(
-          onTap: () =>  Get.offAllNamed(home),
-          child: const Icon(
-            Icons.arrow_back_ios,
-          ),
-        ),
+        // leading: InkWell(
+        //   onTap: () => Get.offAllNamed(home),
+        //   child: const Icon(
+        //     Icons.arrow_back_ios,
+        //   ),
+        // ),
       ),
       body: FutureBuilder<DonorSearch>(
         future: controller.donorSearch(),
         builder: (context, snapshot) {
-
-          if(snapshot.connectionState == ConnectionState.waiting){
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -86,7 +95,7 @@ class FilterPage extends StatelessWidget {
                   bloodAmount,
                   bloodType,
                   address,
-                    deviceToken,
+                  deviceToken,
                 );
               },
             );
@@ -136,7 +145,6 @@ class FilterPage extends StatelessWidget {
 
       return formattedDate;
     }
-
 
     // bool isVisible = false;
     //
@@ -287,7 +295,17 @@ class FilterPage extends StatelessWidget {
                 onPressed: () {
                   print("1122");
                   controller.confirmBlood(
-                      bloodRequestId, bloodDonorId, bloodAmount, bloodDonorUserId,deviceToken);
+                      bloodRequestId,
+                      bloodDonorId,
+                      bloodAmount,
+                      bloodDonorUserId,
+                      deviceToken,
+                      healthIssue,
+                      name,
+                      date,
+                      hospitalName,
+                      phone,
+                      bloodType);
                 },
                 style: ButtonStyle(
                   backgroundColor:

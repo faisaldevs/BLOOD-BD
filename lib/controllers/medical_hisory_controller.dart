@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/MedicalHistoryModel.dart';
 
 class MedicalHistoryController extends GetxController {
    GlobalKey<FormState> formKey = GlobalKey<FormState>();
-   File? image;
+   File? imageFile;
    TextEditingController hemoglobin = TextEditingController();
    TextEditingController institutionName = TextEditingController();
    TextEditingController dayOfTest = TextEditingController();
@@ -71,6 +70,28 @@ class MedicalHistoryController extends GetxController {
 
     }
   }
+   Future<void> sendMultipartRequest() async {
+    print("object");
+     var uri = Uri.parse('https://starsoftjpn.xyz/api/auth/medical-history');
+     var request = http.MultipartRequest('POST', uri);
+     request.headers['Authorization'] = GetStorage().read("token").toString();
+     request.fields['blood_group'] = bloodType!;
+     request.fields['hemoglobin_level'] = hemoglobin.text;
+     request.fields['hepatitis'] = hepatitis!;
+     request.fields['malaria'] = malaria!;
+     request.fields['institute_name'] = institutionName.text;
+     request.fields['blood_pressure'] = bloodPressure.text;
+     request.fields['test_date'] = dayOfTest.text;
+     request.files.add(http.MultipartFile(
+         'image',
+         imageFile!.readAsBytes().asStream(),
+         imageFile!.lengthSync(),
+         filename: 'image.jpg'));
+
+     var response = await http.Response.fromStream(await request.send());
+     print(response.statusCode);
+     print(response.body);
+   }
 
 
  Future<MedicalHistoryModel> getMedicalHistory()async{

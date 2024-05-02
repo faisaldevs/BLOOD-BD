@@ -134,7 +134,7 @@ class Data {
 class User {
   int? id;
   String? name;
-  Null? username;
+  String? username;
   String? userType;
   String? email;
   String? phone;
@@ -142,7 +142,7 @@ class User {
   String? deviceToken;
   String? image;
   int? profileVisibility;
-  Null? otp;
+  int? otp;
   String? ipAddress;
   int? status;
   int? donorStatus;

@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../api/api_links.dart';
+import '../app_notifications/notification_call.dart';
 import '../models/request_status_model.dart';
 import '../utils/app_routes.dart';
 
@@ -94,6 +95,8 @@ class RequestStatusController extends GetxController {
 
     if (response.statusCode == 200) {
       print("done");
+
+      NotificationCallPage().donorResponse(deviceToken,status);
       Get.rawSnackbar(
           messageText: const Text('Done..!!',
               style: TextStyle(color: Colors.white, fontSize: 14)),

@@ -59,6 +59,7 @@ class NotificationServices {
     String? number = message.data["phone"];
     String? name = message.data["name"];
     String? type = message.data["type"];
+    String? status = message.data["status"];
 
     print(hospitalName);
     print(type);
@@ -68,35 +69,68 @@ class NotificationServices {
     String? donorNumber = message.data["phone"];
 
 
-    if(healthIssue != null){
-      final AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
-        'your_channel_id',
-        'your_channel_name',
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: 'ticker',
-        styleInformation: BigTextStyleInformation(
-          '''🩸জরুরী রক্ত প্রয়োজন🩸\b
-        💁 রোগীর সমস্যা: $healthIssue\b
+    if(status == null) {
+      if (healthIssue != null) {
+        final AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+          'your_channel_id',
+          'your_channel_name',
+          importance: Importance.max,
+          priority: Priority.high,
+          ticker: 'ticker',
+          styleInformation: BigTextStyleInformation(
+            '''🩸জরুরী রক্ত প্রয়োজন🩸\b
+         💁 রোগী : $name\b
+      💁 রোগীর সমস্যা: $healthIssue\b
       🔴 রক্তের গ্রুপঃ $bloodType\b
       💉 রক্তের পরিমাণঃ $bloodAmount  Beg.\b
       🗓️ তারিখঃ $date\b
       🏥 রক্তদানের স্থান: $hospitalName\b
       ☎️ যোগাযোগ : $number ($name)''',
-        ),
-      );
-      final NotificationDetails platformChannelSpecifics =
-      NotificationDetails(android: androidPlatformChannelSpecifics);
+          ),
+        );
+        final NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
 
-      await flutterLocalNotificationsPlugin.show(
-        0,
-        message.notification?.title.toString(),
-        '🩸জরুরী রক্ত প্রয়োজন🩸',
-        platformChannelSpecifics,
-        payload: 'type',
-      );
+        await flutterLocalNotificationsPlugin.show(
+          0,
+          message.notification?.title.toString(),
+          '🩸জরুরী রক্ত প্রয়োজন🩸',
+          platformChannelSpecifics,
+          payload: 'type',
+        );
+      } else {
+        final AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+          'your_channel_id',
+          'your_channel_name',
+          importance: Importance.max,
+          priority: Priority.high,
+          ticker: 'ticker',
+          styleInformation: BigTextStyleInformation(
+            '''🩸আমি প্রস্তুত রক্ত দানের জন্য🩸\b
+        🙍‍♂️ দাতা : $donorName\b
+      🔴 রক্তের গ্রুপঃ $donorBloodType\b
+      ☎️ যোগাযোগ : $donorNumber ($donorName)''',
+          ),
+        );
+        final NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+        await flutterLocalNotificationsPlugin.show(
+          0,
+          message.notification?.title.toString(),
+          "🩸আমি প্রস্তুত রক্ত দানের জন্য🩸",
+          platformChannelSpecifics,
+          payload: 'type',
+        );
+      }
     }else{
+
+      String? status = message.data["status"];
+      String? donorName = message.data["name"];
+
+
       final AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails(
         'your_channel_id',
@@ -104,12 +138,12 @@ class NotificationServices {
         importance: Importance.max,
         priority: Priority.high,
         ticker: 'ticker',
-        styleInformation: BigTextStyleInformation(
-          '''🩸আমি প্রস্তুত রক্ত দানের জন্য🩸\b
-        🙍‍♂️ দাতা : $donorName\b
-      🔴 রক্তের গ্রুপঃ $donorBloodType\b
-      ☎️ যোগাযোগ : $donorNumber ($donorName)''',
-        ),
+      //   styleInformation: BigTextStyleInformation(
+      //     '''🩸আমি প্রস্তুত রক্ত দানের জন্য🩸\b
+      //   🙍‍♂️ দাতা : $donorName\b
+      // 🔴 রক্তের গ্রুপঃ $donorBloodType\b
+      // ☎️ যোগাযোগ : $donorNumber ($donorName)''',
+      //   ),
       );
       final NotificationDetails platformChannelSpecifics =
       NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -117,7 +151,7 @@ class NotificationServices {
       await flutterLocalNotificationsPlugin.show(
         0,
         message.notification?.title.toString(),
-        "🩸আমি প্রস্তুত রক্ত দানের জন্য🩸",
+        "$donorName has $status your request...",
         platformChannelSpecifics,
         payload: 'type',
       );
@@ -162,16 +196,15 @@ class NotificationServices {
       print("refresh");
     });
   }
+
+
 void handleMessage(BuildContext context,RemoteMessage message){
-    if(message.data["type"] == "receiver"){
+    if(message.data["routeId"] == "0"){
       Get.to(DonationStatus());
-    }else if(message.data["type"] == "donor"){
+    }else if(message.data["routeId"] == "1"){
       Get.to(RequestStatus());
     }
 
 }
-
-
-
 
 }

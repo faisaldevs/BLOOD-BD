@@ -61,8 +61,7 @@ class BloodHeroList extends StatelessWidget {
                             ),
                             Text(
                               number1,
-                              style: TextStyle(
-                                  fontSize: 14.sp, fontWeight: FontWeight.w400),
+                              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
                             ),
                           ],
                         ),

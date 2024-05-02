@@ -112,27 +112,28 @@ class FeedPage extends StatelessWidget {
 
             if (snapshot.hasData) {
               final dataList = snapshot.data!;
+              print(dataList);
               return ListView.builder(
                 itemCount: snapshot.data?.data?.length,
                 itemBuilder: (context, index) {
                   final e = dataList.data?[index];
-                  String requestId = e?.id.toString() ?? "name";
-                  String requestUserId = e?.user?.id.toString() ?? "name";
-                  String contactPersonName = e?.contactPersonName ?? "name";
-                  String number = e?.contactPersonPhone ?? "01*********";
-                  String patientsName = e?.patientsName ?? "Patient Name";
-                  String healthIssue = e?.healthIssue ?? "Health Issue";
-                  String bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
-                  String bloodType = e?.bloodGroup ?? "Type";
-                  String date = e?.date ?? "date";
-                  String time = e?.time ?? "time";
-                  String address = e?.address ?? "address";
-                  String division = e?.division ?? "address";
-                  String district = e?.district ?? "address";
-                  String thana = e?.upazila ?? "address";
-                  String hospitalName = e?.hospitalName ?? "address";
-                  String note = e?.note ?? "note";
-                  String deviceToken = e?.user?.deviceToken ?? "deviceId";
+                  String? requestId = e?.id.toString() ?? "name";
+                  String? requestUserId = e?.user?.id.toString() ?? "name";
+                  String? contactPersonName = e?.contactPersonName ?? "name";
+                  String? number = e?.contactPersonPhone ?? "01*********";
+                  String? patientsName = e?.patientsName ?? "Patient Name";
+                  String? healthIssue = e?.healthIssue ?? "Health Issue";
+                  String? bloodAmount = e?.amountBag.toString() ?? "Blood Amount";
+                  String? bloodType = e?.bloodGroup ?? "Type";
+                  String? date = e?.date ?? "date";
+                  String? time = e?.time ?? "time";
+                  String? address = e?.address ?? "address";
+                  String? division = e?.division ?? "address";
+                  String? district = e?.district ?? "address";
+                  String? thana = e?.upazila ?? "address";
+                  String? hospitalName = e?.hospitalName ?? "address";
+                  String? note = e?.note ?? "note";
+                  String? deviceToken = e?.user?.deviceToken ?? "deviceId";
 
                   return historyTile(
                       requestId,

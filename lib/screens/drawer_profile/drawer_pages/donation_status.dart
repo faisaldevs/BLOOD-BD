@@ -11,9 +11,14 @@ import '../../../controllers/donation_status_controller.dart';
 import '../../../utils/app_colors.dart';
 import 'donation_status_description_ui.dart';
 
-class DonationStatus extends StatelessWidget {
+class DonationStatus extends StatefulWidget {
   DonationStatus({super.key});
 
+  @override
+  State<DonationStatus> createState() => _DonationStatusState();
+}
+
+class _DonationStatusState extends State<DonationStatus> {
   final DonationStatusController controller =
       Get.put(DonationStatusController());
 
@@ -54,6 +59,11 @@ class DonationStatus extends StatelessWidget {
             Icons.arrow_back_ios,
           ),
         ),
+        actions: [
+          IconButton(onPressed: (){setState(() {
+
+          });}, icon: Icon(Icons.refresh)),
+        ],
       ),
       body: Column(
         children: [

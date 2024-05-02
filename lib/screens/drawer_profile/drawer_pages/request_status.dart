@@ -10,11 +10,15 @@ import '../../../models/request_status_model.dart';
 import '../../../utils/app_colors.dart';
 
 
-class RequestStatus extends StatelessWidget {
+class RequestStatus extends StatefulWidget {
   RequestStatus({super.key});
 
-  final RequestStatusController controller = Get.put(RequestStatusController());
+  @override
+  State<RequestStatus> createState() => _RequestStatusState();
+}
 
+class _RequestStatusState extends State<RequestStatus> {
+  final RequestStatusController controller = Get.put(RequestStatusController());
 
   loadingBar() => Get.rawSnackbar(
       messageText: const Text('Loading..!!',
@@ -53,6 +57,11 @@ class RequestStatus extends StatelessWidget {
             Icons.arrow_back_ios,
           ),
         ),
+        actions: [
+          IconButton(onPressed: (){setState(() {
+
+          });}, icon: Icon(Icons.refresh)),
+        ],
       ),
       body: Column(
         children: [

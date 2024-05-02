@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../../controllers/blood_bank_controller.dart';
 
 class BloodHeroes extends StatelessWidget {

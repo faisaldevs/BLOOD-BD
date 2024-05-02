@@ -264,7 +264,7 @@ class RequestBloodController extends GetxController {
           // NotificationHelper().sendNotification(deviceToken);
           NotificationHelper().customNotification(
               deviceToken,
-              "type",
+              "receiver",
               healthIssue,
               bloodType,
               bloodAmount,
@@ -407,7 +407,7 @@ class RequestBloodController extends GetxController {
         // NotificationHelper().sendNotification(deviceToken);
         NotificationHelper().customNotification(
             deviceToken,
-            "type",
+            "receiver",
             healthIssue,
             bloodType,
             bloodAmount,

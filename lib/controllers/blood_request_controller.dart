@@ -112,7 +112,7 @@ donateBlood(requestId, bloodAmount, requestUserId, deviceToken)async{
         // print(response1.body);
         var success = body["success"];
         print("---------"+success.toString());
-        NotificationHelper().customNotificationDonate(deviceToken, "donate", donorBloodGroup, donorNumber, donorName);
+        NotificationHelper().customNotificationDonate(deviceToken, "donor", donorBloodGroup, donorNumber, donorName);
         if(success == "true"){
           print("success");
           Get.rawSnackbar(

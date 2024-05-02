@@ -80,6 +80,9 @@ class LoginController extends GetxController {
             "Login failed${response.statusCode}",
             "Number or Password was wrong..",
           );
+
+          print(response.statusCode);
+          print(response.body);
         }
       } catch (e) {
         isLogin.value = false;

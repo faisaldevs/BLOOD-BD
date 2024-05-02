@@ -25,7 +25,7 @@ class _CustomBirthdateState extends State<CustomBirthdate> {
           lastDate: DateTime(2025));
 
       setState(() {
-        widget.controller.text = DateFormat("y-M-d").format(pickedDate!);
+        widget.controller.text = DateFormat("yyyy-MM-dd").format(pickedDate!);
       });
     }
 

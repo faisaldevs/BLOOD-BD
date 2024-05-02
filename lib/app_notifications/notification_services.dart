@@ -1,4 +1,5 @@
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
+import 'package:blood_bd/screens/drawer_profile/drawer_pages/request_status.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -162,9 +163,10 @@ class NotificationServices {
     });
   }
 void handleMessage(BuildContext context,RemoteMessage message){
-
-    if(message.data["type"] == "blood_request"){
+    if(message.data["type"] == "receiver"){
       Get.to(DonationStatus());
+    }else if(message.data["type"] == "donor"){
+      Get.to(RequestStatus());
     }
 
 }

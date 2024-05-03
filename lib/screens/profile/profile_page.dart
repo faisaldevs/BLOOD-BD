@@ -1,6 +1,8 @@
 import 'package:blood_bd/screens/blood_request_donor/become_donor_page.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
+import 'package:blood_bd/screens/drawer_profile/update_profile.dart';
 import 'package:blood_bd/utils/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -221,17 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          InkWell(
-                            hoverColor: Colors.black.withOpacity(.2),
-                            focusColor: Colors.black.withOpacity(.2),
-                            highlightColor: Colors.black.withOpacity(.2),
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
-                            onTap: () {
-                              if (kDebugMode) {
-                                print("object");
-                                 Get.toNamed(editProfile);
-                              }
-                            },
+                          GestureDetector(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -247,6 +239,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ),
+                            onTap: (){
+                              Get.to(EditProfile());
+                            },
                           ),
                         ],
                       ),

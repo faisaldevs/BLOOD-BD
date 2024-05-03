@@ -5,12 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../controllers/request_blood_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_routes.dart';
 
-class FilterPage extends StatelessWidget {
+class FilterPage extends StatefulWidget {
   FilterPage(
       {super.key,
       required this.bloodRequestId,
@@ -18,11 +19,11 @@ class FilterPage extends StatelessWidget {
       required this.division,
       required this.district,
       required this.bloodAmount,
-       this.healthIssue,
-       this.name,
-       this.date,
-       this.hospitalName,
-       this.phone});
+      this.healthIssue,
+      this.name,
+      this.date,
+      this.hospitalName,
+      this.phone});
 
   final String bloodRequestId;
   final String bloodType;
@@ -35,6 +36,11 @@ class FilterPage extends StatelessWidget {
   final String? hospitalName;
   final String? phone;
 
+  @override
+  State<FilterPage> createState() => _FilterPageState();
+}
+
+class _FilterPageState extends State<FilterPage> {
   final RequestBloodController controller = Get.put(RequestBloodController());
 
   @override
@@ -52,12 +58,19 @@ class FilterPage extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
         title: const Text("Donor List"),
-        // leading: InkWell(
-        //   onTap: () => Get.offAllNamed(home),
-        //   child: const Icon(
-        //     Icons.arrow_back_ios,
-        //   ),
-        // ),
+        leading: InkWell(
+          onTap: () => Get.offAllNamed(home),
+          child: const Icon(
+            Icons.arrow_back_ios,
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {});
+              },
+              icon: Icon(Icons.refresh)),
+        ],
       ),
       body: FutureBuilder<DonorSearch>(
         future: controller.donorSearch(),
@@ -274,7 +287,7 @@ class FilterPage extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () async {
-
+                  launchUrlString("tel:$contactPersonNumber");
                 },
                 style: ButtonStyle(
                   backgroundColor:
@@ -297,16 +310,16 @@ class FilterPage extends StatelessWidget {
                 onPressed: () {
                   print("1122");
                   controller.confirmBlood(
-                      bloodRequestId,
+                      widget.bloodRequestId,
                       bloodDonorId,
                       bloodAmount,
                       bloodDonorUserId,
                       deviceToken,
                       healthIssue,
-                      name,
-                      date,
-                      hospitalName,
-                      phone,
+                      widget.name,
+                      widget.date,
+                      widget.hospitalName,
+                      widget.phone,
                       bloodType);
                 },
                 style: ButtonStyle(

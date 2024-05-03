@@ -14,6 +14,7 @@ class ProfileController extends GetxController {
   String name = "";
   String number = "";
   String status = "";
+  String bloodType = "";
   RxString blood = "".obs;
   RxString gender = "".obs;
   RxString address = "".obs;
@@ -46,6 +47,7 @@ class ProfileController extends GetxController {
         name = body["name"].toString();
         number = body["phone"].toString();
         status = body["donor_status"].toString();
+        // status = body["blood_group"].toString();
         GetStorage().write("StatusValue", status);
         // number.value = body["phone"];
         // number.value = body["phone"];

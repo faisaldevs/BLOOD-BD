@@ -403,6 +403,21 @@ class RequestBloodController extends GetxController {
       print(res.body);
       if (res.statusCode == 201) {
         print("confirm blood");
+        Get.rawSnackbar(
+            messageText: const Text(
+                'Request has been sent..!!',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14
+                )
+            ),
+            isDismissible: true,
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red[400]!,
+            icon : const Icon(Icons.done_all, color: Colors.white, size: 35,),
+            margin: EdgeInsets.zero,
+            snackStyle: SnackStyle.GROUNDED
+        );
 
         // NotificationHelper().sendNotification(deviceToken);
         NotificationHelper().customNotification(

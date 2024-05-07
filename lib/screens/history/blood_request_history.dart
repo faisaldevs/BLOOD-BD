@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../controllers/user_history_controller.dart';
 import '../../models/blood_request_history_model.dart';
-import 'description_ui_history.dart';
 
 class HistoryRequest extends StatefulWidget {
   const HistoryRequest({super.key});
@@ -130,15 +129,15 @@ class _HistoryRequestState extends State<HistoryRequest> {
     String time,
     String note,
   ) {
-    String showTime() {
-      DateTime now;
-
-      now = DateTime.now();
-
-      String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
-
-      return formattedDate;
-    }
+    // String showTime() {
+    //   DateTime now;
+    //
+    //   now = DateTime.now();
+    //
+    //   String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
+    //
+    //   return formattedDate;
+    // }
 
     return Container(
       color: AppTheme.primary,

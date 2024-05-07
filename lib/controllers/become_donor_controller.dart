@@ -1,13 +1,10 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/screens/blood_request_donor/become_donor/donor_profile.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import '../screens/blood_request_donor/become_donor_page.dart';
 import '../utils/app_routes.dart';
 
 class BecomeDonorController extends GetxController {

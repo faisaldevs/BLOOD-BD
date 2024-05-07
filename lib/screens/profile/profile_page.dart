@@ -1,8 +1,5 @@
-import 'package:blood_bd/screens/blood_request_donor/become_donor_page.dart';
 import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
-import 'package:blood_bd/screens/profile/update_profile.dart';
 import 'package:blood_bd/utils/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

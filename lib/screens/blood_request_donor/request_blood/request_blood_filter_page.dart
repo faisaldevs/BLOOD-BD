@@ -1,5 +1,4 @@
 import 'package:blood_bd/models/search_requested_donor.dart';
-import 'package:blood_bd/screens/global_widget/description_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,11 +1,8 @@
 import 'package:blood_bd/models/donation_model.dart';
-import 'package:blood_bd/screens/global_widget/description_ui.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../controllers/donation_status_controller.dart';
 import '../../../utils/app_colors.dart';
@@ -171,15 +168,15 @@ class _DonationStatusState extends State<DonationStatus> {
     String receiverStatus,
     String deviceToken,
   ) {
-    String showTime() {
-      DateTime now;
-
-      now = DateTime.now();
-
-      String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
-
-      return formattedDate;
-    }
+    // String showTime() {
+    //   DateTime now;
+    //
+    //   now = DateTime.now();
+    //
+    //   String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
+    //
+    //   return formattedDate;
+    // }
 
     print(contactPersonName + "---123456");
 

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../controllers/user_history_controller.dart';
 import '../../models/blood_donate_history_model.dart';
 import '../../utils/app_colors.dart';
@@ -114,15 +111,15 @@ class HistoryDonate extends StatelessWidget {
     String myStatus,
     String senderStatus,
   ) {
-    String showTime() {
-      DateTime now;
-
-      now = DateTime.now();
-
-      String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
-
-      return formattedDate;
-    }
+    // String showTime() {
+    //   DateTime now;
+    //
+    //   now = DateTime.now();
+    //
+    //   String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
+    //
+    //   return formattedDate;
+    // }
 
     // bool isVisible = false;
     //

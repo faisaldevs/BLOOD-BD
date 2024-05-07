@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/app_notifications/notification_call.dart';
-import 'package:blood_bd/app_notifications/notification_helper.dart';
 import 'package:blood_bd/models/donation_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/notification_request_model.dart';
-import '../utils/app_routes.dart';
 
 class DonationStatusController extends GetxController {
   RxString statusBool = "0".obs;

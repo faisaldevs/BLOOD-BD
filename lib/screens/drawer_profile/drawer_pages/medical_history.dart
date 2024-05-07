@@ -2,7 +2,6 @@ import 'package:blood_bd/screens/global_widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../../controllers/medical_hisory_controller.dart';
 import '../../../utils/app_routes.dart';
 import '../../../utils/app_colors.dart';
@@ -20,15 +19,15 @@ class _MedicalHistoryState extends State<MedicalHistory> {
 
   @override
   Widget build(BuildContext context) {
-    String showTime() {
-      DateTime now;
-
-      now = DateTime.now();
-
-      String formattedDate = DateFormat('dd MMM yy').format(now);
-
-      return formattedDate;
-    }
+    // String showTime() {
+    //   DateTime now;
+    //
+    //   now = DateTime.now();
+    //
+    //   String formattedDate = DateFormat('dd MMM yy').format(now);
+    //
+    //   return formattedDate;
+    // }
 
     return Scaffold(
       backgroundColor: AppTheme.primary,
@@ -283,21 +282,24 @@ class _MedicalHistoryState extends State<MedicalHistory> {
               ),
               // const SizedBox(width: 5,),
               TextButton(
-                  onPressed: () => Get.rawSnackbar(
-                      messageText: const Text(
-                          'Working on it..!!',
-                          style: TextStyle(
+                  onPressed: () {
+                    // Get.to(() => MedicalReport(image: image,));
+                    //Image.file(controller.imageFile!)
+                        Get.rawSnackbar(
+                            messageText: const Text('Working on it..!!',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14)),
+                            isDismissible: true,
+                            duration: const Duration(seconds: 3),
+                            backgroundColor: Colors.green[400]!,
+                            icon: const Icon(
+                              Icons.settings,
                               color: Colors.white,
-                              fontSize: 14
-                          )
-                      ),
-                      isDismissible: true,
-                      duration: const Duration(seconds: 3),
-                      backgroundColor: Colors.green[400]!,
-                      icon : const Icon(Icons.settings, color: Colors.white, size: 35,),
-                      margin: EdgeInsets.zero,
-                      snackStyle: SnackStyle.GROUNDED
-                  ),
+                              size: 35,
+                            ),
+                            margin: EdgeInsets.zero,
+                            snackStyle: SnackStyle.GROUNDED);
+                      },
                   child: Text(
                     "See Report",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

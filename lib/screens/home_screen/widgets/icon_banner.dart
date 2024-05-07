@@ -1,10 +1,8 @@
-import 'package:blood_bd/app_notifications/local%20notification_pc.dart';
 import 'package:blood_bd/controllers/profile_controller.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/become_donor_controller.dart';
 import '../../../utils/app_routes.dart';
 import '../../blood_request_donor/blood_request_page.dart';
 

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../controllers/request_status_controller.dart';
 import '../../../models/request_status_model.dart';
@@ -167,15 +166,15 @@ class _RequestStatusState extends State<RequestStatus> {
     String contractPersonNumber,
     String deviceToken,
   ) {
-    String showTime() {
-      DateTime now;
-
-      now = DateTime.now();
-
-      String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
-
-      return formattedDate;
-    }
+    // String showTime() {
+    //   DateTime now;
+    //
+    //   now = DateTime.now();
+    //
+    //   String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
+    //
+    //   return formattedDate;
+    // }
 
     return Container(
       padding: const EdgeInsets.all(8),

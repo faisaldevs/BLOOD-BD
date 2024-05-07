@@ -1,4 +1,4 @@
-import 'package:blood_bd/screens/drawer_profile/update_profile.dart';
+import 'package:blood_bd/screens/profile/update_profile.dart';
 import 'package:blood_bd/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

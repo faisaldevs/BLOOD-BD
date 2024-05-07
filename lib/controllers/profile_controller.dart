@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../screens/blood_request_donor/become_donor_page.dart';
+import '../screens/profile/update_profile.dart';
 import '../utils/app_routes.dart';
 
 class ProfileController extends GetxController {
@@ -239,7 +240,47 @@ class ProfileController extends GetxController {
 
 
 
+editProfile()async{
 
+  try {
+    loading.value = true;
+
+    var res = await http.get(
+        Uri.parse(ApiUrls.profileGet),
+        headers: {
+          "Accept" : "application/json",
+          "Authorization" : token,
+        }
+    );
+
+    if(res.statusCode == 200){
+      var jsonBody = jsonDecode(res.body);
+      var body = jsonBody["data"];
+
+      var userName = body["name"];
+
+
+
+
+      loading.value = false;
+      Get.to(EditProfile());
+    }else if (res.statusCode == 404) {
+      loading.value = false;
+      GetStorage().erase();
+      Get.offAllNamed(welcomePage);
+    }
+
+    print(res.statusCode);
+    print(res.body.toString());
+  } catch (e) {
+    loading.value = false;
+    print("Error : $e");
+  }
+
+
+
+
+}
 
 
 

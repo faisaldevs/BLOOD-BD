@@ -9,8 +9,8 @@ import '../utils/app_routes.dart';
 class UpdateProfileController extends GetxController {
 
   String token = GetStorage().read("token") ?? "";
-  String name = GetStorage().read("name") ?? "";
-  String phone = GetStorage().read("phone") ?? "";
+  // String name = GetStorage().read("name") ?? "";
+  // String phone = GetStorage().read("phone") ?? "";
   // GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -35,9 +35,16 @@ class UpdateProfileController extends GetxController {
          "Authorization" : token,
        },
        body: {
-         "name" : "Faisal Ahamed",
-         "phone" : "01903440069",
-         "email" : "faisal.ah123@gmail.com",
+         "name" : nameController.text,
+         // "phone" : "01903440069",
+         // "email" : "faisal.ah123@gmail.com",
+         "blood_group" : bloodType,
+         "gender" : gender,
+         "weight" : weightController.text,
+         "division" : division,
+         "district" : district,
+         "upazila" : upazila,
+         "address" : addressController.text,
        },
      );
 

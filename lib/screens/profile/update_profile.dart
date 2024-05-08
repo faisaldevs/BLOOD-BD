@@ -8,11 +8,22 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../global_widget/custom_button.dart';
+import 'components/textfield_custom.dart';
 
 class EditProfile extends StatelessWidget {
-  EditProfile({super.key});
+  EditProfile({super.key, required this.name, required this.date, required this.bloodGroup, required this.gender, required this.division, required this.district, required this.thana, required this.address, required this.weight});
 
   final UpdateProfileController controller = Get.put(UpdateProfileController());
+
+ final String name;
+ final String date;
+ final String bloodGroup;
+final  String gender;
+ final String division;
+ final String district;
+ final String thana;
+ final String address;
+ final String weight;
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +103,9 @@ class EditProfile extends StatelessWidget {
 
                 //-------Name Field --------------
 
-                CustomTextFormField(
+                ProfileTextField(
                   controller: controller.nameController,
-                  hintText: "",
+                  hintText: name,
                   textInputType: TextInputType.text,
                   validate: (name) {
                     if (name!.isEmpty) {
@@ -113,7 +124,7 @@ class EditProfile extends StatelessWidget {
                     Expanded(
                       child: CustomDropdown(
                         dropDownList: DataList.genderListData,
-                        label: 'Gender',
+                        label: gender,
                         onChanged: (value) {
                           controller.gender = value.toString();
                         },
@@ -122,10 +133,19 @@ class EditProfile extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    CustomBirthdate(
-                      controller: controller.dateController,
-                      label: 'Date of Birth',
-                    ),
+                    Expanded(
+                        child: CustomDropdown(
+                          dropDownList: DataList.bloodListData,
+                          label: 'Blood Type',
+                          onChanged: (value) {
+                            controller.bloodType = value.toString();
+                          },
+                        )),
+
+                    // CustomBirthdate(
+                    //   controller: controller.dateController,
+                    //   label: 'Date of Birth',
+                    // ),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -133,23 +153,15 @@ class EditProfile extends StatelessWidget {
                 //-------BloodGroup Weight Field --------------
                 Row(
                   children: [
+
                     Expanded(
-                        child: CustomDropdown(
-                      dropDownList: DataList.bloodListData,
-                      label: 'Blood Type',
-                      onChanged: (value) {
-                        controller.bloodType = value.toString();
-                      },
-                    )),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: CustomTextFormField(
+                      child: ProfileTextField(
                         controller: controller.weightController,
-                        hintText: '',
+                        hintText: weight,
                         textInputType: TextInputType.number,
                         validate: (weight) {
                           if (weight!.isEmpty) {
-                            return "Full name required";
+                            return "Weight required";
                           }
                           return null;
                         },
@@ -157,6 +169,15 @@ class EditProfile extends StatelessWidget {
                         labelText: 'Weight(Kg)',
                       ),
                     ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                        child: CustomDropdown(
+                          dropDownList: DataList.divisionListData,
+                          label: division,
+                          onChanged: (value) {
+                            controller.division = value;
+                          },
+                        )),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -166,56 +187,49 @@ class EditProfile extends StatelessWidget {
                   children: [
                     Expanded(
                         child: CustomDropdown(
-                      dropDownList: DataList.divisionListData,
-                      label: 'Division',
-                      onChanged: (value) {
-                        controller.division = value;
-                      },
-                    )),
+                          dropDownList: DataList.districtListData,
+                          label: district,
+                          onChanged: (value) {
+                            controller.district = value;
+                          },
+                        )),
                     const SizedBox(
                       width: 10,
                     ),
                     Expanded(
                         child: CustomDropdown(
-                      dropDownList: DataList.districtListData,
-                      label: 'District',
-                      onChanged: (value) {
-                        controller.district = value;
-                      },
-                    )),
+                          dropDownList: DataList.districtListData,
+                          label: thana,
+                          onChanged: (value) {
+                            controller.upazila = value;
+                          },
+                        )),
                   ],
                 ),
                 const SizedBox(height: 10),
                 //  -------Upazila/City Union Field --------------
-                Row(
-                  children: [
-                    Expanded(
-                        child: CustomDropdown(
-                      dropDownList: DataList.districtListData,
-                      label: 'Upazila',
-                      onChanged: (value) {
-                        controller.upazila = value;
-                      },
-                    )),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        child: CustomDropdown(
-                      dropDownList: DataList.districtListData,
-                      label: 'Union',
-                      onChanged: (value) {
-                        controller.union = value;
-                      },
-                    )),
-                  ],
-                ),
-                const SizedBox(height: 10),
+                // Row(
+                //   children: [
+                //
+                //     const SizedBox(
+                //       width: 10,
+                //     ),
+                //     Expanded(
+                //         child: CustomDropdown(
+                //       dropDownList: DataList.districtListData,
+                //       label: 'Union',
+                //       onChanged: (value) {
+                //         controller.union = value;
+                //       },
+                //     )),
+                //   ],
+                // ),
+                // const SizedBox(height: 10),
                 //  ------- Address Field --------------
 
-                CustomTextFormField(
+                ProfileTextField(
                   controller: controller.addressController,
-                  hintText: "",
+                  hintText: address,
                   textInputType: TextInputType.text,
                   validate: (address) {
                     if (address!.isEmpty) {
@@ -256,19 +270,19 @@ class EditProfile extends StatelessWidget {
                   height: 20,
                 ),
 
-                const Text("Change Mobile Number?"),
-
-                Container(
-                    margin: const EdgeInsets.only(top: 8),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Change Number??",
-                          style: TextStyle(color: Colors.red),
-                        )))
+                // const Text("Change Mobile Number?"),
+                //
+                // Container(
+                //     margin: const EdgeInsets.only(top: 8),
+                //     decoration: const BoxDecoration(
+                //       borderRadius: BorderRadius.all(Radius.circular(20)),
+                //     ),
+                //     child: TextButton(
+                //         onPressed: () {},
+                //         child: const Text(
+                //           "Change Number??",
+                //           style: TextStyle(color: Colors.red),
+                //         )))
               ],
             ),
           ),

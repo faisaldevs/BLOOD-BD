@@ -48,7 +48,7 @@ final pages = [
 
   //-------------Drawer Pages---------------------------
 
-  customPage(name: editProfile, page: EditProfile()),
+  // customPage(name: editProfile, page: EditProfile()),
   customPage(name: notificationPage, page: const NotificationPage()),
   customPage(name: medicalHistory, page:  MedicalHistory()),
   customPage(name: newReport, page: NewReport()),

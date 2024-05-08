@@ -256,14 +256,25 @@ editProfile()async{
     if(res.statusCode == 200){
       var jsonBody = jsonDecode(res.body);
       var body = jsonBody["data"];
+      var profile = jsonBody["profile"];
 
       var userName = body["name"];
+
+
+      var date = profile["date_of_birth"];
+      var weight = profile["weight"];
+      var bloodType = profile["blood_group"];
+      var gender = profile["gender"];
+      var division = profile["division"];
+      var district = profile["district"];
+      var thana = profile["upazila"];
+      var address = profile["address"];
 
 
 
 
       loading.value = false;
-      Get.to(EditProfile());
+      Get.to(EditProfile(name: userName, date: date, bloodGroup: bloodType, gender: gender, division: division, district: district, thana: thana, address: address, weight: weight,));
     }else if (res.statusCode == 404) {
       loading.value = false;
       GetStorage().erase();

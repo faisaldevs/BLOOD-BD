@@ -3,25 +3,19 @@ import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'notification/notification_request.dart';
 
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // String showTime() {
-    //   DateTime now;
-    //
-    //   now = DateTime.now();
-    //
-    //   String formattedDate = DateFormat('dd MMM, kk:mm a').format(now);
-    //
-    //   return formattedDate;
-    // }
+  State<NotificationPage> createState() => _NotificationPageState();
+}
 
+class _NotificationPageState extends State<NotificationPage> {
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -46,6 +40,13 @@ class NotificationPage extends StatelessWidget {
               // color: Colors.black,
             ),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                icon: Icon(Icons.refresh))
+          ],
           bottom: const TabBar(
               labelColor: Colors.green,
               indicatorColor: Colors.green,
@@ -60,42 +61,10 @@ class NotificationPage extends StatelessWidget {
                 ),
               ]),
         ),
-        body:  TabBarView(
+        body: TabBarView(
           children: [
             NotificationRequest(),
-            // const Column(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   children: [
-            //     Icon(
-            //       Icons.search,
-            //       size: 120,
-            //       color: Colors.black26,
-            //     ),
-            //     Text(
-            //       "No Notification Found!",
-            //       style: TextStyle(fontSize: 24, color: Colors.black26),
-            //     ),
-            //   ],
-            // ),
-
             NotificationDonate(),
-            // BloodRqNotification(),
-            // const Column(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   children: [
-            //     Icon(
-            //       Icons.search,
-            //       size: 120,
-            //       color: Colors.black26,
-            //     ),
-            //     Text(
-            //       "No Notification Found!",
-            //       style: TextStyle(fontSize: 24, color: Colors.black26),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),

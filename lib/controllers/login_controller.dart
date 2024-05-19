@@ -65,10 +65,28 @@ class LoginController extends GetxController {
           getStorage.write("phone", phone);
           getStorage.write("blood", blood);
 
-          Get.snackbar(
-            "Login Successes",
-            message,
+          // Get.snackbar(
+          //   "WELCOME TO BLOOD BD",
+          //   name,
+          //   colorText: Colors.red,
+          //   backgroundColor: Colors.white
+          // );
+          Get.rawSnackbar(
+              messageText: const Text(
+                  'Login Successes !!!',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14
+                  )
+              ),
+              isDismissible: true,
+              duration: const Duration(seconds: 3),
+              backgroundColor: Colors.red[400]!,
+              icon : const Icon(Icons.done_all, color: Colors.white, size: 35,),
+              margin: EdgeInsets.zero,
+              snackStyle: SnackStyle.GROUNDED
           );
+
 
           isLogin.value = true;
           Get.offAllNamed(home);

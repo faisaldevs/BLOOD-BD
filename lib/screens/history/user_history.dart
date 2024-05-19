@@ -6,9 +6,14 @@ import '../../../utils/app_colors.dart';
 import 'blood_donate_history.dart';
 import 'blood_request_history.dart';
 
-class BloodHistory extends StatelessWidget {
+class BloodHistory extends StatefulWidget {
   const BloodHistory({super.key});
 
+  @override
+  State<BloodHistory> createState() => _BloodHistoryState();
+}
+
+class _BloodHistoryState extends State<BloodHistory> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,6 +41,13 @@ class BloodHistory extends StatelessWidget {
               // color: Colors.=,
             ),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                icon: Icon(Icons.refresh))
+          ],
           bottom: const TabBar(
               labelColor: Colors.green,
               indicatorColor: Colors.green,

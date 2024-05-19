@@ -9,7 +9,7 @@ class ProfileTextField extends StatelessWidget {
       this.padding,
       this.hintText,
       this.maxLine,
-      required this.labelText,
+        this.labelText,
       this.helperText,
       // required this.obscure,
       required this.textInputType,
@@ -27,7 +27,7 @@ class ProfileTextField extends StatelessWidget {
   final EdgeInsets? padding;
   final String? hintText;
   final int? maxLine;
-  final String labelText;
+  final String? labelText;
   final String? helperText;
   // final bool obscure;
   final TextInputType textInputType;

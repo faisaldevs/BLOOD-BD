@@ -16,8 +16,9 @@ class ProfileController extends GetxController {
   String number = "";
   String status = "";
   String bloodType = "";
+  String gender = "";
   RxString blood = "".obs;
-  RxString gender = "".obs;
+  // RxString gender = "".obs;
   RxString address = "".obs;
   RxBool loading = false.obs;
 
@@ -45,8 +46,11 @@ class ProfileController extends GetxController {
       if(res.statusCode == 200){
         var jsonBody = jsonDecode(res.body);
         var body = jsonBody["data"];
+        var profile = jsonBody["profile"];
         name = body["name"].toString();
         number = body["phone"].toString();
+        bloodType = profile["blood_group"].toString();
+        gender = profile["gender"].toString();
         status = body["donor_status"].toString();
         // status = body["blood_group"].toString();
         GetStorage().write("StatusValue", status);
@@ -55,6 +59,8 @@ class ProfileController extends GetxController {
         // loading.value= false;
         print(name);
         print(number);
+        print(bloodType);
+        print(gender);
         print(status);
         loading.value = false;
         Get.to(const ProfilePage());

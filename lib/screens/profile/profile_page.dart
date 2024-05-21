@@ -38,8 +38,8 @@ class _ProfilePageState extends State<ProfilePage> {
     var name = controller.name;
     var number = controller.number;
     var status = controller.status;
-    var blood = getStorage.read("blood") ?? "A+";
-    var gender = getStorage.read("gender") ?? "Male";
+    var blood = controller.bloodType;
+    var gender = controller.gender;
     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
     var width = Get.width;
     return Obx(() {

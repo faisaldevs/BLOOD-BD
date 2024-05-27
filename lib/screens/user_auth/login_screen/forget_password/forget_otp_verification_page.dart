@@ -8,7 +8,9 @@ import '../../../../controllers/forget_password_controller.dart';
 import '../../../global_widget/custom_button.dart';
 
 class ForgetPassOtpVerification extends StatelessWidget {
-  ForgetPassOtpVerification({super.key});
+  ForgetPassOtpVerification({super.key, this.number});
+  final number;
+
 
   final ForgetPassController controller =
   Get.put(ForgetPassController());
@@ -115,9 +117,10 @@ class ForgetPassOtpVerification extends StatelessWidget {
                   onPressed: () {
                     // print("object");
                     // Get.toNamed(home);
+                    controller.numberValidate();
                   },
                   child: Text(
-                    'Resend Button',
+                    'Resend OTP',
                     style: GoogleFonts.urbanist(
                       fontSize: 14.0,
                       color: Colors.black,

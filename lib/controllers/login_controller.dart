@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import '../utils/app_routes.dart';
 
 class LoginController extends GetxController {
@@ -38,7 +38,7 @@ class LoginController extends GetxController {
       }
 
       try {
-        var response = await post(
+        var response = await http.post(
             Uri.parse(ApiUrls.loginPost),
             body: {
               "phone": numberController.text,

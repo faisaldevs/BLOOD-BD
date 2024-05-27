@@ -37,11 +37,12 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     var name = controller.name;
     var number = controller.number;
-    var status = controller.status;
+    // var status = int.parse(controller.status);
     var blood = controller.bloodType;
     var gender = controller.gender;
     var address = getStorage.read("address") ?? "Komorpur,Faridpur,Dhaka";
     var width = Get.width;
+    print("Status value :---"+controller.status.value.toString());
     return Obx(() {
       return ModalProgressHUD(inAsyncCall: controller.loading.value, child: Scaffold(
         backgroundColor: AppTheme.primary,
@@ -77,19 +78,48 @@ class _ProfilePageState extends State<ProfilePage> {
                         foregroundColor: AppTheme.textColorRed,
                         titleSpacing: 0,
                         actions: [
-                          Switch.adaptive(
-                            value: status == 1.toString()
-                                ? switchValue
-                                : !switchValue,
-                            onChanged: (value) {
-                              controller.activeStatus(value);
-                              setState(() {
-                                switchValue = value;
-                              });
-                              if (kDebugMode) {
-                                print(value);
-                              }
-                            },
+                          // Switch.adaptive(
+                          //   value: status == 0
+                          //       ? false
+                          //       : true,
+                          //   onChanged: (value) {
+                          //     controller.activeStatus(value);
+                          //     setState(() {
+                          //       // switchValue = value;
+                          //       value == true? status = 1: status = 0;
+                          //     });
+                          //     if (kDebugMode) {
+                          //       print(value);
+                          //     }
+                          //   },
+                          // ),
+                          Container(padding: EdgeInsets.only(left: 20),
+                            child: Obx(() => Row(
+                              children: [
+                                Text("Donor Status : "),
+                                DropdownButton<int>(
+                                  value: controller.status.value,
+                                  items: [
+                                    DropdownMenuItem(
+                                      value: 1,
+                                      child: Text('on'),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 0,
+                                      child: Text('off'),
+                                    ),
+                                  ],
+                                  onChanged: (int? newValue) {
+                                        controller.activeStatus(newValue ==1? true: false);
+                                    setState(() {
+                                      controller.status.value = newValue!;
+                                    });
+                                    print(controller.status.value);
+                                  },
+                                ),
+
+                              ],
+                            ),),
                           ),
                         ],
                       ),
@@ -249,6 +279,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
 
               // -------Drawer Body------------
+
               // ActiveDonor(),
               Divider(height: 2,color: Colors.black,),
 

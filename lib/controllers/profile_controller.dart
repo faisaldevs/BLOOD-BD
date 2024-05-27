@@ -4,6 +4,7 @@ import 'package:blood_bd/screens/profile/profile_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +15,7 @@ import '../utils/app_routes.dart';
 class ProfileController extends GetxController {
   String name = "";
   String number = "";
-  String status = "";
+  RxInt status = 0.obs;
   String bloodType = "";
   String gender = "";
   RxString blood = "".obs;
@@ -51,9 +52,10 @@ class ProfileController extends GetxController {
         number = body["phone"].toString();
         bloodType = profile["blood_group"].toString();
         gender = profile["gender"].toString();
-        status = body["donor_status"].toString();
+       var status1 = body["donor_status"].toString();
+       status.value = int.parse(status1);
         // status = body["blood_group"].toString();
-        GetStorage().write("StatusValue", status);
+        // GetStorage().write("StatusValue", status);
         // number.value = body["phone"];
         // number.value = body["phone"];
         // loading.value= false;

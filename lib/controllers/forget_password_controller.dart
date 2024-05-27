@@ -32,7 +32,7 @@ class ForgetPassController extends GetxController {
       print(res.body);
 
       if (res.statusCode == 200) {
-        Get.to(ForgetPassOtpVerification());
+        Get.to(ForgetPassOtpVerification(number: numberController.text,));
       }else if (res.statusCode == 404) {
         GetStorage().erase();
         Get.offAllNamed(welcomePage);
@@ -84,6 +84,28 @@ class ForgetPassController extends GetxController {
         GetStorage().erase();
         Get.offAllNamed(welcomePage);
       }
+    }
+  }
+
+  resendOtp()async{
+    var res = await http
+        .post(Uri.parse(ApiUrls.forgotPasswordPhonePost), body: {"phone": numberController.text});
+    print("object");
+
+    print(res.statusCode);
+    print(res.body);
+
+    if (res.statusCode == 200) {
+      Get.to(ForgetPassOtpVerification(number: numberController.text,));
+    }else if (res.statusCode == 404) {
+      GetStorage().erase();
+      Get.offAllNamed(welcomePage);
+
+    }
+    else{
+      print(res.statusCode);
+      print(res.body);
+
     }
   }
 }

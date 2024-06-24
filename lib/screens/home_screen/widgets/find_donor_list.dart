@@ -291,10 +291,10 @@ class FindDonorListPage extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      const MaterialStatePropertyAll<Color>(Colors.red),
-                  padding: const MaterialStatePropertyAll(
+                      const WidgetStatePropertyAll<Color>(Colors.red),
+                  padding: const WidgetStatePropertyAll(
                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-                  shape: MaterialStatePropertyAll(
+                  shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -328,10 +328,10 @@ class FindDonorListPage extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      const MaterialStatePropertyAll<Color>(Color(0xff026b49)),
-                  padding: const MaterialStatePropertyAll(
+                      const WidgetStatePropertyAll<Color>(Color(0xff026b49)),
+                  padding: const WidgetStatePropertyAll(
                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-                  shape: MaterialStatePropertyAll(
+                  shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),

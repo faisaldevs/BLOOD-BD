@@ -1,3 +1,4 @@
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +11,7 @@ class SignupOTPVerification extends StatelessWidget {
    SignupOTPVerification({super.key, required this.number});
    final TextEditingController number;
 
- final SignupOTPController signupOTPController = Get.put(SignupOTPController());
+ final SignupOTPController controller = Get.put(SignupOTPController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,12 @@ class SignupOTPVerification extends StatelessWidget {
               ),
               SizedBox(height: height*0.04,),
 
-              const Text("Enter the OTP Send To :+88"),
+               RichText(text: TextSpan(
+                 children: [
+                   TextSpan(text: "Enter the OTP Send To : ",style: TextStyle(color: Colors.black  )),
+                   TextSpan(text: "+88${number.text}",style: TextStyle(fontWeight: FontWeight.bold,letterSpacing: 1,color: Colors.black)),
+                 ]
+               )),
               SizedBox(
                 height: height * 0.02,
               ),
@@ -70,9 +76,9 @@ class SignupOTPVerification extends StatelessWidget {
                 child: SizedBox(
                   width: width,
                   child: Pinput(
-                      key: signupOTPController.formKey,
+                      key: controller.formKey,
                       // senderPhoneNumber: "01903440069",
-                      controller: signupOTPController.signupOtpController,
+                      controller: controller.signupOtpController,
                       validator: (otp) {
                         if (otp!.isEmpty) {
                           // print(otp);
@@ -101,30 +107,39 @@ class SignupOTPVerification extends StatelessWidget {
               const SizedBox(
                 height: 16.0,
               ),
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    // print("object");
-                    // Get.toNamed(home);
-
-                  },
-                  child: Text(
-                    'Resend Button',
-                    style: GoogleFonts.urbanist(
-                      fontSize: 14.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
+              // Center(
+              //   child: TextButton(
+              //     onPressed: () {
+              //       // print("object");
+              //       // Get.toNamed(home);
+              //
+              //     },
+              //     child: Text(
+              //       'Resend Button',
+              //       style: GoogleFonts.urbanist(
+              //         fontSize: 14.0,
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w700,
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               /// Continue Button
               const Expanded(child: SizedBox()),
               SizedBox(width: width,child: CustomButton(onPressed: (){
                 // otpValidation();
                 // Get.toNamed(home);
-                signupOTPController.otpValidate(number);
+                if (controller.signupOtpController.text == "") {
+                  CustomSnackBar().showSnackBar(
+                      context: context,
+                      content: 'Enter OTP',
+                      backgroundColor: Colors.red);
+                }
+                else{
+                  FocusScope.of(context).unfocus();
+                  controller.otpValidate(number);
+                }
               },child : const Text("Continue",style: TextStyle(color: Colors.white),))),
               const SizedBox(
                 height: 16.0,

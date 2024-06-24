@@ -72,7 +72,7 @@ class BloodHeroList extends StatelessWidget {
                         },
                         style: const ButtonStyle(
                             padding:
-                                MaterialStatePropertyAll(EdgeInsets.all(0))),
+                                WidgetStatePropertyAll(EdgeInsets.all(0))),
                         icon: Row(
                           children: [
                             const Icon(

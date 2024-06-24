@@ -10,9 +10,9 @@ class ForgetPasswordWidget extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.transparent),
-          foregroundColor: MaterialStateProperty.all(Colors.transparent),
-          overlayColor: MaterialStateProperty.all(Colors.red.shade50),
+        backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+        foregroundColor: WidgetStatePropertyAll(Colors.transparent),
+        overlayColor: WidgetStatePropertyAll(Colors.red.shade50),
         ),
         child: const Text(
           "Forget Password",

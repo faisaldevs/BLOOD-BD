@@ -12,8 +12,8 @@ class FindDonorBtn extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-          backgroundColor: const MaterialStatePropertyAll(Colors.red),
-          shape: MaterialStatePropertyAll(
+          backgroundColor: const WidgetStatePropertyAll(Colors.red),
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: const BorderSide(color: Colors.redAccent)),

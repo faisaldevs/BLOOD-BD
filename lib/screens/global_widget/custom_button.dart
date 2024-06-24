@@ -22,9 +22,9 @@ class CustomButton extends StatelessWidget {
 
 ButtonStyle buttonStyle = ButtonStyle(
   padding:
-      MaterialStateProperty.all(const EdgeInsets.only(top: 15, bottom: 15)),
-  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-  shape: MaterialStateProperty.all(
+      WidgetStatePropertyAll(const EdgeInsets.only(top: 15, bottom: 15)),
+  backgroundColor: WidgetStatePropertyAll(Colors.redAccent),
+  shape: WidgetStatePropertyAll(
     RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
         side: const BorderSide(color: Colors.red)),

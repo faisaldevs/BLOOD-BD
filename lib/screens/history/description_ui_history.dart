@@ -237,10 +237,10 @@ class HistoryDescription extends StatelessWidget {
               //       },
               //       style: ButtonStyle(
               //         backgroundColor:
-              //         const MaterialStatePropertyAll<Color>(Colors.red),
-              //         padding: const MaterialStatePropertyAll(
+              //         const WidgetStatePropertyAll<Color>(Colors.red),
+              //         padding: const WidgetStatePropertyAll(
               //             EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-              //         shape: MaterialStatePropertyAll(
+              //         shape: WidgetStatePropertyAll(
               //           RoundedRectangleBorder(
               //             borderRadius: BorderRadius.circular(5.0),
               //           ),
@@ -272,11 +272,11 @@ class HistoryDescription extends StatelessWidget {
               //       //                       );
               //       //                     }
               //       style: ButtonStyle(
-              //         backgroundColor: const MaterialStatePropertyAll<Color>(
+              //         backgroundColor: const WidgetStatePropertyAll<Color>(
               //             Color(0xff026b49)),
-              //         padding: const MaterialStatePropertyAll(
+              //         padding: const WidgetStatePropertyAll(
               //             EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-              //         shape: MaterialStatePropertyAll(
+              //         shape: WidgetStatePropertyAll(
               //           RoundedRectangleBorder(
               //             borderRadius: BorderRadius.circular(5.0),
               //           ),
@@ -297,11 +297,11 @@ class HistoryDescription extends StatelessWidget {
                       launchUrlString("tel:$contractPersonNumber");
                     },
                     style: ButtonStyle(
-                      backgroundColor: const MaterialStatePropertyAll<Color>(
+                      backgroundColor: const WidgetStatePropertyAll<Color>(
                           Colors.blueGrey),
-                      padding: const MaterialStatePropertyAll(
+                      padding: const WidgetStatePropertyAll(
                           EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-                      shape: MaterialStatePropertyAll(
+                      shape: WidgetStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -317,10 +317,10 @@ class HistoryDescription extends StatelessWidget {
                     onPressed: buttonFunction1,
                     style: ButtonStyle(
                       backgroundColor:
-                          const MaterialStatePropertyAll<Color>(Colors.red),
-                      padding: const MaterialStatePropertyAll(
+                          const WidgetStatePropertyAll<Color>(Colors.red),
+                      padding: const WidgetStatePropertyAll(
                           EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-                      shape: MaterialStatePropertyAll(
+                      shape: WidgetStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -335,11 +335,11 @@ class HistoryDescription extends StatelessWidget {
                   ElevatedButton(
                     onPressed: buttonFunction2,
                     style: ButtonStyle(
-                      backgroundColor: const MaterialStatePropertyAll<Color>(
+                      backgroundColor: const WidgetStatePropertyAll<Color>(
                           Color(0xff026b49)),
-                      padding: const MaterialStatePropertyAll(
+                      padding: const WidgetStatePropertyAll(
                           EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-                      shape: MaterialStatePropertyAll(
+                      shape: WidgetStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),

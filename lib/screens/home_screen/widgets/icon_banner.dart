@@ -82,13 +82,13 @@ class HomeScreenIcons extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                           backgroundColor:
-                          const MaterialStatePropertyAll(Colors.white),
-                          shape: MaterialStatePropertyAll(
+                          const WidgetStatePropertyAll(Colors.white),
+                          shape: WidgetStatePropertyAll(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                           ),
-                          padding: const MaterialStatePropertyAll(
+                          padding: const WidgetStatePropertyAll(
                               EdgeInsets.all(10)),
                         ),
                       ),
@@ -124,8 +124,8 @@ class HomeScreenIcons extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                             backgroundColor:
-                                const MaterialStatePropertyAll(Colors.white),
-                            shape: MaterialStatePropertyAll(
+                                const WidgetStatePropertyAll(Colors.white),
+                            shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
@@ -161,8 +161,8 @@ class HomeScreenIcons extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                             backgroundColor:
-                                const MaterialStatePropertyAll(Colors.white),
-                            shape: MaterialStatePropertyAll(
+                                const WidgetStatePropertyAll(Colors.white),
+                            shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
@@ -206,13 +206,13 @@ class HomeScreenIcons extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                           backgroundColor:
-                              const MaterialStatePropertyAll(Colors.white),
-                          shape: MaterialStatePropertyAll(
+                              const WidgetStatePropertyAll(Colors.white),
+                          shape: WidgetStatePropertyAll(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                           ),
-                          padding: const MaterialStatePropertyAll(
+                          padding: const WidgetStatePropertyAll(
                               EdgeInsets.all(10)),
                         ),
                       ),
@@ -245,8 +245,8 @@ class HomeScreenIcons extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                             backgroundColor:
-                                const MaterialStatePropertyAll(Colors.white),
-                            shape: MaterialStatePropertyAll(
+                                const WidgetStatePropertyAll(Colors.white),
+                            shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
@@ -279,8 +279,8 @@ class HomeScreenIcons extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                             backgroundColor:
-                                const MaterialStatePropertyAll(Colors.white),
-                            shape: MaterialStatePropertyAll(
+                                const WidgetStatePropertyAll(Colors.white),
+                            shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               ),

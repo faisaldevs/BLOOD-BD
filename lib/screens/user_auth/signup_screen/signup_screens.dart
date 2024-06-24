@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:blood_bd/utils/app_routes.dart';
@@ -416,7 +417,95 @@ class _SignupScreenState extends State<SignupScreen> {
                   child: Obx(
                     () => CustomButton(
                       onPressed: () {
-                        signupController.signUpForm();
+                         if (signupController.nameController.text == "") {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Full Name',
+                              backgroundColor: Colors.red);
+                        }
+                        else if (signupController.gender == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Gender',
+                              backgroundColor: Colors.red);
+                        }
+                        else if (signupController.dateController.text == "") {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Birth Date',
+                              backgroundColor: Colors.red);
+                        }
+                        else if (signupController.bloodType == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Blood Group',
+                              backgroundColor: Colors.red);
+                        }
+
+                        else if (signupController.weightController.text == "") {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Weight',
+                              backgroundColor: Colors.red);
+                        }
+                         else if (signupController.division == null) {
+                           CustomSnackBar().showSnackBar(
+                               context: context,
+                               content: 'Enter Division',
+                               backgroundColor: Colors.red);
+                         }
+                         else if (signupController.district == null) {
+                           CustomSnackBar().showSnackBar(
+                               context: context,
+                               content: 'Enter District',
+                               backgroundColor: Colors.red);
+                         }
+                         else if (signupController.thana == null) {
+                           CustomSnackBar().showSnackBar(
+                               context: context,
+                               content: 'Enter Thana',
+                               backgroundColor: Colors.red);
+                         }
+
+                        else if (signupController.addressController.text == "") {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Address',
+                              backgroundColor: Colors.red);
+                        }
+
+                         else if (signupController.numberController.text == '') {
+                           CustomSnackBar().showSnackBar(
+                               context: context,
+                               content: 'Enter Number',
+                               backgroundColor: Colors.red);
+                         }
+
+                        else if (signupController.numberController.text.length != 11) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter A Valid Number',
+                              backgroundColor: Colors.red);
+                        }
+                        else if (signupController.passwordController.text == '') {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Password',
+                              backgroundColor: Colors.red);
+                        }
+                        else if (signupController
+                            .passwordController.text.length <=
+                            5) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content:
+                              'Password length must be at least 6',
+                              backgroundColor: Colors.red);
+                        } else {
+                          FocusScope.of(context).unfocus();
+                          signupController.signUpForm();
+                        }
+
                       },
                       child: signupController.isSignup.value
                           ? const Center(
@@ -457,8 +546,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStatePropertyAll(Colors.red[300]),
-                      padding: MaterialStateProperty.all(
+                      WidgetStatePropertyAll(Colors.red[300]),
+                      padding: WidgetStatePropertyAll(
                         const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 40.0),
                       ),

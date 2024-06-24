@@ -1,6 +1,7 @@
 import 'package:blood_bd/utils/app_routes.dart';
 import 'package:blood_bd/screens/user_auth/signup_screen/signup_screens.dart';
 import 'package:blood_bd/utils/app_colors.dart';
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -132,7 +133,37 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Obx(
                         () => CustomButton(
                           onPressed: () {
-                            _loginController.loginForm();
+                            if (_loginController.numberController.text == '') {
+                              CustomSnackBar().showSnackBar(
+                                  context: context,
+                                  content: 'Enter Number',
+                                  backgroundColor: Colors.red);
+                            } 
+                            else if (_loginController.numberController.text.length != 11) {
+                              CustomSnackBar().showSnackBar(
+                                  context: context,
+                                  content: 'Enter A Valid Number',
+                                  backgroundColor: Colors.red);
+                            }
+                            else if (_loginController.passwordController.text ==
+                                '') {
+                              CustomSnackBar().showSnackBar(
+                                  context: context,
+                                  content: 'Enter Password',
+                                  backgroundColor: Colors.red);
+                            } else if (_loginController
+                                .passwordController.text.length <=
+                                5) {
+                              CustomSnackBar().showSnackBar(
+                                  context: context,
+                                  content:
+                                  'Password length must be at least 6',
+                                  backgroundColor: Colors.red);
+                            } else {
+                              FocusScope.of(context).unfocus();
+                              _loginController.loginForm();
+                            }
+                            
                           },
                           child: _loginController.isLogin.value
                               ? const Center(
@@ -172,8 +203,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStatePropertyAll(Colors.red[300]),
-                        padding: MaterialStateProperty.all(
+                            WidgetStatePropertyAll(Colors.red[300]),
+                        padding: WidgetStateProperty.all(
                           const EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 40.0),
                         ),

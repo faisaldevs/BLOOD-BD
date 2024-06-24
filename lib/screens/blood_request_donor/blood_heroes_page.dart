@@ -130,7 +130,7 @@ class BloodHeroes extends StatelessWidget {
                                     launchUrlString("tel:$phone2");
                                   },
                                   style: const ButtonStyle(
-                                      padding: MaterialStatePropertyAll(
+                                      padding: WidgetStatePropertyAll(
                                           EdgeInsets.all(0))),
                                   icon: Row(
                                     children: [
@@ -156,7 +156,7 @@ class BloodHeroes extends StatelessWidget {
                                     launchUrlString("tel:$phone3");
                                   },
                                   style: const ButtonStyle(
-                                      padding: MaterialStatePropertyAll(
+                                      padding: WidgetStatePropertyAll(
                                           EdgeInsets.all(0))),
                                   icon: Row(
                                     children: [

@@ -30,7 +30,7 @@ class LoginController extends GetxController {
   }
 
   Future<Text> loginForm() async {
-    if (formKey.currentState!.validate()) {
+    if (true) {
       isLogin.value = true;
 
       if (kDebugMode) {

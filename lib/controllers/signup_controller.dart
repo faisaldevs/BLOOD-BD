@@ -62,7 +62,7 @@ class SignupController extends GetxController {
     if (kDebugMode) {
       print("success");
     }
-    if (signupFormKey.currentState!.validate()) {
+    if (true) {
       isSignup.value = true;
 
       try {

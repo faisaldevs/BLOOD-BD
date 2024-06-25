@@ -281,29 +281,29 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                 ],
               ),
               // const SizedBox(width: 5,),
-              TextButton(
-                  onPressed: () {
-                    // Get.to(() => MedicalReport(image: image,));
-                    //Image.file(controller.imageFile!)
-                        Get.rawSnackbar(
-                            messageText: const Text('Working on it..!!',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14)),
-                            isDismissible: true,
-                            duration: const Duration(seconds: 3),
-                            backgroundColor: Colors.green[400]!,
-                            icon: const Icon(
-                              Icons.settings,
-                              color: Colors.white,
-                              size: 35,
-                            ),
-                            margin: EdgeInsets.zero,
-                            snackStyle: SnackStyle.GROUNDED);
-                      },
-                  child: Text(
-                    "See Report",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  )),
+              // TextButton(
+              //     onPressed: () {
+              //       // Get.to(() => MedicalReport(image: image,));
+              //       //Image.file(controller.imageFile!)
+              //           Get.rawSnackbar(
+              //               messageText: const Text('Working on it..!!',
+              //                   style: TextStyle(
+              //                       color: Colors.white, fontSize: 14)),
+              //               isDismissible: true,
+              //               duration: const Duration(seconds: 3),
+              //               backgroundColor: Colors.green[400]!,
+              //               icon: const Icon(
+              //                 Icons.settings,
+              //                 color: Colors.white,
+              //                 size: 35,
+              //               ),
+              //               margin: EdgeInsets.zero,
+              //               snackStyle: SnackStyle.GROUNDED);
+              //         },
+              //     child: Text(
+              //       "See Report",
+              //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              //     )),
             ],
           )
         ],

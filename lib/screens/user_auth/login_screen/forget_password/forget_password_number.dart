@@ -141,7 +141,7 @@ class ForgetPassNumber extends StatelessWidget {
                                       backgroundColor: Colors.red,
                                     )))
                             : Text(
-                                "Login",
+                                "Continue",
                                 style: GoogleFonts.roboto(
                                   color: Colors.white,
                                   fontSize: 18,

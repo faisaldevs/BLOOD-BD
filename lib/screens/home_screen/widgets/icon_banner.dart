@@ -1,4 +1,5 @@
 import 'package:blood_bd/controllers/profile_controller.dart';
+import 'package:blood_bd/screens/drawer_profile/drawer_pages/medical_history.dart';
 import 'package:blood_bd/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -256,18 +257,22 @@ class HomeScreenIcons extends StatelessWidget {
                     SizedBox(
                       width: 110,
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {   Get.to(MedicalHistory());},
                         icon: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.feedback_outlined,
+                              Icons.medical_information_outlined,
                               size: 34,
                               color: AppTheme.textColorRed,
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 5),
                               child: Text(
-                                "FeedBack",
+                                'Medical History',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

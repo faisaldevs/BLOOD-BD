@@ -257,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Icon(Icons.edit_note, color: AppTheme.textColorRed),
                                   Text(
-                                    "Edit Profile",
+                                    "Update Profile",
                                     style: TextStyle(
                                         fontSize: 16.sp,
                                         color: AppTheme.textColorRed),

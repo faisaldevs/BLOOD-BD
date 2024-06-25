@@ -52,7 +52,7 @@ class DrawerProfile extends StatelessWidget {
             },
           ),
           CustomDrawerLinks(
-            title: 'Donation Requests',
+            title: 'Donate Requests',
             icon: Icons.bloodtype_outlined,
             onTap: () {
               Get.to(DonationStatus());

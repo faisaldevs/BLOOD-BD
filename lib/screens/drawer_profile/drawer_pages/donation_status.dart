@@ -44,7 +44,7 @@ class _DonationStatusState extends State<DonationStatus> {
           // For Android (dark icons)
           statusBarBrightness: Brightness.light, // For iOS (dark icons)
         ),
-        title: const Text("Donation Request"),
+        title: const Text("Donate Request"),
         titleSpacing: 0,
         backgroundColor: AppTheme.primary,
         surfaceTintColor: Colors.transparent,

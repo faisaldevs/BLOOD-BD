@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.all(16.0),
         child: SafeArea(
           child: Form(
-            key: _loginController.formKey,
+            // key: _loginController.formKey,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   backgroundColor: Colors.red);
                             } else {
                               FocusScope.of(context).unfocus();
-                              _loginController.loginForm();
+                              _loginController.loginForm(context);
                             }
                             
                           },

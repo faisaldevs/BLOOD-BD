@@ -1,4 +1,5 @@
 import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -36,10 +37,11 @@ class ForgetPasswordPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
-            key: passController.passKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
+            // key: passController.passKey,
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: Get.height * 0.14,
@@ -52,19 +54,21 @@ class ForgetPasswordPage extends StatelessWidget {
                 SizedBox(
                   height: height * 0.04,
                 ),
-                Text(
-                  'New Password',
-                  style: GoogleFonts.urbanist(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                    fontSize: 24.0,
+                Center(
+                  child: Text(
+                    'New Password',
+                    style: GoogleFonts.urbanist(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                      fontSize: 24.0,
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: height * 0.04,
                 ),
 
-                const Text("Enter new Password"),
+                Center(child: const Text("Enter new Password")),
                 SizedBox(
                   height: height * 0.02,
                 ),
@@ -72,12 +76,14 @@ class ForgetPasswordPage extends StatelessWidget {
                 /// Password Field
 
                 CustomTextFormField(
-                    controller: passController.newPassword,
-                    hintText: "New Password",
-                    textInputType: TextInputType.text,
-                    validate: (value) {
-                      return null;
-                    }, labelText: 'New Password', ),
+                  controller: passController.newPassword,
+                  hintText: "New Password",
+                  textInputType: TextInputType.text,
+                  validate: (value) {
+                    return null;
+                  },
+                  labelText: 'New Password',
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -86,7 +92,7 @@ class ForgetPasswordPage extends StatelessWidget {
                     labelText: "Confirm Password",
                     textInputType: TextInputType.text,
                     validate: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "";
                       }
                       return null;
@@ -94,25 +100,70 @@ class ForgetPasswordPage extends StatelessWidget {
                     hintText: "Confirm Password"),
 
                 /// Continue Button
-                const Expanded(child: SizedBox()),
-
-                SizedBox(
-                    width: width,
-                    child: CustomButton(
-                        onPressed: () {
-                          passController.forgetValidation();
-                          // print("object");
-                          // Get.to(const LoginScreen());
-                        },
-                        child: const Text("Continue",style: TextStyle(color: Colors.white),))),
                 const SizedBox(
-                  height: 16.0,
+                  height: 25.0,
                 ),
+                Obx(
+                      () => CustomButton(
+                    onPressed: () {
+                      if (passController.newPassword.text == '') {
+                        CustomSnackBar().showSnackBar(
+                            context: context,
+                            content: 'Enter New Password',
+                            backgroundColor: Colors.red);
+                      } else if (passController.newPassword.text.length < 6) {
+                        CustomSnackBar().showSnackBar(
+                            context: context,
+                            content: 'Password must be more than 6 characters',
+                            backgroundColor: Colors.red);
+                      } else if (passController.confirmPassword.text == '') {
+                        CustomSnackBar().showSnackBar(
+                            context: context,
+                            content: 'Enter confirm password',
+                            backgroundColor: Colors.red);
+                      } else if (passController.confirmPassword.text !=
+                          passController.newPassword.text) {
+                        CustomSnackBar().showSnackBar(
+                            context: context,
+                            content: "Password dosen't match",
+                            backgroundColor: Colors.red);
+                      } else if (passController.confirmPassword.text.length < 6) {
+                        CustomSnackBar().showSnackBar(
+                            context: context,
+                            content: 'Password must be more than 6 characters',
+                            backgroundColor: Colors.red);
+                      } else {
+                        FocusScope.of(context).unfocus();
+                        passController.forgetValidation(context);
+                      }
+                    },
+                    child: passController.isLoading.value
+                        ? const Center(
+                        child: SizedBox(
+                            height: 18,
+                            width: 18,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              backgroundColor: Colors.red,
+                            )))
+                        : Text(
+                      "Change Password",
+                      style: GoogleFonts.roboto(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+
               ],
             ),
           ),
         ),
       ),
+
+      // floatingActionButton: ,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

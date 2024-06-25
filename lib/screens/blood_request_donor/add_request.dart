@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:blood_bd/utils/app_colors.dart';
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../controllers/request_blood_controller.dart';
 import '../../data_list/data_list.dart';
 import '../global_widget/custom_birthDate.dart';
@@ -14,16 +16,18 @@ import '../global_widget/custom_timePicker.dart';
 import 'package:http/http.dart' as http;
 
 class RequestBlood extends StatefulWidget {
-  const RequestBlood({super.key, this.requestId, this.donorId, this.deviceToken});
+  const RequestBlood(
+      {super.key, this.requestId, this.donorId, this.deviceToken});
+
   final String? requestId;
   final String? donorId;
   final String? deviceToken;
+
   @override
   State<RequestBlood> createState() => _RequestBloodState();
 }
 
 class _RequestBloodState extends State<RequestBlood> {
-
   RequestBloodController controller = Get.put(RequestBloodController());
   List<String> divisions = [];
   List<String> districts = [];
@@ -152,7 +156,7 @@ class _RequestBloodState extends State<RequestBlood> {
       body: Container(
         margin: const EdgeInsets.all(16),
         child: Form(
-          key: controller.formKey,
+          // key: controller.formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -320,25 +324,25 @@ class _RequestBloodState extends State<RequestBlood> {
                   children: [
                     Expanded(
                         child: DropdownButtonFormField(
-                          decoration: inputDecoration("Select Thana"),
-                          value: selectedThana,
-                          onChanged: (newValue) {
-                            controller.thana = newValue;
-                            setState(() {
-                              selectedThana = newValue;
-                            });
-                          },
-                          items:
+                      decoration: inputDecoration("Select Thana"),
+                      value: selectedThana,
+                      onChanged: (newValue) {
+                        controller.thana = newValue;
+                        setState(() {
+                          selectedThana = newValue;
+                        });
+                      },
+                      items:
                           thanas.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(color: Colors.red),
-                              ),
-                            );
-                          }).toList(),
-                        )),
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        );
+                      }).toList(),
+                    )),
                     // const SizedBox(
                     //   width: 10,
                     // ),
@@ -435,25 +439,130 @@ class _RequestBloodState extends State<RequestBlood> {
         ),
       ),
       floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.all(10),
         width: double.infinity * .9,
-        child: CustomButton(
+        // child: CustomButton(
+        //     onPressed: () {
+        //         // controller.onSaveRqBlood();
+        //
+        //
+        //       if(widget.donorId == null){
+        //         controller.onSaveRqBlood();
+        //       }
+        //      else{
+        //        controller.donate(widget.donorId,widget.deviceToken);
+        //      }
+        //
+        //     },
+        //     child: const Text(
+        //       "Submit",
+        //       style: TextStyle(color: Colors.white),
+        //     )),
+        child: Obx(
+          () => CustomButton(
             onPressed: () {
-                // controller.onSaveRqBlood();
-
-
-              if(widget.donorId == null){
-                controller.onSaveRqBlood();
+              if (controller.patientNameController.text == "") {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Full Name',
+                    backgroundColor: Colors.red);
+              } else if (controller.bloodType == null) {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Blood Group',
+                    backgroundColor: Colors.red);
+              } else if (controller.dateController.text == "") {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Date',
+                    backgroundColor: Colors.red);
+              } else if (controller.timeController.text == "") {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter time',
+                    backgroundColor: Colors.red);
+              } else if (controller.bloodAmount == null) {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Blood Amount',
+                    backgroundColor: Colors.red);
+              } else if (controller.healthIssue == null) {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Health Issue',
+                    backgroundColor: Colors.red);
+              } else if (controller.hospitalController.text == "") {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Hospital Name',
+                    backgroundColor: Colors.red);
+              } else if (controller.division == null) {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Division',
+                    backgroundColor: Colors.red);
+              } else if (controller.district == null) {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter District',
+                    backgroundColor: Colors.red);
+              } else if (controller.thana == null) {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Thana',
+                    backgroundColor: Colors.red);
+              } else if (controller.addressController.text == '') {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Address',
+                    backgroundColor: Colors.red);
+              } else if (controller.contactParsonNameController.text == '') {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Contract Person Name',
+                    backgroundColor: Colors.red);
+              } else if (controller.numberController.text == '') {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter Contract Person Number',
+                    backgroundColor: Colors.red);
+              } else if (controller.numberController.text.length != 11) {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter A Valid Number',
+                    backgroundColor: Colors.red);
               }
-             else{
-               controller.donate(widget.donorId,widget.deviceToken);
-             }
-
+              else if (controller.noteController.text == "") {
+                CustomSnackBar().showSnackBar(
+                    context: context,
+                    content: 'Enter A Note',
+                    backgroundColor: Colors.red);
+              }
+              else {
+                FocusScope.of(context).unfocus();
+                if (widget.donorId == null) {
+                  controller.onSaveRqBlood();
+                } else {
+                  controller.donate(widget.donorId, widget.deviceToken);
+                }
+              }
             },
-            child: const Text(
-              "Submit",
-              style: TextStyle(color: Colors.white),
-            )),
+            child: controller.isLoading.value
+                ? Container(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ))
+                : Text(
+                    "Submit",
+                    style: GoogleFonts.roboto(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

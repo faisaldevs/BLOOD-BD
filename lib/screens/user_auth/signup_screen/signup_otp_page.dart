@@ -87,7 +87,7 @@ class SignupOTPVerification extends StatelessWidget {
                         }
                         return null;
                       },
-                      length: 4,
+                      length: 6,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       defaultPinTheme: defaultPinTheme,
@@ -127,20 +127,61 @@ class SignupOTPVerification extends StatelessWidget {
 
               /// Continue Button
               const Expanded(child: SizedBox()),
-              SizedBox(width: width,child: CustomButton(onPressed: (){
-                // otpValidation();
-                // Get.toNamed(home);
-                if (controller.signupOtpController.text == "") {
-                  CustomSnackBar().showSnackBar(
-                      context: context,
-                      content: 'Enter OTP',
-                      backgroundColor: Colors.red);
-                }
-                else{
-                  FocusScope.of(context).unfocus();
-                  controller.otpValidate(number);
-                }
-              },child : const Text("Continue",style: TextStyle(color: Colors.white),))),
+              // SizedBox(width: width,child: CustomButton(onPressed: (){
+              //   // otpValidation();
+              //   // Get.toNamed(home);
+              //   if (controller.signupOtpController.text == "") {
+              //     CustomSnackBar().showSnackBar(
+              //         context: context,
+              //         content: 'Enter OTP',
+              //         backgroundColor: Colors.red);
+              //   }
+              //   else{
+              //     FocusScope.of(context).unfocus();
+              //     controller.otpValidate(number,context);
+              //   }
+              // },child : const Text("Continue",style: TextStyle(color: Colors.white),))),
+              SizedBox(
+                  width: double.infinity,
+                  child: Obx(
+                        () => CustomButton(
+                      onPressed: () {
+                        if (controller.signupOtpController.text == "") {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: "Enter OTP",
+                              backgroundColor: Colors.red,
+                              time: 1);
+                        } else if (controller.signupOtpController.text.length !=
+                            6) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: "Enter a valid OTP",
+                              backgroundColor: Colors.red,
+                              time: 1);
+                        } else {
+                          FocusScope.of(context).unfocus();
+                          controller.otpValidate(number,context);
+                        }
+                      },
+                      child: controller.isLoading.value
+                          ? const Center(
+                          child: SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                backgroundColor: Colors.red,
+                              )))
+                          : Text(
+                        "Continue",
+                        style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  )),
               const SizedBox(
                 height: 16.0,
               ),

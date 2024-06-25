@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ import '../utils/app_routes.dart';
 class LoginController extends GetxController {
   GetStorage getStorage = GetStorage();
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  // GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController numberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -29,7 +30,7 @@ class LoginController extends GetxController {
     // show.value = !show.value;
   }
 
-  Future<Text> loginForm() async {
+  Future<Text> loginForm(BuildContext context) async {
     if (true) {
       isLogin.value = true;
 
@@ -71,22 +72,27 @@ class LoginController extends GetxController {
           //   colorText: Colors.red,
           //   backgroundColor: Colors.white
           // );
-          Get.rawSnackbar(
-              messageText: const Text(
-                  'Login Successes !!!',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14
-                  )
-              ),
-              isDismissible: true,
-              duration: const Duration(seconds: 3),
-              backgroundColor: Colors.red[400]!,
-              icon : const Icon(Icons.done_all, color: Colors.white, size: 35,),
-              margin: EdgeInsets.zero,
-              snackStyle: SnackStyle.GROUNDED
-          );
+          // Get.rawSnackbar(
+          //     messageText: const Text(
+          //         'Login Successes !!!',
+          //         style: TextStyle(
+          //             color: Colors.white,
+          //             fontSize: 14
+          //         )
+          //     ),
+          //     isDismissible: true,
+          //     duration: const Duration(seconds: 3),
+          //     backgroundColor: Colors.red[400]!,
+          //     icon : const Icon(Icons.done_all, color: Colors.white, size: 35,),
+          //     margin: EdgeInsets.zero,
+          //     snackStyle: SnackStyle.GROUNDED
+          // );
 
+          CustomSnackBar().showSnackBar(
+              context: context,
+              content:
+              'Login Successes !!!',
+              backgroundColor: Colors.red);
 
           isLogin.value = true;
           Get.offAllNamed(home);
@@ -94,10 +100,16 @@ class LoginController extends GetxController {
           // passwordController.clear();
         } else {
           isLogin.value = false;
-          Get.snackbar(
-            "Login failed${response.statusCode}",
-            "Number or Password was wrong..",
-          );
+          // Get.snackbar(
+          //   "Login failed${response.statusCode}",
+          //   "Number or Password was wrong..",
+          // );
+
+          CustomSnackBar().showSnackBar(
+              context: context,
+              content:
+              'Number or Password was wrong..',
+              backgroundColor: Colors.red);
 
           print(response.statusCode);
           print(response.body);

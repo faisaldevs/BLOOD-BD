@@ -35,7 +35,7 @@ class RequestBloodController extends GetxController {
   RxBool isLoading = false.obs;
 
   onSaveRqBlood() async {
-    if (formKey.currentState!.validate()) {
+    // if (formKey.currentState!.validate()) {
       isLoading.value = true;
       print(token);
 
@@ -164,7 +164,7 @@ class RequestBloodController extends GetxController {
         isLoading.value = false;
         print("Error : $e");
       }
-    }
+    // }
   }
 
   donate(String? donorId, String? deviceToken) async {

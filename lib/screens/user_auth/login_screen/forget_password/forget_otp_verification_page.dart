@@ -1,4 +1,5 @@
 
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -70,18 +71,23 @@ class ForgetPassOtpVerification extends StatelessWidget {
                 height: height * 0.04,
               ),
 
-              const Text("Enter the OTP Send To :+88"),
+              RichText(text: TextSpan(
+                  children: [
+                    TextSpan(text: "Enter the OTP Send To : ",style: TextStyle(color: Colors.black  )),
+                    TextSpan(text: "+88${number}",style: TextStyle(fontWeight: FontWeight.bold,letterSpacing: 1,color: Colors.black)),
+                  ]
+              )),
               SizedBox(
                 height: height * 0.02,
               ),
 
               /// pinput package we will use here
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: SizedBox(
                   width: width,
                   child: Pinput(
-                    key: controller.otpKey,
+                    // key: controller.otpKey,
                     // senderPhoneNumber: "01903440069",
                     controller: controller.otpController,
                     validator: (otp) {
@@ -91,7 +97,7 @@ class ForgetPassOtpVerification extends StatelessWidget {
                       }
                       return null;
                     },
-                    length: 4,
+                    length: 6,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     defaultPinTheme: defaultPinTheme,
@@ -112,36 +118,79 @@ class ForgetPassOtpVerification extends StatelessWidget {
               const SizedBox(
                 height: 16.0,
               ),
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    // print("object");
-                    // Get.toNamed(home);
-                    controller.numberValidate();
-                  },
-                  child: Text(
-                    'Resend OTP',
-                    style: GoogleFonts.urbanist(
-                      fontSize: 14.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
+              // Center(
+              //   child: TextButton(
+              //     onPressed: () {
+              //       // print("object");
+              //       // Get.toNamed(home);
+              //
+              //       controller.numberValidate(context);
+              //     },
+              //     child: Text(
+              //       'Resend OTP',
+              //       style: GoogleFonts.urbanist(
+              //         fontSize: 14.0,
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w700,
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               /// Continue Button
               const Expanded(child: SizedBox()),
+              // SizedBox(
+              //     width: width,
+              //     child: CustomButton(
+              //         onPressed: () {
+              //           // otpValidation();
+              //           // Get.toNamed(home);
+              //           // Get.to(ForgetPasswordPage());
+              //           controller.otpValidate();
+              //         },
+              //         child: const Text("Continue",style: TextStyle(color: Colors.white),))),
+
               SizedBox(
-                  width: width,
-                  child: CustomButton(
+                  width: double.infinity,
+                  child: Obx(
+                        () => CustomButton(
                       onPressed: () {
-                        // otpValidation();
-                        // Get.toNamed(home);
-                        // Get.to(ForgetPasswordPage());
-                        controller.otpValidate();
+                        if (controller.otpController.text == "") {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: "Enter OTP",
+                              backgroundColor: Colors.red,
+                              time: 1);
+                        } else if (controller.otpController.text.length !=
+                            6) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: "Enter a valid OTP",
+                              backgroundColor: Colors.red,
+                              time: 1);
+                        } else {
+                          FocusScope.of(context).unfocus();
+                          controller.otpValidate(context);
+                        }
                       },
-                      child: const Text("Continue",style: TextStyle(color: Colors.white),))),
+                      child: controller.isLoading.value
+                          ? const Center(
+                          child: SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                backgroundColor: Colors.red,
+                              )))
+                          : Text(
+                        "Continue",
+                        style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  )),
               const SizedBox(
                 height: 16.0,
               ),

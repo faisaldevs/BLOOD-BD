@@ -1,3 +1,4 @@
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,7 @@ class ForgetPassNumber extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
-            key: controller.key,
+            // key: controller.key,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -76,19 +77,78 @@ class ForgetPassNumber extends StatelessWidget {
                 /// Continue Button
                 const Expanded(child: SizedBox()),
 
+                // SizedBox(
+                //   width: width,
+                //   child: CustomButton(
+                //     onPressed: () {
+                //       // passController.forgetValidation();
+                //       // print("object");
+                //       // Get.to(ForgetPassOtpVerification());
+                //       if (controller.numberController.text == "") {
+                //         CustomSnackBar().showSnackBar(
+                //             context: context,
+                //             content: "Enter a Registered Number",
+                //             backgroundColor: Colors.red,
+                //             time: 1);
+                //       } else if (controller.numberController.text.length !=
+                //           11) {
+                //         CustomSnackBar().showSnackBar(
+                //             context: context,
+                //             content: "Enter a valid Number",
+                //             backgroundColor: Colors.red,
+                //             time: 1);
+                //       } else {
+                //         FocusScope.of(context).unfocus();
+                //         controller.numberValidate(context);
+                //       }
+                //     },
+                //     child: const Text(
+                //       "Continue",
+                //       style: TextStyle(color: Colors.white),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
-                    width: width,
-                    child: CustomButton(
+                    width: double.infinity,
+                    child: Obx(
+                      () => CustomButton(
                         onPressed: () {
-                          // passController.forgetValidation();
-                          // print("object");
-                          // Get.to(ForgetPassOtpVerification());
-                          controller.numberValidate();
+                          if (controller.numberController.text == "") {
+                            CustomSnackBar().showSnackBar(
+                                context: context,
+                                content: "Enter a Registered Number",
+                                backgroundColor: Colors.red,
+                                time: 1);
+                          } else if (controller.numberController.text.length !=
+                              11) {
+                            CustomSnackBar().showSnackBar(
+                                context: context,
+                                content: "Enter a valid Number",
+                                backgroundColor: Colors.red,
+                                time: 1);
+                          } else {
+                            FocusScope.of(context).unfocus();
+                            controller.numberValidate(context);
+                          }
                         },
-                        child: const Text(
-                          "Continue",
-                          style: TextStyle(color: Colors.white),
-                        ))),
+                        child: controller.isLoading.value
+                            ? const Center(
+                                child: SizedBox(
+                                    height: 18,
+                                    width: 18,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      backgroundColor: Colors.red,
+                                    )))
+                            : Text(
+                                "Login",
+                                style: GoogleFonts.roboto(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
+                              ),
+                      ),
+                    )),
                 const SizedBox(
                   height: 16.0,
                 ),

@@ -1,4 +1,5 @@
 import 'package:blood_bd/screens/splash_screen.dart';
+import 'package:blood_bd/screens/user_auth/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ import '../screens/home_screen/home_screen.dart';
 import '../screens/user_auth/welcome_screen.dart';
 
 const splashScreen = "/";
+const login = "/login";
 const welcomePage = "/welcomePage";
 const home = "/home";
 const forgetPasswordPage = "/forgetPasswordPage";
@@ -36,6 +38,7 @@ const mySearchHistory = "/mySearchHistory";
 final pages = [
   customPage(name: splashScreen, page: const SplashScreen()),
   customPage(name: welcomePage, page: WelcomePage()),
+  customPage(name: login, page: LoginScreen()),
 
   //-------------App Screens---------------------------
 

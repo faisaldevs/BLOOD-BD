@@ -1,3 +1,4 @@
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -121,16 +122,57 @@ class ChangePassword extends StatelessWidget {
               
                   // Continue Button
                   const SizedBox(height: 40,),
-              
                   SizedBox(
-                      width: width,
-                      child: CustomButton(
-                          onPressed: () {
-                            // passController.forgetValidation();
-                            // print("object");
-                            controller.passChange();
-                          },
-                          child: const Text("Continue"))),
+                      width: double.infinity,
+                      child: Obx(
+                            () => CustomButton(
+                              onPressed: () {
+                                if (controller.currentPassword.text == "") {
+                                  CustomSnackBar().showSnackBar(
+                                      context: context,
+                                      content: "Enter Old Password",
+                                      backgroundColor: Colors.red,
+                                      time: 1);
+                                } else if (controller.newPassword.text == "") {
+                                  CustomSnackBar().showSnackBar(
+                                      context: context,
+                                      content: "Enter New Password",
+                                      backgroundColor: Colors.red,
+                                      time: 1);
+                                }else if (controller.confirmNewPassword.text == "") {
+                                  CustomSnackBar().showSnackBar(
+                                      context: context,
+                                      content: "Enter Confirm Password",
+                                      backgroundColor: Colors.red,
+                                      time: 1);
+                                }else if (controller.newPassword.text != controller.confirmNewPassword.text) {
+                                  CustomSnackBar().showSnackBar(
+                                      context: context,
+                                      content: "Passsword Doesn't match",
+                                      backgroundColor: Colors.red,
+                                      time: 1);
+                                }else{
+                                  FocusScope.of(context).unfocus();
+                                  controller.passChange(context);}
+                              },
+                          child: controller.isLoading.value
+                              ? const Center(
+                              child: SizedBox(
+                                  height: 18,
+                                  width: 18,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    backgroundColor: Colors.red,
+                                  )))
+                              : Text(
+                            "Continue",
+                            style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      )),
                   const SizedBox(
                     height: 16.0,
                   ),

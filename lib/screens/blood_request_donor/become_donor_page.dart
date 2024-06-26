@@ -1,8 +1,9 @@
 import 'dart:convert';
-
 import 'package:blood_bd/screens/global_widget/custom_textFormField.dart';
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import '../../controllers/become_donor_controller.dart';
@@ -19,7 +20,7 @@ class BecomeDonor extends StatefulWidget {
 }
 
 class _BecomeDonorState extends State<BecomeDonor> {
-  BecomeDonorController sdController = Get.put(BecomeDonorController());
+  BecomeDonorController controller = Get.put(BecomeDonorController());
 
   List<String> divisions = [];
   List<String> districts = [];
@@ -139,7 +140,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
         backgroundColor: AppTheme.primary,
         surfaceTintColor: Colors.transparent,
         foregroundColor: AppTheme.textColorRed,
-        title: const Text("Search Donor"),
+        title: const Text("Become Donor"),
         titleSpacing: 0,
         leading: InkWell(
           onTap: () => Get.back(),
@@ -151,7 +152,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
       body: Container(
         margin: const EdgeInsets.all(16),
         child: Form(
-          // key: sdController.formKey,
+          // key: controller.formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -161,7 +162,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 //-------Name Field --------------
 
                 // CustomTextFormField(
-                //   controller: sdController.patientNameController,
+                //   controller: controller.patientNameController,
                 //   hintText: "",
                 //   textInputType: TextInputType.text,
                 //   validate: (name) {
@@ -185,7 +186,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                         dropDownList: DataList.bloodListData,
                         label: 'Blood Group',
                         onChanged: (value) {
-                          sdController.bloodType = value.toString();
+                          controller.bloodType = value.toString();
                         },
                       ),
                     ),
@@ -198,7 +199,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                           dropDownList: DataList.bloodAmount,
                           label: 'Amount',
                           onChanged: (value) {
-                            sdController.bloodAmount = value.toString();
+                            controller.bloodAmount = value.toString();
                           },
                         )),
                   ],
@@ -210,14 +211,14 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 // Row(
                 //   children: [
                 //     CustomBirthdate(
-                //       controller: sdController.dateController,
+                //       controller: controller.dateController,
                 //       label: 'Date',
                 //     ),
                 //     const SizedBox(
                 //       width: 10,
                 //     ),
                 //     CustomTimePicker(
-                //       controller: sdController.timeController,
+                //       controller: controller.timeController,
                 //       label: 'time',
                 //     ),
                 //   ],
@@ -230,7 +231,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                   dropDownList: DataList.healthIssue,
                   label: "Health Issue",
                   onChanged: (value) {
-                    sdController.healthIssue = value.toString();
+                    controller.healthIssue = value.toString();
                   },
                 ),
 
@@ -246,7 +247,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                         value: selectedDivision,
                         decoration: inputDecoration("Select Division"),
                         onChanged: (newValue) {
-                          sdController.division = newValue;
+                          controller.division = newValue;
                           // signupController.division = newValue;
                           setState(() {
                             selectedDivision = newValue;
@@ -276,7 +277,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                           decoration: inputDecoration("Select District"),
                           value: selectedDistrict,
                           onChanged: (newValue) {
-                            sdController.district = newValue;
+                            controller.district = newValue;
                             setState(() {
                               selectedDistrict = newValue;
                               selectedThana = null; // Reset selected thana
@@ -305,7 +306,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                           decoration: inputDecoration("Select Thana"),
                           value: selectedThana,
                           onChanged: (newValue) {
-                            sdController.thana = newValue;
+                            controller.thana = newValue;
                             setState(() {
                               selectedThana = newValue;
                             });
@@ -330,7 +331,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                     //       dropDownList: DataList.districtListData,
                     //       label: 'District',
                     //       onChanged: (value) {
-                    //         sdController.union = value;
+                    //         controller.union = value;
                     //       },
                     //     )),
                   ],
@@ -340,7 +341,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 //  ------- Address Field --------------
 
                 CustomTextFormField(
-                  controller: sdController.addressController,
+                  controller: controller.addressController,
                   hintText: "",
                   textInputType: TextInputType.text,
                   validate: (address) {
@@ -358,7 +359,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
                 const SizedBox(height: 10),
 
                 CustomTextFormField(
-                  controller: sdController.contactParsonNameController,
+                  controller: controller.contactParsonNameController,
                   hintText: "",
                   textInputType: TextInputType.text,
                   validate: (address) {
@@ -375,7 +376,7 @@ class _BecomeDonorState extends State<BecomeDonor> {
 
                 //  ------- Mobile Field --------------
                 CustomTextFormField(
-                  controller: sdController.numberController,
+                  controller: controller.numberController,
                   hintText: "",
                   length: 11,
                   textInputType: TextInputType.number,
@@ -398,16 +399,105 @@ class _BecomeDonorState extends State<BecomeDonor> {
 
                 SizedBox(
                   width: double.infinity,
-                  child: CustomButton(
+                  child: Obx(
+                        () => CustomButton(
                       onPressed: () {
-                        sdController.searchDonor();
-                        // Get.toNamed(home);
+                         if (controller.bloodType == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Blood Group',
+                              backgroundColor: Colors.red);
+                        }  else if (controller.bloodAmount == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Blood Amount',
+                              backgroundColor: Colors.red);
+                        } else if (controller.healthIssue == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Health Issue',
+                              backgroundColor: Colors.red);
+                        }
+                        // else if (controller.hospitalController.text == "") {
+                        //   CustomSnackBar().showSnackBar(
+                        //       context: context,
+                        //       content: 'Enter Hospital Name',
+                        //       backgroundColor: Colors.red);
+                        // }
+                        else if (controller.division == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Division',
+                              backgroundColor: Colors.red);
+                        } else if (controller.district == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter District',
+                              backgroundColor: Colors.red);
+                        } else if (controller.thana == null) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Thana',
+                              backgroundColor: Colors.red);
+                        } else if (controller.addressController.text == '') {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Address',
+                              backgroundColor: Colors.red);
+                        } else if (controller.contactParsonNameController.text == '') {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Contract Person Name',
+                              backgroundColor: Colors.red);
+                        } else if (controller.numberController.text == '') {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter Contract Person Number',
+                              backgroundColor: Colors.red);
+                        } else if (controller.numberController.text.length != 11) {
+                          CustomSnackBar().showSnackBar(
+                              context: context,
+                              content: 'Enter A Valid Number',
+                              backgroundColor: Colors.red);
+                        }
+                        // else if (controller.noteController.text == "") {
+                        //   CustomSnackBar().showSnackBar(
+                        //       context: context,
+                        //       content: 'Enter A Note',
+                        //       backgroundColor: Colors.red);
+                        // }
+                        else {
+                          FocusScope.of(context).unfocus();
+                          controller.searchDonor(context);
+                        }
                       },
-                      child: const Text(
+                      child: controller.isLoading.value
+                          ? Container(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ))
+                          : Text(
                         "Submit",
-                        style: TextStyle(color: Colors.white),
-                      )),
+                        style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // CustomButton(
+                  //     onPressed: () {
+                  //       controller.searchDonor();
+                  //       // Get.toNamed(home);
+                  //     },
+                  //     child: const Text(
+                  //       "Submit",
+                  //       style: TextStyle(color: Colors.white),
+                  //     )),
                 ),
+
               ],
             ),
           ),

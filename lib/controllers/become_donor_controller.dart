@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/screens/blood_request_donor/become_donor/donor_profile.dart';
+import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -29,7 +30,7 @@ class BecomeDonorController extends GetxController {
 
 
 
-  searchDonor() async{
+  searchDonor(BuildContext context) async{
     isLoading.value = true;
     print("pressend");
     // if (formKey.currentState!.validate()) {
@@ -81,7 +82,11 @@ class BecomeDonorController extends GetxController {
         );
 
         if(res.statusCode == 201){
-          Get.snackbar("Received", "Donor Data Received");
+          CustomSnackBar().showSnackBar(
+              context: context,
+              content: 'You became a donor',
+              backgroundColor: Colors.red);
+          // Get.snackbar("Received", "Donor Data Received");
           Get.toNamed(home);
           isLoading.value = false;
         }else{

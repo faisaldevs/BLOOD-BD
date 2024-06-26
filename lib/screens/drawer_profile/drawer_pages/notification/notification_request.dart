@@ -1,3 +1,4 @@
+import 'package:blood_bd/screens/drawer_profile/drawer_pages/request_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,10 +11,10 @@ import '../../../../utils/app_colors.dart';
 import '../../../global_widget/description_ui.dart';
 
 class NotificationRequest extends StatelessWidget {
-   NotificationRequest({super.key});
+  NotificationRequest({super.key});
 
   final DonationStatusController controller =
-  Get.put(DonationStatusController());
+      Get.put(DonationStatusController());
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +53,14 @@ class NotificationRequest extends StatelessWidget {
               itemBuilder: (context, index) {
                 final e = dataList.data?[index];
 
-                String donorName =
-                    e?.user?.name ?? "";
+                String donorName = e?.user?.name ?? "";
                 // String contractPersonName =
                 //     e?.bloodDonor?.contactPersonName ?? "";
                 String contractPersonNumber =
                     e?.bloodDonor?.contactPersonPhone ?? "";
                 // String patientsName = e?.bloodRequest?.patientsName ?? "";
                 String healthIssue = e?.bloodDonor?.healthIssue ?? "";
-                String bloodAmount =
-                    e?.bloodDonor?.amountBag.toString() ?? "";
+                String bloodAmount = e?.bloodDonor?.amountBag.toString() ?? "";
                 String bloodType = e?.bloodDonor?.bloodGroup ?? "";
                 String address = e?.bloodDonor?.address ?? "";
                 String division = e?.bloodDonor?.division ?? "";
@@ -109,17 +108,17 @@ class NotificationRequest extends StatelessWidget {
   }
 
   Widget donationTile(
-      String name,
-      String number,
-      String healthIssue,
-      String bloodAmount,
-      String bloodType,
-      String address,
-      String division,
-      String district,
-      String thana,
-      String lastDonateDate,
-      ) {
+    String name,
+    String number,
+    String healthIssue,
+    String bloodAmount,
+    String bloodType,
+    String address,
+    String division,
+    String district,
+    String thana,
+    String lastDonateDate,
+  ) {
     String showTime() {
       DateTime now;
 
@@ -233,9 +232,12 @@ class NotificationRequest extends StatelessWidget {
                             address: address,
                             division: division,
                             district: district,
-                            thana : thana,
+                            thana: thana,
                             lastDonateDate: lastDonateDate,
                             title: 'Donation Request List',
+                            buttonFunction: () {
+                              Get.to(RequestStatus());
+                            },
                           ),
                         );
                       },
@@ -269,7 +271,7 @@ class NotificationRequest extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                  const WidgetStatePropertyAll<Color>(Colors.red),
+                      const WidgetStatePropertyAll<Color>(Colors.red),
                   padding: const WidgetStatePropertyAll(
                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
                   shape: WidgetStatePropertyAll(
@@ -286,23 +288,24 @@ class NotificationRequest extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.rawSnackbar(
-                      messageText: const Text('Currently working on it..!!',
-                          style: TextStyle(color: Colors.white, fontSize: 14)),
-                      isDismissible: true,
-                      duration: const Duration(seconds: 3),
-                      backgroundColor: Colors.red[400]!,
-                      icon: const Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                      margin: EdgeInsets.zero,
-                      snackStyle: SnackStyle.GROUNDED);
+                  // Get.rawSnackbar(
+                  //     messageText: const Text('Currently working on it..!!',
+                  //         style: TextStyle(color: Colors.white, fontSize: 14)),
+                  //     isDismissible: true,
+                  //     duration: const Duration(seconds: 3),
+                  //     backgroundColor: Colors.red[400]!,
+                  //     icon: const Icon(
+                  //       Icons.settings,
+                  //       color: Colors.white,
+                  //       size: 35,
+                  //     ),
+                  //     margin: EdgeInsets.zero,
+                  //     snackStyle: SnackStyle.GROUNDED);
+                  Get.to(RequestStatus());
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                  const WidgetStatePropertyAll<Color>(Color(0xff026b49)),
+                      const WidgetStatePropertyAll<Color>(Color(0xff026b49)),
                   padding: const WidgetStatePropertyAll(
                       EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
                   shape: WidgetStatePropertyAll(
@@ -323,4 +326,3 @@ class NotificationRequest extends StatelessWidget {
     );
   }
 }
-

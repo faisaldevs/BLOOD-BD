@@ -1,3 +1,4 @@
+import 'package:blood_bd/screens/drawer_profile/drawer_pages/donation_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -232,6 +233,7 @@ class NotificationDonate extends StatelessWidget {
                             time: time,
                             note: note,
                             title: 'Donation Request List',
+                            buttonFunction: (){ Get.to(DonationStatus());},
                           ),
                         );
                       },
@@ -282,19 +284,20 @@ class NotificationDonate extends StatelessWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.rawSnackbar(
-                      messageText: const Text('Currently working on it..!!',
-                          style: TextStyle(color: Colors.white, fontSize: 14)),
-                      isDismissible: true,
-                      duration: const Duration(seconds: 3),
-                      backgroundColor: Colors.red[400]!,
-                      icon: const Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                      margin: EdgeInsets.zero,
-                      snackStyle: SnackStyle.GROUNDED);
+                  // Get.rawSnackbar(
+                  //     messageText: const Text('Currently working on it..!!',
+                  //         style: TextStyle(color: Colors.white, fontSize: 14)),
+                  //     isDismissible: true,
+                  //     duration: const Duration(seconds: 3),
+                  //     backgroundColor: Colors.red[400]!,
+                  //     icon: const Icon(
+                  //       Icons.settings,
+                  //       color: Colors.white,
+                  //       size: 35,
+                  //     ),
+                  //     margin: EdgeInsets.zero,
+                  //     snackStyle: SnackStyle.GROUNDED);
+                  Get.to(DonationStatus());
                 },
                 style: ButtonStyle(
                   backgroundColor:

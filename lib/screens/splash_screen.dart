@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
 
-    if (getStorage.read("id") != null) {
+    if (getStorage.read("token") != null) {
       Future.delayed(const Duration(seconds: 2), () => Get.offAllNamed(home));
     } else {
       Future.delayed(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/app_colors.dart';
 
-class CustomDropdown extends StatelessWidget {
+class CustomDropdown extends StatefulWidget {
   CustomDropdown({
     super.key,
     required this.dropDownList,
@@ -17,6 +17,11 @@ class CustomDropdown extends StatelessWidget {
   var onChanged;
 
   @override
+  State<CustomDropdown> createState() => _CustomDropdownState();
+}
+
+class _CustomDropdownState extends State<CustomDropdown> {
+  @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       // validator: validation,
@@ -25,7 +30,7 @@ class CustomDropdown extends StatelessWidget {
         color: AppTheme.textColorRed,
       ),
       decoration: InputDecoration(
-        hintText: label,
+        hintText: widget.label,
         fillColor: AppTheme.textFieldColor,
         filled: true,
         contentPadding: const EdgeInsets.only(left: 12),
@@ -44,7 +49,7 @@ class CustomDropdown extends StatelessWidget {
           color: AppTheme.textColorRed,
         ),
       ),
-      items: dropDownList.map((e) {
+      items: widget.dropDownList.map((e) {
         return DropdownMenuItem(
             value: e,
             child: Text(e,
@@ -52,7 +57,7 @@ class CustomDropdown extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                     color: AppTheme.textColorRed)));
       }).toList(),
-      onChanged: onChanged,
+      onChanged: widget.onChanged,
     );
   }
 }

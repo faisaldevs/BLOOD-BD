@@ -10,7 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
 import 'utils/app_routes.dart';
 
-
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class PostHttpOverrides extends HttpOverrides {
@@ -22,22 +21,9 @@ class PostHttpOverrides extends HttpOverrides {
   }
 }
 
-// void main() async{
-//   WidgetsFlutterBinding.ensureInitialized();
-//   // NotificationService().initNotification();
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-//   );
-//   runApp(MyApp());
-//
-// }
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // AwesomeNotifications().initialize(null, [
-  //   NotificationChannel(channelKey: "channelKey", channelName: "channelName", channelDescription: "channelDescription"),
-  //
-  // ],debug: true,);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -55,14 +41,11 @@ void main() async {
   DependencyInjection.init();
 }
 
-
 @pragma("vm:entry-point")
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message)async{
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print(message.notification?.title);
-
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -28,7 +28,7 @@ class Data {
   int? bloodRequestId;
   int? bloodDonorId;
   int? requestAmountBag;
-  Null? approvedAmountBag;
+  Null approvedAmountBag;
   String? date;
   String? senderStatus;
   String? receiverStatus;
@@ -125,7 +125,7 @@ class BloodDonor {
   String? address;
   String? contactPersonName;
   String? contactPersonPhone;
-  Null? lastDonateDate;
+  Null lastDonateDate;
   int? status;
   int? createdByUserId;
   int? updatedByUserId;
@@ -204,7 +204,7 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null? emailVerifiedAt;
+  Null emailVerifiedAt;
   String? image;
   int? profileVisibility;
   int? otp;
@@ -214,7 +214,7 @@ class User {
   int? donorProfileStatus;
   int? createdByUserId;
   int? updatedByUserId;
-  Null? deletedAt;
+  Null deletedAt;
   String? createdAt;
   String? updatedAt;
 

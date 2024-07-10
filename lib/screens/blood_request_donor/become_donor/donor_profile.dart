@@ -23,20 +23,20 @@ class _DonorProfileState extends State<DonorProfile> {
 
   @override
   Widget build(BuildContext context) {
-    String id = controller.id ?? "id";
-    String userId = controller.userId ?? "userId";
+   /* String id = controller.id ?? "id";
+    String userId = controller.userId ?? "userId";*/
     String nameDonor = controller.nameDonor ?? "name";
-    String bloodGroupDonor = controller.bloodGroupDonor ?? "";
-    String amountBagDonor = controller.amountBagDonor ?? "" ;
-    String healthIssueDonor= controller.healthIssueDonor ?? "";
-    String divisionDonor= controller.divisionDonor ?? "";
-    String districtDonor= controller.districtDonor ?? "";
-    String upazilaDonor = controller.upazilaDonor ?? "";
-    String unionDonor = controller.unionDonor ?? "";
-    String addressDonor= controller.addressDonor ?? "";
-    String contact_person_nameDonor = controller.contact_person_nameDonor ?? "";
-    String contact_person_phoneDonor = controller.contact_person_phoneDonor ?? "";
-    String last_donate_date= controller.last_donate_date ?? "";
+    // String bloodGroupDonor = controller.bloodGroupDonor ?? "";
+    // String amountBagDonor = controller.amountBagDonor ?? "" ;
+    // String healthIssueDonor= controller.healthIssueDonor ?? "";
+    // String divisionDonor= controller.divisionDonor ?? "";
+    // String districtDonor= controller.districtDonor ?? "";
+    // String upazilaDonor = controller.upazilaDonor ?? "";
+    // String unionDonor = controller.unionDonor ?? "";
+    // String addressDonor= controller.addressDonor ?? "";
+    // String contact_person_nameDonor = controller.contact_person_nameDonor ?? "";
+    // String contact_person_phoneDonor = controller.contact_person_phoneDonor ?? "";
+    // String last_donate_date= controller.last_donate_date ?? "";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

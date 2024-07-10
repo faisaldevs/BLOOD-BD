@@ -4,7 +4,6 @@ import 'package:blood_bd/api/api_links.dart';
 import 'package:blood_bd/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 

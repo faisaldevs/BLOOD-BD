@@ -17,7 +17,6 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = Get.height;
-    double width = Get.width;
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(

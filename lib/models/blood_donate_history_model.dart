@@ -223,22 +223,22 @@ class BloodRequest {
 class User {
   int? id;
   String? name;
-  Null? username;
+  Null username;
   String? userType;
   String? email;
   String? phone;
-  Null? emailVerifiedAt;
+  Null emailVerifiedAt;
   String? deviceToken;
   String? image;
   int? profileVisibility;
-  Null? otp;
+  Null otp;
   String? ipAddress;
   int? status;
   int? donorStatus;
   int? donorProfileStatus;
   int? createdByUserId;
   int? updatedByUserId;
-  Null? deletedAt;
+  Null deletedAt;
   String? createdAt;
   String? updatedAt;
 

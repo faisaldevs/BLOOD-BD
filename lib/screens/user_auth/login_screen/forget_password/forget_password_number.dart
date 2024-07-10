@@ -14,7 +14,6 @@ class ForgetPassNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = Get.height;
-    double width = Get.width;
     return Scaffold(
       body: SafeArea(
         child: Padding(

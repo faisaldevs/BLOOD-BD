@@ -122,7 +122,7 @@ class User {
   String? userType;
   String? email;
   String? phone;
-  Null? emailVerifiedAt;
+  Null emailVerifiedAt;
   String? deviceToken;
   String? image;
   int? profileVisibility;
@@ -133,7 +133,7 @@ class User {
   int? donorProfileStatus;
   int? createdByUserId;
   int? updatedByUserId;
-  Null? deletedAt;
+  Null deletedAt;
   String? createdAt;
   String? updatedAt;
 

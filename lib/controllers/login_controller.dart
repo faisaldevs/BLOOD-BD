@@ -57,7 +57,7 @@ class LoginController extends GetxController {
           var name = data["user"]["name"].toString();
           var phone = data["user"]["phone"].toString();
           var blood = data["user"]["blood"].toString();
-          String message = data["message"].toString();
+          // String message = data["message"].toString();
 
           getStorage.write("token", token);
           print(token);
